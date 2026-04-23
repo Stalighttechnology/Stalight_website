@@ -44,8 +44,8 @@ const features = [
 ];
 
 const reviews = [
-  { name: "Rahul Sharma", role: "Final Year CSE", institution: "JIT Bangalore", text: "NeuroSync's AI mock interviews were incredibly realistic. The voice recognition and feedback helped me improve my communication skills tremendously. Got placed at Google!", rating: 5 },
-  { name: "Sheetal", role: "Pre-final Year ISE", institution: "EWIT", text: "The coding lab interface is exactly like LeetCode but with better explanations. The system design whiteboard feature helped me crack my Amazon interview.", rating: 5 },
+  { name: "Vijayashree", role: "Final Year CSE", institution: "JIT Bangalore", text: "NeuroSync's AI mock interviews were incredibly realistic. The voice recognition and feedback helped me improve my communication skills tremendously. Got placed at Google!", rating: 5 },
+  { name: "Sheetal", role: "Pre-final Year ISE", institution: "JSS", text: "The coding lab interface is exactly like LeetCode but with better explanations. The system design whiteboard feature helped me crack my Amazon interview.", rating: 5 },
   { name: "Poornachandra", role: "Final Year Data Science", institution: "BKIT", text: "The Placement Readiness Index gave me confidence to apply for FAANG roles. The communication scoring helped me understand my weak areas and improve them.", rating: 4 },
   { name: "Sinchana M", role: "Final Year CSE-AIML", institution: "AMC Institution", text: "Mock assessment drills prepared me perfectly for TCS recruitment. The timed rounds and difficulty levels matched exactly what I faced in the actual placement.", rating: 5 },
   { name: "Dr. Ramakrishna", role: "Placement Director", institution: "AMC Engineering", text: "NeuroSync completely automated our screening process. The analytics dashboard gives me a bird's eye view of the entire batch's readiness before campus drives begin.", rating: 5 },

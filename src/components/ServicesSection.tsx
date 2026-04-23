@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Code, GraduationCap, ServerCog, ArrowRight } from "lucide-react";
 
 // Import IT Services image
@@ -120,12 +121,14 @@ const ServicesSection = () => {
           variants={containerVariants}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {capabilities.map((item, i) => (
-            <motion.div
-              variants={cardVariants}
-              key={item.title}
-              className="group relative bg-white border border-slate-200 overflow-hidden hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] transition-all duration-500 hover:-translate-y-2 cursor-pointer"
-            >
+          {capabilities.map((item, i) => {
+            const href = item.title === "Software Development" ? "/software-development" : item.title === "Skill Development Training" ? "/skill-development" : "/it-services";
+            return (
+              <Link to={href} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} key={item.title} className="block">
+                <motion.div
+                  variants={cardVariants}
+                  className="group relative bg-white border border-slate-200 overflow-hidden hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] transition-all duration-500 hover:-translate-y-2"
+                >
               {/* Image Header with Cinematic Reveal */}
               <div className="h-56 overflow-hidden relative bg-slate-100">
                 <motion.img 
@@ -160,7 +163,8 @@ const ServicesSection = () => {
               {/* Red Animated Bottom Border - Center Expanding */}
               <div className="absolute bottom-0 left-0 h-1 w-full bg-[#D32027] scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-500 ease-out z-20"></div>
             </motion.div>
-          ))}
+            </Link>
+          )})}
         </motion.div>
         
       </div>

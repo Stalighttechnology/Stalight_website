@@ -8,6 +8,9 @@ import NeuroCampus from "./pages/NeuroCampus.tsx";
 import NeuroSync from "./pages/NeuroSync.tsx";
 import AboutUs from "./pages/AboutUs.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import SoftwareDevelopment from "./pages/SoftwareDevelopment.tsx";
+import SkillDevelopment from "./pages/SkillDevelopment.tsx";
+import ITServices from "./pages/ITServices.tsx";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +24,9 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/neuro-campus" element={<NeuroCampus />} />
           <Route path="/neurosync" element={<NeuroSync />} />
+          <Route path="/software-development" element={<SoftwareDevelopment />} />
+          <Route path="/skill-development" element={<SkillDevelopment />} />
+          <Route path="/it-services" element={<ITServices />} />
           <Route path="/about-us" element={<AboutUs />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
