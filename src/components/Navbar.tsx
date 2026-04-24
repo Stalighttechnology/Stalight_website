@@ -113,7 +113,7 @@ const Navbar = () => {
 
             {/* Premium CTA Button in Navbar */}
             <a
-              href="#contact"
+              href="/neuro-campus-access"
               className="ml-2 xl:ml-4 px-4 xl:px-6 py-2 xl:py-3 bg-slate-950 text-white text-xs xl:text-[11px] font-bold uppercase tracking-[0.15em] hover:bg-[#D32027] transition-colors duration-300"
             >
               Get Access
