@@ -178,11 +178,11 @@ const Navbar = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
-                href="#contact"
+                href="/neuro-campus-access"
                 onClick={() => setMobileOpen(false)}
-                className="mt-4 sm:mt-6 px-6 sm:px-8 py-4 sm:py-5 bg-[#D32027] text-white text-center text-sm font-bold uppercase tracking-[0.2em]"
+                className="mt-4 sm:mt-6 px-6 sm:px-8 py-4 sm:py-5 bg-slate-950 text-white text-center text-sm font-bold uppercase tracking-[0.2em] hover:bg-[#D32027] transition-colors duration-300"
               >
-                Request Access
+                Get Access
               </motion.a>
             </nav>
           </motion.div>
