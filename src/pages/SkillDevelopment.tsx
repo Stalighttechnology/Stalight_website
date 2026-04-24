@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import trainImg from "@/assets/products/jobfix.jpg";
@@ -16,14 +16,18 @@ import {
   Target,
   Star
 } from "lucide-react";
+import { SEO } from "@/components/SEO";
+import { generateWebPageSchema, generateBreadcrumbSchema } from "@/utils/seoUtils";
+import { OptimizedImage } from "@/components/OptimizedImage";
+
 
 // --- High-End Animation Variants ---
-const fadeUp = { 
+const fadeUp: Variants = { 
   hidden: { opacity: 0, y: 30 }, 
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } } 
 };
 
-const staggerContainer = { 
+const staggerContainer: Variants = { 
   hidden: { opacity: 0 }, 
   visible: { opacity: 1, transition: { staggerChildren: 0.15 } } 
 };
@@ -67,7 +71,23 @@ const SkillDevelopment = () => {
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900 overflow-hidden">
+      <SEO 
+        title="Professional IT Skill Development | Stalight Technologies"
+        description="Intensive, architectural-scale training designed by industry veterans. We guarantee your placement in top-tier enterprises upon successful completion."
+        jsonLd={[
+          generateWebPageSchema(
+            "Skill Development & Training",
+            "Elite engineering tracks in AI, Full-Stack, and Cloud with 100% placement guarantee.",
+            "/skill-development"
+          ),
+          generateBreadcrumbSchema([
+            { name: "Home", item: "/" },
+            { name: "Skill Development", item: "/skill-development" }
+          ])
+        ]}
+      />
       <Navbar />
+
 
       {/* --- Hero Section --- */}
       <motion.section 
@@ -104,7 +124,7 @@ const SkillDevelopment = () => {
             <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 rounded-[2.5rem] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
             <div className="absolute inset-0 bg-gradient-to-tr from-slate-200 to-slate-50 rounded-[2rem] transform rotate-3 scale-105 -z-10 transition-transform duration-700 group-hover:rotate-6"></div>
             <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border border-white/50 bg-white">
-              <img src={trainImg} alt="Technical Training" className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110 opacity-95" />
+              <OptimizedImage src={trainImg} alt="Technical training and mentorship session at Stalight Technologies" className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110 opacity-95" priority />
             </div>
           </motion.div>
         </div>

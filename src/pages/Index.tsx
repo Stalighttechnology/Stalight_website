@@ -10,6 +10,9 @@ import Footer from "@/components/Footer";
 import useScrollReveal from "@/hooks/useScrollReveal";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { SEO } from "@/components/SEO";
+import { generateOrganizationSchema, generateLocalBusinessSchema } from "@/utils/seoUtils";
+
 
 const Index = () => {
   useScrollReveal();
@@ -30,6 +33,14 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Stalight Technologies | AI-First Enterprise Platforms"
+        description="Stalight Technologies builds enterprise-grade AI systems for academic management, workforce assessment, and campus automation."
+        jsonLd={[
+          generateOrganizationSchema(),
+          generateLocalBusinessSchema()
+        ]}
+      />
       <Navbar />
       <HeroSection />
       <AboutSection />

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform, useMotionValue, animate, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, animate, useInView, Variants } from "framer-motion";
 import { 
   Brain, BarChart3, ShieldCheck, Users, User,
   CheckCircle2, Star, Calendar, FileText, 
@@ -9,6 +9,10 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
+import { generateWebPageSchema, generateBreadcrumbSchema } from "@/utils/seoUtils";
+import { OptimizedImage } from "@/components/OptimizedImage";
+
 
 // --- Image Imports ---
 import campusImg from "@/assets/screenshots/mobileloginpage1.png";
@@ -68,19 +72,19 @@ const featurePills = [
 ];
 
 // --- Animations ---
-const customEase = [0.16, 1.0, 0.3, 1.0];
+const customEase = [0.16, 1.0, 0.3, 1.0] as any;
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
 };
 
-const fadeUpVariants = {
+const fadeUpVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: customEase } },
 };
 
-const scaleUpVariants = {
+const scaleUpVariants: Variants = {
   hidden: { opacity: 0, scale: 0.95 },
   visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: customEase } },
 };
@@ -96,7 +100,23 @@ const NeuroCampus = () => {
 
   return (
     <div ref={containerRef} className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900 overflow-x-hidden relative">
+      <SEO 
+        title="Neuro Campus | Stalight Technologies"
+        description="A next-generation academic management platform unifying AI-driven analytics, blockchain security, and automated operations."
+        jsonLd={[
+          generateWebPageSchema(
+            "Neuro Campus",
+            "A next-generation academic management platform unifying AI-driven analytics, blockchain security, and automated operations.",
+            "/neuro-campus"
+          ),
+          generateBreadcrumbSchema([
+            { name: "Home", item: "/" },
+            { name: "Neuro Campus", item: "/neuro-campus" }
+          ])
+        ]}
+      />
       <Navbar />
+
       
       {/* Background decoration */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -195,7 +215,7 @@ const NeuroCampus = () => {
                 </div>
 
                 <div className="w-full h-[calc(100%-2rem)] sm:h-[calc(100%-2.5rem)] lg:h-[calc(100%-3rem)] rounded-b-lg sm:rounded-b-xl lg:rounded-b-[1.5rem] overflow-hidden">
-                  <img src={img} className="w-full h-full object-cover object-top shadow-sm" loading="lazy" />
+                   <OptimizedImage src={img} alt={`Neuro Campus Dashboard Screenshot ${idx + 1}`} className="w-full h-full object-cover object-top shadow-sm" />
                 </div>
 
                 <div className="absolute inset-0 rounded-xl sm:rounded-2xl lg:rounded-[2rem] ring-1 ring-inset ring-black/5 group-hover:ring-purple-500/30 transition-all duration-500 pointer-events-none"></div>
@@ -217,7 +237,7 @@ const NeuroCampus = () => {
             {features.map((f, i) => (
               <motion.div key={i} variants={fadeUpVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="group bg-white border border-slate-200/60 rounded-xl sm:rounded-2xl lg:rounded-[2rem] overflow-hidden hover:shadow-[0_15px_35px_-10px_rgba(103,58,183,0.15)] hover:border-purple-200 transition-all duration-500 flex flex-col h-full">
                 <div className="h-40 sm:h-48 lg:h-56 overflow-hidden relative border-b border-slate-100">
-                  <img src={f.imgSrc} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+                   <OptimizedImage src={f.imgSrc} alt={`${f.title} - Neuro Campus Feature`} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" />
                   <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-5 w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg group-hover:bg-gradient-to-br group-hover:from-purple-500 group-hover:to-blue-500 transition-all duration-500">
                     <f.icon className="w-4 h-4 sm:w-5 sm:h-5 text-slate-700 group-hover:text-white" strokeWidth={2} />
                   </div>

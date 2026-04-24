@@ -1,6 +1,9 @@
 import { Check, ChevronDown } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
+import { generateWebPageSchema, generateBreadcrumbSchema, generateFAQSchema } from "@/utils/seoUtils";
+
 
 const NeuroCampusAccessPlan = () => {
   const plans = [
@@ -66,7 +69,34 @@ const NeuroCampusAccessPlan = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
+      <SEO 
+        title="Neuro Campus Access Plans & Pricing | Stalight Technologies"
+        description="Choose the perfect plan for your institution's needs. Scale seamlessly from essential daily operations to enterprise-grade AI intelligence."
+        jsonLd={[
+          generateWebPageSchema(
+            "Neuro Campus Access Plans",
+            "Pricing and feature comparison for Neuro Campus academic management platform.",
+            "/neuro-campus-access-plan"
+          ),
+          generateBreadcrumbSchema([
+            { name: "Home", item: "/" },
+            { name: "Neuro Campus", item: "/neuro-campus" },
+            { name: "Access Plans", item: "/neuro-campus-access-plan" }
+          ]),
+          generateFAQSchema([
+            {
+              question: "Can I upgrade or downgrade my plan anytime?",
+              answer: "Yes, you can change your plan at any time. Changes take effect in the next billing cycle."
+            },
+            {
+              question: "Do you offer custom plans for enterprise institutions?",
+              answer: "Absolutely! We offer fully customized solutions for large institutions. Contact our sales team for a personalized quote."
+            }
+          ])
+        ]}
+      />
       <Navbar />
+
 
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-4 md:px-8 lg:px-16 bg-white">

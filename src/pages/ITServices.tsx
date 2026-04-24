@@ -1,17 +1,21 @@
 import React, { useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import itImg from "@/assets/products/webapp.jpg";
 import { Server, Shield, Cloud, Headset, Zap, Activity } from "lucide-react";
+import { SEO } from "@/components/SEO";
+import { generateWebPageSchema, generateBreadcrumbSchema } from "@/utils/seoUtils";
+import { OptimizedImage } from "@/components/OptimizedImage";
+
 
 // --- Animation Variants ---
-const fadeUp = { 
+const fadeUp: Variants = { 
   hidden: { opacity: 0, y: 30 }, 
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } 
 };
 
-const staggerContainer = { 
+const staggerContainer: Variants = { 
   hidden: { opacity: 0 }, 
   visible: { opacity: 1, transition: { staggerChildren: 0.2 } } 
 };
@@ -31,7 +35,23 @@ const ITServices = () => {
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-slate-900 overflow-hidden">
+      <SEO 
+        title="Managed IT Services & Operations | Stalight Technologies"
+        description="Empower your institution with robust managed operations, secure cloud migrations, and 24/7 proactive support. We handle the tech so you can focus on growth."
+        jsonLd={[
+          generateWebPageSchema(
+            "IT Services & Operations",
+            "Next-generation managed IT services including cloud migration, cybersecurity, and 24/7 support.",
+            "/it-services"
+          ),
+          generateBreadcrumbSchema([
+            { name: "Home", item: "/" },
+            { name: "IT Services", item: "/it-services" }
+          ])
+        ]}
+      />
       <Navbar />
+
 
       {/* --- Hero Section --- */}
       <motion.section 
@@ -65,7 +85,7 @@ const ITServices = () => {
           <motion.div variants={fadeUp} className="relative rounded-3xl overflow-hidden shadow-2xl">
             {/* Glowing background blur matched to your logo colors */}
             <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 rounded-3xl blur opacity-30"></div>
-            <img src={itImg} className="relative z-10 w-full h-full object-cover rounded-2xl border border-white/20" alt="Stalight IT Services" />
+            <OptimizedImage src={itImg} className="relative z-10 w-full h-full object-cover rounded-2xl border border-white/20" alt="Stalight IT Services and Infrastructure Management" priority />
           </motion.div>
         </div>
       </motion.section>

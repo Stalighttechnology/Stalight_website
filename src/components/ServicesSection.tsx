@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Code, GraduationCap, ServerCog, ArrowRight } from "lucide-react";
 
@@ -29,9 +29,9 @@ const capabilities = [
 ];
 
 // --- Premium Animation Variants ---
-const customEase = [0.19, 1.0, 0.22, 1.0];
+const customEase = [0.19, 1.0, 0.22, 1.0] as any;
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -39,7 +39,7 @@ const containerVariants = {
   },
 };
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 60 },
   visible: {
     opacity: 1,
@@ -48,7 +48,7 @@ const cardVariants = {
   },
 };
 
-const textRevealVariants = {
+const textRevealVariants: Variants = {
   hidden: { y: "100%", opacity: 0 },
   visible: {
     y: 0,
@@ -58,7 +58,7 @@ const textRevealVariants = {
 };
 
 // Masked Text Helper
-const MaskedText = ({ children, className }) => (
+const MaskedText = ({ children, className }: { children: React.ReactNode; className?: string }) => (
   <div className="overflow-hidden inline-block w-full leading-tight py-1">
     <motion.div variants={textRevealVariants} className={className}>
       {children}
@@ -138,7 +138,7 @@ const ServicesSection = () => {
                   transition={{ duration: 1.5, ease: customEase, delay: i * 0.1 }}
                   src={item.image} 
                   alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s] ease-out"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-&lsqb;1.5s&rsqb; ease-out"
                 />
                 {/* Subtle gradient so the white floating badge looks good over light images */}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-80 group-hover:opacity-40 transition-opacity duration-500"></div>
