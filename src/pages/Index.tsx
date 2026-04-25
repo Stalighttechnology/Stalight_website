@@ -26,6 +26,8 @@ const Index = () => {
         // Small delay to ensure page is fully rendered
         setTimeout(() => {
           element.scrollIntoView({ behavior: 'smooth' });
+          // Clear the hash from the URL to keep it clean
+          window.history.replaceState(null, "", window.location.pathname);
         }, 100);
       }
     }

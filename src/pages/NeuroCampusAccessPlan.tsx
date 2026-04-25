@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Check, ChevronDown } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -6,6 +7,10 @@ import { generateWebPageSchema, generateBreadcrumbSchema, generateFAQSchema } fr
 
 
 const NeuroCampusAccessPlan = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const plans = [
     {
       name: "Basic",

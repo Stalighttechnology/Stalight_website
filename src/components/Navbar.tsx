@@ -6,7 +6,7 @@ import stalightLogo from "@/assets/logos/stalightlogo.png";
 
 const navLinks = [
   { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
+  { label: "About", href: "/about" },
   { label: "Products", href: "#products" },
   { label: "Services", href: "#services" },
   { label: "Careers", href: "#careers" },
@@ -37,8 +37,6 @@ const Navbar = () => {
         const element = document.querySelector(href);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
-          // Update the URL with hash without reloading
-          window.history.pushState(null, "", href);
         }
       } else {
         // If we are on another page, let the default behavior of Link (to="/#hash") 
@@ -79,7 +77,7 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <div key={link.href} className="relative group">
                 <Link
-                  to={isHome ? link.href : `/${link.href}`}
+                  to={link.href.startsWith("/") ? link.href : (isHome ? link.href : `/${link.href}`)}
                   onClick={(e) => handleNavClick(e, link.href)}
                   className="text-xs xl:text-[12px] font-bold tracking-[0.15em] uppercase text-slate-700 hover:text-slate-950 transition-colors py-2 block"
                 >
@@ -129,7 +127,7 @@ const Navbar = () => {
                   transition={{ delay: i * 0.1 }}
                 >
                   <Link
-                    to={isHome ? link.href : `/${link.href}`}
+                    to={link.href.startsWith("/") ? link.href : (isHome ? link.href : `/${link.href}`)}
                     onClick={(e) => handleNavClick(e, link.href)}
                     className="text-2xl sm:text-3xl font-light tracking-tight text-slate-900 block border-b border-slate-100 pb-3 sm:pb-4"
                   >
