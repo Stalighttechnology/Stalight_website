@@ -113,7 +113,7 @@ const SkillDevelopment = () => {
               <a href="#courses" className="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-full font-bold transition-all shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:-translate-y-1">
                 Explore Guaranteed Tracks
               </a>
-              <a href="mailto:info@stalight.tech" className="inline-flex items-center gap-2 px-8 py-4 bg-white border-2 border-slate-200 hover:border-purple-500 hover:text-purple-700 text-slate-900 rounded-full font-bold transition-all hover:shadow-lg">
+              <a href="mailto:info@stalight.in" className="inline-flex items-center gap-2 px-8 py-4 bg-white border-2 border-slate-200 hover:border-purple-500 hover:text-purple-700 text-slate-900 rounded-full font-bold transition-all hover:shadow-lg">
                 Talk to an Advisor
               </a>
             </div>
@@ -262,7 +262,7 @@ const SkillDevelopment = () => {
               </div>
               <h3 className="text-3xl font-black mb-4">Secure Your Seat</h3>
               <p className="text-slate-600 mb-8 text-lg">Enroll in our placement-guaranteed batches. Limited seats available to ensure strict mentorship quality.</p>
-              <a href="mailto:info@stalight.tech" className="inline-block w-full py-5 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl font-black text-lg transition-all shadow-[0_8px_30px_rgb(0,0,0,0.15)] hover:-translate-y-1">
+              <a href="mailto:info@stalight.in" className="inline-block w-full py-5 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl font-black text-lg transition-all shadow-[0_8px_30px_rgb(0,0,0,0.15)] hover:-translate-y-1">
                 Apply for Admission
               </a>
               <p className="text-sm font-bold text-slate-500 mt-6 flex items-center justify-center gap-2">

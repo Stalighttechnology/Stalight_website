@@ -72,7 +72,7 @@ const ITServices = () => {
               Empower your institution with robust managed operations, secure cloud migrations, and 24/7 proactive support. We handle the tech so you can focus on growth.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a href="mailto:info@stalight.tech" className="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-full font-bold transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+              <a href="mailto:info@stalight.in" className="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-full font-bold transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
                 Talk to an Expert
                 <Zap className="w-5 h-5" />
               </a>
@@ -160,7 +160,7 @@ const ITServices = () => {
               variants={fadeUp} 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="mailto:info@stalight.tech" 
+              href="mailto:info@stalight.in" 
               className="inline-block px-10 py-4 bg-white text-slate-900 rounded-full font-bold text-lg shadow-xl"
             >
               Get Your Custom IT Assessment

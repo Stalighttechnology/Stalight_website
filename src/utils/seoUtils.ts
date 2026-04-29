@@ -15,7 +15,7 @@ export const generateOrganizationSchema = () => ({
     "@type": "ContactPoint",
     "telephone": "+91-XXXXXXXXXX",
     "contactType": "customer service",
-    "email": "info@stalight.tech"
+    "email": "info@stalight.in"
   },
   "sameAs": [
     "https://www.linkedin.com/company/stalight-technologies",

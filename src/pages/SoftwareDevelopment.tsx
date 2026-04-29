@@ -88,7 +88,7 @@ const SoftwareDevelopment = () => {
               From intuitive websites to complex enterprise software, we engineer bespoke digital solutions. We turn your specific requirements into scalable, secure, and beautiful applications.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a href="mailto:info@stalight.tech" className="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-full font-medium transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+              <a href="mailto:info@stalight.in" className="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-full font-medium transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
                 Start a Project
                 <ArrowRight className="w-4 h-4" />
               </a>
@@ -174,7 +174,7 @@ const SoftwareDevelopment = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            href="mailto:info@stalight.tech" 
+            href="mailto:info@stalight.in" 
             className="inline-block px-10 py-4 bg-white text-slate-900 rounded-full font-bold text-lg hover:bg-indigo-50 transition-colors"
           >
             Contact Our Engineering Team

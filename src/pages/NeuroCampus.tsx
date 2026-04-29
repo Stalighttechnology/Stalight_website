@@ -267,7 +267,7 @@ const NeuroCampus = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-              <a href="mailto:info@stalight.tech" className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 text-white rounded-full font-bold uppercase text-xs sm:text-sm tracking-widest shadow-lg hover:shadow-purple-500/25 hover:-translate-y-0.5 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition-all duration-300 w-full sm:w-auto">
+              <a href="mailto:info@stalight.in" className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 text-white rounded-full font-bold uppercase text-xs sm:text-sm tracking-widest shadow-lg hover:shadow-purple-500/25 hover:-translate-y-0.5 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition-all duration-300 w-full sm:w-auto">
                 Contact Us <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
               </a>
               <Link to="/" className="flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-white border border-slate-300 text-slate-700 rounded-full font-bold uppercase text-xs sm:text-sm tracking-widest hover:bg-slate-50 hover:text-slate-900 transition-all duration-300 w-full sm:w-auto">
