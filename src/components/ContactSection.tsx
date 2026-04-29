@@ -150,7 +150,7 @@ const ContactSection = () => {
               
               {/* Contact Items Array Mapping */}
               {[
-                { icon: Mail, title: "Email", text: "info@stalight.tech", link: "mailto:info@stalight.tech" },
+                { icon: Mail, title: "Email", text: "info@stalight.in", link: "mailto:info@stalight.in" },
                 { icon: Phone, title: "Phone", text: "+91 86601 44040", link: "tel:+918660144040" },
                 { icon: MapPin, title: "Headquarters", text: "Bengaluru, Karnataka, India", link: null },
                 { icon: Clock, title: "Business Hours", text: "Monday – Friday, 9:00 AM – 6:00 PM IST", link: null },
