@@ -1,13 +1,13 @@
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, useInView, Variants } from "framer-motion";
 import carrier1Img from "@/assets/backgrounds/carrier1.jpg";
 import carrier2Img from "@/assets/backgrounds/carrier2.jpg";
 import campusImg from "@/assets/backgrounds/campus.jpg";
 
 // --- Enterprise-Grade Easing & Variants ---
-const premiumEase = [0.16, 1, 0.3, 1];
+const premiumEase = [0.16, 1, 0.3, 1] as any;
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -15,7 +15,7 @@ const containerVariants = {
   },
 };
 
-const textRevealVariants = {
+const textRevealVariants: Variants = {
   hidden: { y: "110%", rotate: 2, opacity: 0 },
   visible: {
     y: 0,
@@ -25,7 +25,7 @@ const textRevealVariants = {
   },
 };
 
-const fadeUpVariants = {
+const fadeUpVariants: Variants = {
   hidden: { y: 30, opacity: 0 },
   visible: {
     y: 0,
@@ -35,16 +35,16 @@ const fadeUpVariants = {
 };
 
 // Masked Text Helper
-const MaskedText = ({ children, className = "", variant = textRevealVariants }) => (
+const MaskedText = ({ children, className = "", variant = textRevealVariants }: { children: React.ReactNode; className?: string; variant?: Variants }) => (
   <div className="overflow-hidden inline-block w-full leading-tight py-1">
-    <motion.div variants={variant} className={className} style={{ transformOrigin: "left center" }}>
+    <motion.div variants={variant as any} className={className} style={{ transformOrigin: "left center" }}>
       {children}
     </motion.div>
   </div>
 );
 
 // High-End Image Reveal Component (Curtain Effect)
-const CinematicImage = ({ src, alt, className = "", style = {} }) => {
+const CinematicImage = ({ src, alt, className = "", style = {} }: { src: string; alt: string; className?: string; style?: React.CSSProperties }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -166,7 +166,7 @@ const CareersPage = () => {
       {/* ----------------------------------------------------------------- */}
       {/* SECTION 2: Network (Dark Theme Premium Split Card) */}
       {/* ----------------------------------------------------------------- */}
-      <section id="connect-grow" className="relative w-full py-16 md:py-24 bg-[#050810] overflow-hidden">
+      <section id="connect-grow" className="relative w-full py-2 md:py-24 bg-[#050810] overflow-hidden">
         
         {/* Subtle ambient background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#D32027]/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
@@ -187,14 +187,14 @@ const CareersPage = () => {
             ></motion.div>
 
             {/* Left Content Half */}
-            <div className="flex-1 p-8 md:p-14 lg:p-20 flex flex-col justify-center relative z-20">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold mb-6 tracking-tight text-white leading-[1.15]">
+            <div className="flex-1 p-2 md:p-14 lg:p-20 flex flex-col justify-center relative z-20">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold mb-0 md:mb-6 tracking-tight text-white leading-[1.15]">
                 <MaskedText>Connect &</MaskedText>
                 <MaskedText><span className="text-[#D32027] font-light italic">Grow together.</span></MaskedText>
               </h2>
               
-              <motion.p variants={fadeUpVariants} className="text-base md:text-lg font-light text-slate-400 leading-relaxed mb-10 border-l-2 border-[#D32027]/30 pl-5">
-                You aren't just joining a corporate hierarchy. You are entering a synchronized community of creators, system thinkers, and technologists. 
+              <motion.p variants={fadeUpVariants} className="text-base md:text-lg font-light text-slate-400 leading-relaxed mb-2 md:mb-10 border-l-2 border-[#D32027]/30 pl-3">
+                Beyond the corporate hierarchy, join a synchronized community of creators and system thinkers.
               </motion.p>
               
               <motion.div variants={fadeUpVariants} className="mt-auto md:mt-4">
@@ -211,7 +211,7 @@ const CareersPage = () => {
             </div>
 
             {/* Right Image Half */}
-            <div className="flex-1 relative min-h-[300px] md:min-h-[400px] lg:min-h-0 p-4 md:p-6 lg:p-8">
+            <div className="flex-1 relative min-h-[60px] sm:min-h-[140px] md:min-h-[400px] lg:min-h-0 p-1 md:p-6 lg:p-8">
               <div className="w-full h-full relative rounded-[1.5rem] md:rounded-[2rem] overflow-hidden group shadow-2xl">
                 <motion.img 
                   initial={{ scale: 1.15 }}

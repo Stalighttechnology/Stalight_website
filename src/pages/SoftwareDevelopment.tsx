@@ -1,17 +1,21 @@
 import React, { useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import devImg from "@/assets/products/it services.jpg";
 import { Code2, MonitorSmartphone, Cpu, Layers, ArrowRight } from "lucide-react";
+import { SEO } from "@/components/SEO";
+import { generateWebPageSchema, generateBreadcrumbSchema } from "@/utils/seoUtils";
+import { OptimizedImage } from "@/components/OptimizedImage";
+
 
 // --- Smooth Animation Variants ---
-const fadeUp = { 
+const fadeUp: Variants = { 
   hidden: { opacity: 0, y: 30 }, 
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } } 
 };
 
-const staggerContainer = { 
+const staggerContainer: Variants = { 
   hidden: { opacity: 0 }, 
   visible: { opacity: 1, transition: { staggerChildren: 0.15 } } 
 };
@@ -47,7 +51,23 @@ const SoftwareDevelopment = () => {
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-indigo-100 selection:text-indigo-900">
+      <SEO 
+        title="Custom Software Development | Stalight Technologies"
+        description="From intuitive websites to complex enterprise software, we engineer bespoke digital solutions. We turn your specific requirements into scalable, secure applications."
+        jsonLd={[
+          generateWebPageSchema(
+            "Software Development",
+            "Bespoke software engineering designed to solve complex challenges and scale alongside your growth.",
+            "/software-development"
+          ),
+          generateBreadcrumbSchema([
+            { name: "Home", item: "/" },
+            { name: "Software Development", item: "/software-development" }
+          ])
+        ]}
+      />
       <Navbar />
+
 
       {/* --- Hero Section --- */}
       <motion.section 
@@ -79,7 +99,7 @@ const SoftwareDevelopment = () => {
             {/* Minimalist architectural backdrop */}
             <div className="absolute inset-0 bg-gradient-to-tr from-indigo-100 to-slate-50 rounded-3xl transform rotate-3 scale-105 -z-10 transition-transform duration-500 group-hover:rotate-6"></div>
             <div className="rounded-2xl overflow-hidden shadow-2xl border border-white bg-white">
-              <img src={devImg} alt="Software Development Interface" className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105" />
+              <OptimizedImage src={devImg} alt="Software development interface and code editor" className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105" priority />
             </div>
           </motion.div>
         </div>

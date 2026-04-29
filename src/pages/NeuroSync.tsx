@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform, useMotionValue, animate, useInView, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, animate, useInView, AnimatePresence, Variants } from "framer-motion";
 import {
   Mic, Code, ClipboardList, BarChart3, CheckCircle2, ArrowRight, Star,
   Briefcase, Award, ShieldCheck, Users, Target, Activity, Quote,
@@ -8,6 +8,10 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
+import { generateWebPageSchema, generateBreadcrumbSchema } from "@/utils/seoUtils";
+import { OptimizedImage } from "@/components/OptimizedImage";
+
 
 // Import NeuroSync images
 import neurosync1Img from "@/assets/products/neurosync1.png";
@@ -70,29 +74,29 @@ const scrollingFeatures = [
 
 // Data for Interactive Placement Hub
 // --- Premium Animation Variants ---
-const customEase = [0.19, 1.0, 0.22, 1.0];
+const customEase = [0.19, 1.0, 0.22, 1.0] as any;
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
 };
 
-const fadeUpVariants = {
+const fadeUpVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 1.0, ease: customEase } },
 };
 
-const scaleUpVariants = {
+const scaleUpVariants: Variants = {
   hidden: { opacity: 0, scale: 0.95 },
   visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: customEase } },
 };
 
-const textRevealVariants = {
+const textRevealVariants: Variants = {
   hidden: { y: "100%", opacity: 0 },
   visible: { y: 0, opacity: 1, transition: { duration: 1.2, ease: customEase } },
 };
 
-const MaskedText = ({ children, className }) => (
+const MaskedText = ({ children, className }: { children: React.ReactNode; className?: string }) => (
   <div className="overflow-hidden inline-block w-full leading-tight py-1 md:py-2">
     <motion.div variants={textRevealVariants} className={className}>{children}</motion.div>
   </div>
@@ -111,7 +115,24 @@ const NeuroSync = () => {
   // State for the Interactive Placement Overview Section
   return (
     <div ref={containerRef} className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900 overflow-x-hidden relative">
+      <SEO 
+        title="Neuro Sync | Stalight Technologies"
+        description="Empower your candidates with AI-driven interview simulations and real-time coding assessments. One platform. Total placement readiness."
+        jsonLd={[
+          generateWebPageSchema(
+            "Neuro Sync",
+            "Empower your candidates with AI-driven interview simulations and real-time coding assessments.",
+            "/neurosync"
+          ),
+          generateBreadcrumbSchema([
+            { name: "Home", item: "/" },
+            { name: "Neuro Sync", item: "/neurosync" }
+          ])
+        ]}
+      />
       
+      <Navbar />
+
       {/* --- AMBIENT BACKGROUND GLOWS & BRAND THEMED WAVES --- */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <motion.div 
@@ -136,8 +157,6 @@ const NeuroSync = () => {
           <motion.path d="M0,50 Q25,30 50,50 T100,50" stroke="url(#waveGrad)" strokeWidth="0.2" fill="none" animate={{ d: ["M0,50 Q25,30 50,50 T100,50", "M0,50 Q25,70 50,50 T100,50", "M0,50 Q25,30 50,50 T100,50"] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }} />
         </svg>
       </div>
-
-      <Navbar />
 
       {/* --- HERO SECTION --- */}
       <section className="relative pt-28 pb-12 sm:pt-36 sm:pb-16 md:pt-48 md:pb-24 z-10 flex flex-col justify-center items-center min-h-[85vh]">
@@ -212,7 +231,7 @@ const NeuroSync = () => {
                 className="group bg-white border border-slate-200/60 rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden hover:shadow-[0_20px_40px_-15px_rgba(103,58,183,0.15)] hover:border-purple-200 hover:-translate-y-1 transition-all duration-500 flex flex-col h-full"
               >
                 <div className="h-40 sm:h-48 md:h-56 overflow-hidden relative border-b border-slate-100">
-                  <img src={f.imgSrc} alt={f.title} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out" loading="lazy" />
+                  <OptimizedImage src={f.imgSrc} alt={`${f.title} - Neuro Sync AI Feature`} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out" />
                   
                   <div className="absolute bottom-3 sm:bottom-4 left-4 sm:left-5 w-10 sm:w-12 h-10 sm:h-12 bg-white rounded-xl flex items-center justify-center shadow-lg group-hover:bg-gradient-to-br group-hover:from-purple-500 group-hover:to-blue-500 transition-all duration-500">
                     <f.icon className="w-4 h-4 sm:w-5 sm:h-5 text-slate-700 group-hover:text-white" strokeWidth={2} />

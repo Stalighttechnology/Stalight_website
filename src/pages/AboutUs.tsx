@@ -1,19 +1,23 @@
 import React, { useRef, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import stalightMainOfficeImg from "@/assets/office/stalightmainoffice.png";
 import stalightOfficeImg from "@/assets/office/stalightoffice.png";
 import amcLogo from "@/assets/logos/amclogo.png";
 import cityEngineeringLogo from "@/assets/logos/cityenginerring.jpg";
 import gleamatorLogo from "@/assets/logos/gleamatorlogo.jpg";
 import eduforcarrierLogo from "@/assets/logos/eduforcarrier.png";
+import { generateWebPageSchema, generateBreadcrumbSchema } from "@/utils/seoUtils";
+import { OptimizedImage } from "@/components/OptimizedImage";
+
 
 // --- Premium MNC Easing Curve ---
 // This provides a sharp, decisive entry that glides smoothly to a halt
-const techEase = [0.16, 1, 0.3, 1];
+const techEase = [0.16, 1, 0.3, 1] as any;
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -21,7 +25,7 @@ const containerVariants = {
   },
 };
 
-const textRevealVariants = {
+const textRevealVariants: Variants = {
   hidden: { y: "110%", opacity: 0, rotateX: 20 },
   visible: {
     y: 0,
@@ -31,7 +35,7 @@ const textRevealVariants = {
   },
 };
 
-const fadeUpVariants = {
+const fadeUpVariants: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
@@ -41,7 +45,7 @@ const fadeUpVariants = {
 };
 
 // Masked Text Helper for that clean, sliding-up text effect
-const MaskedText = ({ children, className }) => (
+const MaskedText = ({ children, className }: { children: React.ReactNode; className?: string }) => (
   <div className="overflow-hidden inline-block w-full leading-tight py-1" style={{ perspective: "1000px" }}>
     <motion.div variants={textRevealVariants} className={className} style={{ transformOrigin: "bottom center" }}>
       {children}
@@ -72,7 +76,23 @@ const AboutUs = () => {
 
   return (
     <div ref={containerRef} className="min-h-screen bg-white text-slate-900 font-sans selection:bg-[#D32027] selection:text-white">
+      <SEO 
+        title="About Stalight Technologies | Enterprise AI & Software Solutions"
+        description="Learn about Stalight Technologies, a leader in AI-first enterprise platforms, custom software development, and professional IT training in Karnataka."
+        jsonLd={[
+          generateWebPageSchema(
+            "About Stalight Technologies",
+            "Learn about Stalight Technologies, a leader in AI-first enterprise platforms and software development.",
+            "/about-us"
+          ),
+          generateBreadcrumbSchema([
+            { name: "Home", item: "/" },
+            { name: "About Us", item: "/about-us" }
+          ])
+        ]}
+      />
       <Navbar />
+
 
       {/* --- HERO SECTION --- */}
       <section className="relative pt-40 pb-24 md:pt-52 md:pb-32 overflow-hidden bg-[#FAFAFA]">
@@ -84,7 +104,7 @@ const AboutUs = () => {
           style={{ opacity: opacityParallax }}
           className="absolute inset-0 z-0 mix-blend-multiply"
         >
-           <img src={stalightMainOfficeImg} alt="Office" className="w-full h-full object-cover filter grayscale opacity-40" />
+           <OptimizedImage src={stalightMainOfficeImg} alt="Stalight Technologies Main Office Building" className="w-full h-full object-cover filter grayscale opacity-40" priority />
            <div className="absolute inset-0 bg-gradient-to-b from-[#FAFAFA]/40 via-transparent to-[#FAFAFA]"></div>
         </motion.div>
 
@@ -132,11 +152,13 @@ const AboutUs = () => {
               <motion.div 
                 variants={{
                   hidden: { opacity: 0, scale: 0.95, filter: "blur(10px)" },
-                  visible: { opacity: 1, scale: 1, filter: "blur(0px)", transition: { duration: 1.5, ease: techEase } }
+                  visible: { opacity: 1, scale: 1, filter: "blur(0px)", transition: { duration: 1.5, ease: techEase as any } }
                 }} 
                 className="relative h-[450px] lg:h-[650px] bg-slate-100 overflow-hidden shadow-2xl rounded-2xl md:rounded-[2rem]"
               >
-                <motion.img style={{ y: yParallax, scale: 1.1 }} src={stalightOfficeImg} alt="Office" className="w-full h-full object-cover origin-bottom" />
+                <motion.div style={{ y: yParallax, scale: 1.1 }} className="w-full h-full">
+                  <OptimizedImage src={stalightOfficeImg} alt="Modern interior of Stalight Technologies software development center" className="w-full h-full object-cover origin-bottom" />
+                </motion.div>
                 <div className="absolute inset-0 bg-slate-900/10 mix-blend-multiply"></div>
               </motion.div>
             </div>
@@ -251,9 +273,9 @@ const AboutUs = () => {
 
                   {/* Logo Container - Removed grayscale, ALWAYS IN COLOR */}
                   <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center relative z-10 transition-all duration-500">
-                    <img
+                    <OptimizedImage
                       src={partner.logo}
-                      alt={partner.name}
+                      alt={`${partner.name} Logo - Official Partner of Stalight Technologies`}
                       className="max-w-full max-h-full object-contain transform group-hover:scale-110 transition-transform duration-500 drop-shadow-sm"
                     />
                   </div>
