@@ -43,11 +43,11 @@ const AnimatedNumber = ({ value, duration = 2.5 }) => {
 const features = [
   { icon: Brain, title: "NebulaSuggests AI", desc: "A recommendation engine that analyses individual learning patterns and suggests tailored DSA problems, study resources, and revision schedules.", imgSrc: nebulaaiImg },
   { icon: ScanFace, title: "Facial Recognition Attendance", desc: "Automated tracking powered by high-precision AI facial recognition to eliminate proxies and save valuable classroom time.", imgSrc: facerecognImg },
+   { icon: ClipboardCheck, title: "Leave & Approvals", desc: "Structured leave request system with multi-level approvals, real-time tracking, and automated notifications.", imgSrc: leavereqImg },
   { icon: LayoutDashboard, title: "Role-Based Dashboards", desc: "Personalized interfaces tailored for students, faculty, and administrators, ensuring relevant data is always front and center.", imgSrc: neurocampus11Img },
-  { icon: Printer, title: "Smart Print & Xerox", desc: "Digitally upload documents to the campus Xerox center, receive a token, and quickly collect printouts during breaks.", imgSrc: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=600&q=80" },
   { icon: Calendar, title: "Timetable & Scheduling", desc: "Intelligent timetable management with automated scheduling, conflict detection, and real-time updates.", imgSrc: timetableImg },
   { icon: FileText, title: "Assignment Workflow", desc: "Streamlined system for assignment creation, submission tracking, evaluation, and deadline enforcement.", imgSrc: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=80" },
-  { icon: ClipboardCheck, title: "Leave & Approvals", desc: "Structured leave request system with multi-level approvals, real-time tracking, and automated notifications.", imgSrc: leavereqImg },
+   { icon: Printer, title: "Smart Print & Xerox", desc: "Digitally upload documents to the campus Xerox center, receive a token, and quickly collect printouts during breaks.", imgSrc: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=600&q=80" },
   { icon: BookOpen, title: "Study Material Hub", desc: "Organized digital library for faculty-uploaded resources, enabling students to access study materials anytime.", imgSrc: "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=600&q=80" },
 ];
 
