@@ -13,7 +13,6 @@ import { SEO } from "@/components/SEO";
 import { generateWebPageSchema, generateBreadcrumbSchema } from "@/utils/seoUtils";
 import { OptimizedImage } from "@/components/OptimizedImage";
 
-
 // --- Image Imports ---
 import campusImg from "@/assets/screenshots/mobileloginpage1.png";
 import loginpageImg from "@/assets/screenshots/loginpageimage.png";
@@ -25,7 +24,6 @@ import facerecognImg from "@/assets/products/facerecogn.jpg";
 import resultsImg from "@/assets/screenshots/results.png";
 
 // --- Custom Animated Number Component ---
-// This creates the "clock running / counting up" effect
 const AnimatedNumber = ({ value, duration = 2.5 }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
@@ -53,13 +51,6 @@ const features = [
   { icon: BookOpen, title: "Study Material Hub", desc: "Organized digital library for faculty-uploaded resources, enabling students to access study materials anytime.", imgSrc: "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=600&q=80" },
 ];
 
-const reviews = [
-  { name: "Dr. Rajesh Kumar", role: "HOD, Computer Science", institution: "BIT", text: "Neuro Campus transformed how we manage student data. The AI-driven analytics gave us insights we never had before.", rating: 5 },
-  { name: "Priya Sharma", role: "Final Year Student", institution: "REVA", text: "The dashboard is intuitive and I can track my progress in one place. Highly recommended for students.", rating: 5 },
-  { name: "Prof. Anand Rao", role: "Dean of Academics", institution: "Presidency", text: "We deployed across three departments within a month. Administrative paperwork has dropped significantly.", rating: 4 },
-  { name: "Dr. Meena Krishnan", role: "Principal", institution: "Oxford", text: "The face recognition attendance system alone saved us hours of manual work every week.", rating: 5 },
-];
-
 const dashboardScreenshots = [leavereqImg, timetableImg, loginpageImg, neurocampus11Img];
 
 const featurePills = [
@@ -72,7 +63,7 @@ const featurePills = [
 ];
 
 // --- Animations ---
-const customEase = [0.16, 1.0, 0.3, 1.0] as any;
+const customEase = [0.16, 1.0, 0.3, 1.0];
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -84,19 +75,13 @@ const fadeUpVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: customEase } },
 };
 
-const scaleUpVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: customEase } },
-};
-
 const NeuroCampus = () => {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
-  const yParallax = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);  
-  // Scroll to top when page loads
+  
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);  const yFloat = useTransform(scrollYProgress, [0, 1], ["0%", "-5%"]);
+  }, []);
 
   return (
     <div ref={containerRef} className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900 overflow-x-hidden relative">
@@ -117,7 +102,6 @@ const NeuroCampus = () => {
       />
       <Navbar />
 
-      
       {/* Background decoration */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <div className="absolute inset-0 opacity-[0.3] sm:opacity-[0.4]" style={{ backgroundImage: 'radial-gradient(#cbd5e1 1px, transparent 1px)', backgroundSize: '24px 24px sm:32px 32px' }}></div>
@@ -125,10 +109,11 @@ const NeuroCampus = () => {
       </div>
 
       {/* --- HERO SECTION --- */}
-      <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 md:pt-40 md:pb-20 z-10 flex flex-col items-center">
-        <div className="container mx-auto px-4 sm:px-6 relative z-10 w-full text-center">
+      <section className="relative pt-24 pb-8 sm:pt-32 sm:pb-12 md:pt-40 md:pb-16 z-10 w-full flex flex-col items-center">
+        
+        {/* Constrained Header Text */}
+        <div className="container mx-auto px-4 sm:px-6 relative z-10 w-full text-center mb-10 sm:mb-16">
           <motion.div initial="hidden" animate="visible" variants={containerVariants} className="max-w-6xl mx-auto">
-
             <motion.h1 variants={fadeUpVariants} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-slate-950 tracking-tighter leading-[0.85] mb-4 sm:mb-6">
               Neuro <br className="sm:hidden"/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 animate-gradient-x">
@@ -136,48 +121,46 @@ const NeuroCampus = () => {
               </span>
             </motion.h1>
 
-            <motion.p variants={fadeUpVariants} className="text-slate-600 font-light text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed mb-8 sm:mb-10 px-2">
+            <motion.p variants={fadeUpVariants} className="text-slate-600 font-light text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed px-2">
               A next-generation academic management platform unifying AI-driven analytics, blockchain security, and automated operations.
             </motion.p>
-
-            {/* Infinite Feature Marquee */}
-            <motion.div variants={fadeUpVariants} className="w-full max-w-full sm:max-w-4xl mx-auto relative overflow-hidden py-3 sm:py-4">
-              <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-r from-[#FAFAFA] to-transparent z-10"></div>
-              <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-l from-[#FAFAFA] to-transparent z-10"></div>
-
-              <motion.div className="flex gap-2 sm:gap-3 px-2 w-max" animate={{ x: ["0%", "-50%"] }} transition={{ ease: "linear", duration: 30, repeat: Infinity }}>
-                {[...featurePills, ...featurePills].map((pill, idx) => (
-                  <div key={idx} className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-white/90 backdrop-blur-sm border border-slate-200/80 shadow-sm rounded-full shrink-0 hover:border-purple-200 hover:shadow-md transition-all duration-300">
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-br from-pink-50 to-blue-50 flex items-center justify-center">
-                      <pill.icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-purple-600" />
-                    </div>
-                    <span className="text-xs sm:text-sm font-semibold text-slate-700 tracking-wide whitespace-nowrap">{pill.title}</span>
-                  </div>
-                ))}
-              </motion.div>
-            </motion.div>
           </motion.div>
         </div>
+
+        {/* FULL WIDTH Infinite Feature Marquee (Moved outside the container constraint) */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="w-full relative overflow-hidden py-4"
+        >
+          {/* Edge gradients seamlessly blending into the #FAFAFA background */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#FAFAFA] to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#FAFAFA] to-transparent z-10 pointer-events-none"></div>
+
+          <motion.div 
+            className="flex gap-3 sm:gap-4 w-max px-4" 
+            animate={{ x: ["0%", "-50%"] }} 
+            transition={{ ease: "linear", duration: 35, repeat: Infinity }}
+          >
+            {/* Duplicated 4 times to ensure no blank spaces on ultra-wide monitors */}
+            {[...featurePills, ...featurePills, ...featurePills, ...featurePills].map((pill, idx) => (
+              <div key={idx} className="flex items-center gap-1.5 sm:gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm border border-slate-200/80 shadow-sm rounded-full shrink-0 hover:border-purple-200 hover:shadow-md transition-all duration-300">
+                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-br from-pink-50 to-blue-50 flex items-center justify-center">
+                  <pill.icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-purple-600" />
+                </div>
+                <span className="text-xs sm:text-sm font-semibold text-slate-700 tracking-wide whitespace-nowrap">{pill.title}</span>
+              </div>
+            ))}
+          </motion.div>
+        </motion.div>
+
       </section>
 
-      {/* --- DASHBOARD SHOWCASE (ARCHITECTURAL UPGRADE) --- */}
+      {/* --- DASHBOARD SHOWCASE --- */}
       <section id="features" className="py-16 sm:py-20 md:py-24 lg:py-32 bg-[#FAFAFC] overflow-hidden relative z-10">
-
-        {/* Tech Mahindra Style Architectural Background Grid */}
-        <div
-          className="absolute inset-0 z-0 pointer-events-none opacity-[0.4] sm:opacity-[0.6]"
-          style={{ backgroundImage: 'linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px)', backgroundSize: '60px 100%' }}
-        ></div>
-
-        {/* Diagonal Tech Mahindra Style Cut overlay */}
-        <div
-          className="absolute top-0 right-0 w-[85%] md:w-[70%] lg:w-[65%] h-full bg-white z-0 pointer-events-none shadow-[inset_20px_0_60px_rgba(0,0,0,0.02)]"
-          style={{ clipPath: 'polygon(15% 0, 100% 0, 100% 100%, 0 100%)' }}
-        ></div>
-
-        {/* Subtle Brand Accents */}
-        <div className="absolute top-[15%] sm:top-[20%] left-[-5%] sm:left-[-10%] w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-purple-500/5 rounded-full blur-[80px] sm:blur-[100px] z-0 pointer-events-none"></div>
-        <div className="absolute bottom-[-5%] sm:bottom-[-10%] right-[-5%] sm:right-[-10%] w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-blue-500/5 rounded-full blur-[80px] sm:blur-[100px] z-0 pointer-events-none"></div>
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.4] sm:opacity-[0.6]" style={{ backgroundImage: 'linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px)', backgroundSize: '60px 100%' }}></div>
+        <div className="absolute top-0 right-0 w-[85%] md:w-[70%] lg:w-[65%] h-full bg-white z-0 pointer-events-none shadow-[inset_20px_0_60px_rgba(0,0,0,0.02)]" style={{ clipPath: 'polygon(15% 0, 100% 0, 100% 100%, 0 100%)' }}></div>
 
         <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 mb-12 sm:mb-16 relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8">
           <div className="max-w-3xl text-center md:text-left">
@@ -206,18 +189,14 @@ const NeuroCampus = () => {
           >
             {[...dashboardScreenshots, ...dashboardScreenshots].map((img, idx) => (
               <div key={idx} className="relative w-[250px] sm:w-[350px] md:w-[450px] lg:w-[550px] xl:w-[650px] aspect-video bg-white rounded-xl sm:rounded-2xl lg:rounded-[2rem] border border-slate-200/80 p-1.5 sm:p-2 lg:p-3 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.08)] shrink-0 group cursor-pointer hover:-translate-y-1 sm:hover:-translate-y-2 transition-all duration-500">
-
-                {/* Mac-like Window Header */}
                 <div className="flex items-center gap-1 sm:gap-1.5 lg:gap-2 px-2 sm:px-3 lg:px-4 py-1.5 sm:py-2 lg:py-3 border-b border-slate-100 bg-slate-50/50 rounded-t-lg sm:rounded-t-xl lg:rounded-t-[1.5rem]">
                   <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 lg:w-3 lg:h-3 rounded-full bg-slate-200 group-hover:bg-red-400 transition-colors"></div>
                   <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 lg:w-3 lg:h-3 rounded-full bg-slate-200 group-hover:bg-amber-400 transition-colors"></div>
                   <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 lg:w-3 lg:h-3 rounded-full bg-slate-200 group-hover:bg-emerald-400 transition-colors"></div>
                 </div>
-
                 <div className="w-full h-[calc(100%-2rem)] sm:h-[calc(100%-2.5rem)] lg:h-[calc(100%-3rem)] rounded-b-lg sm:rounded-b-xl lg:rounded-b-[1.5rem] overflow-hidden">
                    <OptimizedImage src={img} alt={`Neuro Campus Dashboard Screenshot ${idx + 1}`} className="w-full h-full object-cover object-top shadow-sm" />
                 </div>
-
                 <div className="absolute inset-0 rounded-xl sm:rounded-2xl lg:rounded-[2rem] ring-1 ring-inset ring-black/5 group-hover:ring-purple-500/30 transition-all duration-500 pointer-events-none"></div>
               </div>
             ))}
@@ -225,7 +204,7 @@ const NeuroCampus = () => {
         </div>
       </section>
 
-      {/* --- AESTHETIC FEATURE CARDS --- */}
+      {/* --- FEATURE CARDS SECTION (ULTRA-SHARP FIX) --- */}
       <section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-[#FAFAFA]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
@@ -235,16 +214,43 @@ const NeuroCampus = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {features.map((f, i) => (
-              <motion.div key={i} variants={fadeUpVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="group bg-white border border-slate-200/60 rounded-xl sm:rounded-2xl lg:rounded-[2rem] overflow-hidden hover:shadow-[0_15px_35px_-10px_rgba(103,58,183,0.15)] hover:border-purple-200 transition-all duration-500 flex flex-col h-full">
-                <div className="h-40 sm:h-48 lg:h-56 overflow-hidden relative border-b border-slate-100">
-                   <OptimizedImage src={f.imgSrc} alt={`${f.title} - Neuro Campus Feature`} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-5 w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg group-hover:bg-gradient-to-br group-hover:from-purple-500 group-hover:to-blue-500 transition-all duration-500">
+              <motion.div 
+                key={i} 
+                variants={fadeUpVariants} 
+                initial="hidden" 
+                whileInView="visible" 
+                viewport={{ once: true }} 
+                className="group bg-white border border-slate-200/60 rounded-xl sm:rounded-2xl lg:rounded-[2rem] overflow-hidden hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-purple-300 transition-all duration-500 flex flex-col h-full"
+              >
+                {/* Image Container with sharpening fixes */}
+                <div className="h-40 sm:h-48 lg:h-56 overflow-hidden relative border-b border-slate-100 bg-slate-100">
+                  <div className="w-full h-full overflow-hidden">
+                    <img 
+                      src={f.imgSrc} 
+                      alt={f.title}
+                      loading="eager"
+                      className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
+                      style={{ 
+                        transform: 'translateZ(0)',
+                        backfaceVisibility: 'hidden',
+                        imageRendering: 'auto', 
+                        WebkitBackfaceVisibility: 'hidden',
+                        WebkitPerspective: 1000,
+                        WebkitTransform: 'translate3d(0,0,0)',
+                      }} 
+                    />
+                  </div>
+                  
+                  <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-5 w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg group-hover:bg-gradient-to-br group-hover:from-purple-500 group-hover:to-blue-500 transition-all duration-500 z-10">
                     <f.icon className="w-4 h-4 sm:w-5 sm:h-5 text-slate-700 group-hover:text-white" strokeWidth={2} />
                   </div>
                 </div>
+
                 <div className="p-4 sm:p-5 lg:p-6 pt-6 sm:pt-7 lg:pt-8 flex-grow flex flex-col">
                   <h3 className="font-bold text-base sm:text-lg lg:text-xl text-slate-900 mb-2 sm:mb-3 group-hover:text-purple-600 transition-colors">{f.title}</h3>
-                  <p className="text-slate-600 text-xs sm:text-sm lg:text-base font-light leading-relaxed flex-grow">{f.desc}</p>
+                  <p className="text-slate-600 text-xs sm:text-sm lg:text-base font-light leading-relaxed flex-grow">
+                    {f.desc}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -267,9 +273,10 @@ const NeuroCampus = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-              <a href="mailto:info@stalight.in" className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 text-white rounded-full font-bold uppercase text-xs sm:text-sm tracking-widest shadow-lg hover:shadow-purple-500/25 hover:-translate-y-0.5 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition-all duration-300 w-full sm:w-auto">
-                Contact Us <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
+              {/* UPDATED: "Get Access" button routing to /neuro-campus-access */}
+              <Link to="/neuro-campus-access" className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 text-white rounded-full font-bold uppercase text-xs sm:text-sm tracking-widest shadow-lg hover:shadow-purple-500/25 hover:-translate-y-0.5 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition-all duration-300 w-full sm:w-auto">
+                Get Access <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
               <Link to="/" className="flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-white border border-slate-300 text-slate-700 rounded-full font-bold uppercase text-xs sm:text-sm tracking-widest hover:bg-slate-50 hover:text-slate-900 transition-all duration-300 w-full sm:w-auto">
                 Back to Home
               </Link>

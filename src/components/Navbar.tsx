@@ -146,6 +146,21 @@ const Navbar = () => {
                 );
               }
 
+              // Special handling for Contact button
+              if (link.label === "Contact") {
+                return (
+                  <div key={link.href} className="relative group">
+                    <Link
+                      to={link.href.startsWith("/") ? link.href : (isHome ? link.href : `/${link.href}`)}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className="bg-[#D32027] hover:bg-red-600 text-white px-6 py-3 rounded-full font-bold text-xs xl:text-sm tracking-wide uppercase transition-all duration-300 hover:shadow-lg hover:shadow-[#D32027]/30 hover:-translate-y-0.5 transform"
+                    >
+                      {link.label}
+                    </Link>
+                  </div>
+                );
+              }
+
               // Regular link handling
               return (
                 <div key={link.href} className="relative group">
@@ -192,13 +207,23 @@ const Navbar = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.1 }}
                 >
-                  <Link
-                    to={link.href.startsWith("/") ? link.href : (isHome ? link.href : `/${link.href}`)}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className="text-2xl sm:text-3xl font-light tracking-tight text-slate-900 block border-b border-slate-100 pb-3 sm:pb-4"
-                  >
-                    {link.label}
-                  </Link>
+                  {link.label === "Contact" ? (
+                    <Link
+                      to={link.href.startsWith("/") ? link.href : (isHome ? link.href : `/${link.href}`)}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className="bg-[#D32027] hover:bg-red-600 text-white px-6 py-3 rounded-full font-bold text-lg tracking-wide uppercase transition-all duration-300 hover:shadow-lg hover:shadow-[#D32027]/30 inline-block text-center w-full"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <Link
+                      to={link.href.startsWith("/") ? link.href : (isHome ? link.href : `/${link.href}`)}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className="text-2xl sm:text-3xl font-light tracking-tight text-slate-900 block border-b border-slate-100 pb-3 sm:pb-4"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </motion.div>
               ))}
             </nav>
