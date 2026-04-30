@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import stalightLogo from "@/assets/logos/stalightlogo.png";
@@ -16,6 +16,7 @@ const navLinks = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === "/";
@@ -36,7 +37,7 @@ const Navbar = () => {
         event.preventDefault();
         const element = document.querySelector(href);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          smoothScrollToElement(element);
         }
       } else {
         // If we are on another page, let the default behavior of Link (to="/#hash") 
@@ -44,6 +45,33 @@ const Navbar = () => {
         // Index.tsx already has a useEffect to handle scrolling on mount.
       }
     }
+  };
+
+  // Custom smooth scroll function using RAF for better performance
+  const smoothScrollToElement = (element: Element) => {
+    const duration = 600;
+    const targetPosition = (element as HTMLElement).offsetTop;
+    const startPosition = window.scrollY;
+    const distance = targetPosition - startPosition;
+    const startTime = performance.now();
+
+    function animation(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Easing function for smooth animation
+      const easeInOutQuad = progress < 0.5 
+        ? 2 * progress * progress 
+        : -1 + (4 - 2 * progress) * progress;
+
+      window.scrollTo(0, startPosition + distance * easeInOutQuad);
+
+      if (progress < 1) {
+        requestAnimationFrame(animation);
+      }
+    }
+
+    requestAnimationFrame(animation);
   };
 
   return (
@@ -74,27 +102,65 @@ const Navbar = () => {
 
           {/* --- DESKTOP NAVIGATION --- */}
           <nav className="hidden lg:flex items-center gap-6 xl:gap-10">
-            {navLinks.map((link) => (
-              <div key={link.href} className="relative group">
-                <Link
-                  to={link.href.startsWith("/") ? link.href : (isHome ? link.href : `/${link.href}`)}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className="text-xs xl:text-[12px] font-bold tracking-[0.15em] uppercase text-slate-700 hover:text-slate-950 transition-colors py-2 block"
-                >
-                  {link.label}
-                </Link>
-                {/* Hover Underline Sweep */}
-                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#D32027] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-              </div>
-            ))}
+            {navLinks.map((link) => {
+              // Special handling for Products dropdown
+              if (link.label === "Products") {
+                return (
+                  <div
+                    key={link.href}
+                    className="relative group"
+                    onMouseEnter={() => setProductsDropdownOpen(true)}
+                    onMouseLeave={() => setProductsDropdownOpen(false)}
+                  >
+                    <button className="flex items-center gap-1 text-xs xl:text-[12px] font-bold tracking-[0.15em] uppercase text-slate-700 hover:text-slate-950 transition-colors py-2">
+                      {link.label}
+                      <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${productsDropdownOpen ? "rotate-180" : ""}`} />
+                    </button>
+                    {/* Hover Underline Sweep */}
+                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#D32027] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
 
-            {/* Premium CTA Button in Navbar */}
-            <Link
-              to="/neuro-campus-access"
-              className="ml-2 xl:ml-4 px-4 xl:px-6 py-2 xl:py-3 bg-slate-950 text-white text-xs xl:text-[11px] font-bold uppercase tracking-[0.15em] hover:bg-[#D32027] transition-colors duration-300"
-            >
-              Get Access
-            </Link>
+                    {/* Dropdown Menu */}
+                    <motion.div
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={productsDropdownOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }}
+                      transition={{ duration: 0.2 }}
+                      className={`absolute top-full left-0 mt-1 bg-white border border-slate-200 rounded-lg shadow-lg backdrop-blur-sm overflow-hidden z-50 ${productsDropdownOpen ? "pointer-events-auto" : "pointer-events-none"}`}
+                    >
+                      <Link
+                        to="/neuro-campus"
+                        className="flex items-center gap-2 px-4 py-3 hover:bg-slate-50 transition-colors text-sm font-semibold text-slate-700 hover:text-slate-950 whitespace-nowrap"
+                        onClick={() => setProductsDropdownOpen(false)}
+                      >
+                        NeuroCampus
+                      </Link>
+                      <div className="border-t border-slate-100"></div>
+                      <Link
+                        to="/neurosync"
+                        className="flex items-center gap-2 px-4 py-3 hover:bg-slate-50 transition-colors text-sm font-semibold text-slate-700 hover:text-slate-950 whitespace-nowrap"
+                        onClick={() => setProductsDropdownOpen(false)}
+                      >
+                        NeuroSync
+                      </Link>
+                    </motion.div>
+                  </div>
+                );
+              }
+
+              // Regular link handling
+              return (
+                <div key={link.href} className="relative group">
+                  <Link
+                    to={link.href.startsWith("/") ? link.href : (isHome ? link.href : `/${link.href}`)}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className="text-xs xl:text-[12px] font-bold tracking-[0.15em] uppercase text-slate-700 hover:text-slate-950 transition-colors py-2 block"
+                  >
+                    {link.label}
+                  </Link>
+                  {/* Hover Underline Sweep */}
+                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#D32027] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                </div>
+              );
+            })}
           </nav>
 
           {/* --- MOBILE MENU TOGGLE --- */}
@@ -135,21 +201,6 @@ const Navbar = () => {
                   </Link>
                 </motion.div>
               ))}
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6 }}
-                className="w-full"
-              >
-                <Link
-                  to="/neuro-campus-access"
-                  onClick={() => setMobileOpen(false)}
-                  className="mt-4 sm:mt-6 px-6 sm:px-8 py-4 sm:py-5 bg-slate-950 text-white text-center text-sm font-bold uppercase tracking-[0.2em] hover:bg-[#D32027] transition-colors duration-300 block"
-                >
-                  Get Access
-                </Link>
-              </motion.div>
             </nav>
           </motion.div>
         )}

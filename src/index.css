@@ -229,7 +229,12 @@
 .reveal-delay-4 { transition-delay: 0.4s; }
 .reveal-delay-5 { transition-delay: 0.5s; }
 
-/* Smooth scrolling */
+/* Smooth scrolling - optimized for performance */
 html {
+  scroll-behavior: auto;
+}
+
+/* Enable smooth scroll only for hash anchor links via JavaScript */
+html.smooth-scroll {
   scroll-behavior: smooth;
 }

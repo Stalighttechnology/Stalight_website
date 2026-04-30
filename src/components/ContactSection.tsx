@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Clock, ArrowRight, Loader } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { submitContact } from "@/lib/contactService";
+import { submitContactToSupabase } from "@/lib/supabaseContactService";
 import { sendContactEmail } from "@/lib/emailService";
 
 // --- Premium Animation Variants ---
@@ -80,35 +80,51 @@ const ContactSection = () => {
     
     setLoading(true);
     
-    // Save to localStorage
-    const result = submitContact(formData);
-    
-    // Send email to admin
-    let emailResult = null;
-    if (result.success) {
-      emailResult = await sendContactEmail({
+    try {
+      // Submit to Supabase database
+      const result = await submitContactToSupabase({
         name: formData.name,
         email: formData.email,
         message: formData.message,
-        adminEmail: 'raghupanchal21@gmail.com'
       });
-    }
-    
-    setLoading(false);
-    
-    if (result.success) {
-      toast({
-        title: "Success!",
-        description: emailResult?.success 
-          ? "Message sent! Email notification sent to admin."
-          : "Message saved! Email notification could not be sent."
-      });
-      setFormData({ name: "", email: "", message: "" });
-    } else {
+      
+      setLoading(false);
+
+      if (result.success) {
+        // Send email notification to admin (optional)
+        let emailResult = null;
+        try {
+          emailResult = await sendContactEmail({
+            name: formData.name,
+            email: formData.email,
+            message: formData.message,
+            adminEmail: 'info@stalight.in'
+          });
+        } catch (emailError) {
+          console.log("Email notification skipped:", emailError);
+        }
+
+        toast({
+          title: "Success!",
+          description: emailResult?.success 
+            ? "Message sent! Email notification sent to admin."
+            : "Message saved successfully to our database!",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        toast({
+          title: "Error",
+          description: result.message,
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error("Submission error:", error);
       toast({
         title: "Error",
-        description: result.message,
-        variant: "destructive"
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
       });
     }
   };
