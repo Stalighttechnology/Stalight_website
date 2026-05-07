@@ -24,7 +24,7 @@ import facerecognImg from "@/assets/products/facerecogn.jpg";
 import resultsImg from "@/assets/screenshots/results.png";
 
 // --- Custom Animated Number Component ---
-const AnimatedNumber = ({ value, duration = 2.5 }) => {
+const AnimatedNumber = ({ value, duration = 2.5 }: { value: number; duration?: number }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const motionValue = useMotionValue(0);
@@ -273,10 +273,9 @@ const NeuroCampus = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-              {/* UPDATED: "Get Access" button routing to /neuro-campus-access */}
-              <Link to="/neuro-campus-access" className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 text-white rounded-full font-bold uppercase text-xs sm:text-sm tracking-widest shadow-lg hover:shadow-purple-500/25 hover:-translate-y-0.5 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition-all duration-300 w-full sm:w-auto">
+              <a href="https://campus.stalight.in/stalightcampus" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 text-white rounded-full font-bold uppercase text-xs sm:text-sm tracking-widest shadow-lg hover:shadow-purple-500/25 hover:-translate-y-0.5 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition-all duration-300 w-full sm:w-auto">
                 Get Access <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </a>
               <Link to="/" className="flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-white border border-slate-300 text-slate-700 rounded-full font-bold uppercase text-xs sm:text-sm tracking-widest hover:bg-slate-50 hover:text-slate-900 transition-all duration-300 w-full sm:w-auto">
                 Back to Home
               </Link>

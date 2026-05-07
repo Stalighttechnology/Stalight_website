@@ -10,18 +10,34 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted">
+    <div className="min-h-screen bg-[#FAFAFA] flex flex-col items-center justify-center relative overflow-hidden font-sans">
       <SEO 
         title="404 - Page Not Found | Stalight Technologies"
         description="The page you are looking for does not exist on Stalight Technologies."
         noIndex={true}
       />
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-muted-foreground">Oops! Page not found</p>
-        <a href="/" className="text-primary underline hover:text-primary/90">
-          Return to Home
-        </a>
+      
+      {/* Background decoration */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-100/30 rounded-full blur-[100px]"></div>
+      </div>
+
+      <div className="relative z-10 text-center px-4">
+        <h1 className="text-[12rem] font-black text-slate-100 leading-none select-none">404</h1>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full">
+           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6">
+            Page <span className="text-[#D32027]">Not Found</span>
+          </h2>
+          <p className="text-slate-500 text-lg md:text-xl font-light max-w-md mx-auto mb-10 leading-relaxed">
+            The architectural blueprint for this route seems to be missing or relocated.
+          </p>
+          <a 
+            href="/" 
+            className="inline-flex items-center justify-center px-8 py-4 bg-slate-950 text-white rounded-full font-bold uppercase text-xs tracking-[0.2em] shadow-xl hover:bg-[#D32027] hover:-translate-y-1 transition-all duration-300"
+          >
+            Return to Headquarters
+          </a>
+        </div>
       </div>
     </div>
   );

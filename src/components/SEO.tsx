@@ -7,7 +7,7 @@ interface SEOProps {
   description: string;
   canonicalUrl?: string;
   type?: string;
-  jsonLd?: Record<string, any> | Record<string, any>[];
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   noIndex?: boolean;
 }
 

@@ -22,7 +22,7 @@ import leadboardneurosyncImg from "@/assets/screenshots/leadboardneurosync.png";
 import neurosynchandsetImg from "@/assets/products/neurosynchandset.png";
 
 // --- Custom Animated Number Component ---
-const AnimatedNumber = ({ value, duration = 2.5 }) => {
+const AnimatedNumber = ({ value, duration = 2.5 }: { value: number; duration?: number }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const motionValue = useMotionValue(0);
@@ -74,7 +74,7 @@ const scrollingFeatures = [
 
 // Data for Interactive Placement Hub
 // --- Premium Animation Variants ---
-const customEase = [0.19, 1.0, 0.22, 1.0] as any;
+const customEase: [number, number, number, number] = [0.19, 1.0, 0.22, 1.0];
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },

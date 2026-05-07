@@ -15,7 +15,7 @@ import { OptimizedImage } from "@/components/OptimizedImage";
 
 // --- Premium MNC Easing Curve ---
 // This provides a sharp, decisive entry that glides smoothly to a halt
-const techEase = [0.16, 1, 0.3, 1] as any;
+const techEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -152,7 +152,7 @@ const AboutUs = () => {
               <motion.div 
                 variants={{
                   hidden: { opacity: 0, scale: 0.95, filter: "blur(10px)" },
-                  visible: { opacity: 1, scale: 1, filter: "blur(0px)", transition: { duration: 1.5, ease: techEase as any } }
+                  visible: { opacity: 1, scale: 1, filter: "blur(0px)", transition: { duration: 1.5, ease: techEase } }
                 }} 
                 className="relative h-[450px] lg:h-[650px] bg-slate-100 overflow-hidden shadow-2xl rounded-2xl md:rounded-[2rem]"
               >

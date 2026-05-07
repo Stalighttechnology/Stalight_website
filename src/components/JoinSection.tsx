@@ -5,7 +5,7 @@ import carrier2Img from "@/assets/backgrounds/carrier2.jpg";
 import campusImg from "@/assets/backgrounds/campus.jpg";
 
 // --- Enterprise-Grade Easing & Variants ---
-const premiumEase = [0.16, 1, 0.3, 1] as any;
+const premiumEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -37,7 +37,7 @@ const fadeUpVariants: Variants = {
 // Masked Text Helper
 const MaskedText = ({ children, className = "", variant = textRevealVariants }: { children: React.ReactNode; className?: string; variant?: Variants }) => (
   <div className="overflow-hidden inline-block w-full leading-tight py-1">
-    <motion.div variants={variant as any} className={className} style={{ transformOrigin: "left center" }}>
+    <motion.div variants={variant} className={className} style={{ transformOrigin: "left center" }}>
       {children}
     </motion.div>
   </div>

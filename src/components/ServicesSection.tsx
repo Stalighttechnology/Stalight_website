@@ -29,7 +29,7 @@ const capabilities = [
 ];
 
 // --- Premium Animation Variants ---
-const customEase = [0.19, 1.0, 0.22, 1.0] as any;
+const customEase: [number, number, number, number] = [0.19, 1.0, 0.22, 1.0];
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
