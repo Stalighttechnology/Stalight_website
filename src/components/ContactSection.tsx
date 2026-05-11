@@ -173,7 +173,7 @@ const ContactSection = () => {
                 { icon: Mail, title: "Email", text: "info@stalight.in", link: "mailto:info@stalight.in" },
                 { icon: Phone, title: "Phone", text: "+91 86601 44040", link: "tel:+918660144040" },
                 { icon: MapPin, title: "Headquarters", text: "Bengaluru, Karnataka, India", link: null },
-                { icon: Clock, title: "Business Hours", text: "Monday – Friday, 9:00 AM – 6:00 PM IST", link: null },
+                { icon: Clock, title: "Business Hours", text: "Monday – Saturday, 9:00 AM – 7:00 PM IST", link: null },
               ].map((item, idx) => (
                 <motion.div key={idx} variants={fadeUpVariants} className="flex items-start gap-5 group">
                   <div className="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100 group-hover:border-red-100 group-hover:bg-red-50 transition-colors duration-500 shadow-sm">
