@@ -1,24 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import stalightLogo from "@/assets/logos/stalightlogo.png";
 
 const navLinks = [
   { label: "Home", href: "#home" },
-  { label: "About", href: "/about" },
+  { label: "About", href: "#about" },
   { label: "Products", href: "#products" },
   { label: "Services", href: "#services" },
   { label: "Careers", href: "#careers" },
   { label: "Contact", href: "#contact" },
 ];
 
+const productsDropdownItems = [
+  { label: "NeuroCampus", href: "/neuro-campus" },
+  { label: "NeuroSync", href: "/neurosync" },
+];
+
+const servicesDropdownItems = [
+  { label: "Software Development", href: "/software-development" },
+  { label: "IT Services", href: "/services" },
+  { label: "Skill Development", href: "/skill-development" },
+];
+
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
   const isHome = location.pathname === "/";
 
   // Handle scroll state for styling
@@ -112,10 +123,13 @@ const Navbar = () => {
                     onMouseEnter={() => setProductsDropdownOpen(true)}
                     onMouseLeave={() => setProductsDropdownOpen(false)}
                   >
-                    <button className="flex items-center gap-1 text-xs xl:text-[12px] font-bold tracking-[0.15em] uppercase text-slate-700 hover:text-slate-950 transition-colors py-2">
+                    <Link
+                      to={link.href}
+                      className="flex items-center gap-1 text-xs xl:text-[12px] font-bold tracking-[0.15em] uppercase text-slate-700 hover:text-slate-950 transition-colors py-2"
+                    >
                       {link.label}
                       <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${productsDropdownOpen ? "rotate-180" : ""}`} />
-                    </button>
+                    </Link>
                     {/* Hover Underline Sweep */}
                     <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#D32027] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
 
@@ -126,21 +140,60 @@ const Navbar = () => {
                       transition={{ duration: 0.2 }}
                       className={`absolute top-full left-0 mt-1 bg-white border border-slate-200 rounded-lg shadow-lg backdrop-blur-sm overflow-hidden z-50 ${productsDropdownOpen ? "pointer-events-auto" : "pointer-events-none"}`}
                     >
-                      <Link
-                        to="/neuro-campus"
-                        className="flex items-center gap-2 px-4 py-3 hover:bg-slate-50 transition-colors text-sm font-semibold text-slate-700 hover:text-slate-950 whitespace-nowrap"
-                        onClick={() => setProductsDropdownOpen(false)}
-                      >
-                        NeuroCampus
-                      </Link>
-                      <div className="border-t border-slate-100"></div>
-                      <Link
-                        to="/neurosync"
-                        className="flex items-center gap-2 px-4 py-3 hover:bg-slate-50 transition-colors text-sm font-semibold text-slate-700 hover:text-slate-950 whitespace-nowrap"
-                        onClick={() => setProductsDropdownOpen(false)}
-                      >
-                        NeuroSync
-                      </Link>
+                      {productsDropdownItems.map((item, index) => (
+                        <React.Fragment key={item.href}>
+                          {index > 0 && <div className="border-t border-slate-100" />}
+                          <Link
+                            to={item.href}
+                            className="flex items-center gap-2 px-4 py-3 hover:bg-slate-50 transition-colors text-sm font-semibold text-slate-700 hover:text-slate-950 whitespace-nowrap"
+                            onClick={() => setProductsDropdownOpen(false)}
+                          >
+                            {item.label}
+                          </Link>
+                        </React.Fragment>
+                      ))}
+                    </motion.div>
+                  </div>
+                );
+              }
+
+              if (link.label === "Services") {
+                return (
+                  <div
+                    key={link.href}
+                    className="relative group"
+                    onMouseEnter={() => setServicesDropdownOpen(true)}
+                    onMouseLeave={() => setServicesDropdownOpen(false)}
+                  >
+                    <Link
+                      to={link.href}
+                      className="flex items-center gap-1 text-xs xl:text-[12px] font-bold tracking-[0.15em] uppercase text-slate-700 hover:text-slate-950 transition-colors py-2"
+                    >
+                      {link.label}
+                      <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${servicesDropdownOpen ? "rotate-180" : ""}`} />
+                    </Link>
+                    {/* Hover Underline Sweep */}
+                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#D32027] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+
+                    {/* Dropdown Menu */}
+                    <motion.div
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={servicesDropdownOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }}
+                      transition={{ duration: 0.2 }}
+                      className={`absolute top-full left-0 mt-1 bg-white border border-slate-200 rounded-lg shadow-lg backdrop-blur-sm overflow-hidden z-50 ${servicesDropdownOpen ? "pointer-events-auto" : "pointer-events-none"}`}
+                    >
+                      {servicesDropdownItems.map((item, index) => (
+                        <React.Fragment key={item.href}>
+                          {index > 0 && <div className="border-t border-slate-100" />}
+                          <Link
+                            to={item.href}
+                            className="flex items-center gap-2 px-4 py-3 hover:bg-slate-50 transition-colors text-sm font-semibold text-slate-700 hover:text-slate-950 whitespace-nowrap"
+                            onClick={() => setServicesDropdownOpen(false)}
+                          >
+                            {item.label}
+                          </Link>
+                        </React.Fragment>
+                      ))}
                     </motion.div>
                   </div>
                 );
