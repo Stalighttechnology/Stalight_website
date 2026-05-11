@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin, Clock, ArrowRight, Loader } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { submitContactToSupabase } from "@/lib/supabaseContactService";
 import { sendContactEmail } from "@/lib/emailService";
+import contactUsBadge from "@/assets/logos/11012955.png"; 
 
 // --- Premium Animation Variants ---
 const customEase = [0.19, 1.0, 0.22, 1.0];
@@ -147,10 +148,13 @@ const ContactSection = () => {
           {/* --- LEFT COLUMN: Contact Info --- */}
           <div className="flex flex-col justify-center h-full">
             
-            {/* Animated Tag */}
-            <motion.div variants={fadeUpVariants} className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-red-100 bg-red-50/80 mb-8 w-fit">
-              <span className="w-2 h-2 bg-[#D32027] rounded-full animate-pulse" />
-              <span className="text-[#D32027] font-sans text-[10px] tracking-[0.2em] uppercase font-bold">Contact Support</span>
+            {/* Enlarged, Premium Contact Us Badge */}
+            <motion.div variants={fadeUpVariants} className="mb-6 lg:mb-8 w-fit select-none">
+              <img 
+                src={contactUsBadge} 
+                alt="Contact Us" 
+                className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain drop-shadow-[0_8px_16px_rgba(129,78,246,0.2)] hover:drop-shadow-[0_12px_24px_rgba(129,78,246,0.35)] hover:-translate-y-1.5 transition-all duration-500 ease-out cursor-default"
+              />
             </motion.div>
             
             <motion.h2 variants={fadeUpVariants} className="font-sans text-4xl md:text-5xl font-light text-slate-950 mb-6 tracking-tight leading-[1.1]">
