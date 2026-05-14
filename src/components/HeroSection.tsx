@@ -1,129 +1,198 @@
-import React, { useRef } from "react";
-import { motion } from "framer-motion";
-import heroBg from "@/assets/backgrounds/hero-bg.jpg"; 
+import React, { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import heroBg from "@/assets/backgrounds/hero-bg.jpg";
 
-const customEase = [0.19, 1.0, 0.22, 1.0];
+const easeOutExpo = [0.16, 1, 0.3, 1];
 
 const containerVariants = {
-  hidden: { opacity: 0 },
+  hidden: {},
   visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.15,
+    },
   },
 };
 
-const revealVariants = {
-  hidden: { y: 30, opacity: 0 },
+const itemVariants = {
+  hidden: { opacity: 0, y: 24, filter: "blur(8px)" },
   visible: {
-    y: 0,
     opacity: 1,
-    transition: { duration: 1, ease: customEase },
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.85, ease: easeOutExpo },
+  },
+};
+
+const lineVariants = {
+  hidden: { scaleX: 0, opacity: 0 },
+  visible: {
+    scaleX: 1,
+    opacity: 1,
+    transition: { duration: 0.7, ease: easeOutExpo, delay: 0.3 },
+  },
+};
+
+const backgroundVariants = {
+  hidden: { opacity: 0, scale: 1.08 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 1.8, ease: easeOutExpo },
   },
 };
 
 const HeroSection = () => {
-  const containerRef = useRef(null);
-  
+  const reduceMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  const floatY = reduceMotion ? 0 : isMobile ? 10 : 22;
+  const floatDuration = isMobile ? 8 : 10;
+
   return (
-    <section 
-      ref={containerRef}
-      id="home" 
-      className="relative h-[100dvh] min-h-[600px] max-h-[1080px] w-full flex items-center justify-center overflow-hidden bg-[#F8F7F3] font-sans border-b border-slate-200"
+    <section
+      id="home"
+      className="relative isolate flex min-h-[100dvh] w-full items-center justify-center overflow-hidden bg-[#F8F7F3] font-sans border-b border-slate-200"
     >
-      
-      {/* Background Graphic - REMOVED 'multiply' blend mode for a cleaner, brighter look */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Subtle background scale animation */}
-        <motion.div 
-          initial={{ scale: 1.05, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.2 }} // Much lower opacity for a cleaner "texture" feel
-          transition={{ duration: 2, ease: "easeOut" }}
-          className="absolute right-0 w-full md:w-[70%] h-full"
-          style={{ 
-            clipPath: "polygon(25% 0, 100% 0, 100% 100%, 0 100%)",
+        <motion.div
+          variants={backgroundVariants}
+          initial="hidden"
+          animate="visible"
+          className="absolute inset-y-0 right-0 w-full md:w-[72%]"
+          style={{
+            clipPath: "polygon(24% 0, 100% 0, 100% 100%, 0 100%)",
             background: `url(${heroBg}) center/cover no-repeat`,
           }}
         />
-        
-        {/* Clean, brightening gradients instead of dark shadows */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#F8F7F3] via-[#F8F7F3]/80 to-transparent md:bg-gradient-to-r"></div>
-        
-        {/* Added a subtle radial glow exactly where the text sits to guarantee contrast on mobile */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] md:w-[60%] h-[60%] bg-[#F8F7F3]/60 blur-[60px] rounded-full"></div>
+
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(248,247,243,0.52),rgba(248,247,243,0.86)_58%,rgba(248,247,243,1)_100%)] md:bg-[linear-gradient(90deg,rgba(248,247,243,0.98)_0%,rgba(248,247,243,0.82)_36%,rgba(248,247,243,0.18)_100%)]" />
+
+        <motion.div
+          animate={
+            reduceMotion
+              ? {}
+              : {
+                  y: [0, -floatY, 0],
+                  x: [0, 10, 0],
+                }
+          }
+          transition={{
+            duration: floatDuration,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute top-[14%] left-[7%] h-36 w-36 rounded-full bg-[#D32027]/10 blur-3xl md:h-56 md:w-56 md:bg-[#D32027]/12"
+        />
+
+        <motion.div
+          animate={
+            reduceMotion
+              ? {}
+              : {
+                  y: [0, 16, 0],
+                  x: [0, -12, 0],
+                }
+          }
+          transition={{
+            duration: floatDuration + 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute bottom-[12%] right-[8%] h-40 w-40 rounded-full bg-slate-900/8 blur-3xl md:h-64 md:w-64 md:bg-slate-900/10"
+        />
+
+        <motion.div
+          animate={
+            reduceMotion
+              ? {}
+              : {
+                  opacity: [0.3, 0.55, 0.3],
+                  scale: [1, 1.08, 1],
+                }
+          }
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute left-1/2 top-1/2 h-[70%] w-[120%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/35 blur-[80px] md:w-[58%]"
+        />
+
+        <div className="absolute inset-0 opacity-[0.05] [background-image:linear-gradient(rgba(15,23,42,0.35)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.35)_1px,transparent_1px)] [background-size:72px_72px]" />
       </div>
 
-      {/* Main Content Container */}
-      <motion.div 
-        className="relative z-10 w-full px-5 sm:px-6 flex flex-col items-center text-center -mt-12 md:mt-0"
+      <motion.div
+        className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center px-5 py-24 text-center sm:px-6 lg:px-8"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
         
-        {/* Heading */}
-        <h1 className="flex flex-col gap-2 md:gap-3 mb-6 md:mb-8">
-          <motion.span 
-            variants={revealVariants}
-            className="text-slate-500 font-medium text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-wide uppercase"
+
+        <motion.h1 className="flex flex-col gap-3 md:gap-4">
+          <motion.span
+            variants={itemVariants}
+            className="text-sm font-medium uppercase tracking-[0.32em] text-slate-500 sm:text-base"
           >
             The Standard for
           </motion.span>
-          <motion.span 
-            variants={revealVariants}
-            className="text-[#0B101E] font-black text-[2.75rem] sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight"
-          >
-            Enterprise<br className="block md:hidden" /> Intelligence.
-          </motion.span>
-        </h1>
 
-        {/* Divider - Made slightly thicker but shorter for a sharper, modern look */}
-        <motion.div 
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: customEase }}
-          className="w-12 md:w-16 h-1.5 bg-[#D32027] mb-8 origin-center rounded-full"
+          <motion.span
+            variants={itemVariants}
+            className="mx-auto max-w-5xl text-[3rem] font-black leading-[0.92] tracking-[-0.05em] text-[#0B101E] sm:text-6xl md:text-7xl lg:text-8xl"
+          >
+            Enterprise
+            <br className="block md:hidden" />
+            Intelligence
+          </motion.span>
+        </motion.h1>
+
+        <motion.div
+          variants={lineVariants}
+          className="mt-7 mb-8 h-1.5 w-14 origin-center rounded-full bg-[#D32027] md:w-16"
         />
 
-        {/* Subtitle - Refined line-height and font-weight for easier mobile reading */}
-        <motion.p 
-          variants={revealVariants}
-          className="max-w-[320px] sm:max-w-xl md:max-w-2xl text-[14px] sm:text-base lg:text-lg text-slate-600 font-medium md:font-light leading-relaxed mb-10 md:mb-12"
+        <motion.p
+          variants={itemVariants}
+          className="max-w-2xl text-[15px] font-medium leading-7 text-slate-600 sm:text-base md:text-lg"
         >
-          Bridging academic rigour and enterprise-grade AI—delivering 
-          platforms built for scale and institutional trust.
+          Bridging academic rigor and enterprise-grade AI with secure, scalable
+          platforms designed for institutional trust and measurable impact.
         </motion.p>
 
-        {/* Buttons - Sleeker padding and precise constraint limits */}
-        <motion.div 
-          variants={revealVariants} 
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 w-full max-w-[300px] sm:max-w-none"
+        <motion.div
+          variants={itemVariants}
+          className="mt-10 flex w-full max-w-md flex-col items-center justify-center gap-3 sm:max-w-none sm:flex-row sm:gap-4"
         >
           <a
             href="#contact"
-            className="group relative px-6 py-4 md:py-3.5 bg-[#0B101E] text-white overflow-hidden shadow-lg transition-all w-full sm:w-auto min-w-[220px]"
+            className="group relative flex w-full min-w-[220px] items-center justify-center overflow-hidden rounded-xl bg-[#0B101E] px-6 py-4 text-[11px] font-bold uppercase tracking-[0.22em] text-white shadow-[0_18px_40px_rgba(11,16,30,0.18)] transition-transform duration-300 hover:-translate-y-0.5 sm:w-auto"
           >
-            <div className="absolute inset-0 w-full h-full bg-[#D32027] -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-300"></div>
-            <span className="relative z-10 text-[11px] font-bold tracking-[0.2em] uppercase flex items-center justify-center gap-2">
+            <span className="absolute inset-0 -translate-x-full bg-[#D32027] transition-transform duration-500 group-hover:translate-x-0" />
+            <span className="relative z-10 flex items-center gap-2">
               Institutional Inquiry
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
             </span>
           </a>
-          
+
           <a
             href="#products"
-            className="px-6 py-4 md:py-3.5 text-[11px] font-bold tracking-[0.2em] uppercase text-[#0B101E] bg-white/90 md:bg-white/60 border border-slate-200 md:border-slate-300 backdrop-blur-md hover:bg-white transition-all w-full sm:w-auto min-w-[220px]"
+            className="flex w-full min-w-[220px] items-center justify-center rounded-xl border border-slate-200 bg-white/70 px-6 py-4 text-[11px] font-bold uppercase tracking-[0.22em] text-[#0B101E] backdrop-blur-md transition-all duration-300 hover:bg-white hover:shadow-[0_12px_30px_rgba(15,23,42,0.08)] sm:w-auto"
           >
             View Solutions
           </a>
         </motion.div>
-
       </motion.div>
-
-      {/* Corporate Grid Overlay (Subtle) */}
-      <div className="absolute inset-0 pointer-events-none z-0 flex justify-between px-6 md:px-20 lg:px-40 opacity-[0.02] md:opacity-[0.04]">
-        <div className="w-px h-full bg-slate-950"></div>
-        <div className="w-px h-full bg-slate-950"></div>
-      </div>
     </section>
   );
 };
