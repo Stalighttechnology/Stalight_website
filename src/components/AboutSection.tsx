@@ -1,220 +1,196 @@
-import React, { useEffect, useRef, useState } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useTransform,
-  useSpring,
-} from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
-// Images
-import galleryImg1 from "@/assets/office/stalightoffice.png";
-import galleryImg2 from "@/assets/office/stalightmainoffice.png";
+// Update these paths to your actual assets
+import galleryImg1 from "@/assets/office/about0.jpg";
+import galleryImg2 from "@/assets/office/about1.jpg";
+import galleryImg3 from "@/assets/office/stalightoffice.png";
+import galleryImg4 from "@/assets/office/stalightmainoffice.png";
 
-const images = [galleryImg1, galleryImg2];
+const images = [galleryImg1, galleryImg2, galleryImg3, galleryImg4];
 
 const capabilities = [
   {
     title: "Software Training",
+    tag: "Education",
     description: "Future-ready technical education and enterprise-level software expertise designed for modern businesses.",
   },
   {
     title: "IT Infrastructure",
+    tag: "Architecture",
     description: "Scalable digital systems, cloud integration, and reliable IT architecture built for performance.",
   },
   {
     title: "Custom Solutions",
+    tag: "Development",
     description: "Premium technology solutions crafted to accelerate operational growth and digital transformation.",
   },
 ];
 
-const ease = [0.22, 1, 0.36, 1];
-
 const AboutSection = () => {
-  const sectionRef = useRef(null);
-  const [currentImage, setCurrentImage] = useState(0);
-  const [currentCapability, setCurrentCapability] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const imageY = useTransform(scrollYProgress, [0, 1], ["-12%", "8%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "6%"]);
-  const rotate = useTransform(scrollYProgress, [0, 1], [-1.2, 1.2]);
-
-  // Smooth mouse follow
-  const mouseX = useSpring(0, { stiffness: 35, damping: 25 });
-  const mouseY = useSpring(0, { stiffness: 35, damping: 25 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
-
-  // Auto cycle images & capabilities
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length);
-      setCurrentCapability((prev) => (prev + 1) % capabilities.length);
-    }, 4800);
+      setCurrentIndex((prev) => (prev + 1) % capabilities.length);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      id="about"
-      className="relative overflow-hidden bg-[#f7f7f5] py-20 md:py-32 lg:py-40"
-    >
-      {/* Background Elements */}
-      <motion.div
-        style={{
-          x: useTransform(mouseX, (v) => v * 0.018),
-          y: useTransform(mouseY, (v) => v * 0.018),
-        }}
-        className="absolute -left-40 -top-40 h-[620px] w-[620px] rounded-full bg-[#D32027]/8 blur-3xl"
-      />
-      <motion.div
-        style={{
-          x: useTransform(mouseX, (v) => -v * 0.012),
-          y: useTransform(mouseY, (v) => -v * 0.012),
-        }}
-        className="absolute -bottom-52 right-0 h-[720px] w-[720px] rounded-full bg-slate-400/8 blur-3xl"
-      />
+    <section id="about" className="relative min-h-screen flex items-center bg-[#FAFAFA] py-20 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none -z-10">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle at top right, rgba(244,180,67,0.16), transparent 35%), radial-gradient(circle at bottom left, rgba(45,174,174,0.12), transparent 28%), linear-gradient(rgba(255,255,255,0.7) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.7) 1px, transparent 1px)',
+            backgroundSize: '40px 40px, 40px 40px, 40px 40px, 40px 40px',
+          }}
+        />
+      </div>
 
-      <div className="absolute inset-0 opacity-[0.035] mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/noise.png')]" />
+      {/* Decorative Background Elements (Reference image_a3e93c.jpg) */}
+      <div className="absolute top-20 right-[10%] w-64 h-64 bg-orange-100/50 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-10 left-[5%] w-96 h-96 bg-teal-50/50 rounded-full blur-3xl -z-10" />
 
-      <div className="container relative z-10 mx-auto px-6 lg:px-8">
-        <div className="grid items-center gap-16 lg:gap-20 lg:grid-cols-2">
-          {/* LEFT SIDE - CONTENT */}
-          <motion.div
-            style={{ y: textY }}
-            className="space-y-12 lg:space-y-16"
-          >
-            {/* Label */}
-            <div className="flex items-center gap-4">
-              <div className="h-px w-12 bg-[#D32027]" />
-              <span className="text-xs font-bold uppercase tracking-[0.4em] text-[#D32027]">
-                STALIGHT TECHNOLOGY
-              </span>
-            </div>
-
-            {/* Heading */}
-            <div className="space-y-2">
-              <h1 className="text-6xl md:text-7xl lg:text-[82px] xl:text-[92px] leading-[0.95] font-light tracking-[-0.04em] text-slate-950">
-                Building
-              </h1>
-              <h1 className="text-6xl md:text-7xl lg:text-[82px] xl:text-[92px] leading-[0.95] font-light tracking-[-0.04em] text-slate-950">
-                Digital
-              </h1>
-              <h1 className="text-[68px] md:text-[88px] lg:text-[108px] xl:text-[122px] leading-none font-black italic tracking-[-0.07em] bg-gradient-to-r from-slate-900 via-slate-800 to-slate-700 bg-clip-text text-transparent">
-                Excellence.
-              </h1>
-            </div>
-
-            {/* Description */}
-            <p className="max-w-lg text-lg md:text-xl leading-relaxed text-slate-600 font-light tracking-tight">
-              We empower businesses through premium software training, enterprise-grade IT infrastructure, 
-              and future-focused technology solutions crafted with innovation and precision.
-            </p>
-
-            {/* Capabilities */}
-            <div className="pt-6">
-              <div className="mb-6 flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">
-                  CORE EXPERTISE
+      <div className="container mx-auto px-6 lg:px-16">
+        <div className="flex flex-col lg:flex-row items-center gap-16">
+          
+          {/* LEFT CONTENT */}
+          <div className="w-full lg:w-1/2 space-y-8">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-orange-500 font-bold tracking-[0.2em] uppercase text-sm mb-4">
+                Our Excellence
+              </h2>
+              <h1 className="text-5xl md:text-7xl font-bold text-[#1A1A1A] leading-[1.1]">
+                Building Your <br />
+                <span className="relative">
+                  Digital Future
+                  <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 20" fill="none">
+                    <path d="M5 15Q150 5 295 15" stroke="#F4B043" strokeWidth="4" strokeLinecap="round"/>
+                  </svg>
                 </span>
-                <div className="h-px w-20 bg-gradient-to-r from-[#D32027] to-transparent" />
-              </div>
+              </h1>
+            </motion.div>
 
+            <div className="relative h-32">
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={currentCapability}
-                  initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, y: -30, filter: "blur(8px)" }}
-                  transition={{ duration: 0.85, ease }}
-                  className="flex gap-6"
+                  key={currentIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  className="space-y-4"
                 >
-                  <div className="mt-1.5">
-                    <motion.div
-                      animate={{ scale: [1, 1.4, 1] }}
-                      transition={{ duration: 2.8, repeat: Infinity }}
-                      className="relative"
-                    >
-                      <div className="h-3.5 w-3.5 rounded-full bg-[#D32027]" />
-                      <div className="absolute inset-0 rounded-full border border-[#D32027]/30 animate-ping" />
-                    </motion.div>
-                  </div>
-
-                  <div>
-                    <h3 className="mb-3 text-xl font-semibold tracking-tight text-slate-900">
-                      {capabilities[currentCapability].title}
-                    </h3>
-                    <p className="text-[17px] leading-relaxed text-slate-600">
-                      {capabilities[currentCapability].description}
-                    </p>
-                  </div>
+                  <p className="text-gray-600 text-lg leading-relaxed max-w-md italic">
+                    "{capabilities[currentIndex].description}"
+                  </p>
                 </motion.div>
               </AnimatePresence>
             </div>
-          </motion.div>
 
-          {/* RIGHT SIDE - VISUAL */}
-          <motion.div
-            style={{ rotate }}
-            initial={{ opacity: 0, scale: 0.94 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.4, ease }}
-            className="relative flex justify-center lg:justify-end"
-          >
-            <div className="relative w-full max-w-[520px] lg:max-w-none">
-              {/* Outer Frame */}
-              <div className="absolute -inset-6 rounded-[42px] border border-slate-200/60" />
+            <Link to="/about-us" className="relative inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-6 lg:px-8 py-3 sm:py-3.5 lg:py-4 bg-slate-900 text-white rounded-full overflow-hidden shadow-md group">
+              <span className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+              <span className="relative z-10 flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs lg:text-sm font-bold tracking-[0.15em] uppercase">
+                Explore Platform <ArrowRight size={12} className="sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Link>
+          </div>
 
-              {/* Main Image Container */}
-              <div className="relative h-[520px] md:h-[620px] lg:h-[680px] overflow-hidden rounded-3xl shadow-2xl shadow-black/20 bg-black">
-                <motion.div style={{ y: imageY }} className="absolute inset-0">
+          {/* RIGHT VISUAL - THE "TAGGED PHOTO" DESIGN */}
+          <div className="w-full lg:w-1/2 relative flex justify-center items-center">
+            
+            {/* The Triple Capsule Layout (Inspired by image_a3f157.png) */}
+            <div className="relative flex items-center gap-4">
+              
+              {/* Left Secondary Image */}
+              <motion.div 
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="w-32 h-64 md:w-40 md:h-80 rounded-[32px] overflow-hidden border border-white/80 bg-white/70 shadow-[0_30px_80px_rgba(15,23,42,0.16)] mt-20"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={`left-${currentIndex}`}
+                    src={images[(currentIndex + 3) % images.length]}
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.8 }}
+                    className="h-full w-full object-cover"
+                    alt="office left"
+                  />
+                </AnimatePresence>
+              </motion.div>
+
+              {/* Main Center Image */}
+              <div className="relative">
+                <motion.div
+                  initial={{ opacity: 0, y: 20, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.9, ease: "easeOut" }}
+                  className="w-56 h-80 md:w-72 md:h-[450px] rounded-[40px] overflow-hidden border border-white/90 bg-slate-50 shadow-[0_40px_90px_rgba(15,23,42,0.18)] z-10 relative"
+                >
                   <AnimatePresence mode="wait">
                     <motion.img
-                      key={currentImage}
-                      src={images[currentImage]}
-                      alt="Stalight Office"
-                      className="absolute inset-0 h-full w-full object-cover"
-                      initial={{ opacity: 0, scale: 1.12 }}
+                      key={currentIndex}
+                      src={images[currentIndex % images.length]}
+                      initial={{ opacity: 0, scale: 1.05 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 1.6, ease: "easeInOut" }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.8 }}
+                      className="h-full w-full object-cover"
                     />
                   </AnimatePresence>
                 </motion.div>
 
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/70" />
-
-                {/* Shine Effect */}
-                <motion.div
-                  animate={{ x: ["-120%", "280%"] }}
-                  transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12"
-                />
-
-                {/* Subtle Border Accent */}
-                <motion.div
-                  animate={{ opacity: [0.4, 0.8, 0.4] }}
-                  transition={{ duration: 4, repeat: Infinity }}
-                  className="absolute inset-4 rounded-[22px] border border-white/20 pointer-events-none"
-                />
+                {/* Floating "Tag" Card (Professional Look) */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  className="absolute -right-12 top-1/4 z-20 bg-white/95 backdrop-blur-md p-3 rounded-3xl shadow-lg border border-gray-100"
+                >
+                  <div className="flex items-center gap-3">
+                  
+                   
+                  </div>
+                </motion.div>
               </div>
+
+              {/* Right Secondary Image */}
+              <motion.div 
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                className="w-32 h-64 md:w-40 md:h-80 rounded-[32px] overflow-hidden border border-white/80 bg-white/70 shadow-[0_30px_80px_rgba(15,23,42,0.16)] mt-10"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={`right-${currentIndex}`}
+                    src={images[(currentIndex + 1) % images.length]}
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.8 }}
+                    className="h-full w-full object-cover"
+                    alt="office right"
+                  />
+                </AnimatePresence>
+              </motion.div>
             </div>
-          </motion.div>
+
+            {/* Decorative Ambient Glow */}
+            <div className="absolute top-4 right-10 w-16 h-16 rounded-full bg-orange-200/30 blur-3xl" />
+            <div className="absolute bottom-8 left-12 w-24 h-24 rounded-full bg-sky-100/30 blur-3xl" />
+          </div>
+
         </div>
       </div>
     </section>
