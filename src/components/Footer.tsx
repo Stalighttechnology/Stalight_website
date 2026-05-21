@@ -106,10 +106,10 @@ const Footer = () => {
           </p>
           
           <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
-             <a href="https://stalight.in/privacy" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm hover:text-white transition-colors">
+             <a href="/privacy" className="text-xs sm:text-sm hover:text-white transition-colors">
                Privacy Policy
              </a>
-             <a href="https://stalight.in/terms" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm hover:text-white transition-colors">
+             <a href="/terms" className="text-xs sm:text-sm hover:text-white transition-colors">
                Terms of Service
              </a>
           </div>

@@ -173,12 +173,22 @@ const HeroSection = () => {
           className="mt-10 flex w-full max-w-md flex-col items-center justify-center gap-3 sm:max-w-none sm:flex-row sm:gap-4"
         >
           <a
-            href="#contact"
+            href="#services"
+            onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById("services");
+              if (el) {
+                el.scrollIntoView({ behavior: "smooth", block: "start" });
+              } else {
+                // fallback: change hash
+                window.location.hash = "#services";
+              }
+            }}
             className="group relative flex w-full min-w-[220px] items-center justify-center overflow-hidden rounded-xl bg-[#0B101E] px-6 py-4 text-[11px] font-bold uppercase tracking-[0.22em] text-white shadow-[0_18px_40px_rgba(11,16,30,0.18)] transition-transform duration-300 hover:-translate-y-0.5 sm:w-auto"
           >
             <span className="absolute inset-0 -translate-x-full bg-[#D32027] transition-transform duration-500 group-hover:translate-x-0" />
             <span className="relative z-10 flex items-center gap-2">
-              Institutional Inquiry
+              Explore services
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>

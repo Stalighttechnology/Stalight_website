@@ -88,7 +88,8 @@ const Navbar = () => {
   };
 
   // Sleek, minimal and elegant typography links with interactive soft background on hover
-  const pillLinkStyle = "group flex items-center gap-1.5 px-4 lg:px-5 py-2 rounded-full text-[14px] font-semibold text-slate-600 hover:text-purple-300 hover:bg-purple-100/60 transition-all duration-300 cursor-pointer";
+  // Use neutral slate tones for a professional appearance (no purple on hover)
+  const pillLinkStyle = "group flex items-center gap-1.5 px-4 lg:px-5 py-2 rounded-full text-[14px] font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100/60 transition-all duration-300 cursor-pointer";
 
   return (
     <>
@@ -100,7 +101,7 @@ const Navbar = () => {
       >
         <div className={`mx-auto max-w-7xl pointer-events-auto transition-all duration-500 rounded-full ${
             scrolled 
-              ? "bg-purple-900/80 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-purple-200/50 py-2 md:py-2.5" 
+              ? "bg-white/90 backdrop-blur-sm shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-slate-200/60 py-2 md:py-2.5" 
               : "bg-white/50 backdrop-blur-md shadow-[0_4px_20px_rgb(0,0,0,0.02)] border border-white/60 py-2 md:py-3"
           }`}
 

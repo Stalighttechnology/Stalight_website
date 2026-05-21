@@ -17,6 +17,8 @@ const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 const SoftwareDevelopment = lazy(() => import("./pages/SoftwareDevelopment.tsx"));
 const SkillDevelopment = lazy(() => import("./pages/SkillDevelopment.tsx"));
 const ITServices = lazy(() => import("./pages/ITServices.tsx"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.tsx"));
+const TermsOfService = lazy(() => import("./pages/TermsOfService.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -40,6 +42,8 @@ const App = () => (
             <Route path="/neurosync" element={<NeuroSync />} />
             <Route path="/neuro-campus" element={<NeuroCampus />} />
             <Route path="/neuro-campus-access" element={<NeuroCampusAccessPlan />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsOfService />} />
             
             {/* CATCH-ALL ROUTE */}
             <Route path="*" element={<NotFound />} />
