@@ -145,7 +145,7 @@ const CareersPage = () => {
               
               <motion.div variants={fadeUpVariants}>
                 <a
-                  href="https://www.linkedin.com/in/stalight-technology-45391a378?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                  href="https://www.linkedin.com/in/stalight-technologies-a2a912406/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative inline-flex items-center justify-center bg-slate-950 text-white px-8 py-4 text-[11px] font-bold tracking-[0.25em] uppercase overflow-hidden"
@@ -166,7 +166,7 @@ const CareersPage = () => {
       {/* ----------------------------------------------------------------- */}
       {/* SECTION 2: Network (Dark Theme Premium Split Card) */}
       {/* ----------------------------------------------------------------- */}
-      <section id="connect-grow" className="relative w-full py-2 md:py-24 bg-[#050810] overflow-hidden">
+      <section id="connect-grow" className="relative w-full py-2 md:py-24 bg-slate-800 overflow-hidden">
         
         {/* Subtle ambient background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#D32027]/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
@@ -222,7 +222,7 @@ const CareersPage = () => {
                   className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.75] group-hover:scale-105 group-hover:brightness-95 transition-all duration-1000 ease-out origin-center"
                 />
                 {/* Inner shadow gradient to blend image with card */}
-                <div className="absolute inset-0 bg-gradient-to-bl from-[#050810]/40 via-transparent to-[#050810]/80 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-gradient-to-bl from-slate-800/40 via-transparent to-slate-800/80 pointer-events-none"></div>
               </div>
             </div>
 

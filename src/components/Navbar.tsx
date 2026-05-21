@@ -16,8 +16,8 @@ const navLinks = [
 
 // Subtext/descriptions removed as requested
 const productsDropdownItems = [
-  { label: "NeuroCampus", href: "/neuro-campus" },
-  { label: "NeuroSync", href: "/neurosync" },
+  { label: "Stalight Campus", href: "/neuro-campus" },
+  { label: "Stalight Sync", href: "/neurosync" },
 ];
 
 const servicesDropdownItems = [
@@ -27,6 +27,8 @@ const servicesDropdownItems = [
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
@@ -35,10 +37,29 @@ const Navbar = () => {
   const isHome = location.pathname === "/";
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Determine if page has scrolled past threshold
+      setScrolled(currentScrollY > 20);
+
+      // Scroll direction visibility rules (hides on scroll down, reveals on scroll up)
+      if (currentScrollY < 10) {
+        setVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setVisible(false);
+        setProductsDropdownOpen(false);
+        setServicesDropdownOpen(false);
+      } else if (currentScrollY < lastScrollY) {
+        setVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const handleNavClick = (event: React.MouseEvent, href: string) => {
     setMobileOpen(false);
@@ -66,35 +87,36 @@ const Navbar = () => {
     requestAnimationFrame(animation);
   };
 
-  const pillLinkStyle = "group flex items-center gap-1.5 px-4 lg:px-5 py-2 lg:py-2.5 rounded-full bg-white/60 hover:bg-white text-[14px] lg:text-[15px] font-semibold text-slate-700 hover:text-slate-900 transition-all duration-300 shadow-sm hover:shadow-md border border-white/40 backdrop-blur-sm cursor-pointer";
+  // Sleek, minimal and elegant typography links with interactive soft background on hover
+  const pillLinkStyle = "group flex items-center gap-1.5 px-4 lg:px-5 py-2 rounded-full text-[14px] font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50/60 transition-all duration-300 cursor-pointer";
 
   return (
     <>
       <motion.header
         initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.19, 1.0, 0.22, 1.0] }}
+        animate={{ y: visible ? 0 : -120, opacity: visible ? 1 : 0 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className="fixed top-4 md:top-6 left-0 right-0 z-50 px-4 sm:px-6 pointer-events-none"
       >
         <div className={`mx-auto max-w-7xl pointer-events-auto transition-all duration-500 rounded-full ${
             scrolled 
-              ? "bg-white/60 backdrop-blur-xl shadow-lg border border-white/60 py-2 md:py-2.5" 
-              : "bg-white/40 backdrop-blur-md shadow-md border border-white/40 py-2 md:py-3"
+              ? "bg-white/80 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-slate-200/50 py-2 md:py-2.5" 
+              : "bg-white/50 backdrop-blur-md shadow-[0_4px_20px_rgb(0,0,0,0.02)] border border-white/60 py-2 md:py-3"
           }`}
         >
-          <div className="flex items-center justify-between px-3 md:px-4">
+          <div className="flex items-center justify-between px-3 md:px-5">
             
             {/* --- LOGO --- */}
             <Link to="/" className="flex items-center gap-2.5 shrink-0 group" aria-label="Home">
-              <img src={stalightLogo} alt="Logo" className="h-8 sm:h-10 w-auto object-contain transition-transform group-hover:scale-105" />
+              <img src={stalightLogo} alt="Logo" className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105" />
               <div className="hidden sm:flex flex-col leading-none">
-                <span className="text-sm md:text-[17px] font-black text-slate-800 tracking-tight">Stalight</span>
-                <span className="text-[10px] md:text-[11px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">Technologies</span>
+                <span className="text-sm md:text-[16px] font-black text-slate-900 tracking-tight">Stalight</span>
+                <span className="text-[9px] md:text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">Technologies</span>
               </div>
             </Link>
 
             {/* --- DESKTOP NAVIGATION --- */}
-            <nav className="hidden lg:flex items-center gap-2 xl:gap-3">
+            <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
               {navLinks.map((link) => {
                 const isDropdown = link.label === "Products" || link.label === "Services";
                 const isOpen = link.label === "Products" ? productsDropdownOpen : servicesDropdownOpen;
@@ -109,14 +131,13 @@ const Navbar = () => {
                       onMouseEnter={() => setOpen(true)}
                       onMouseLeave={() => setOpen(false)}
                     >
-                      {/* Changed from <button> to <Link> to enable smooth scroll clicking */}
                       <Link 
                         to={link.href.startsWith("/") ? link.href : (isHome ? link.href : `/${link.href}`)}
                         onClick={(e) => handleNavClick(e, link.href)}
                         className={pillLinkStyle}
                       >
                         {link.label}
-                        <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${isOpen ? "rotate-180 text-slate-900" : ""}`} />
+                        <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-300 ${isOpen ? "rotate-180 text-slate-900" : ""}`} />
                       </Link>
 
                       {/* Dropdown Menu */}
@@ -127,18 +148,17 @@ const Navbar = () => {
                               initial={{ opacity: 0, y: 10, scale: 0.95 }}
                               animate={{ opacity: 1, y: 0, scale: 1 }}
                               exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                              transition={{ type: "spring", stiffness: 300, damping: 24 }}
-                              className="min-w-[200px] bg-white/95 backdrop-blur-2xl border border-white rounded-2xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] p-2 overflow-hidden flex flex-col gap-1"
+                              transition={{ type: "spring", stiffness: 350, damping: 26 }}
+                              className="min-w-[210px] bg-white/95 backdrop-blur-2xl border border-slate-100 rounded-2xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] p-2 overflow-hidden flex flex-col gap-1"
                             >
                               {items.map((item) => (
                                 <Link
                                   key={item.href}
                                   to={item.href}
-                                  className="group flex items-center px-4 py-2.5 rounded-xl hover:bg-slate-100/80 transition-colors"
+                                  className="group flex items-center px-4 py-2.5 rounded-xl hover:bg-slate-50 transition-colors"
                                   onClick={() => setOpen(false)}
                                 >
-                                  {/* Just the Name, removed subtext */}
-                                  <span className="text-[15px] font-semibold text-slate-700 group-hover:text-[#FF5023] transition-colors">
+                                  <span className="text-[14px] font-semibold text-slate-700 group-hover:text-[#D32027] transition-colors">
                                     {item.label}
                                   </span>
                                 </Link>
@@ -157,11 +177,11 @@ const Navbar = () => {
                       <Link
                         to={link.href.startsWith("/") ? link.href : (isHome ? link.href : `/${link.href}`)}
                         onClick={(e) => handleNavClick(e, link.href)}
-                        className="group flex items-center gap-3 bg-gradient-to-r from-[#FF5023] to-[#FF7043] hover:from-[#E64215] hover:to-[#FF5023] text-white pl-6 pr-2 py-1.5 rounded-full font-bold text-[15px] transition-all duration-300 shadow-[0_8px_20px_-6px_rgba(255,80,35,0.4)] hover:shadow-[0_12px_24px_-6px_rgba(255,80,35,0.6)] hover:-translate-y-0.5"
+                        className="group flex items-center gap-2.5 bg-[#D32027] hover:bg-[#b91c1c] text-white pl-5 pr-2 py-1.5 rounded-full font-bold text-[14px] transition-all duration-300 shadow-[0_8px_20px_-6px_rgba(211,32,39,0.3)] hover:shadow-[0_12px_24px_-6px_rgba(211,32,39,0.5)] hover:-translate-y-0.5"
                       >
                         {link.label}
-                        <div className="bg-white/20 rounded-full p-1.5 transition-colors group-hover:bg-white/30 flex items-center justify-center">
-                          <ArrowRight className="w-4 h-4 text-white stroke-[3]" />
+                        <div className="bg-white/20 rounded-full p-1 transition-colors group-hover:bg-white/30 flex items-center justify-center">
+                          <ArrowRight className="w-3.5 h-3.5 text-white stroke-[3]" />
                         </div>
                       </Link>
                     </div>
@@ -184,9 +204,9 @@ const Navbar = () => {
             {/* --- MOBILE TOGGLE --- */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden text-slate-800 bg-white/70 hover:bg-white p-2.5 rounded-full transition-colors shadow-sm border border-white/50"
+              className="lg:hidden text-slate-800 bg-white/80 hover:bg-white p-2.5 rounded-full transition-all duration-300 shadow-sm border border-slate-100 hover:border-slate-200"
             >
-              {mobileOpen ? <X size={22} strokeWidth={2.5} /> : <Menu size={22} strokeWidth={2.5} />}
+              {mobileOpen ? <X size={20} strokeWidth={2.5} /> : <Menu size={20} strokeWidth={2.5} />}
             </button>
           </div>
         </div>
@@ -214,7 +234,7 @@ const Navbar = () => {
                     onClick={(e) => handleNavClick(e, link.href)}
                     className={`flex items-center justify-between px-6 py-4 rounded-3xl font-bold text-lg shadow-sm border ${
                       link.label === "Contact" 
-                        ? "bg-[#FF5023] text-white border-transparent" 
+                        ? "bg-[#D32027] text-white border-transparent shadow-[0_8px_20px_-6px_rgba(211,32,39,0.3)]" 
                         : "bg-white text-slate-800 border-slate-100 hover:bg-slate-50 transition-colors"
                     }`}
                   >
@@ -222,7 +242,6 @@ const Navbar = () => {
                     {link.label === "Contact" ? (
                       <ArrowRight className="w-5 h-5" />
                     ) : (
-                      /* Still showing arrow to represent sub-items, but click navigates to section */
                       (link.label === "Products" || link.label === "Services") && <ChevronDown className="w-5 h-5 text-slate-400" />
                     )}
                   </Link>

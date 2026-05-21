@@ -8,6 +8,7 @@ import galleryImg1 from "@/assets/office/about0.jpg";
 import galleryImg2 from "@/assets/office/about1.jpg";
 import galleryImg3 from "@/assets/office/stalightoffice.png";
 import galleryImg4 from "@/assets/office/stalightmainoffice.png";
+import officeImg from "@/assets/office/office.jpeg";
 
 const images = [galleryImg1, galleryImg2, galleryImg3, galleryImg4];
 
@@ -99,7 +100,7 @@ const AboutSection = () => {
             <Link to="/about-us" className="relative inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-6 lg:px-8 py-3 sm:py-3.5 lg:py-4 bg-slate-900 text-white rounded-full overflow-hidden shadow-md group">
               <span className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
               <span className="relative z-10 flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs lg:text-sm font-bold tracking-[0.15em] uppercase">
-                Explore Platform <ArrowRight size={12} className="sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 group-hover:translate-x-1 transition-transform" />
+                About Us <ArrowRight size={12} className="sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 group-hover:translate-x-1 transition-transform" />
               </span>
             </Link>
           </div>
@@ -116,18 +117,11 @@ const AboutSection = () => {
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                 className="w-32 h-64 md:w-40 md:h-80 rounded-[32px] overflow-hidden border border-white/80 bg-white/70 shadow-[0_30px_80px_rgba(15,23,42,0.16)] mt-20"
               >
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={`left-${currentIndex}`}
-                    src={images[(currentIndex + 3) % images.length]}
-                    initial={{ opacity: 0, scale: 1.05 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.8 }}
-                    className="h-full w-full object-cover"
-                    alt="office left"
-                  />
-                </AnimatePresence>
+                <img
+                  src={galleryImg3}
+                  className="h-full w-full object-cover"
+                  alt="Stalight Workspace Left"
+                />
               </motion.div>
 
               {/* Main Center Image */}
@@ -138,30 +132,11 @@ const AboutSection = () => {
                   transition={{ duration: 0.9, ease: "easeOut" }}
                   className="w-56 h-80 md:w-72 md:h-[450px] rounded-[40px] overflow-hidden border border-white/90 bg-slate-50 shadow-[0_40px_90px_rgba(15,23,42,0.18)] z-10 relative"
                 >
-                  <AnimatePresence mode="wait">
-                    <motion.img
-                      key={currentIndex}
-                      src={images[currentIndex % images.length]}
-                      initial={{ opacity: 0, scale: 1.05 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.8 }}
-                      className="h-full w-full object-cover"
-                    />
-                  </AnimatePresence>
-                </motion.div>
-
-                {/* Floating "Tag" Card (Professional Look) */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                  className="absolute -right-12 top-1/4 z-20 bg-white/95 backdrop-blur-md p-3 rounded-3xl shadow-lg border border-gray-100"
-                >
-                  <div className="flex items-center gap-3">
-                  
-                   
-                  </div>
+                  <img
+                    src={officeImg}
+                    className="h-full w-full object-cover"
+                    alt="Stalight Office"
+                  />
                 </motion.div>
               </div>
 
@@ -171,18 +146,11 @@ const AboutSection = () => {
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                 className="w-32 h-64 md:w-40 md:h-80 rounded-[32px] overflow-hidden border border-white/80 bg-white/70 shadow-[0_30px_80px_rgba(15,23,42,0.16)] mt-10"
               >
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={`right-${currentIndex}`}
-                    src={images[(currentIndex + 1) % images.length]}
-                    initial={{ opacity: 0, scale: 1.05 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.8 }}
-                    className="h-full w-full object-cover"
-                    alt="office right"
-                  />
-                </AnimatePresence>
+                <img
+                  src={galleryImg4}
+                  className="h-full w-full object-cover"
+                  alt="Stalight Main Office HQ"
+                />
               </motion.div>
             </div>
 

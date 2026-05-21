@@ -80,7 +80,7 @@ const ProductsSection = () => {
             <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500">Platforms</span>
           </motion.h2>
           <motion.p variants={fadeUpVariants} className="text-slate-600 text-sm sm:text-base md:text-lg lg:text-xl font-light leading-relaxed max-w-3xl mx-auto px-4">
-            Designed for scalability, intelligence, and high-performance environments. Transform your institution with our flagship products.
+            Designed for scalability, performance, and institutional transformation. Empower your campus with platforms built for reliability and impact.
           </motion.p>
         </motion.div>
 
@@ -98,14 +98,13 @@ const ProductsSection = () => {
               <motion.div variants={fadeUpVariants}>
                 <div className="w-8 h-0.5 sm:w-10 sm:h-1 lg:w-12 lg:h-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full mb-4 sm:mb-6 lg:mb-8"></div>
 
-                <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight mb-3 sm:mb-4 lg:mb-6">
-                  Neuro Campus
+                <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-slate-900 tracking-tight mb-3 sm:mb-4 lg:mb-6">
+                  <span className="font-light">Stalight</span>{' '}
+                  <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500">Campus</span>
                 </h3>
 
                 <p className="text-slate-600 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-6 sm:mb-8 lg:mb-10">
-                  A unified AI-powered campus ecosystem that transforms how institutions operate — 
-                  from automated workflows to real-time intelligence. Built for scalability, precision, 
-                  and next-generation academic excellence.
+                  A unified campus platform that streamlines operations, secures access, and elevates academic outcomes.
                 </p>
 
                 {/* Button */}
@@ -192,13 +191,13 @@ const ProductsSection = () => {
               <motion.div variants={fadeUpVariants}>
                 <div className="w-8 h-0.5 sm:w-10 sm:h-1 lg:w-12 lg:h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mb-4 sm:mb-6 lg:mb-8"></div>
 
-                <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight mb-3 sm:mb-4 lg:mb-6">
-                  NeuroSync
+                <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-slate-900 tracking-tight mb-3 sm:mb-4 lg:mb-6">
+                  <span className="font-light">Stalight</span>{' '}
+                  <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">Sync</span>
                 </h3>
 
                 <p className="text-slate-600 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-6 sm:mb-8 lg:mb-10">
-                  An intelligent AI infrastructure designed to simulate, assess, and enhance workforce 
-                  capabilities through adaptive learning, cloud-based IDE execution, and real-world scenario intelligence.
+                  An assessment and upskilling platform with cloud-based execution, performance benchmarking, and hands-on practice.
                 </p>
 
                 {/* Button */}

@@ -75,17 +75,17 @@ const NeuroCampusAccessPlan = () => {
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
       <SEO 
-        title="Neuro Campus Access Plans & Pricing | Stalight Technologies"
+        title="Stalight Campus Access Plans & Pricing | Stalight Technologies"
         description="Choose the perfect plan for your institution's needs. Scale seamlessly from essential daily operations to enterprise-grade AI intelligence."
         jsonLd={[
           generateWebPageSchema(
-            "Neuro Campus Access Plans",
-            "Pricing and feature comparison for Neuro Campus academic management platform.",
+            "Stalight Campus Access Plans",
+            "Pricing and feature comparison for Stalight Campus academic management platform.",
             "/neuro-campus-access-plan"
           ),
           generateBreadcrumbSchema([
             { name: "Home", item: "/" },
-            { name: "Neuro Campus", item: "/neuro-campus" },
+            { name: "Stalight Campus", item: "/neuro-campus" },
             { name: "Access Plans", item: "/neuro-campus-access-plan" }
           ]),
           generateFAQSchema([
@@ -108,7 +108,7 @@ const NeuroCampusAccessPlan = () => {
         <div className="max-w-7xl mx-auto text-center relative z-10">
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-100/50 via-white to-white"></div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight">
-            Neuro Campus <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-blue-600">Access Plans</span>
+            Stalight Campus <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-blue-600">Access Plans</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-600 mb-6 max-w-3xl mx-auto leading-relaxed">
             Choose the perfect plan for your institution's needs. Scale seamlessly from essential daily operations to enterprise-grade intelligence.

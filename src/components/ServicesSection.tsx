@@ -90,12 +90,12 @@ const ServicesSection = () => {
           <div className="max-w-2xl">
             <MaskedText className="flex items-center gap-3 mb-6">
               <div className="w-8 h-[2px] bg-[#D32027]"></div>
-              <span className="uppercase tracking-[0.2em] text-xs font-bold text-slate-500">Our Capabilities</span>
+              <span className="uppercase tracking-[0.2em] text-xs font-bold text-slate-500">Core Specializations</span>
             </MaskedText>
             
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-slate-950 mb-8 tracking-tight leading-[1.1]">
-              <MaskedText>Institutional Grade</MaskedText>
-              <MaskedText><span className="font-bold">Architecture.</span></MaskedText>
+              <MaskedText>Enterprise-Grade</MaskedText>
+              <MaskedText><span className="font-bold">Tech Services.</span></MaskedText>
             </h2>
             
             <motion.p variants={cardVariants} className="text-slate-600 text-lg leading-relaxed font-light border-l-2 border-slate-200 pl-6">
