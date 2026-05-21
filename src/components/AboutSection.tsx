@@ -4,13 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 // Update these paths to your actual assets
-import galleryImg1 from "@/assets/office/about0.jpg";
-import galleryImg2 from "@/assets/office/about1.jpg";
-import galleryImg3 from "@/assets/office/stalightoffice.jpg";
-import galleryImg4 from "@/assets/office/stalightmainoffice.jpg";
-import officeImg from "@/assets/office/office.jpeg";
-
-const images = [galleryImg1, galleryImg2, galleryImg3, galleryImg4];
+import leftImage from "@/assets/office/left.png";
+import centerImage from "@/assets/office/center.png";
+import rightImage from "@/assets/office/right.png";
 
 const capabilities = [
   {
@@ -118,7 +114,7 @@ const AboutSection = () => {
                 className="w-32 h-64 md:w-40 md:h-80 rounded-[32px] overflow-hidden border border-white/80 bg-white/70 shadow-[0_30px_80px_rgba(15,23,42,0.16)] mt-20"
               >
                 <img
-                  src={galleryImg3}
+                  src={leftImage}
                   className="h-full w-full object-cover"
                   alt="Stalight Workspace Left"
                 />
@@ -133,8 +129,8 @@ const AboutSection = () => {
                   className="w-56 h-80 md:w-72 md:h-[450px] rounded-[40px] overflow-hidden border border-white/90 bg-slate-50 shadow-[0_40px_90px_rgba(15,23,42,0.18)] z-10 relative"
                 >
                   <img
-                    src={officeImg}
-                    className="h-full w-full object-cover"
+                    src={centerImage}
+                    className="h-full w-full object-cover object-top"
                     alt="Stalight Office"
                   />
                 </motion.div>
@@ -147,7 +143,7 @@ const AboutSection = () => {
                 className="w-32 h-64 md:w-40 md:h-80 rounded-[32px] overflow-hidden border border-white/80 bg-white/70 shadow-[0_30px_80px_rgba(15,23,42,0.16)] mt-10"
               >
                 <img
-                  src={galleryImg4}
+                  src={rightImage}
                   className="h-full w-full object-cover"
                   alt="Stalight Main Office HQ"
                 />

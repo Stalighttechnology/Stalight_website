@@ -7,7 +7,7 @@ import {
   GraduationCap, 
   Award, 
   Briefcase, 
-  BrainCircuit, 
+  Cpu,
   Code, 
   Cloud, 
   ArrowRight,
@@ -35,7 +35,7 @@ const staggerContainer: Variants = {
 // --- Mock Data for Courses & Certifications ---
 const courses = [
   {
-    icon: <BrainCircuit className="w-8 h-8 text-purple-600" />,
+    icon: <Cpu className="w-8 h-8 text-purple-600" />,
     title: "Applied AI & Machine Learning",
     duration: "12 Weeks",
     desc: "Master modern AI architectures, from training custom predictive models to building enterprise-scale Retrieval-Augmented Generation (RAG) pipelines and computer vision systems.",
@@ -73,11 +73,11 @@ const SkillDevelopment = () => {
     <div className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900 overflow-hidden">
       <SEO 
         title="Professional IT Skill Development | Stalight Technologies"
-        description="Intensive, architectural-scale training designed by industry veterans. We guarantee your placement in top-tier enterprises upon successful completion."
+        description="Intensive, architectural-scale training designed by industry veterans. We provide placement support and hands-on labs to help you transition into top-tier enterprises upon successful completion."
         jsonLd={[
           generateWebPageSchema(
             "Skill Development & Training",
-            "Elite engineering tracks in AI, Full-Stack, and Cloud with 100% placement guarantee.",
+            "Elite engineering tracks in AI, Full-Stack, and Cloud with placement support and hands-on labs.",
             "/skill-development"
           ),
           generateBreadcrumbSchema([
@@ -96,25 +96,37 @@ const SkillDevelopment = () => {
         variants={staggerContainer} 
         className="pt-32 pb-20 container mx-auto px-4 lg:px-8 relative"
       >
-        <div className="grid lg:grid-cols-2 gap-16 items-center relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 items-center relative z-10 mt-10">
           <motion.div variants={fadeUp} className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-5 py-2 mb-8 rounded-full bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-blue-600/10 border border-purple-200/50 text-slate-800 font-bold tracking-wide text-sm shadow-sm backdrop-blur-sm">
-              <ShieldCheck className="w-5 h-5 text-purple-600" />
-              100% Placement Guarantee Program
-            </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-6 leading-[1.1] tracking-tight">
               Master the tech. <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600">Secure your career.</span>
             </h1>
             <p className="text-lg text-slate-600 mb-10 leading-relaxed max-w-xl">
-              Intensive, architectural-scale training designed by industry veterans. We don't just upskill you; we guarantee your placement in top-tier enterprises upon successful completion.
+              Intensive, architectural-scale training designed by industry veterans. We provide comprehensive training, hands-on projects, and dedicated placement support to help you transition into top-tier enterprises.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a href="#courses" className="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-full font-bold transition-all shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:-translate-y-1">
-                Explore Guaranteed Tracks
+              <a
+                href="#courses"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById('courses');
+                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 text-white rounded-full font-bold transition-all shadow-[0_12px_40px_rgba(124,58,237,0.18)] hover:-translate-y-1"
+              >
+                Explore Tracks
               </a>
-              <a href="mailto:info@stalight.in" className="inline-flex items-center gap-2 px-8 py-4 bg-white border-2 border-slate-200 hover:border-purple-500 hover:text-purple-700 text-slate-900 rounded-full font-bold transition-all hover:shadow-lg">
-                Talk to an Advisor
+              <a
+                href="#admission"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById('admission');
+                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white border-2 border-slate-200 hover:border-purple-500 hover:text-purple-700 text-slate-900 rounded-full font-bold transition-all hover:shadow-lg"
+              >
+                Apply Now
               </a>
             </div>
           </motion.div>
@@ -123,8 +135,33 @@ const SkillDevelopment = () => {
             {/* Glowing background blur matched to logo colors */}
             <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 rounded-[2.5rem] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
             <div className="absolute inset-0 bg-gradient-to-tr from-slate-200 to-slate-50 rounded-[2rem] transform rotate-3 scale-105 -z-10 transition-transform duration-700 group-hover:rotate-6"></div>
+
+            {/* Subtle campus background image */}
+            <div
+              className="absolute inset-0 bg-center bg-cover opacity-20 grayscale blur-sm rounded-[2rem] -z-20"
+              style={{ backgroundImage: `url(${trainImg})` }}
+            />
+
             <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border border-white/50 bg-white">
-              <OptimizedImage src={trainImg} alt="Technical training and mentorship session at Stalight Technologies" className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110 opacity-95" priority />
+              <div className="p-8 md:p-12">
+                <h4 className="text-sm font-bold uppercase text-pink-500 mb-2">Technical training & mentorship</h4>
+                <p className="text-slate-700 mb-4">Intensive, architectural-scale training designed by industry veterans. Live projects, enterprise readiness, and direct placement support.</p>
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="w-10 h-10 bg-pink-50 rounded-lg flex items-center justify-center"> <GraduationCap className="w-5 h-5 text-pink-600" /> </div>
+                    <span className="text-xs font-bold text-slate-700">Career Mentorship</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center"> <Briefcase className="w-5 h-5 text-purple-600" /> </div>
+                    <span className="text-xs font-bold text-slate-700">Placement Support</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center"> <Code className="w-5 h-5 text-blue-600" /> </div>
+                    <span className="text-xs font-bold text-slate-700">Real Projects</span>
+                  </div>
+                </div>
+                <p className="text-sm text-slate-600 mt-4">Enrolled students receive complimentary access to NeuroSync labs for hands-on experimentation and extended learning.</p>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -141,7 +178,7 @@ const SkillDevelopment = () => {
             className="grid md:grid-cols-3 gap-8"
           >
             {[
-              { icon: <Target />, color: "text-pink-600", bg: "bg-pink-50", title: "100% Placement Assured", desc: "Signed agreements ensuring your transition into MNC roles upon completing our elite tracks." },
+              { icon: <Target />, color: "text-pink-600", bg: "bg-pink-50", title: "Placement Support", desc: "Dedicated placement assistance and employer connections to support your transition into MNC roles upon completing our elite tracks." },
               { icon: <Briefcase />, color: "text-purple-600", bg: "bg-purple-50", title: "Industry-Vetted Curriculum", desc: "Syllabuses strictly aligned with current enterprise requirements, bypassing outdated academics." },
               { icon: <Star />, color: "text-blue-600", bg: "bg-blue-50", title: "Architectural Projects", desc: "Build live, large-scale systems for your portfolio, not just theoretical textbook examples." }
             ].map((item, index) => (
@@ -211,11 +248,11 @@ const SkillDevelopment = () => {
         </div>
       </section>
 
-      {/* --- Guarantee & Certifications --- */}
-      <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
+      {/* --- Certifications & Excellence --- */}
+      <section id="admission" className="py-24 bg-white text-slate-900 relative overflow-hidden">
         {/* Dynamic Background Elements */}
-        <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-pink-600/20 rounded-full mix-blend-screen filter blur-[120px] opacity-60"></div>
-        <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-600/20 rounded-full mix-blend-screen filter blur-[120px] opacity-60"></div>
+        <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-pink-600/8 rounded-full mix-blend-screen filter blur-[120px] opacity-40 pointer-events-none"></div>
+        <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-600/8 rounded-full mix-blend-screen filter blur-[120px] opacity-40 pointer-events-none"></div>
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -225,23 +262,23 @@ const SkillDevelopment = () => {
               viewport={{ once: true }} 
               variants={staggerContainer}
             >
-              <motion.div variants={fadeUp} className="inline-block px-4 py-1.5 mb-6 rounded-full bg-white/10 border border-white/20 backdrop-blur-md">
-                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
+              <motion.div variants={fadeUp} className="inline-block px-4 py-1.5 mb-6 rounded-full bg-pink-50">
+                <span className="font-bold text-pink-600">
                   Certified Excellence
                 </span>
               </motion.div>
               <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-black mb-6 leading-tight">
-                Your career, strictly <br/> guaranteed.
+                Your career, confidently <br/> supported.
               </motion.h2>
-              <motion.p variants={fadeUp} className="text-slate-300 text-lg mb-8 leading-relaxed max-w-lg">
-                Our certification pathways ensure that every learner is tested against rigorous, real-world architectural standards. We are so confident in our training that we back it with a 100% placement guarantee.
+              <motion.p variants={fadeUp} className="text-slate-700 text-lg mb-8 leading-relaxed max-w-lg">
+                Our certification pathways ensure that every learner is tested against rigorous, real-world architectural standards. We provide dedicated placement support and enterprise connections to help graduates find the right opportunities.
               </motion.p>
               
               <div className="space-y-4">
                 {certifications.map((cert, index) => (
-                  <motion.div key={index} variants={fadeUp} className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors cursor-default">
-                    <Award className="w-6 h-6 text-purple-400 flex-shrink-0" />
-                    <span className="font-bold text-slate-100">{cert}</span>
+                  <motion.div key={index} variants={fadeUp} className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 hover:bg-slate-100 transition-colors cursor-default">
+                    <Award className="w-6 h-6 text-purple-600 flex-shrink-0" />
+                    <span className="font-bold text-slate-900">{cert}</span>
                   </motion.div>
                 ))}
               </div>
@@ -261,12 +298,12 @@ const SkillDevelopment = () => {
                 <ShieldCheck className="w-10 h-10 text-slate-900" />
               </div>
               <h3 className="text-3xl font-black mb-4">Secure Your Seat</h3>
-              <p className="text-slate-600 mb-8 text-lg">Enroll in our placement-guaranteed batches. Limited seats available to ensure strict mentorship quality.</p>
-              <a href="mailto:info@stalight.in" className="inline-block w-full py-5 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl font-black text-lg transition-all shadow-[0_8px_30px_rgb(0,0,0,0.15)] hover:-translate-y-1">
+              <p className="text-slate-600 mb-8 text-lg">Enroll in our batches with dedicated placement support. Limited seats available to ensure strict mentorship quality.</p>
+              <a href="mailto:info@stalight.in" className="inline-block w-full py-5 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 hover:opacity-95 text-white rounded-2xl font-black text-lg transition-all shadow-[0_12px_40px_rgba(124,58,237,0.18)] hover:-translate-y-1">
                 Apply for Admission
               </a>
               <p className="text-sm font-bold text-slate-500 mt-6 flex items-center justify-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-green-500" /> 100% Placement Assured
+                <CheckCircle2 className="w-5 h-5 text-green-500" /> Placement Support
               </p>
             </motion.div>
           </div>
