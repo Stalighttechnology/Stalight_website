@@ -14,14 +14,14 @@ import { generateWebPageSchema, generateBreadcrumbSchema } from "@/utils/seoUtil
 import { OptimizedImage } from "@/components/OptimizedImage";
 
 // --- Image Imports ---
-import campusImg from "@/assets/screenshots/mobileloginpage1.png";
-import loginpageImg from "@/assets/screenshots/loginpageimage.png";
-import leavereqImg from "@/assets/screenshots/leavereqimage.png";
-import timetableImg from "@/assets/screenshots/timetable dash.png";
-import neurocampus11Img from "@/assets/products/neurocampus11.png";
-import nebulaaiImg from "@/assets/products/nebulaai.png";
+import campusImg from "@/assets/screenshots/mobileloginpage1.jpg";
+import loginpageImg from "@/assets/screenshots/loginpageimage.jpg";
+import leavereqImg from "@/assets/screenshots/leavereqimage.jpg";
+import timetableImg from "@/assets/screenshots/timetable dash.jpg";
+import neurocampus11Img from "@/assets/products/neurocampus11.jpg";
+import nebulaaiImg from "@/assets/products/nebulaai.jpg";
 import facerecognImg from "@/assets/products/facerecogn.jpg";
-import resultsImg from "@/assets/screenshots/results.png";
+import resultsImg from "@/assets/screenshots/results.jpg";
 
 // --- Custom Animated Number Component ---
 const AnimatedNumber = ({ value, duration = 2.5 }: { value: number; duration?: number }) => {

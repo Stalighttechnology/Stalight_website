@@ -3,8 +3,8 @@ import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
-import stalightMainOfficeImg from "@/assets/office/stalightmainoffice.png";
-import stalightOfficeImg from "@/assets/office/stalightoffice.png";
+import stalightMainOfficeImg from "@/assets/office/stalightmainoffice.jpg";
+import stalightOfficeImg from "@/assets/office/stalightoffice.jpg";
 import amcLogo from "@/assets/logos/amclogo.png";
 import cityEngineeringLogo from "@/assets/logos/cityenginerring.jpg";
 import gleamatorLogo from "@/assets/logos/gleamatorlogo.jpg";
@@ -77,12 +77,12 @@ const AboutUs = () => {
   return (
     <div ref={containerRef} className="min-h-screen bg-white text-slate-900 font-sans selection:bg-[#D32027] selection:text-white">
       <SEO 
-        title="About Stalight Technologies | Enterprise AI & Software Solutions"
-        description="Learn about Stalight Technologies, a leader in AI-first enterprise platforms, custom software development, and professional IT training in Karnataka."
+        title="About Stalight Technologies | Software Development & Placements Company"
+        description="Learn about Stalight Technologies (Stalight Pvt Ltd), a leading software development, website making, and IT skill training provider in Rajajinagar, Bengaluru."
         jsonLd={[
           generateWebPageSchema(
             "About Stalight Technologies",
-            "Learn about Stalight Technologies, a leader in AI-first enterprise platforms and software development.",
+            "Learn about Stalight Technologies, a leader in software development, website making, and skills training with placements.",
             "/about-us"
           ),
           generateBreadcrumbSchema([

@@ -4,11 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 // --- Images ---
-import ncImg1 from "@/assets/screenshots/leavereqimage.png";
-import ncImg2 from "@/assets/products/neurocampus11.png";
+import ncImg1 from "@/assets/screenshots/leavereqimage.jpg";
+import ncImg2 from "@/assets/products/neurocampus11.jpg";
 
-import nsImg1 from "@/assets/products/neurosync11.png";
-import nsImg2 from "@/assets/products/neurosync22.png";
+import nsImg1 from "@/assets/products/neurosync11.jpg";
+import nsImg2 from "@/assets/products/neurosync22.jpg";
 
 const neuroCampusImages = [ncImg1, ncImg2];
 const neuroSyncImages = [nsImg1, nsImg2];

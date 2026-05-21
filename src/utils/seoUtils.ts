@@ -8,12 +8,13 @@ const BASE_URL = "https://stalight.in";
 export const generateOrganizationSchema = () => ({
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "Stalight Technologies",
+  "name": "Stalight Technologies Pvt Ltd",
+  "alternateName": ["Stalight", "Stalight Technologies", "Stalight Pvt Ltd"],
   "url": BASE_URL,
-  "logo": `${BASE_URL}/logo.png`,
+  "logo": `${BASE_URL}/full_logo.png`,
   "contactPoint": {
     "@type": "ContactPoint",
-    "telephone": "+91-XXXXXXXXXX",
+    "telephone": "+91-86601-44040",
     "contactType": "customer service",
     "email": "info@stalight.in"
   },
@@ -22,29 +23,43 @@ export const generateOrganizationSchema = () => ({
     "https://twitter.com/stalight_tech",
     "https://www.facebook.com/stalight.technologies"
   ],
-  "description": "AI-First Enterprise Platforms"
+  "description": "Stalight Technologies Pvt Ltd (Stalight) is a leading provider of custom software development, professional website making, IT skills training, and assured placement programs."
 });
 
 export const generateLocalBusinessSchema = () => ({
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "Stalight Technologies",
-  "image": `${BASE_URL}/office.jpg`,
+  "name": "Stalight Technologies Pvt Ltd",
+  "image": `${BASE_URL}/office.jpeg`,
   "@id": `${BASE_URL}/#localbusiness`,
   "url": BASE_URL,
-  "telephone": "+91-XXXXXXXXXX",
+  "telephone": "+91-86601-44040",
+  "priceRange": "$$",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Silicon Valley of India",
-    "addressLocality": "Bangalore",
+    "streetAddress": "Rajajinagar",
+    "addressLocality": "Bengaluru",
     "addressRegion": "Karnataka",
-    "postalCode": "560001",
+    "postalCode": "560010",
     "addressCountry": "IN"
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": 12.9716,
-    "longitude": 77.5946
+    "latitude": 12.9880,
+    "longitude": 77.5536
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "opens": "09:00",
+    "closes": "19:00"
   }
 });
 

@@ -6,8 +6,8 @@ import { ArrowRight } from "lucide-react";
 // Update these paths to your actual assets
 import galleryImg1 from "@/assets/office/about0.jpg";
 import galleryImg2 from "@/assets/office/about1.jpg";
-import galleryImg3 from "@/assets/office/stalightoffice.png";
-import galleryImg4 from "@/assets/office/stalightmainoffice.png";
+import galleryImg3 from "@/assets/office/stalightoffice.jpg";
+import galleryImg4 from "@/assets/office/stalightmainoffice.jpg";
 import officeImg from "@/assets/office/office.jpeg";
 
 const images = [galleryImg1, galleryImg2, galleryImg3, galleryImg4];

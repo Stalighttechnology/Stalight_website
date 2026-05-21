@@ -14,12 +14,12 @@ import { OptimizedImage } from "@/components/OptimizedImage";
 
 
 // Import NeuroSync images
-import neurosync1Img from "@/assets/products/neurosync1.png";
-import neurosync11Img from "@/assets/products/neurosync11.png";
-import neurosync22Img from "@/assets/products/neurosync22.png";
-import neurosync33Img from "@/assets/products/neurosync33.png";
-import leadboardneurosyncImg from "@/assets/screenshots/leadboardneurosync.png";
-import neurosynchandsetImg from "@/assets/products/neurosynchandset.png";
+import neurosync1Img from "@/assets/products/neurosync1.jpg";
+import neurosync11Img from "@/assets/products/neurosync11.jpg";
+import neurosync22Img from "@/assets/products/neurosync22.jpg";
+import neurosync33Img from "@/assets/products/neurosync33.jpg";
+import leadboardneurosyncImg from "@/assets/screenshots/leadboardneurosync.jpg";
+import neurosynchandsetImg from "@/assets/products/neurosynchandset.jpg";
 
 // --- Custom Animated Number Component ---
 const AnimatedNumber = ({ value, duration = 2.5 }: { value: number; duration?: number }) => {

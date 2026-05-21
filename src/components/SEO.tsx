@@ -9,9 +9,10 @@ interface SEOProps {
   type?: string;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   noIndex?: boolean;
+  keywords?: string[];
 }
 
-export const SEO = ({ title, description, canonicalUrl, type = "website", jsonLd, noIndex }: SEOProps) => {
+export const SEO = ({ title, description, canonicalUrl, type = "website", jsonLd, noIndex, keywords = [] }: SEOProps) => {
   const location = useLocation();
   const baseUrl = "https://stalight.in";
   const currentFullUrl = `${baseUrl}${location.pathname}${location.search}`;
@@ -29,7 +30,9 @@ export const SEO = ({ title, description, canonicalUrl, type = "website", jsonLd
   return (
     <Helmet>
       <title>{title}</title>
-      <meta name="description" content={description} />
+    {keywords && keywords.length > 0 && (
+      <meta name="keywords" content={keywords.join(", ")} />
+    )}
       <meta name="robots" content={robotsContent} />
       
       {/* Open Graph / Facebook */}
