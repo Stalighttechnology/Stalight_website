@@ -107,12 +107,26 @@ const ProductsSection = () => {
                   A unified campus platform that streamlines operations, secures access, and elevates academic outcomes.
                 </p>
 
-                {/* Button */}
-                <div className="relative inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-6 lg:px-8 py-3 sm:py-3.5 lg:py-4 bg-slate-900 text-white rounded-full overflow-hidden shadow-md">
-                  <span className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
-                  <span className="relative z-10 flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs lg:text-sm font-bold tracking-[0.15em] uppercase">
-                    Explore Platform <ArrowRight size={12} className="sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 group-hover:translate-x-1 transition-transform" />
-                  </span>
+                {/* Buttons */}
+                <div className="flex flex-col items-start gap-3">
+                  <div className="relative inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-6 lg:px-8 py-3 sm:py-3.5 lg:py-4 bg-slate-900 text-white rounded-full overflow-hidden shadow-md">
+                    <span className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+                    <span className="relative z-10 flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs lg:text-sm font-bold tracking-[0.15em] uppercase">
+                      Explore Platform <ArrowRight size={12} className="sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </div>
+
+                  {/* Campus Login (external) */}
+                  <a
+                    href="https://campus.stalight.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center justify-center px-4 py-2 border border-slate-200 rounded-full text-slate-900 bg-white hover:bg-slate-50 transition-colors duration-150 text-sm"
+                  >
+                    <span className="text-xs text-slate-500 mr-2">Already have Campus?</span>
+                    <span className="underline font-semibold">Login</span>
+                  </a>
                 </div>
               </motion.div>
             </div>
@@ -200,12 +214,24 @@ const ProductsSection = () => {
                   An assessment and upskilling platform with cloud-based execution, performance benchmarking, and hands-on practice.
                 </p>
 
-                {/* Button */}
-                <div className="relative inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-6 lg:px-8 py-3 sm:py-3.5 lg:py-4 bg-slate-900 text-white rounded-full overflow-hidden shadow-md">
-                  <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
-                  <span className="relative z-10 flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs lg:text-sm font-bold tracking-[0.15em] uppercase">
-                    Explore Platform <ArrowRight size={12} className="sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 group-hover:translate-x-1 transition-transform" />
-                  </span>
+                {/* Buttons */}
+                <div className="flex flex-col items-start gap-3">
+                  <div className="relative inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-6 lg:px-8 py-3 sm:py-3.5 lg:py-4 bg-slate-900 text-white rounded-full overflow-hidden shadow-md">
+                    <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+                    <span className="relative z-10 flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs lg:text-sm font-bold tracking-[0.15em] uppercase">
+                      Explore Platform <ArrowRight size={12} className="sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </div>
+
+                  {/* NeuroSync Login (internal page) */}
+                  <Link
+                    to="/neurosync"
+                    onClick={(e) => { e.stopPropagation(); scrollToTop(); }}
+                    className="inline-flex items-center justify-center px-4 py-2 border border-slate-200 rounded-full text-slate-900 bg-white hover:bg-slate-50 transition-colors duration-150 text-sm"
+                  >
+                    <span className="text-xs text-slate-500 mr-2">Already have Sync?</span>
+                    <span className="underline font-semibold">Login</span>
+                  </Link>
                 </div>
               </motion.div>
             </div>

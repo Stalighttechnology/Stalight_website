@@ -221,6 +221,8 @@ const NeuroCampus = () => {
       />
       <Navbar />
 
+      {/* Campus Login moved into hero controls for contextual placement */}
+
       {/* --- AMBIENT BACKGROUND GLOWS & BRAND THEMED WAVES (from Stalight Sync) --- */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <motion.div
@@ -262,17 +264,34 @@ const NeuroCampus = () => {
             </motion.p>
 
             <motion.div variants={fadeUpVariants} className="relative z-20 mb-8 sm:mb-12">
-              <a
-                href="https://wa.me/918660144040?text=Hello%20Stalight%20Team%2C%20I%20would%20like%20to%20schedule%20a%20personalized%20live%20demo%20of%20the%20Stalight%20Campus%20platform.%20Please%20let%20me%20know%20the%20available%20time%20slots.%20Thank%20you%21"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative inline-flex items-center justify-center px-8 sm:px-10 py-3 sm:py-4 bg-slate-950 text-white rounded-xl overflow-hidden shadow-[0_20px_40px_-10px_rgba(168,85,247,0.3)] hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto"
-              >
-                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                <span className="relative z-10 flex items-center gap-3 text-[11px] sm:text-[12px] font-bold tracking-[0.2em] uppercase">
-                  Schedule Demo <ArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform" />
-                </span>
-              </a>
+              <div className="flex flex-col sm:flex-row items-center gap-3 max-w-md mx-auto">
+                <a
+                  href="https://wa.me/918660144040?text=Hello%20Stalight%20Team%2C%20I%20would%20like%20to%20schedule%20a%20personalized%20live%20demo%20of%20the%20Stalight%20Campus%20platform.%20Please%20let%20me%20know%20the%20available%20time%20slots.%20Thank%20you%21"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative inline-flex items-center justify-center px-8 sm:px-10 py-3 sm:py-4 bg-slate-950 text-white rounded-xl overflow-hidden shadow-[0_20px_40px_-10px_rgba(168,85,247,0.3)] hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto"
+                >
+                  <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
+                  <span className="relative z-10 flex items-center gap-3 text-[11px] sm:text-[12px] font-bold tracking-[0.2em] uppercase">
+                    Schedule Demo <ArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </a>
+
+                {/* Login button linking to external campus site */}
+                <a
+                  href="https://campus.stalight.in/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-3 border border-slate-200 rounded-xl text-slate-900 bg-white hover:bg-slate-50 transition-colors duration-200 w-full sm:w-auto"
+                >
+                  <span className="flex items-center gap-2 font-semibold text-sm">
+                    <span className="text-xs text-slate-500 mr-2">Already have Campus?</span>
+                    <span className="underline">Login</span>
+                    <ArrowRight size={14} />
+                  </span>
+                </a>
+                
+              </div>
             </motion.div>
           </motion.div>
         </div>
