@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { motion, Variants } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { motion, Variants, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import trainImg from "@/assets/products/jobfix.jpg";
@@ -14,12 +14,14 @@ import {
   CheckCircle2,
   ShieldCheck,
   Target,
-  Star
+  Star,
+  X,
+  Send
 } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { submitAdmissionApplication } from "@/lib/supabaseFormService";
 import { generateWebPageSchema, generateBreadcrumbSchema } from "@/utils/seoUtils";
 import { OptimizedImage } from "@/components/OptimizedImage";
-
 
 // --- High-End Animation Variants ---
 const fadeUp: Variants = { 
@@ -65,9 +67,36 @@ const certifications = [
 ];
 
 const SkillDevelopment = () => {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   useEffect(() => { 
     window.scrollTo(0, 0); 
   }, []);
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    const payload = {
+      first_name: (form.get("first_name") as string) ?? "",
+      last_name: (form.get("last_name") as string) ?? "",
+      email: (form.get("email") as string) ?? "",
+      phone: (form.get("phone") as string) ?? "",
+      interested_track: (form.get("track") as string) ?? "",
+      qualification: (form.get("qualification") as string) ?? "",
+    };
+
+    const res = await submitAdmissionApplication(payload);
+    if (res.success) {
+      setIsSubmitted(true);
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setIsFormOpen(false);
+      }, 4000);
+    } else {
+      alert(res.message || "Failed to submit application.");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900 overflow-hidden">
@@ -87,7 +116,6 @@ const SkillDevelopment = () => {
         ]}
       />
       <Navbar />
-
 
       {/* --- Hero Section --- */}
       <motion.section 
@@ -123,8 +151,9 @@ const SkillDevelopment = () => {
                   e.preventDefault();
                   const el = document.getElementById('admission');
                   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  setIsFormOpen(true); // Open the form automatically if clicked from hero
                 }}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white border-2 border-slate-200 hover:border-purple-500 hover:text-purple-700 text-slate-900 rounded-full font-bold transition-all hover:shadow-lg"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white border-2 border-slate-200 hover:border-purple-500 hover:text-purple-700 text-slate-900 rounded-full font-bold transition-all hover:shadow-lg cursor-pointer"
               >
                 Apply Now
               </a>
@@ -169,6 +198,7 @@ const SkillDevelopment = () => {
 
       {/* --- Core Value Grid --- */}
       <section className="py-16 bg-white relative z-20">
+        {/* ... (existing Core Value Grid code remains identical) ... */}
         <div className="container mx-auto px-4 lg:px-8">
           <motion.div 
             initial="hidden" 
@@ -200,6 +230,7 @@ const SkillDevelopment = () => {
 
       {/* --- Specialized Courses Section --- */}
       <section id="courses" className="py-24 bg-[#FAFAFA]">
+        {/* ... (existing Specialized Courses code remains identical) ... */}
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div className="max-w-3xl">
@@ -221,7 +252,6 @@ const SkillDevelopment = () => {
                 variants={fadeUp} 
                 className="group relative p-8 rounded-3xl bg-white border border-slate-200 hover:border-transparent transition-all duration-300 flex flex-col h-full hover:-translate-y-2 z-10"
               >
-                {/* Hover Gradient Border Effect */}
                 <div className="absolute -inset-[2px] bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-[2px]"></div>
                 <div className="absolute inset-0 bg-white rounded-3xl -z-10"></div>
 
@@ -248,7 +278,7 @@ const SkillDevelopment = () => {
         </div>
       </section>
 
-      {/* --- Certifications & Excellence --- */}
+      {/* --- Certifications & Admission Section --- */}
       <section id="admission" className="py-24 bg-white text-slate-900 relative overflow-hidden">
         {/* Dynamic Background Elements */}
         <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-pink-600/8 rounded-full mix-blend-screen filter blur-[120px] opacity-40 pointer-events-none"></div>
@@ -256,6 +286,8 @@ const SkillDevelopment = () => {
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
+            
+            {/* Left Content Side */}
             <motion.div 
               initial="hidden" 
               whileInView="visible" 
@@ -284,27 +316,131 @@ const SkillDevelopment = () => {
               </div>
             </motion.div>
 
+            {/* Right Form/CTA Side */}
             <motion.div 
               initial={{ opacity: 0, y: 40 }} 
               whileInView={{ opacity: 1, y: 0 }} 
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="bg-white rounded-[2.5rem] p-10 md:p-12 text-slate-900 text-center shadow-2xl relative overflow-hidden"
+              className="bg-white rounded-[2.5rem] p-8 md:p-12 text-slate-900 shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-slate-100 relative overflow-hidden min-h-[480px] flex flex-col justify-center"
             >
-              {/* Subtle top gradient bar */}
               <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600"></div>
               
-              <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
-                <ShieldCheck className="w-10 h-10 text-slate-900" />
-              </div>
-              <h3 className="text-3xl font-black mb-4">Secure Your Seat</h3>
-              <p className="text-slate-600 mb-8 text-lg">Enroll in our batches with dedicated placement support. Limited seats available to ensure strict mentorship quality.</p>
-              <a href="mailto:info@stalight.in" className="inline-block w-full py-5 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 hover:opacity-95 text-white rounded-2xl font-black text-lg transition-all shadow-[0_12px_40px_rgba(124,58,237,0.18)] hover:-translate-y-1">
-                Apply for Admission
-              </a>
-              <p className="text-sm font-bold text-slate-500 mt-6 flex items-center justify-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-green-500" /> Placement Support
-              </p>
+              <AnimatePresence mode="wait">
+                {!isFormOpen ? (
+                  /* Initial CTA State */
+                  <motion.div 
+                    key="cta-view"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
+                    className="text-center"
+                  >
+                    <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+                      <ShieldCheck className="w-10 h-10 text-slate-900" />
+                    </div>
+                    <h3 className="text-3xl font-black mb-4">Secure Your Seat</h3>
+                    <p className="text-slate-600 mb-8 text-lg">Enroll in our batches with dedicated placement support. Limited seats available to ensure strict mentorship quality.</p>
+                    <button 
+                      onClick={() => setIsFormOpen(true)}
+                      className="inline-block w-full py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 hover:opacity-95 text-white rounded-2xl font-bold text-lg transition-all shadow-[0_12px_40px_rgba(124,58,237,0.18)] hover:-translate-y-1"
+                    >
+                      Apply for Admission
+                    </button>
+                    <p className="text-sm font-bold text-slate-500 mt-6 flex items-center justify-center gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-green-500" /> Placement Support Included
+                    </p>
+                  </motion.div>
+                ) : isSubmitted ? (
+                  /* Success Message State */
+                  <motion.div
+                    key="success-view"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    className="text-center py-10"
+                  >
+                    <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <CheckCircle2 className="w-10 h-10 text-green-500" />
+                    </div>
+                    <h3 className="text-2xl font-black mb-2">Application Received!</h3>
+                    <p className="text-slate-600">Our admission team will reach out to you shortly to discuss the next steps.</p>
+                  </motion.div>
+                ) : (
+                  /* Form State */
+                  <motion.div
+                    key="form-view"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
+                  >
+                    <div className="flex justify-between items-center mb-6">
+                      <div>
+                        <h3 className="text-2xl font-black">Application Form</h3>
+                        <p className="text-sm text-slate-500">Fast-track your IT career.</p>
+                      </div>
+                      <button 
+                        onClick={() => setIsFormOpen(false)}
+                        className="p-2 bg-slate-50 hover:bg-slate-100 rounded-full transition-colors text-slate-500"
+                      >
+                        <X className="w-5 h-5" />
+                      </button>
+                    </div>
+
+                    <form onSubmit={handleFormSubmit} className="space-y-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">First Name</label>
+                          <input name="first_name" type="text" required placeholder="John" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Last Name</label>
+                          <input name="last_name" type="text" required placeholder="Doe" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Email Address</label>
+                          <input name="email" type="email" required placeholder="john@example.com" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Phone Number</label>
+                          <input name="phone" type="tel" required placeholder="+91 98765 43210" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Interested Track</label>
+                        <select name="track" required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm appearance-none cursor-pointer">
+                          <option value="" disabled selected>Select a program...</option>
+                          <option value="ai">Applied AI & Machine Learning</option>
+                          <option value="fullstack">Advanced Full-Stack Engineering</option>
+                          <option value="cloud">Cloud Infrastructure & DevOps</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Highest Qualification</label>
+                        <select name="qualification" required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm appearance-none cursor-pointer">
+                          <option value="" disabled selected>Select qualification...</option>
+                          <option value="btech">B.Tech / B.E.</option>
+                          <option value="bca">BCA / MCA</option>
+                          <option value="bsc">B.Sc / M.Sc IT</option>
+                          <option value="other">Other / Diploma</option>
+                        </select>
+                      </div>
+
+                      <button 
+                        type="submit"
+                        className="w-full mt-2 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2"
+                      >
+                        Submit Application <Send className="w-4 h-4" />
+                      </button>
+                    </form>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           </div>
         </div>
