@@ -601,7 +601,7 @@ const NeuroCampus = () => {
 
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1">Phone Number *</label>
-                <input name="phone" placeholder="+91 98765 43210" value={formData.phone} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+                <input name="phone" placeholder="+91 9380937502" value={formData.phone} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
               </div>
 
               <div>

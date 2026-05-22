@@ -66,18 +66,18 @@ const AboutSection = () => {
               <h2 className="text-orange-500 font-bold tracking-[0.2em] uppercase text-sm mb-4">
                 Our Excellence
               </h2>
-              <h1 className="text-5xl md:text-7xl font-bold text-[#1A1A1A] leading-[1.1]">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#0f1724] leading-tight tracking-tight">
                 Building Your <br />
-                <span className="relative">
+                <span className="relative inline-block">
                   Digital Future
-                  <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 20" fill="none">
+                  <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 20" fill="none" preserveAspectRatio="none">
                     <path d="M5 15Q150 5 295 15" stroke="#F4B043" strokeWidth="4" strokeLinecap="round"/>
                   </svg>
                 </span>
               </h1>
             </motion.div>
 
-            <div className="relative h-32">
+            <div className="relative h-28 sm:h-32 lg:h-36">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentIndex}
@@ -86,7 +86,7 @@ const AboutSection = () => {
                   exit={{ opacity: 0, y: -20 }}
                   className="space-y-4"
                 >
-                  <p className="text-gray-600 text-lg leading-relaxed max-w-md italic">
+                  <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-md italic">
                     "{capabilities[currentIndex].description}"
                   </p>
                 </motion.div>
@@ -105,13 +105,13 @@ const AboutSection = () => {
           <div className="w-full lg:w-1/2 relative flex justify-center items-center">
             
             {/* The Triple Capsule Layout (Inspired by image_a3f157.png) */}
-            <div className="relative flex items-center gap-4">
+            <div className="relative flex flex-col sm:flex-row items-center gap-4">
               
               {/* Left Secondary Image */}
               <motion.div 
-                animate={{ y: [0, -10, 0] }}
+                animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="w-32 h-64 md:w-40 md:h-80 rounded-[32px] overflow-hidden border border-white/80 bg-white/70 shadow-[0_30px_80px_rgba(15,23,42,0.16)] mt-20"
+                className="w-36 sm:w-40 md:w-44 h-56 sm:h-64 md:h-80 rounded-[24px] overflow-hidden border border-white/80 bg-white/70 shadow-lg mt-8 sm:mt-20 transform-gpu will-change-transform"
               >
                 <img
                   src={leftImage}
@@ -126,11 +126,11 @@ const AboutSection = () => {
                   initial={{ opacity: 0, y: 20, scale: 0.98 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{ duration: 0.9, ease: "easeOut" }}
-                  className="w-56 h-80 md:w-72 md:h-[450px] rounded-[40px] overflow-hidden border border-white/90 bg-slate-50 shadow-[0_40px_90px_rgba(15,23,42,0.18)] z-10 relative"
+                  className="w-60 sm:w-72 md:w-80 h-64 sm:h-80 md:h-[420px] rounded-[28px] overflow-hidden border border-white/90 bg-slate-50 shadow-[0_40px_90px_rgba(15,23,42,0.18)] z-10 relative transform-gpu will-change-transform"
                 >
                   <img
                     src={centerImage}
-                    className="h-full w-full object-cover object-top"
+                    className="h-full w-full object-cover object-top transition-transform duration-700 ease-in-out hover:scale-105"
                     alt="Stalight Office"
                   />
                 </motion.div>
@@ -140,7 +140,7 @@ const AboutSection = () => {
               <motion.div 
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="w-32 h-64 md:w-40 md:h-80 rounded-[32px] overflow-hidden border border-white/80 bg-white/70 shadow-[0_30px_80px_rgba(15,23,42,0.16)] mt-10"
+                className="w-36 sm:w-40 md:w-44 h-56 sm:h-64 md:h-80 rounded-[24px] overflow-hidden border border-white/80 bg-white/70 shadow-lg mt-6 sm:mt-10 transform-gpu will-change-transform"
               >
                 <img
                   src={rightImage}
@@ -151,8 +151,8 @@ const AboutSection = () => {
             </div>
 
             {/* Decorative Ambient Glow */}
-            <div className="absolute top-4 right-10 w-16 h-16 rounded-full bg-orange-200/30 blur-3xl" />
-            <div className="absolute bottom-8 left-12 w-24 h-24 rounded-full bg-sky-100/30 blur-3xl" />
+            <div className="absolute top-6 right-6 sm:right-10 w-16 h-16 rounded-full bg-orange-200/30 blur-3xl" />
+            <div className="absolute bottom-6 left-6 sm:left-12 w-20 h-20 rounded-full bg-sky-100/30 blur-3xl" />
           </div>
 
         </div>
