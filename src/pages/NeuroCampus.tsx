@@ -5,8 +5,10 @@ import {
   Brain, BarChart3, ShieldCheck, Users, User,
   CheckCircle2, Star, Calendar, FileText,
   ClipboardCheck, BookOpen, GraduationCap, MapPin, Quote,
-  Bell, ScanFace, LayoutDashboard, Home, Printer, ArrowRight, Zap, Activity
+  Bell, ScanFace, LayoutDashboard, Home, Printer, ArrowRight, Zap, Activity, X, Loader2, Send
 } from "lucide-react";
+import { supabase } from "@/lib/supabaseClient";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
@@ -198,6 +200,52 @@ const NeuroCampus = () => {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
 
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [formData, setFormData] = useState({ full_name: "", official_email: "", phone: "", organization: "", designation: "", interested_solution: "", preferred_date: "", preferred_time: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target as HTMLInputElement;
+    setFormData((s) => ({ ...s, [name]: value }));
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const payload = {
+      full_name: formData.full_name || null,
+      official_email: formData.official_email || null,
+      phone: formData.phone || null,
+      organization: formData.organization || null,
+      designation: formData.designation || null,
+      interested_solution: formData.interested_solution || null,
+      preferred_date: formData.preferred_date || null,
+      preferred_time: formData.preferred_time || null,
+      message: formData.message || null,
+      created_at: new Date().toISOString()
+    };
+
+    const { data, error } = await supabase.from('neurocampus_inquiries').insert([payload]);
+    setIsSubmitting(false);
+
+    if (error) {
+      // eslint-disable-next-line no-alert
+      alert('Submission error: ' + error.message);
+      return;
+    }
+
+    setSubmitted(true);
+    setTimeout(() => {
+      setSubmitted(false);
+      setIsFormOpen(false);
+    }, 3000);
+
+    // reset form
+    setFormData({ full_name: "", official_email: "", phone: "", organization: "", designation: "", interested_solution: "", preferred_date: "", preferred_time: "", message: "" });
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -266,14 +314,14 @@ const NeuroCampus = () => {
             <motion.div variants={fadeUpVariants} className="relative z-20 mb-8 sm:mb-12">
               <div className="flex flex-col sm:flex-row items-center gap-3 max-w-md mx-auto">
                 <a
-                  href="https://wa.me/918660144040?text=Hello%20Stalight%20Team%2C%20I%20would%20like%20to%20schedule%20a%20personalized%20live%20demo%20of%20the%20Stalight%20Campus%20platform.%20Please%20let%20me%20know%20the%20available%20time%20slots.%20Thank%20you%21"
+                  href="https://campus.stalight.in/stalightcampus"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative inline-flex items-center justify-center px-8 sm:px-10 py-3 sm:py-4 bg-slate-950 text-white rounded-xl overflow-hidden shadow-[0_20px_40px_-10px_rgba(168,85,247,0.3)] hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto"
                 >
                   <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
                   <span className="relative z-10 flex items-center gap-3 text-[11px] sm:text-[12px] font-bold tracking-[0.2em] uppercase">
-                    Schedule Demo <ArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform" />
+                    Get Access <ArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform" />
                   </span>
                 </a>
 
@@ -509,10 +557,10 @@ const NeuroCampus = () => {
               Get in touch with our team to schedule a personalised architectural walkthrough of Stalight Campus.
             </p>
 
-            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-              <a href="https://campus.stalight.in/stalightcampus" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 text-white rounded-full font-bold uppercase text-xs sm:text-sm tracking-widest shadow-lg hover:shadow-purple-500/25 hover:-translate-y-0.5 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition-all duration-300 w-full sm:w-auto">
-                Get Access <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
+              <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+              <button onClick={() => setIsFormOpen(true)} className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 text-white rounded-full font-bold uppercase text-xs sm:text-sm tracking-widest shadow-lg hover:shadow-purple-500/25 hover:-translate-y-0.5 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition-all duration-300 w-full sm:w-auto">
+                Schedule Demo <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
+              </button>
               <Link to="/" className="flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-white border border-slate-300 text-slate-700 rounded-full font-bold uppercase text-xs sm:text-sm tracking-widest hover:bg-slate-50 hover:text-slate-900 transition-all duration-300 w-full sm:w-auto">
                 Back to Home
               </Link>
@@ -522,6 +570,91 @@ const NeuroCampus = () => {
       </section>
 
       <Footer />
+      {isFormOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setIsFormOpen(false)} />
+          <div className="relative z-50 w-full max-w-2xl bg-white rounded-[2.5rem] shadow-xl p-6 sm:p-8 border border-slate-100">
+            <div className="absolute top-0 left-0 right-0 h-2 rounded-t-[1rem] bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600"></div>
+            <div className="flex items-start justify-between">
+              <h3 className="text-lg sm:text-xl font-bold">Schedule a Live Demo</h3>
+              <button onClick={() => setIsFormOpen(false)} className="p-2 rounded-full text-slate-500 hover:text-slate-800 hover:bg-slate-50">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <form onSubmit={handleFormSubmit} className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {submitted && (
+                <div className="sm:col-span-2 bg-green-50 border border-green-100 text-green-800 px-4 py-3 rounded-lg text-sm font-medium">
+                  Demo request submitted — we will reach out to confirm the schedule.
+                </div>
+              )}
+
+              <div className="sm:col-span-2">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Full Name *</label>
+                <input name="full_name" placeholder="Your full name" value={formData.full_name} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Official Email *</label>
+                <input name="official_email" type="email" placeholder="name@institution.edu" value={formData.official_email} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Phone Number *</label>
+                <input name="phone" placeholder="+91 98765 43210" value={formData.phone} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Organization / Institution Name *</label>
+                <input name="organization" placeholder="Company / Institution" value={formData.organization} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Designation / Role *</label>
+                <input name="designation" placeholder="e.g., Principal, HOD, Placement Officer" value={formData.designation} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Interested Solution *</label>
+                <Select value={formData.interested_solution} onValueChange={(val) => setFormData(s => ({ ...s, interested_solution: val }))}>
+                  <SelectTrigger className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm">
+                    <SelectValue placeholder="Select a solution" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="stalight_campus">Stalight Campus</SelectItem>
+                    <SelectItem value="neurosync">NeuroSync</SelectItem>
+                    <SelectItem value="both">Both / Integration</SelectItem>
+                    <SelectItem value="custom">Custom / Other</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Preferred Demo Date *</label>
+                <input name="preferred_date" type="date" value={formData.preferred_date} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Preferred Demo Time *</label>
+                <input name="preferred_time" type="time" value={formData.preferred_time} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+              </div>
+
+              <div className="sm:col-span-2">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Additional Notes</label>
+                <textarea name="message" placeholder="Any specific agenda or requirements" value={formData.message} onChange={handleChange} rows={4} className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+              </div>
+
+              <div className="sm:col-span-2 flex items-center justify-end gap-3 mt-2">
+                <button type="button" onClick={() => setIsFormOpen(false)} disabled={isSubmitting} className="px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm">Cancel</button>
+                <button type="submit" disabled={isSubmitting} className="px-4 py-3 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 text-white rounded-xl text-sm font-bold flex items-center gap-3">
+                  {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                  {isSubmitting ? 'Submitting...' : 'Request Demo'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
