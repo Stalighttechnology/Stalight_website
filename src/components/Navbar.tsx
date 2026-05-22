@@ -117,6 +117,11 @@ const Navbar = () => {
                 <span className="text-sm md:text-[16px] font-black text-slate-900 tracking-tight">Stalight</span>
                 <span className="text-[9px] md:text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">Technologies</span>
               </div>
+              {/* Mobile label: visible only on small screens to improve header clarity */}
+              <div className="flex flex-col leading-none sm:hidden ml-2">
+                <span className="text-sm font-black text-slate-900 tracking-tight">Stalight</span>
+                <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Technologies</span>
+              </div>
             </Link>
 
             {/* --- DESKTOP NAVIGATION --- */}
