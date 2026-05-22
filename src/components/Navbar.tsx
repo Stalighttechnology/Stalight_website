@@ -181,7 +181,7 @@ const Navbar = () => {
                       <Link
                         to={link.href.startsWith("/") ? link.href : (isHome ? link.href : `/${link.href}`)}
                         onClick={(e) => handleNavClick(e, link.href)}
-                        className="group flex items-center gap-2.5 bg-[#D32027] hover:bg-[#b91c1c] text-white pl-5 pr-2 py-1.5 rounded-full font-bold text-[14px] transition-all duration-300 shadow-[0_8px_20px_-6px_rgba(211,32,39,0.3)] hover:shadow-[0_12px_24px_-6px_rgba(211,32,39,0.5)] hover:-translate-y-0.5"
+                        className="group flex items-center gap-2.5 bg-[#D32027] hover:bg-[#b91c1c] text-white pl-5 pr-2 py-1.5 rounded-xl font-bold text-[14px] transition-all duration-300 shadow-[0_8px_20px_-6px_rgba(211,32,39,0.3)] hover:shadow-[0_12px_24px_-6px_rgba(211,32,39,0.5)] hover:-translate-y-0.5"
                       >
                         {link.label}
                         <div className="bg-white/20 rounded-full p-1 transition-colors group-hover:bg-white/30 flex items-center justify-center">

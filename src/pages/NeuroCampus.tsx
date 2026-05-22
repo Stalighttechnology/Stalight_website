@@ -42,7 +42,6 @@ const AnimatedNumber = ({ value, duration = 2.5 }: { value: number; duration?: n
 };
 
 // --- Content ---
-// Condensed, image-free feature list for sticky-scroll UI
 const tourFeatures = [
   {
     title: "Nebula AI Insights",
@@ -231,7 +230,6 @@ const NeuroCampus = () => {
     setIsSubmitting(false);
 
     if (error) {
-      // eslint-disable-next-line no-alert
       alert('Submission error: ' + error.message);
       return;
     }
@@ -269,34 +267,34 @@ const NeuroCampus = () => {
       />
       <Navbar />
 
-      {/* Campus Login moved into hero controls for contextual placement */}
-
-      {/* --- AMBIENT BACKGROUND GLOWS & BRAND THEMED WAVES (from Stalight Sync) --- */}
+      {/* --- AMBIENT BACKGROUND GLOWS & PREMIUM ARCHITECTURAL GRID --- */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* Subtle Architectural Grid Pattern */}
+        <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(rgba(15,23,42,0.4)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.4)_1px,transparent_1px)] [background-size:64px_64px]" />
+
+        {/* Center Spotlight Glow */}
         <motion.div
-          animate={{ y: [0, 24] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-          className="absolute inset-[-100%] bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:32px_32px] opacity-70"
-        ></motion.div>
+          animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.05, 1] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute left-1/2 top-0 h-[500px] w-[120%] -translate-x-1/2 rounded-full bg-gradient-to-b from-purple-500/10 via-pink-500/5 to-transparent blur-[100px] md:w-[70%]"
+        />
 
-        <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[300px] sm:h-[400px] w-[90%] sm:w-[600px] rounded-full bg-purple-500 opacity-[0.08] blur-[100px] sm:blur-[120px]"></div>
-        <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[150%] sm:w-[120%] max-w-6xl h-[400px] sm:h-[600px] bg-gradient-to-b from-pink-50/50 via-white/20 to-transparent rounded-b-[100%] blur-2xl sm:blur-3xl opacity-80"></div>
+        {/* Floating Accent Orb 1 */}
+        <motion.div
+          animate={{ y: [0, -15, 0], x: [0, 15, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[15%] left-[5%] md:left-[10%] h-48 w-48 rounded-full bg-pink-500/10 blur-[60px] md:h-72 md:w-72"
+        />
 
-        {/* Brand Colored SVG Waves */}
-        <svg className="absolute w-full h-full opacity-[0.25]" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#ec4899" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a855f7" stopOpacity="1" />
-              <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <motion.path d="M0,30 Q25,10 50,30 T100,30" stroke="url(#waveGrad)" strokeWidth="0.15" fill="none" animate={{ d: ["M0,30 Q25,10 50,30 T100,30", "M0,30 Q25,50 50,30 T100,30", "M0,30 Q25,10 50,30 T100,30"] }} transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }} />
-          <motion.path d="M0,50 Q25,30 50,50 T100,50" stroke="url(#waveGrad)" strokeWidth="0.2" fill="none" animate={{ d: ["M0,50 Q25,30 50,50 T100,50", "M0,50 Q25,70 50,50 T100,50", "M0,50 Q25,30 50,50 T100,50"] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }} />
-        </svg>
+        {/* Floating Accent Orb 2 */}
+        <motion.div
+          animate={{ y: [0, 15, 0], x: [0, -15, 0] }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[30%] right-[5%] md:right-[10%] h-56 w-56 rounded-full bg-blue-500/10 blur-[70px] md:h-80 md:w-80"
+        />
       </div>
 
-      {/* --- HERO SECTION (Stalight Sync style) --- */}
+      {/* --- HERO SECTION --- */}
       <section className="relative pt-28 sm:pt-36 md:pt-44 lg:pt-52 pb-8 sm:pb-12 md:pb-16 z-10 w-full flex flex-col items-center min-h-[85vh]">
         <div className="container mx-auto px-4 sm:px-6 relative z-10 w-full text-center mb-8 sm:mb-12">
           <motion.div initial="hidden" animate="visible" variants={containerVariants} className="max-w-6xl mx-auto flex flex-col items-center">
@@ -325,7 +323,6 @@ const NeuroCampus = () => {
                   </span>
                 </a>
 
-                {/* Login button linking to external campus site */}
                 <a
                   href="https://campus.stalight.in/"
                   target="_blank"
@@ -338,20 +335,18 @@ const NeuroCampus = () => {
                     <ArrowRight size={14} />
                   </span>
                 </a>
-                
               </div>
             </motion.div>
           </motion.div>
         </div>
 
-        {/* FULL WIDTH Infinite Feature Marquee (Moved outside the container constraint) */}
+        {/* FULL WIDTH Infinite Feature Marquee */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
           className="w-full relative overflow-hidden py-4"
         >
-          {/* Edge gradients seamlessly blending into the #FAFAFA background */}
           <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#FAFAFA] to-transparent z-10 pointer-events-none"></div>
           <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#FAFAFA] to-transparent z-10 pointer-events-none"></div>
 
@@ -360,7 +355,6 @@ const NeuroCampus = () => {
             animate={{ x: ["0%", "-50%"] }}
             transition={{ ease: "linear", duration: 35, repeat: Infinity }}
           >
-            {/* Duplicated 4 times to ensure no blank spaces on ultra-wide monitors */}
             {[...featurePills, ...featurePills, ...featurePills, ...featurePills].map((pill, idx) => (
               <div key={idx} className="flex items-center gap-1.5 sm:gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm border border-slate-200/80 shadow-sm rounded-full shrink-0 hover:border-purple-200 hover:shadow-md transition-all duration-300">
                 <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-br from-pink-50 to-blue-50 flex items-center justify-center">
@@ -374,7 +368,7 @@ const NeuroCampus = () => {
 
       </section>
 
-      {/* --- DASHBOARD SHOWCASE (Infinite Premium Auto-Scrolling Carousel) --- */}
+      {/* --- DASHBOARD SHOWCASE --- */}
       <section id="features" className="py-20 sm:py-28 bg-[#FAFAFC] overflow-hidden relative z-10">
         <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.4]" style={{ backgroundImage: 'linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px)', backgroundSize: '60px 100%' }}></div>
 
@@ -394,13 +388,10 @@ const NeuroCampus = () => {
           </div>
         </div>
 
-        {/* Full-width scrolling wrapper with edge gradients */}
         <div className="w-full relative overflow-hidden py-10">
-          {/* Edge gradients blending into background */}
           <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-40 bg-gradient-to-r from-[#FAFAFC] to-transparent z-20 pointer-events-none"></div>
           <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-40 bg-gradient-to-l from-[#FAFAFC] to-transparent z-20 pointer-events-none"></div>
 
-          {/* Marquee track */}
           <motion.div
             className="flex gap-8 w-max px-8"
             style={{ willChange: "transform" }}
@@ -412,7 +403,6 @@ const NeuroCampus = () => {
               repeatType: "loop"
             }}
           >
-            {/* Duplicate list 2 times to ensure infinite wrap-around on ultra-wide screens */}
             {[...tourFeatures, ...tourFeatures].map((feat, idx) => {
               const Icon = feat.icon;
               return (
@@ -420,10 +410,8 @@ const NeuroCampus = () => {
                   key={idx}
                   className="w-[280px] sm:w-[400px] md:w-[480px] shrink-0 group relative bg-white/90 border border-slate-200/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-md hover:shadow-2xl hover:border-purple-200 hover:-translate-y-2 transition-all duration-500 overflow-hidden"
                 >
-                  {/* Subtle hover background glow */}
                   <div className="absolute -inset-4 bg-gradient-to-r from-pink-500/5 via-purple-500/5 to-blue-500/5 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
-                  {/* Browser Header Bar */}
                   <div className="bg-slate-50/80 border-b border-slate-200/60 px-4 py-3 flex items-center justify-between relative z-10">
                     <div className="flex gap-1.5">
                       <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-[#E0443E]"></span>
@@ -435,11 +423,9 @@ const NeuroCampus = () => {
                       <Icon className="w-2.5 h-2.5 text-purple-600 shrink-0" />
                       <span>{feat.title.toLowerCase().replace(/\s+/g, '-')}.stalight.in</span>
                     </div>
-
-                    <div className="w-8"></div> {/* Spacer to keep URL centered */}
+                    <div className="w-8"></div>
                   </div>
 
-                  {/* Screenshot Viewport */}
                   <div className="relative h-[180px] sm:h-[260px] md:h-[300px] bg-slate-950/5 flex items-center justify-center p-4 sm:p-6 overflow-hidden">
                     <OptimizedImage
                       src={feat.img}
@@ -448,7 +434,6 @@ const NeuroCampus = () => {
                     />
                   </div>
 
-                  {/* Card Bottom Caption Info */}
                   <div className="bg-white/95 backdrop-blur-md p-4 sm:p-5 border-t border-slate-100 relative z-10 flex flex-col items-start gap-1">
                     <span className="inline-block text-[9px] text-pink-600 font-bold uppercase tracking-widest px-2 py-0.5 bg-pink-50 border border-pink-100 rounded-md mb-1">
                       {feat.title}
@@ -467,7 +452,7 @@ const NeuroCampus = () => {
         </div>
       </section>
 
-      {/* --- FEATURE BLOCKS (Structured Pillars for Modern Institutions) --- */}
+      {/* --- FEATURE BLOCKS --- */}
       <section className="py-20 sm:py-28 bg-[#FAFAFA] relative z-10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="text-center mb-16">
@@ -479,7 +464,6 @@ const NeuroCampus = () => {
             </p>
           </div>
 
-          {/* Pillars Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {institutionalPillars.map((pillar, pillarIdx) => (
               <motion.div
@@ -491,10 +475,8 @@ const NeuroCampus = () => {
                 transition={{ duration: 0.6, delay: pillarIdx * 0.08 }}
                 className="group relative bg-white border border-slate-200/70 hover:border-slate-300 rounded-3xl p-6 sm:p-7 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden"
               >
-                {/* Dynamic Subtle Gradient Background on Hover */}
                 <div className={`absolute inset-0 bg-gradient-to-b ${pillar.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}></div>
 
-                {/* Pillar Header */}
                 <div className="relative z-10 mb-6 flex flex-col items-start">
                   <div className={`w-12 h-12 rounded-2xl ${pillar.iconBg} ${pillar.iconColor} flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform duration-300`}>
                     {React.createElement(pillar.icon, { className: "w-6 h-6" })}
@@ -507,10 +489,8 @@ const NeuroCampus = () => {
                   </p>
                 </div>
 
-                {/* Divider */}
                 <div className="w-full h-px bg-slate-100 mb-6 relative z-10 group-hover:bg-slate-200/80 transition-colors"></div>
 
-                {/* Features List */}
                 <div className="relative z-10 flex flex-col gap-5 flex-1">
                   {pillar.features.map((feat) => {
                     const FeatIcon = feat.icon;
@@ -532,7 +512,6 @@ const NeuroCampus = () => {
                   })}
                 </div>
 
-                {/* Card Footer Indicator */}
                 <div className="mt-8 pt-4 border-t border-slate-50 text-[10px] font-bold text-purple-500 uppercase tracking-widest relative z-10 flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
                   Active Module
@@ -570,88 +549,103 @@ const NeuroCampus = () => {
       </section>
 
       <Footer />
+
+      {/* --- RESPONSIVE MODAL REDESIGN --- */}
       {isFormOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/40" onClick={() => setIsFormOpen(false)} />
-          <div className="relative z-50 w-full max-w-2xl bg-white rounded-[2.5rem] shadow-xl p-6 sm:p-8 border border-slate-100">
-            <div className="absolute top-0 left-0 right-0 h-2 rounded-t-[1rem] bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600"></div>
-            <div className="flex items-start justify-between">
-              <h3 className="text-lg sm:text-xl font-bold">Schedule a Live Demo</h3>
-              <button onClick={() => setIsFormOpen(false)} className="p-2 rounded-full text-slate-500 hover:text-slate-800 hover:bg-slate-50">
-                <X className="w-4 h-4" />
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 overflow-hidden">
+          {/* Subtle blurred backdrop */}
+          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setIsFormOpen(false)} />
+          
+          <div className="relative z-[110] w-full max-w-2xl bg-white rounded-3xl sm:rounded-[2.5rem] shadow-2xl border border-slate-100 max-h-[95dvh] sm:max-h-[90vh] flex flex-col overflow-hidden">
+            
+            {/* Top Decorative Line */}
+            <div className="absolute top-0 left-0 right-0 h-1.5 sm:h-2 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 z-20"></div>
+            
+            {/* Sticky Header */}
+            <div className="flex items-center justify-between px-5 sm:px-8 py-4 sm:py-6 shrink-0 border-b border-slate-100 bg-white relative z-10">
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900">Schedule a Live Demo</h3>
+              <button onClick={() => setIsFormOpen(false)} className="p-2 -mr-2 rounded-full text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-colors">
+                <X className="w-5 h-5" />
               </button>
             </div>
 
-            <form onSubmit={handleFormSubmit} className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {submitted && (
-                <div className="sm:col-span-2 bg-green-50 border border-green-100 text-green-800 px-4 py-3 rounded-lg text-sm font-medium">
-                  Demo request submitted — we will reach out to confirm the schedule.
+            {/* Scrollable Form Content */}
+            <div className="overflow-y-auto custom-scrollbar p-5 sm:p-8 relative">
+              <form id="demo-form" onSubmit={handleFormSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                {submitted && (
+                  <div className="sm:col-span-2 bg-green-50 border border-green-100 text-green-800 px-4 py-3 rounded-xl text-sm font-medium">
+                    Demo request submitted — we will reach out to confirm the schedule.
+                  </div>
+                )}
+
+                <div className="sm:col-span-2">
+                  <label className="block text-[11px] sm:text-xs font-semibold text-slate-700 mb-1">Full Name *</label>
+                  <input name="full_name" placeholder="Your full name" value={formData.full_name} onChange={handleChange} required className="w-full px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
                 </div>
-              )}
 
-              <div className="sm:col-span-2">
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Full Name *</label>
-                <input name="full_name" placeholder="Your full name" value={formData.full_name} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
-              </div>
+                <div>
+                  <label className="block text-[11px] sm:text-xs font-semibold text-slate-700 mb-1">Official Email *</label>
+                  <input name="official_email" type="email" placeholder="name@institution.edu" value={formData.official_email} onChange={handleChange} required className="w-full px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+                </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Official Email *</label>
-                <input name="official_email" type="email" placeholder="name@institution.edu" value={formData.official_email} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
-              </div>
+                <div>
+                  <label className="block text-[11px] sm:text-xs font-semibold text-slate-700 mb-1">Phone Number *</label>
+                  <input name="phone" placeholder="+91 9380937502" value={formData.phone} onChange={handleChange} required className="w-full px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+                </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Phone Number *</label>
-                <input name="phone" placeholder="+91 9380937502" value={formData.phone} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
-              </div>
+                <div>
+                  <label className="block text-[11px] sm:text-xs font-semibold text-slate-700 mb-1">Organization / Institution Name *</label>
+                  <input name="organization" placeholder="Company / Institution" value={formData.organization} onChange={handleChange} required className="w-full px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+                </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Organization / Institution Name *</label>
-                <input name="organization" placeholder="Company / Institution" value={formData.organization} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
-              </div>
+                <div>
+                  <label className="block text-[11px] sm:text-xs font-semibold text-slate-700 mb-1">Designation / Role *</label>
+                  <input name="designation" placeholder="e.g., Principal, HOD, Placement Officer" value={formData.designation} onChange={handleChange} required className="w-full px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+                </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Designation / Role *</label>
-                <input name="designation" placeholder="e.g., Principal, HOD, Placement Officer" value={formData.designation} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
-              </div>
+                <div>
+                  <label className="block text-[11px] sm:text-xs font-semibold text-slate-700 mb-1">Interested Solution *</label>
+                  <Select value={formData.interested_solution} onValueChange={(val) => setFormData(s => ({ ...s, interested_solution: val }))}>
+                    <SelectTrigger className="w-full px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm">
+                      <SelectValue placeholder="Select a solution" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="stalight_campus">Stalight Campus</SelectItem>
+                      <SelectItem value="neurosync">NeuroSync</SelectItem>
+                      <SelectItem value="both">Both / Integration</SelectItem>
+                      <SelectItem value="custom">Custom / Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Interested Solution *</label>
-                <Select value={formData.interested_solution} onValueChange={(val) => setFormData(s => ({ ...s, interested_solution: val }))}>
-                  <SelectTrigger className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm">
-                    <SelectValue placeholder="Select a solution" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="stalight_campus">Stalight Campus</SelectItem>
-                    <SelectItem value="neurosync">NeuroSync</SelectItem>
-                    <SelectItem value="both">Both / Integration</SelectItem>
-                    <SelectItem value="custom">Custom / Other</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+                <div>
+                  <label className="block text-[11px] sm:text-xs font-semibold text-slate-700 mb-1">Preferred Demo Date *</label>
+                  <input name="preferred_date" type="date" value={formData.preferred_date} onChange={handleChange} required className="w-full px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+                </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Preferred Demo Date *</label>
-                <input name="preferred_date" type="date" value={formData.preferred_date} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
-              </div>
+                <div>
+                  <label className="block text-[11px] sm:text-xs font-semibold text-slate-700 mb-1">Preferred Demo Time *</label>
+                  <input name="preferred_time" type="time" value={formData.preferred_time} onChange={handleChange} required className="w-full px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+                </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Preferred Demo Time *</label>
-                <input name="preferred_time" type="time" value={formData.preferred_time} onChange={handleChange} required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
-              </div>
+                <div className="sm:col-span-2">
+                  <label className="block text-[11px] sm:text-xs font-semibold text-slate-700 mb-1">Additional Notes</label>
+                  <textarea name="message" placeholder="Any specific agenda or requirements" value={formData.message} onChange={handleChange} rows={3} className="w-full px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm resize-none" />
+                </div>
+              </form>
+            </div>
 
-              <div className="sm:col-span-2">
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Additional Notes</label>
-                <textarea name="message" placeholder="Any specific agenda or requirements" value={formData.message} onChange={handleChange} rows={4} className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
-              </div>
-
-              <div className="sm:col-span-2 flex items-center justify-end gap-3 mt-2">
-                <button type="button" onClick={() => setIsFormOpen(false)} disabled={isSubmitting} className="px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm">Cancel</button>
-                <button type="submit" disabled={isSubmitting} className="px-4 py-3 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 text-white rounded-xl text-sm font-bold flex items-center gap-3">
-                  {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-                  {isSubmitting ? 'Submitting...' : 'Request Demo'}
-                </button>
-              </div>
-            </form>
+            {/* Sticky Footer Buttons */}
+            <div className="px-5 sm:px-8 py-4 shrink-0 border-t border-slate-100 bg-slate-50 flex justify-end gap-3 relative z-10">
+              <button type="button" onClick={() => setIsFormOpen(false)} disabled={isSubmitting} className="px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+                Cancel
+              </button>
+              <button type="submit" form="demo-form" disabled={isSubmitting} className="px-5 py-2.5 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 text-white rounded-xl text-sm font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-purple-500/25 transition-all hover:-translate-y-0.5">
+                {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                {isSubmitting ? 'Submitting...' : 'Request Demo'}
+              </button>
+            </div>
+            
           </div>
         </div>
       )}
