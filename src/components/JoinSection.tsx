@@ -145,7 +145,7 @@ const CareersPage = () => {
               
               <motion.div variants={fadeUpVariants}>
                 <a
-                  href="https://www.linkedin.com/in/stalight-technologies-a2a912406/"
+                  href="https://www.linkedin.com/in/stalight-technologies-pvt-ltd-a2a912406/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative inline-flex items-center justify-center bg-slate-950 text-white px-8 py-4 text-[11px] font-bold tracking-[0.25em] uppercase overflow-hidden"
@@ -199,8 +199,11 @@ const CareersPage = () => {
               
               <motion.div variants={fadeUpVariants} className="mt-auto md:mt-4">
                 <a
-                  href="#join"
+                  href="https://www.linkedin.com/in/stalight-technologies-pvt-ltd-a2a912406/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group relative inline-flex items-center justify-center bg-white text-slate-950 px-8 py-4 text-[11px] font-bold tracking-[0.25em] uppercase transition-all duration-500 hover:shadow-[0_0_30px_-5px_rgba(211,32,39,0.4)] overflow-hidden rounded-full w-full sm:w-auto"
+                  aria-label="Open Stalight Technologies LinkedIn"
                 >
                   <span className="absolute inset-0 w-full h-full bg-[#D32027] transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500 ease-out origin-bottom z-0"></span>
                   <span className="relative z-10 group-hover:text-white transition-colors duration-300">

@@ -295,13 +295,19 @@ const NeuroCampus = () => {
       </div>
 
       {/* --- HERO SECTION --- */}
-      <section className="relative pt-28 sm:pt-36 md:pt-44 lg:pt-52 pb-8 sm:pb-12 md:pb-16 z-10 w-full flex flex-col items-center min-h-[85vh]">
+      <section className="relative pt-20 sm:pt-28 md:pt-36 lg:pt-44 pb-8 sm:pb-12 md:pb-16 z-10 w-full flex flex-col items-center min-h-[60vh] md:min-h-[85vh]">
         <div className="container mx-auto px-4 sm:px-6 relative z-10 w-full text-center mb-8 sm:mb-12">
           <motion.div initial="hidden" animate="visible" variants={containerVariants} className="max-w-6xl mx-auto flex flex-col items-center">
-            <h1 className="text-[3.25rem] sm:text-6xl md:text-[7rem] lg:text-[8.5rem] font-light text-slate-950 tracking-tighter leading-[0.95] mb-4 sm:mb-6 px-2 whitespace-nowrap">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-light text-slate-950 tracking-tight leading-[1.02] mb-3 sm:mb-5 px-2 break-words max-w-full">
                 <MaskedText>
                   <span className="font-light">Stalight</span>{' '}
-                  <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500">Campus.</span>
+                  <motion.span
+                    className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-gradient-animate"
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    Campus.
+                  </motion.span>
                 </MaskedText>
             </h1>
 
@@ -327,11 +333,11 @@ const NeuroCampus = () => {
                   href="https://campus.stalight.in/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-6 py-3 border border-slate-200 rounded-xl text-slate-900 bg-white hover:bg-slate-50 transition-colors duration-200 w-full sm:w-auto"
+                  className="group inline-flex items-center justify-center px-6 py-3 rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white shadow-md hover:brightness-105 transition-all duration-200 w-full sm:w-auto"
                 >
                   <span className="flex items-center gap-2 font-semibold text-sm">
-                    <span className="text-xs text-slate-500 mr-2">Already have Campus?</span>
-                    <span className="underline">Login</span>
+                    <span className="text-xs text-white/90 mr-2">Already have Campus?</span>
+                    <span className="underline decoration-white/30">Login</span>
                     <ArrowRight size={14} />
                   </span>
                 </a>

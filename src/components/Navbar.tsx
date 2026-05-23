@@ -32,6 +32,8 @@ const Navbar = () => {
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   
@@ -238,22 +240,68 @@ const Navbar = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}
                 >
-                  <Link
-                    to={link.href.startsWith("/") ? link.href : (isHome ? link.href : `/${link.href}`)}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className={`flex items-center justify-between px-6 py-4 rounded-3xl font-bold text-lg shadow-sm border ${
-                      link.label === "Contact" 
-                        ? "bg-[#D32027] text-white border-transparent shadow-[0_8px_20px_-6px_rgba(211,32,39,0.3)]" 
-                        : "bg-white text-slate-800 border-slate-100 hover:bg-slate-50 transition-colors"
-                    }`}
-                  >
-                    {link.label}
-                    {link.label === "Contact" ? (
-                      <ArrowRight className="w-5 h-5" />
-                    ) : (
-                      (link.label === "Products" || link.label === "Services") && <ChevronDown className="w-5 h-5 text-slate-400" />
-                    )}
-                  </Link>
+                  { (link.label === "Products") ? (
+                    <div>
+                      <button
+                        onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
+                        aria-expanded={mobileProductsOpen}
+                        className={`w-full flex items-center justify-between px-6 py-4 rounded-3xl font-bold text-lg shadow-sm border bg-white text-slate-800 border-slate-100 hover:bg-slate-50 transition-colors`}
+                      >
+                        {link.label}
+                        <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${mobileProductsOpen ? 'rotate-180' : ''}`} />
+                      </button>
+
+                      <AnimatePresence>
+                        {mobileProductsOpen && (
+                          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden mt-2 px-4">
+                            <div className="flex flex-col gap-2">
+                              {productsDropdownItems.map((item) => (
+                                <Link key={item.href} to={item.href} onClick={() => { setMobileOpen(false); setMobileProductsOpen(false); }} className="px-4 py-3 rounded-xl bg-white border border-slate-100 hover:bg-slate-50">{item.label}</Link>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ) : (link.label === "Services") ? (
+                    <div>
+                      <button
+                        onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                        aria-expanded={mobileServicesOpen}
+                        className={`w-full flex items-center justify-between px-6 py-4 rounded-3xl font-bold text-lg shadow-sm border bg-white text-slate-800 border-slate-100 hover:bg-slate-50 transition-colors`}
+                      >
+                        {link.label}
+                        <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+
+                      <AnimatePresence>
+                        {mobileServicesOpen && (
+                          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden mt-2 px-4">
+                            <div className="flex flex-col gap-2">
+                              {servicesDropdownItems.map((item) => (
+                                <Link key={item.href} to={item.href} onClick={() => { setMobileOpen(false); setMobileServicesOpen(false); }} className="px-4 py-3 rounded-xl bg-white border border-slate-100 hover:bg-slate-50">{item.label}</Link>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ) : (
+                    <Link
+                      to={link.href.startsWith("/") ? link.href : (isHome ? link.href : `/${link.href}`)}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className={`flex items-center justify-between px-6 py-4 rounded-3xl font-bold text-lg shadow-sm border ${
+                        link.label === "Contact" 
+                          ? "bg-[#D32027] text-white border-transparent shadow-[0_8px_20px_-6px_rgba(211,32,39,0.3)]" 
+                          : "bg-white text-slate-800 border-slate-100 hover:bg-slate-50 transition-colors"
+                      }`}
+                    >
+                      {link.label}
+                      {link.label === "Contact" ? (
+                        <ArrowRight className="w-5 h-5" />
+                      ) : null}
+                    </Link>
+                  )}
                 </motion.div>
               ))}
             </nav>
