@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Clock, ArrowRight, Loader } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, ArrowRight, Loader, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { submitContactToSupabase } from "@/lib/supabaseContactService";
 import { sendContactEmail } from "@/lib/emailService";
@@ -29,6 +29,7 @@ const fadeUpVariants = {
 const ContactSection = () => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -105,12 +106,7 @@ const ContactSection = () => {
           console.log("Email notification skipped:", emailError);
         }
 
-        toast({
-          title: "Success!",
-          description: emailResult?.success
-            ? "Message sent! Email notification sent to admin."
-            : "Message saved successfully to our database!",
-        });
+        setShowSuccess(true);
         setFormData({ name: "", email: "", message: "" });
       } else {
         toast({
@@ -275,6 +271,26 @@ const ContactSection = () => {
 
         </motion.div>
       </div>
+      {showSuccess && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setShowSuccess(false)} />
+          <div className="relative z-50 w-full max-w-md bg-white rounded-2xl shadow-xl p-6 border border-slate-100">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center">
+                <Check className="w-6 h-6 text-green-600" />
+              </div>
+              <div className="flex-1">
+                <h4 className="text-lg font-bold text-slate-900">Message sent</h4>
+                <p className="text-slate-500 text-sm mt-1">Thanks — your message was sent successfully. Our team will contact you shortly to follow up.</p>
+              </div>
+            </div>
+
+            <div className="mt-6 text-right">
+              <button onClick={() => setShowSuccess(false)} className="px-4 py-2 bg-slate-100 rounded-lg text-sm font-medium">Close</button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

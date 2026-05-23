@@ -1,12 +1,21 @@
-import React, { useEffect } from "react";
-import { motion, Variants } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { motion, Variants, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import devImg from "@/assets/products/it services.jpg";
-import { Code2, MonitorSmartphone, Cpu, Layers, ArrowRight } from "lucide-react";
+import { 
+  Code2, 
+  MonitorSmartphone, 
+  Cpu, 
+  Layers, 
+  ArrowRight,
+  X,
+  Send,
+  CheckCircle2,
+  Loader2
+} from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { generateWebPageSchema, generateBreadcrumbSchema } from "@/utils/seoUtils";
-// OptimizedImage intentionally removed from this page; using devImg as a background instead
 import {
   Dialog,
   DialogTrigger,
@@ -18,6 +27,8 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 
+// IMPORTANT: We are now using the direct supabase client instead of the helper file!
+import { supabase } from "@/lib/supabaseClient";
 
 // --- Smooth Animation Variants ---
 const fadeUp: Variants = {
@@ -86,9 +97,66 @@ const services = [
 ];
 
 const SoftwareDevelopment = () => {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    
+    // Safety check for dropdown
+    const serviceRequired = form.get("service_required");
+    if (!serviceRequired) {
+      alert("Please select a Service Required from the dropdown.");
+      return;
+    }
+
+    // Map the form data to match the database exactly
+    const payload = {
+      full_name: form.get("full_name") || "",
+      email: form.get("email") || "",
+      phone: form.get("phone") || "",
+      company_name: form.get("company_name") || "",
+      service_required: serviceRequired || "",
+      expected_timeline: form.get("timeline") || "",
+      project_requirements: form.get("details") || "",
+    };
+
+    setIsSubmitting(true);
+
+    // Call Supabase DIRECTLY to bypass the helper file issues
+    const { error } = await supabase
+      .from('project_inquiries')
+      .insert([payload]);
+
+    setIsSubmitting(false);
+
+    if (error) {
+      console.error("Error submitting form:", error);
+      alert("Database error: " + error.message);
+      return;
+    }
+
+    setIsSubmitted(true);
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setIsFormOpen(false);
+    }, 4000);
+  };
+
+  const scrollToEstimate = (e) => {
+    e.preventDefault();
+    const el = document.getElementById('estimate');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setIsFormOpen(true);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900">
@@ -109,10 +177,8 @@ const SoftwareDevelopment = () => {
       />
       <Navbar />
 
-
-      {/* --- Hero Section (NeuroCampus-style) --- */}
+      {/* --- Hero Section --- */}
       <section className="relative pt-28 sm:pt-36 md:pt-44 lg:pt-52 pb-8 sm:pb-12 md:pb-16 z-10 w-full flex flex-col items-center min-h-[70vh]">
-        {/* Subtle background image (lightly visible) */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div
             className="absolute inset-0 bg-center bg-cover opacity-60 grayscale blur-sm"
@@ -134,7 +200,8 @@ const SoftwareDevelopment = () => {
 
             <motion.div variants={fadeUp} className="relative z-20 mb-8 sm:mb-12">
               <a
-                href="mailto:info@stalight.in"
+                href="#estimate"
+                onClick={scrollToEstimate}
                 className="group relative inline-flex items-center justify-center px-8 sm:px-10 py-3 sm:py-4 bg-slate-950 text-white rounded-xl overflow-hidden shadow-[0_20px_40px_-10px_rgba(168,85,247,0.12)] hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto"
               >
                 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
@@ -145,8 +212,6 @@ const SoftwareDevelopment = () => {
             </motion.div>
           </motion.div>
         </div>
-
-        {/* visual card removed — hero now uses the image as a subtle background */}
       </section>
 
       {/* --- Detailed Services Section --- */}
@@ -187,7 +252,6 @@ const SoftwareDevelopment = () => {
                   <h3 className="text-xl font-bold mb-3 text-slate-900">{service.title}</h3>
                   <p className="text-slate-600 leading-relaxed">{service.desc}</p>
 
-                  {/* Learn More dialog trigger */}
                   <div className="mt-4">
                     <Dialog>
                       <DialogTrigger asChild>
@@ -202,7 +266,6 @@ const SoftwareDevelopment = () => {
                             <div className="w-12 h-12 rounded-lg bg-purple-50 flex items-center justify-center">
                               {service.icon}
                             </div>
-                            {/* Title split: head + tail for gradient emphasis */}
                             <DialogTitle className="text-lg sm:text-xl">
                               {(() => {
                                 const parts = service.title.split(" ");
@@ -224,21 +287,22 @@ const SoftwareDevelopment = () => {
 
                         <div className="mt-2 text-slate-700">
                           <ul className="list-disc pl-5 space-y-3">
-                            {service.details?.map((d: string, i: number) => (
+                            {service.details?.map((d, i) => (
                               <li key={i} className="leading-relaxed">{d}</li>
                             ))}
                           </ul>
                         </div>
 
                         <DialogFooter className="mt-6 flex flex-col sm:flex-row sm:justify-end gap-3">
-                          <a
-                            href={`mailto:info@stalight.in?subject=Request%20estimate%20for%20${encodeURIComponent(service.title)}`}
-                            className="group relative inline-flex items-center justify-center px-4 py-2 bg-slate-950 text-white rounded-md overflow-hidden shadow-[0_10px_30px_-10px_rgba(168,85,247,0.12)] hover:-translate-y-0.5 transition-all duration-200"
-                          >
-                            <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                            <span className="relative z-10 text-sm font-semibold">Request Estimate</span>
-                          </a>
-
+                          <DialogClose asChild>
+                            <button
+                              onClick={scrollToEstimate}
+                              className="group relative inline-flex items-center justify-center px-4 py-2 bg-slate-950 text-white rounded-md overflow-hidden shadow-[0_10px_30px_-10px_rgba(168,85,247,0.12)] hover:-translate-y-0.5 transition-all duration-200"
+                            >
+                              <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                              <span className="relative z-10 text-sm font-semibold">Request Estimate</span>
+                            </button>
+                          </DialogClose>
                           <DialogClose className="inline-flex items-center px-4 py-2 bg-slate-100 text-slate-900 rounded-md hover:bg-slate-200 transition">Close</DialogClose>
                         </DialogFooter>
                       </DialogContent>
@@ -251,39 +315,154 @@ const SoftwareDevelopment = () => {
         </div>
       </section>
 
-      {/* --- CTA Section (Light Theme) --- */}
-      <section className="py-24 bg-white text-slate-900">
-        <div className="container mx-auto px-4 text-center max-w-4xl">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-black mb-8"
-          >
-            Ready to build something custom?
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-slate-600 text-lg mb-10"
-          >
-            Share your project details and we'll craft an Custom plan, timeline, and estimate to get you started.
-          </motion.p>
-          <motion.a
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15 }}
-            href="mailto:info@stalight.in"
-            className="group relative inline-flex items-center justify-center px-8 sm:px-10 py-3 sm:py-4 bg-slate-950 text-white rounded-xl overflow-hidden shadow-[0_20px_40px_-10px_rgba(168,85,247,0.12)] hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto"
-          >
-            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-            <span className="relative z-10 flex items-center gap-3 text-sm font-bold tracking-[0.08em] uppercase">
-              Get a Project Estimate <ArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform" />
-            </span>
-          </motion.a>
+      {/* --- CTA / Professional Project Inquiry Section --- */}
+      <section id="estimate" className="py-24 bg-white text-slate-900 scroll-mt-20">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.06)] border border-slate-100 relative overflow-hidden min-h-[400px]">
+            {/* Top gradient border highlight */}
+            <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500"></div>
+            
+            <AnimatePresence mode="wait">
+              {!isFormOpen ? (
+                /* Initial CTA View */
+                <motion.div
+                  key="cta"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
+                  className="p-10 md:p-16 text-center flex flex-col items-center justify-center h-full"
+                >
+                  <h2 className="text-4xl md:text-5xl font-black mb-6">Ready to build something custom?</h2>
+                  <p className="text-slate-600 text-lg mb-10 max-w-2xl">
+                    Share your project requirements and our engineering team will craft a tailored strategy and timeline for your business.
+                  </p>
+                  <button
+                    onClick={() => setIsFormOpen(true)}
+                    className="group relative inline-flex items-center justify-center px-8 sm:px-10 py-3 sm:py-4 bg-slate-950 text-white rounded-xl overflow-hidden shadow-[0_20px_40px_-10px_rgba(168,85,247,0.12)] hover:-translate-y-1 transition-all duration-300"
+                  >
+                    <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
+                    <span className="relative z-10 flex items-center gap-3 text-sm font-bold tracking-[0.08em] uppercase">
+                      Start an Inquiry <ArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </button>
+                </motion.div>
+              ) : isSubmitted ? (
+                /* Success View */
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="p-10 md:p-16 text-center flex flex-col items-center justify-center h-full min-h-[400px]"
+                >
+                  <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle2 className="w-10 h-10 text-green-500" />
+                  </div>
+                  <h3 className="text-3xl font-black mb-4">Inquiry Received Successfully!</h3>
+                  <p className="text-slate-600 text-lg">Our engineering team will review your requirements and reach out within 1 business day.</p>
+                </motion.div>
+              ) : (
+                /* Form View */
+                <motion.div
+                  key="form"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
+                  className="p-8 md:p-12"
+                >
+                  <div className="flex justify-between items-center mb-8 pb-6 border-b border-slate-100">
+                    <div>
+                      <h3 className="text-2xl font-black">Project Inquiry</h3>
+                      <p className="text-sm text-slate-500 mt-1">Please provide your professional details and project scope.</p>
+                    </div>
+                    <button 
+                      onClick={() => setIsFormOpen(false)}
+                      className="p-2 bg-slate-50 hover:bg-slate-100 rounded-full transition-colors text-slate-500"
+                      aria-label="Close form"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
+                  </div>
+
+                  <form onSubmit={handleFormSubmit} className="space-y-5">
+                    {/* Row 1: Name & Email */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Full Name <span className="text-pink-500">*</span></label>
+                        <input name="full_name" type="text" required placeholder="Jane Doe" className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Work Email <span className="text-pink-500">*</span></label>
+                        <input name="email" type="email" required placeholder="jane@company.com" className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+                      </div>
+                    </div>
+
+                    {/* Row 2: Phone & Company */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Phone Number <span className="text-pink-500">*</span></label>
+                        <input name="phone" type="tel" required placeholder="+1 (555) 000-0000" className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Company Name <span className="text-pink-500">*</span></label>
+                        <input name="company_name" type="text" required placeholder="Your Organization" className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+                      </div>
+                    </div>
+
+                    {/* Row 3: Service & Timeline */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Service Required <span className="text-pink-500">*</span></label>
+                        <select defaultValue="" name="service_required" required className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm appearance-none cursor-pointer">
+                          <option value="" disabled>Select service...</option>
+                          <option value="web-app">Web & App Development</option>
+                          <option value="custom-software">Custom Software Solutions</option>
+                          <option value="enterprise">Enterprise Modernization</option>
+                          <option value="api">API & Microservices</option>
+                          <option value="other">Other Requirements</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Expected Timeline</label>
+                        <select defaultValue="" name="timeline" className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm appearance-none cursor-pointer">
+                          <option value="" disabled>Select timeline...</option>
+                          <option value="immediate">Immediate Start</option>
+                          <option value="1-3-months">1 to 3 Months</option>
+                          <option value="3-6-months">3 to 6 Months</option>
+                          <option value="exploring">Just Exploring Options</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Row 4: Details */}
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Project Requirements <span className="text-pink-500">*</span></label>
+                      <textarea name="details"
+                        required 
+                        rows={4} 
+                        placeholder="Please describe your current challenges, desired outcomes, and key technical requirements..." 
+                        className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm resize-none"
+                      ></textarea>
+                    </div>
+
+                    <div className="pt-2">
+                      <button 
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
+                      >
+                        {isSubmitting ? (
+                          <><Loader2 className="w-5 h-5 animate-spin" /> Submitting...</>
+                        ) : (
+                          <>Submit Request <Send className="w-4 h-4" /></>
+                        )}
+                      </button>
+                    </div>
+                  </form>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       </section>
 

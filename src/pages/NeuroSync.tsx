@@ -1,11 +1,12 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform, useMotionValue, animate, useInView, AnimatePresence, Variants } from "framer-motion";
 import {
   Mic, Code, ClipboardList, BarChart3, CheckCircle2, ArrowRight, Star,
   Briefcase, Award, ShieldCheck, Users, Target, Activity, Quote,
-  Bell, ScanFace, LayoutDashboard, Calendar, User, TrendingUp, Cpu, Zap
+  Bell, ScanFace, LayoutDashboard, Calendar, User, TrendingUp, Cpu, Zap, Send, Loader2
 } from "lucide-react";
+import { supabase } from "@/lib/supabaseClient";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
@@ -106,11 +107,153 @@ const NeuroSync = () => {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
   const yParallax = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  
   // Scroll to top when page loads
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Contact area component (inline within CTA card)
+  const ContactArea = () => {
+    const [open, setOpen] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      setIsSubmitting(true);
+      const fd = new FormData(e.currentTarget as HTMLFormElement);
+      
+      const payload = {
+        full_name: fd.get('full_name')?.toString() || null,
+        official_email: fd.get('official_email')?.toString() || null,
+        phone: fd.get('phone')?.toString() || null,
+        institution: fd.get('institution')?.toString() || null,
+        designation: fd.get('designation')?.toString() || null,
+        number_of_students: fd.get('number_of_students')?.toString() || null,
+        current_process: fd.get('current_process')?.toString() || null,
+        preferred_date: fd.get('preferred_date')?.toString() || null,
+        preferred_time: fd.get('preferred_time')?.toString() || null,
+        message: fd.get('message')?.toString() || null,
+        created_at: new Date().toISOString()
+      };
+
+      const { data, error } = await supabase.from('neurosync_inquiries').insert([payload]);
+      setIsSubmitting(false);
+
+      if (error) {
+        // eslint-disable-next-line no-alert
+        alert("Error: " + error.message);
+        return;
+      }
+
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setOpen(false);
+      }, 4000);
+    };
+
+    if (submitted) {
+      return (
+        <div className="text-center py-6">
+          <div className="w-20 h-20 bg-green-50 rounded-full mx-auto mb-4 flex items-center justify-center">
+            <CheckCircle2 className="w-8 h-8 text-green-500" />
+          </div>
+          <h4 className="text-lg font-bold">Thanks — We received your request</h4>
+          <p className="text-sm text-slate-600">Our team will reach out to schedule the walkthrough.</p>
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        {!open ? (
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+            <button onClick={() => setOpen(true)} className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-4 sm:py-5 bg-slate-900 text-white rounded-xl sm:rounded-full font-bold uppercase text-[11px] sm:text-xs tracking-widest shadow-lg hover:shadow-purple-500/25 hover:-translate-y-1 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition-all duration-300 w-full sm:w-auto">
+              Contact Us <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+            <Link to="/" className="flex items-center justify-center px-6 sm:px-8 py-4 sm:py-5 bg-white border border-slate-300 text-slate-700 rounded-xl sm:rounded-full font-bold uppercase text-[11px] sm:text-xs tracking-widest hover:bg-slate-50 hover:text-slate-900 transition-all duration-300 w-full sm:w-auto">
+              Back to Home
+            </Link>
+          </div>
+        ) : (
+          <div className="bg-white rounded-[1.5rem] p-6 sm:p-8 border border-slate-100 shadow-sm mt-4 relative">
+            <div className="absolute left-0 right-0 top-0 h-1 rounded-t-[1rem] bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600" />
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="sm:col-span-2">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-sm font-bold">Required Fields</h4>
+                  <p className="text-xs text-slate-500">Please fill to schedule a personalised demo</p>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1 ml-1">Full Name</label>
+                <input name="full_name" required placeholder="Your full name" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1 ml-1">Official Email</label>
+                <input name="official_email" type="email" required placeholder="name@institution.edu" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1 ml-1">Phone Number</label>
+                <input name="phone" type="tel" required placeholder="+91 98765 43210" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1 ml-1">College / Institution Name</label>
+                <input name="institution" required placeholder="Institution name" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1 ml-1">Designation</label>
+                <select name="designation" required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm appearance-none">
+                  <option value="">Select designation...</option>
+                  <option value="tpo">TPO</option>
+                  <option value="placement_coordinator">Placement Coordinator</option>
+                  <option value="hod">HOD</option>
+                  <option value="admin">Admin</option>
+                  <option value="faculty">Faculty</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1 ml-1">Number of Students</label>
+                <input name="number_of_students" type="number" min={1} required placeholder="e.g. 120" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+              </div>
+
+              <div className="sm:col-span-2">
+                <label className="block text-xs font-bold text-slate-700 mb-1 ml-1">Current Placement Process</label>
+                <textarea name="current_process" rows={3} required placeholder="Short description of your current placement workflow" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1 ml-1">Preferred Demo Date</label>
+                <input name="preferred_date" type="date" required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1 ml-1">Preferred Demo Time</label>
+                <input name="preferred_time" type="time" required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+              </div>
+
+              <div className="sm:col-span-2">
+                <label className="block text-xs font-bold text-slate-700 mb-1 ml-1">Additional Notes (optional)</label>
+                <textarea name="message" rows={3} className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" placeholder="Any other details you'd like us to know" />
+              </div>
+
+              <div className="sm:col-span-2 flex items-center justify-end gap-3 mt-1">
+                <button type="button" onClick={() => setOpen(false)} className="px-4 py-3 bg-white border border-slate-200 rounded-xl">Cancel</button>
+                <button type="submit" className="px-4 py-3 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 text-white rounded-xl font-bold flex items-center gap-2">Request Demo <Send className="w-4 h-4" /></button>
+              </div>
+            </form>
+          </div>
+        )}
+      </div>
+    );
+  };
   
   // State for the Interactive Placement Overview Section
   return (
@@ -306,15 +449,9 @@ const NeuroSync = () => {
           <motion.div whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 40 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="max-w-4xl mx-auto bg-slate-50 border border-slate-200 rounded-[2rem] sm:rounded-[3rem] p-8 sm:p-12 md:p-24 text-center relative shadow-xl z-10">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-slate-900 mb-4 sm:mb-6 tracking-tight">Ready to <span className="font-black bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-600">Sync Your Placements?</span></h2>
             <p className="text-slate-500 font-light text-sm sm:text-base md:text-lg mb-8 sm:mb-10 max-w-xl mx-auto px-2">Get in touch with our team to schedule a personalised architectural walkthrough of Stalight Sync.</p>
-            
-            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-              <a href="mailto:" className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-4 sm:py-5 bg-slate-900 text-white rounded-xl sm:rounded-full font-bold uppercase text-[11px] sm:text-xs tracking-widest shadow-lg hover:shadow-purple-500/25 hover:-translate-y-1 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition-all duration-300 w-full sm:w-auto">
-                Contact Us <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <Link to="/" className="flex items-center justify-center px-6 sm:px-8 py-4 sm:py-5 bg-white border border-slate-300 text-slate-700 rounded-xl sm:rounded-full font-bold uppercase text-[11px] sm:text-xs tracking-widest hover:bg-slate-50 hover:text-slate-900 transition-all duration-300 w-full sm:w-auto">
-                Back to Home
-              </Link>
-            </div>
+
+            {/* Inline contact form area */}
+            <ContactArea />
           </motion.div>
         </div>
       </section>
