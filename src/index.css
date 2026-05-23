@@ -204,6 +204,32 @@
   }
 }
 
+/* Auto reveal utilities */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px) scale(0.99);
+  transition: transform 700ms cubic-bezier(.16,1,.3,1), opacity 700ms cubic-bezier(.16,1,.3,1);
+  will-change: transform, opacity;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* stronger mobile reveal */
+@media (max-width: 767px) {
+  .reveal { transform: translateY(40px) scale(0.98); transition-duration: 900ms; }
+  .reveal.visible { transform: translateY(0) scale(1); }
+}
+
+/* utility to add subtle scale/float for hero words */
+.float-subtle { transform-origin: center; animation: floatHero 6s ease-in-out infinite; }
+@keyframes floatHero { 0% { transform: translateY(0px); } 50% { transform: translateY(-6px); } 100% { transform: translateY(0px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .float-subtle { transition: none !important; animation: none !important; }
+}
+
 .animate-fade-in-up {
   animation: fade-in-up 0.8s ease-out forwards;
 }
