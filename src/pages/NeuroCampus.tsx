@@ -190,7 +190,7 @@ const textRevealVariants: Variants = {
 };
 
 const MaskedText = ({ children, className }: { children: React.ReactNode; className?: string }) => (
-  <div className="overflow-hidden inline-block w-full leading-tight py-1 md:py-2">
+  <div className="overflow-hidden md:overflow-visible inline-block w-full leading-tight py-1 md:py-2">
     <motion.div variants={textRevealVariants} className={className}>{children}</motion.div>
   </div>
 );
@@ -295,18 +295,18 @@ const NeuroCampus = () => {
       </div>
 
       {/* --- HERO SECTION --- */}
-      <section className="relative pt-20 sm:pt-28 md:pt-36 lg:pt-44 pb-8 sm:pb-12 md:pb-16 z-10 w-full flex flex-col items-center min-h-[60vh] md:min-h-[85vh]">
+      <section className="relative pt-32 sm:pt-36 md:pt-44 lg:pt-52 xl:pt-56 pb-6 sm:pb-10 md:pb-16 z-10 w-full flex flex-col items-center min-h-[48vh] md:min-h-[85vh]">
         <div className="container mx-auto px-4 sm:px-6 relative z-10 w-full text-center mb-8 sm:mb-12">
           <motion.div initial="hidden" animate="visible" variants={containerVariants} className="max-w-6xl mx-auto flex flex-col items-center">
-            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-light text-slate-950 tracking-tight leading-[1.02] mb-3 sm:mb-5 px-2 break-words max-w-full">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-logo font-extrabold text-slate-900 tracking-tight leading-[0.9] mb-3 sm:mb-6 px-2 max-w-full text-center">
                 <MaskedText>
-                  <span className="font-light">Stalight</span>{' '}
+                  <span className="block sm:inline font-logo font-extrabold uppercase tracking-[0.02em]">Stalight</span>
                   <motion.span
-                    className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-gradient-animate"
+                    className="block sm:inline font-logo font-extrabold uppercase text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-gradient-animate mt-1 sm:mt-0 tracking-[0.02em] float-subtle"
                     animate={{ y: [0, -6, 0] }}
                     transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                   >
-                    Campus.
+                    Campus
                   </motion.span>
                 </MaskedText>
             </h1>
@@ -315,7 +315,7 @@ const NeuroCampus = () => {
               A next-generation academic management platform unifying AI-driven analytics, blockchain security, and automated operations.
             </motion.p>
 
-            <motion.div variants={fadeUpVariants} className="relative z-20 mb-8 sm:mb-12">
+            <motion.div variants={fadeUpVariants} className="relative z-20 mb-6 sm:mb-12">
               <div className="flex flex-col sm:flex-row items-center gap-3 max-w-md mx-auto">
                 <a
                   href="https://campus.stalight.in/stalightcampus"
@@ -616,7 +616,7 @@ const NeuroCampus = () => {
                       <SelectValue placeholder="Select a solution" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="stalight_campus">Stalight Campus</SelectItem>
+                      <SelectItem value="stalight_campus">Stalight   Campus</SelectItem>
                       <SelectItem value="neurosync">NeuroSync</SelectItem>
                       <SelectItem value="both">Both / Integration</SelectItem>
                       <SelectItem value="custom">Custom / Other</SelectItem>
