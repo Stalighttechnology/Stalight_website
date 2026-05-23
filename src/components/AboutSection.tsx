@@ -51,17 +51,9 @@ const AboutSection = () => {
         <div className="absolute inset-0 opacity-[0.03]"
              style={{ backgroundImage: 'linear-gradient(#0f172a 1px, transparent 1px), linear-gradient(90deg, #0f172a 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
         
-        {/* Breathing Orbs */}
-        <motion.div 
-          animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-0 right-[-10%] w-[600px] h-[600px] bg-orange-400/20 rounded-full blur-[120px] mix-blend-multiply" 
-        />
-        <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-pink-400/20 rounded-full blur-[100px] mix-blend-multiply" 
-        />
+        {/* Subtle ambient glows (static for performance) */}
+        <div className="absolute top-0 right-[-6%] w-[360px] h-[360px] bg-orange-400/12 rounded-full blur-[24px] mix-blend-multiply" style={{pointerEvents: 'none'}} />
+        <div className="absolute bottom-[-6%] left-[-6%] w-[300px] h-[300px] bg-pink-400/12 rounded-full blur-[20px] mix-blend-multiply" style={{pointerEvents: 'none'}} />
       </div>
 
       <div className="container mx-auto px-6 lg:px-12 xl:px-20 relative z-10">
@@ -85,7 +77,7 @@ const AboutSection = () => {
               </div>
             </motion.div>
             
-            <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.1] tracking-tight mb-6">
+            <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.1] tracking-tight mb-6 will-change-transform">
               Building Your <br className="hidden lg:block" />
               <span className="relative inline-block mt-2">
                 {/* Flowing Gradient Text Animation */}
@@ -113,15 +105,14 @@ const AboutSection = () => {
             <motion.p variants={itemVariants} className="text-slate-500 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10">
               We bridge the gap between complex technology and your business goals. By delivering scalable software, modern IT infrastructure, and top-tier technical education, we empower you to lead in a digital-first world.
             </motion.p>
-
             {/* Compact feature summary (no repeated descriptions) */}
-            <motion.div variants={itemVariants} className="mb-10 mx-auto lg:mx-0 max-w-md">
+            <div className="mb-10 mx-auto lg:mx-0 max-w-md">
               <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
                 <span className="px-3 py-1 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold">Technical education</span>
                 <span className="px-3 py-1 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold">Cloud & IT infrastructure</span>
                 <span className="px-3 py-1 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold">Custom digital solutions</span>
               </div>
-            </motion.div>
+            </div>
 
             <motion.div variants={itemVariants}>
               <Link to="/about-us" className="group relative inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-full overflow-hidden shadow-xl shadow-slate-900/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-orange-500/25">
@@ -142,14 +133,9 @@ const AboutSection = () => {
 
             <div className="grid grid-cols-1 gap-6 sm:gap-8 w-full">
               {features.map((feature, idx) => (
-                <motion.div
+                <div
                   key={idx}
-                  variants={itemVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-80px" }}
-                  whileHover={{ translateY: -6 }}
-                  className="group bg-white/60 backdrop-blur-sm border border-slate-100 rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300"
+                  className="group bg-white/60 border border-slate-100 rounded-2xl p-6 shadow-sm transition-all duration-200 will-change-transform"
                 >
                   <div className="flex items-start gap-4">
                     <div className="mt-1 w-3 h-3 rounded-full bg-orange-500 shrink-0" />
@@ -158,7 +144,7 @@ const AboutSection = () => {
                       <p className="text-slate-500 text-sm mt-2 max-w-xl">{feature.desc}</p>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
 
               {/* Call-to-action panel */}
