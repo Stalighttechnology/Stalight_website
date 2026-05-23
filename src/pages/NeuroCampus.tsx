@@ -298,9 +298,9 @@ const NeuroCampus = () => {
       <section className="relative pt-32 sm:pt-36 md:pt-44 lg:pt-52 xl:pt-56 pb-6 sm:pb-10 md:pb-16 z-10 w-full flex flex-col items-center min-h-[48vh] md:min-h-[85vh]">
         <div className="container mx-auto px-4 sm:px-6 relative z-10 w-full text-center mb-8 sm:mb-12">
           <motion.div initial="hidden" animate="visible" variants={containerVariants} className="max-w-6xl mx-auto flex flex-col items-center">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-logo font-extrabold text-slate-900 tracking-tight leading-[0.9] mb-3 sm:mb-6 px-2 max-w-full text-center">
+            <h1 className="text-[3.25rem] sm:text-6xl md:text-[7rem] lg:text-[8.5rem] font-light text-slate-900 tracking-tighter leading-[0.95] mb-3 sm:mb-6 px-2 max-w-full text-center">
                 <MaskedText>
-                  <span className="block sm:inline font-logo font-extrabold uppercase tracking-[0.02em]">Stalight</span>
+                  <span className="block sm:inline font-light normal-case">Stalight</span>{' '}
                   <motion.span
                     className="block sm:inline font-logo font-extrabold uppercase text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-gradient-animate mt-1 sm:mt-0 tracking-[0.02em] float-subtle"
                     animate={{ y: [0, -6, 0] }}

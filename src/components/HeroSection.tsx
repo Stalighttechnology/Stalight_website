@@ -149,7 +149,7 @@ const HeroSection = () => {
             variants={itemVariants}
             className="mx-auto max-w-5xl text-[3rem] font-black leading-[0.92] tracking-[-0.05em] text-[#0B101E] sm:text-6xl md:text-7xl lg:text-8xl"
           >
-            Enterprise
+            Enterprise{" "}
             <br className="block md:hidden" />
             Intelligence
           </motion.span>
