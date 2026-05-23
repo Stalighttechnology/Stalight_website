@@ -61,8 +61,8 @@ const Footer = () => {
               <div className="md:pl-4">
                 <h4 className="text-xs md:text-sm uppercase tracking-widest text-stone-800 font-bold mb-4 md:mb-5">Solutions</h4>
                 <ul className="space-y-3 md:space-y-4">
-                  <li><Link to="/neuro-campus" className="text-sm md:text-base text-stone-600 hover:text-stone-900 transition-colors font-medium">Neuro Campus</Link></li>
-                  <li><Link to="/neurosync" className="text-sm md:text-base text-stone-600 hover:text-stone-900 transition-colors font-medium">NeuroSync</Link></li>
+                  <li><Link to="/neuro-campus" className="text-sm md:text-base text-stone-600 hover:text-stone-900 transition-colors font-medium">Stalight Campus</Link></li>
+                  <li><Link to="/neurosync" className="text-sm md:text-base text-stone-600 hover:text-stone-900 transition-colors font-medium">Stalight Sync</Link></li>
                   <li><a href="mailto:info@stalight.in" className="text-sm md:text-base text-red-700 md:text-stone-600 hover:text-stone-900 transition-colors font-medium">info@stalight.in</a></li>
                   <li><a href="tel:+918660144040" className="text-sm md:text-base text-stone-600 hover:text-stone-900 transition-colors font-medium">Mobile: 866 014 4040</a></li>
                 </ul>
