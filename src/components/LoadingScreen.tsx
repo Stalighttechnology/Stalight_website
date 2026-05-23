@@ -1,5 +1,7 @@
 import React from "react";
-import loadingVideo from "@/assets/logos/stalight loading animation.mp4";
+
+// Use a runtime URL so Vite resolves the asset correctly (handles spaces in filename)
+const loadingVideo = new URL("../assets/logos/stalight loading animation.mp4", import.meta.url).href;
 
 export const LoadingScreen: React.FC = () => {
   return (
