@@ -18,12 +18,12 @@ import { OptimizedImage } from "@/components/OptimizedImage";
 // --- Image Imports ---
 import campusImg from "@/assets/screenshots/mobileloginpage1.jpg";
 import loginpageImg from "@/assets/screenshots/loginpageimage.jpg";
-import leavereqImg from "@/assets/screenshots/leavereqimage.jpg";
-import timetableImg from "@/assets/screenshots/timetable dash.jpg";
+import leavereqImg from "@/assets/screenshots/leavereqimage.png";
+import timetableImg from "@/assets/screenshots/timetable dash.png";
 import neurocampus11Img from "@/assets/products/neurocampus11.jpg";
-import nebulaaiImg from "@/assets/products/nebulaai.jpg";
+import nebulaaiImg from "@/assets/products/nebulaai.png";
 import facerecognImg from "@/assets/products/facerecogn.jpg";
-import resultsImg from "@/assets/screenshots/results.jpg";
+import resultsImg from "@/assets/screenshots/results.png";
 
 // --- Custom Animated Number Component ---
 const AnimatedNumber = ({ value, duration = 2.5 }: { value: number; duration?: number }) => {
@@ -44,18 +44,18 @@ const AnimatedNumber = ({ value, duration = 2.5 }: { value: number; duration?: n
 // --- Content ---
 const tourFeatures = [
   {
-    title: "Nebula AI Insights",
+    title: "Assignments Dashboard",
     icon: Brain,
-    desc: "AI-driven cognitive recommendations and student growth profiling.",
+    desc: "Manage academic assignments with real-time submission tracking, overdue alerts, grading status, and seamless student-teacher interactio",
     img: nebulaaiImg,
-    caption: "Stalight Nebula AI Student Growth & Insights Panel"
+    caption: "Smart Assignment Tracking & Submission System"
   },
   {
-    title: "Smart Timetables",
+    title: "Fee Management",
     icon: Calendar,
-    desc: "Automated schedule planners with conflict checking and active sync.",
+    desc: "Automated fee tracking with semester-wise structure, payment records, due alerts, and complete student financial management.",
     img: timetableImg,
-    caption: "Interactive Conflict-Free Academic Timetable & Scheduling"
+    caption: "Smart Student Fee Management & Semester-Based Billing"
   },
   {
     title: "Facial Attendance",
