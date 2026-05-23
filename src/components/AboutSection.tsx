@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, BookOpen, Cloud, MonitorSmartphone } from "lucide-react";
+import { ArrowRight, BookOpen, Cloud, MonitorSmartphone, Check } from "lucide-react";
 
 // Update these paths to your actual assets
 import leftImage from "@/assets/office/left.png";
@@ -61,6 +61,27 @@ const cardVariants = {
 };
 
 const AboutSection = () => {
+  const mobileCards = [
+    {
+      title: "Skills Development",
+      subtitle: "Empowering individuals with in-demand digital skills for tomorrow.",
+      image: leftImage,
+      tag: "Skills"
+    },
+    {
+      title: "Solutions",
+      subtitle: "Building smart, scalable solutions that drive business forward.",
+      image: centerImage,
+      tag: "Solutions"
+    },
+    {
+      title: "Growth Together",
+      subtitle: "Partnering with you to achieve sustainable growth and success.",
+      image: rightImage,
+      tag: "Growth"
+    }
+  ];
+
   return (
     <section id="about" className="relative min-h-screen flex flex-col justify-center bg-[#FAFAFA] py-20 lg:py-28 overflow-hidden z-0">
       
@@ -136,42 +157,79 @@ const AboutSection = () => {
 
           {/* Right Visual Layout */}
           <div className="w-full lg:w-1/2 relative flex justify-center items-center py-10 lg:py-0">
-            {/* Ambient Glow behind images */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-orange-400/20 rounded-full blur-[80px] -z-10"></div>
 
-            <div className="relative flex items-center justify-center lg:gap-6">
-              
-              {/* Floating Left Image */}
-              <motion.div 
-                animate={{ y: [0, -12, 0] }}
-                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-                className="hidden lg:block w-40 xl:w-48 h-72 xl:h-80 rounded-[28px] overflow-hidden border-4 border-white shadow-2xl mt-24 z-0"
-              >
-                <img src={leftImage} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" alt="Workspace Left" />
-              </motion.div>
+            {/* Mobile: horizontally scrollable cards so all three images are visible */}
+            <div className="w-full lg:hidden">
+              <div className="flex flex-col gap-6 py-6 px-4">
+                {mobileCards.map((card, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 8 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ type: "spring", stiffness: 80, delay: i * 0.06 }}
+                    className="relative bg-white rounded-3xl p-6 shadow-lg border border-slate-100"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <h3 className="text-lg font-bold text-slate-900 mb-2">{card.title}</h3>
+                        <p className="text-sm text-slate-500 leading-relaxed">{card.subtitle}</p>
+                      </div>
+                      <span className="ml-4 text-xs font-semibold text-slate-400 uppercase tracking-wider">{card.tag}</span>
+                    </div>
 
-              {/* Main Center Image */}
-              <div className="relative z-10">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9, y: 30 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ type: "spring", stiffness: 70, damping: 20 }}
-                  className="w-[85vw] max-w-[340px] lg:w-72 xl:w-[360px] h-[400px] lg:h-[500px] rounded-[32px] overflow-hidden border-[6px] border-white bg-slate-50 shadow-[0_20px_50px_rgba(15,23,42,0.15)] relative group cursor-pointer"
+                    <div className="mt-4 rounded-xl overflow-hidden h-[220px]">
+                      <img src={card.image} alt={card.title} className="w-full h-full object-cover" />
+                    </div>
+
+                    {i === 1 && (
+                      <div className="absolute bottom-4 right-4 bg-white rounded-full p-2 shadow-md border border-slate-100">
+                        <Check className="w-5 h-5 text-emerald-500" />
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop / large screens: keep the previous overlapping layout */}
+            <div className="hidden lg:flex w-full relative justify-center items-center">
+              {/* Ambient Glow behind images */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-orange-400/20 rounded-full blur-[80px] -z-10"></div>
+
+              <div className="relative flex items-center justify-center lg:gap-6">
+                {/* Floating Left Image */}
+                <motion.div 
+                  animate={{ y: [0, -12, 0] }}
+                  transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                  className="w-40 xl:w-48 h-72 xl:h-80 rounded-[28px] overflow-hidden border-4 border-white shadow-2xl mt-24 z-0"
                 >
-                  <img src={centerImage} className="h-full w-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-110" alt="Office Main" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <img src={leftImage} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" alt="Workspace Left" />
+                </motion.div>
+
+                {/* Main Center Image */}
+                <div className="relative z-10">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ type: "spring", stiffness: 70, damping: 20 }}
+                    className="w-[85vw] max-w-[340px] lg:w-72 xl:w-[360px] h-[400px] lg:h-[500px] rounded-[32px] overflow-hidden border-[6px] border-white bg-slate-50 shadow-[0_20px_50px_rgba(15,23,42,0.15)] relative group cursor-pointer"
+                  >
+                    <img src={centerImage} className="h-full w-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-110" alt="Office Main" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </motion.div>
+                </div>
+
+                {/* Floating Right Image */}
+                <motion.div 
+                  animate={{ y: [0, 12, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  className="w-40 xl:w-48 h-72 xl:h-80 rounded-[28px] overflow-hidden border-4 border-white shadow-2xl mt-12 z-0"
+                >
+                  <img src={rightImage} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" alt="Office Right" />
                 </motion.div>
               </div>
-
-              {/* Floating Right Image */}
-              <motion.div 
-                animate={{ y: [0, 12, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="hidden lg:block w-40 xl:w-48 h-72 xl:h-80 rounded-[28px] overflow-hidden border-4 border-white shadow-2xl mt-12 z-0"
-              >
-                <img src={rightImage} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" alt="Office Right" />
-              </motion.div>
             </div>
           </div>
         </div>
