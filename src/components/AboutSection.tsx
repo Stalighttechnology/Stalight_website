@@ -1,17 +1,21 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, CheckCircle2, ShieldCheck, Zap, Cpu } from "lucide-react";
-import { OptimizedImage } from "./OptimizedImage";
-
-// Update these paths to your actual assets
-import leftImage from "@/assets/office/abt1.jpg";
-import rightImage from "@/assets/office/abt2.png";
+import { motion } from "framer-motion";
+// Note: images removed for a cleaner professional layout
 
 const features = [
-  { icon: Cpu, text: "Future-ready technical education" },
-  { icon: ShieldCheck, text: "Scalable cloud & IT infrastructure" },
-  { icon: Zap, text: "Premium custom digital solutions" }
+  {
+    title: "Future-ready technical education",
+    desc: "Hands-on curricula, industry-aligned projects, and mentorship to upskill teams."
+  },
+  {
+    title: "Scalable cloud & IT infrastructure",
+    desc: "Robust cloud architectures, secure deployments, and cost-optimized operations."
+  },
+  {
+    title: "Premium custom digital solutions",
+    desc: "Tailored software built for performance, maintainability, and growth."
+  }
 ];
 
 const containerVariants = {
@@ -33,16 +37,6 @@ const itemVariants = {
 
 const AboutSection = () => {
   const sectionRef = useRef(null);
-  
-  // Parallax Scroll Effects for the images
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"]
-  });
-  
-  // Left image moves up, Right image moves down slightly on scroll
-  const leftImageY = useTransform(scrollYProgress, [0, 1], [60, -60]);
-  const rightImageY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
 
   return (
     <section 
@@ -120,77 +114,55 @@ const AboutSection = () => {
               We bridge the gap between complex technology and your business goals. By delivering scalable software, modern IT infrastructure, and top-tier technical education, we empower you to lead in a digital-first world.
             </motion.p>
 
-            {/* Seamless Animated Feature List */}
-            <motion.div variants={itemVariants} className="flex flex-col gap-4 mb-10 mx-auto lg:mx-0 max-w-md">
-              {features.map((feature, idx) => (
-                <motion.div 
-                  key={idx} 
-                  whileHover={{ scale: 1.02, x: 5 }}
-                  className="group flex items-center gap-4 bg-white/60 backdrop-blur-sm border border-slate-100 rounded-2xl p-4 shadow-sm cursor-default transition-colors hover:bg-white hover:border-orange-100 hover:shadow-orange-500/10"
-                >
-                  <div className="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center shrink-0 overflow-hidden relative">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-orange-200 to-pink-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <feature.icon className="w-5 h-5 text-orange-500 relative z-10 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300" />
-                  </div>
-                  <span className="text-slate-700 font-semibold text-sm sm:text-base group-hover:text-slate-900 transition-colors">{feature.text}</span>
-                </motion.div>
-              ))}
+            {/* Compact feature summary (no repeated descriptions) */}
+            <motion.div variants={itemVariants} className="mb-10 mx-auto lg:mx-0 max-w-md">
+              <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
+                <span className="px-3 py-1 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold">Technical education</span>
+                <span className="px-3 py-1 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold">Cloud & IT infrastructure</span>
+                <span className="px-3 py-1 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold">Custom digital solutions</span>
+              </div>
             </motion.div>
 
             <motion.div variants={itemVariants}>
               <Link to="/about-us" className="group relative inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-full overflow-hidden shadow-xl shadow-slate-900/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-orange-500/25">
                 <span className="absolute inset-0 bg-gradient-to-r from-orange-500 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></span>
                 <span className="relative z-10 flex items-center gap-2 text-sm font-bold tracking-[0.1em] uppercase">
-                  Discover More 
-                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
+                  Discover More
+                  <span className="ml-1 transform group-hover:translate-x-1 transition-transform duration-300">→</span>
                 </span>
               </Link>
             </motion.div>
           </motion.div>
 
-          {/* RIGHT COLUMN: Parallax Staggered Non-Overlapping Grid */}
+          {/* RIGHT COLUMN: Professional Feature Cards (images removed) */}
           <div className="lg:col-span-7 mt-12 lg:mt-0 w-full relative">
-            
+
             {/* Ambient Back Glow for Depth */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[80%] bg-gradient-to-tr from-orange-100 to-pink-100 rounded-full blur-[80px] -z-10 opacity-60"></div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 w-full">
-              
-              {/* Image 1: Left / Moves UP on scroll */}
-              <motion.div 
-                style={{ y: leftImageY }}
-                className="relative h-[300px] sm:h-[400px] lg:h-[500px] rounded-[2rem] overflow-hidden shadow-2xl group border-4 border-white bg-slate-100 sm:mt-12"
-              >
-                <OptimizedImage src={leftImage} alt="Workspace Detail" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors duration-500" />
-                
-                {/* Static Clean Badge */}
-                <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-slate-100">
-                  <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-slate-800">Growth & Skills</span>
-                </div>
-              </motion.div>
-
-              {/* Image 2: Right / Moves DOWN on scroll */}
-              <motion.div 
-                style={{ y: rightImageY }}
-                className="relative h-[300px] sm:h-[400px] lg:h-[500px] rounded-[2rem] overflow-hidden shadow-2xl group border-4 border-white bg-slate-100 sm:-mt-12"
-              >
-                <OptimizedImage src={rightImage} alt="Enterprise Solutions" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors duration-500" />
-                
-                {/* Interactive Floating Label at bottom */}
-                <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md border border-slate-100 p-4 rounded-xl shadow-xl transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
-                  <div className="flex items-center justify-between">
+            <div className="grid grid-cols-1 gap-6 sm:gap-8 w-full">
+              {features.map((feature, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={itemVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-80px" }}
+                  whileHover={{ translateY: -6 }}
+                  className="group bg-white/60 backdrop-blur-sm border border-slate-100 rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="mt-1 w-3 h-3 rounded-full bg-orange-500 shrink-0" />
                     <div>
-                      <p className="text-[10px] font-bold text-orange-500 uppercase tracking-wider mb-0.5">Architecture</p>
-                      <p className="text-slate-900 font-bold text-sm leading-tight">Enterprise Solutions</p>
-                    </div>
-                    <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center shrink-0">
-                      <CheckCircle2 className="text-emerald-500 w-4 h-4" />
+                      <h3 className="text-slate-900 font-bold text-lg">{feature.title}</h3>
+                      <p className="text-slate-500 text-sm mt-2 max-w-xl">{feature.desc}</p>
                     </div>
                   </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              ))}
+
+              {/* Call-to-action panel */}
+              
 
             </div>
           </div>

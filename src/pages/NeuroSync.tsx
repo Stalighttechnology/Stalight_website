@@ -302,7 +302,7 @@ const NeuroSync = () => {
       </div>
 
       {/* --- HERO SECTION --- */}
-      <section className="relative pt-20 pb-10 sm:pt-36 sm:pb-16 md:pt-44 md:pb-20 z-10 flex flex-col justify-center items-center md:min-h-[85vh]">
+      <section className="relative pt-32 sm:pt-36 md:pt-44 lg:pt-52 xl:pt-56 pb-10 sm:pb-16 md:pb-20 z-10 flex flex-col justify-center items-center md:min-h-[85vh]">
         
         {/* Grid Background */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.08]" style={{ backgroundImage: 'linear-gradient(to right, rgba(15, 23, 42, 0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(15, 23, 42, 0.12) 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
