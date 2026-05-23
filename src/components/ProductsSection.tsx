@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 // --- Images ---
-import ncImg1 from "@/assets/screenshots/leavereqimage.jpg";
+import ncImg1 from "@/assets/screenshots/leavereqimage.png";
 import ncImg2 from "@/assets/products/neurocampus11.jpg";
 
 import nsImg1 from "@/assets/products/neurosync11.jpg";
