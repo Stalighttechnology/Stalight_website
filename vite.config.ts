@@ -42,6 +42,7 @@ export default defineConfig(({ mode }) => ({
     ensureRobotsPlugin(),
     sitemap({
       hostname: "https://stalight.in",
+      exclude: ["/googlefc67a6c63a16b977"],
       dynamicRoutes: [
         "/",
         "/neuro-campus",
