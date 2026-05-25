@@ -52,7 +52,8 @@ export default defineConfig(({ mode }) => ({
         "/skill-development",
         "/it-services",
         "/about-us"
-      ]
+      ],
+      generateRobotsTxt: false
     })
   ].filter(Boolean),
   resolve: {
