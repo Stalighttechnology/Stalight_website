@@ -14,7 +14,7 @@ const PrivacyPolicy = () => {
 
       <main className="container mx-auto px-6 py-20 max-w-4xl">
         <div className="flex items-center gap-4 mb-8">
-          <img src={stalightLogo} alt="Stalight logo" className="h-12 w-auto object-contain" />
+          <img loading="lazy" decoding="async" src={stalightLogo} alt="Stalight logo" className="h-12 w-auto object-contain" />
           <div>
             <h1 className="text-2xl md:text-3xl font-bold">Privacy Policy</h1>
             <p className="text-sm text-slate-600">Effective date: {effectiveDate}</p>

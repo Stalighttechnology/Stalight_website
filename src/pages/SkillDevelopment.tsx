@@ -38,9 +38,9 @@ const staggerContainer: Variants = {
 const courses = [
   {
     icon: <Cpu className="w-8 h-8 text-purple-600" />,
-    title: "Applied AI & Machine Learning",
+    title: "Applied Machine Learning",
     duration: "12 Weeks",
-    desc: "Master modern AI architectures, from training custom predictive models to building enterprise-scale Retrieval-Augmented Generation (RAG) pipelines and computer vision systems.",
+    desc: "Master modern architectures, from training custom predictive models to building enterprise-scale Retrieval-Augmented Generation (RAG) pipelines and computer vision systems.",
     tags: ["Python", "TensorFlow", "LangChain"]
   },
   {
@@ -60,7 +60,7 @@ const courses = [
 ];
 
 const certifications = [
-  "Stalight Certified AI Practitioner (SCAI)",
+  "Stalight Certified ML Practitioner (SCAI)",
   "Enterprise Full-Stack Developer",
   "Cloud Architecture Fundamentals",
   "Modern UI/UX Design Principles"
@@ -106,7 +106,7 @@ const SkillDevelopment = () => {
         jsonLd={[
           generateWebPageSchema(
             "Skill Development & Training",
-            "Elite engineering tracks in AI, Full-Stack, and Cloud with placement support and hands-on labs.",
+            "Elite engineering tracks in Machine Learning, Full-Stack, and Cloud with placement support and hands-on labs.",
             "/skill-development"
           ),
           generateBreadcrumbSchema([
@@ -162,7 +162,7 @@ const SkillDevelopment = () => {
           
           <motion.div variants={fadeUp} className="relative group perspective-1000">
             {/* Glowing background blur matched to logo colors */}
-            <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 rounded-[2.5rem] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
+            <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 rounded-[2.5rem] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700 transform-gpu"></div>
             <div className="absolute inset-0 bg-gradient-to-tr from-slate-200 to-slate-50 rounded-[2rem] transform rotate-3 scale-105 -z-10 transition-transform duration-700 group-hover:rotate-6"></div>
 
             {/* Subtle campus background image */}
@@ -252,7 +252,7 @@ const SkillDevelopment = () => {
                 variants={fadeUp} 
                 className="group relative p-8 rounded-3xl bg-white border border-slate-200 hover:border-transparent transition-all duration-300 flex flex-col h-full hover:-translate-y-2 z-10"
               >
-                <div className="absolute -inset-[2px] bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-[2px]"></div>
+                <div className="absolute -inset-[2px] bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-[2px] transform-gpu"></div>
                 <div className="absolute inset-0 bg-white rounded-3xl -z-10"></div>
 
                 <div className="flex justify-between items-start mb-6">
@@ -281,8 +281,8 @@ const SkillDevelopment = () => {
       {/* --- Certifications & Admission Section --- */}
       <section id="admission" className="py-24 bg-white text-slate-900 relative overflow-hidden">
         {/* Dynamic Background Elements */}
-        <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-pink-600/8 rounded-full mix-blend-screen filter blur-[120px] opacity-40 pointer-events-none"></div>
-        <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-600/8 rounded-full mix-blend-screen filter blur-[120px] opacity-40 pointer-events-none"></div>
+        <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-pink-600/8 rounded-full  filter blur-[120px] opacity-40 pointer-events-none transform-gpu"></div>
+        <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-600/8 rounded-full  filter blur-[120px] opacity-40 pointer-events-none transform-gpu"></div>
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -414,7 +414,7 @@ const SkillDevelopment = () => {
                         <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Interested Track</label>
                         <select name="track" required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm appearance-none cursor-pointer">
                           <option value="" disabled selected>Select a program...</option>
-                          <option value="ai">Applied AI & Machine Learning</option>
+                          <option value="ai">Applied Machine Learning</option>
                           <option value="fullstack">Advanced Full-Stack Engineering</option>
                           <option value="cloud">Cloud Infrastructure & DevOps</option>
                         </select>

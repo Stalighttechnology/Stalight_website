@@ -29,7 +29,7 @@ const Footer = () => {
             {/* Column 1: Brand */}
             <div className="lg:pr-6 sm:col-span-2 lg:col-span-1">
               <div className="flex items-center gap-3 mb-5">
-                <img src={stalightLogo} alt="Stalight logo" className="h-10 sm:h-12 lg:h-14 w-auto object-contain drop-shadow-sm" />
+                <img loading="lazy" decoding="async" src={stalightLogo} alt="Stalight logo" className="h-10 sm:h-12 lg:h-14 w-auto object-contain drop-shadow-sm" />
                 <div className="flex flex-col">
                   <span className="text-lg sm:text-xl lg:text-2xl font-logo font-bold text-stone-900 tracking-tight leading-none mb-1">
                     Stalight

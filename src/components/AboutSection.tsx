@@ -52,8 +52,8 @@ const AboutSection = () => {
              style={{ backgroundImage: 'linear-gradient(#0f172a 1px, transparent 1px), linear-gradient(90deg, #0f172a 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
         
         {/* Subtle ambient glows (static for performance) */}
-        <div className="absolute top-0 right-[-6%] w-[360px] h-[360px] bg-orange-400/12 rounded-full blur-[24px] mix-blend-multiply" style={{pointerEvents: 'none'}} />
-        <div className="absolute bottom-[-6%] left-[-6%] w-[300px] h-[300px] bg-pink-400/12 rounded-full blur-[20px] mix-blend-multiply" style={{pointerEvents: 'none'}} />
+        <div className="absolute top-0 right-[-6%] w-[360px] h-[360px] bg-orange-400/12 rounded-full blur-[24px]  transform-gpu" style={{pointerEvents: 'none'}} />
+        <div className="absolute bottom-[-6%] left-[-6%] w-[300px] h-[300px] bg-pink-400/12 rounded-full blur-[20px]  transform-gpu" style={{pointerEvents: 'none'}} />
       </div>
 
       <div className="container mx-auto px-6 lg:px-12 xl:px-20 relative z-10">
@@ -77,17 +77,15 @@ const AboutSection = () => {
               </div>
             </motion.div>
             
-            <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.1] tracking-tight mb-6 will-change-transform">
+            <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.1] tracking-tight mb-6 ">
               Building Your <br className="hidden lg:block" />
               <span className="relative inline-block mt-2">
                 {/* Flowing Gradient Text Animation */}
-                <motion.span 
-                  animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                <span
                   className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 bg-[length:200%_auto]"
                 >
                   Digital Future
-                </motion.span>
+                </span>
                 
                 {/* Elegant curved underline */}
                 <svg className="absolute -bottom-2 left-0 w-full h-3 opacity-60 z-0" viewBox="0 0 300 20" fill="none" preserveAspectRatio="none">
@@ -129,13 +127,13 @@ const AboutSection = () => {
           <div className="lg:col-span-7 mt-12 lg:mt-0 w-full relative">
 
             {/* Ambient Back Glow for Depth */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[80%] bg-gradient-to-tr from-orange-100 to-pink-100 rounded-full blur-[80px] -z-10 opacity-60"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[80%] bg-gradient-to-tr from-orange-100 to-pink-100 rounded-full blur-[80px] -z-10 opacity-60 transform-gpu"></div>
 
             <div className="grid grid-cols-1 gap-6 sm:gap-8 w-full">
               {features.map((feature, idx) => (
                 <div
                   key={idx}
-                  className="group bg-white/60 border border-slate-100 rounded-2xl p-6 shadow-sm transition-all duration-200 will-change-transform"
+                  className="group bg-white/60 border border-slate-100 rounded-2xl p-6 shadow-sm transition-all duration-200 "
                 >
                   <div className="flex items-start gap-4">
                     <div className="mt-1 w-3 h-3 rounded-full bg-orange-500 shrink-0" />

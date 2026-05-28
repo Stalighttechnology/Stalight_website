@@ -131,7 +131,7 @@ const ServicesSection = () => {
                 >
               {/* Image Header with Cinematic Reveal */}
               <div className="h-56 overflow-hidden relative bg-slate-100">
-                <motion.img 
+                <motion.img loading="lazy" decoding="async" 
                   initial={{ scale: 1.2, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
                   viewport={{ once: true }}

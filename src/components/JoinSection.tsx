@@ -50,7 +50,7 @@ const CinematicImage = ({ src, alt, className = "", style = {} }: { src: string;
 
   return (
     <div ref={ref} className={`relative overflow-hidden ${className}`} style={style}>
-      <motion.img
+      <motion.img loading="lazy" decoding="async"
         src={src}
         alt={alt}
         initial={{ scale: 1.3 }}
@@ -169,7 +169,7 @@ const CareersPage = () => {
       <section id="connect-grow" className="relative w-full py-2 md:py-24 bg-slate-800 overflow-hidden">
         
         {/* Subtle ambient background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#D32027]/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#D32027]/10 rounded-full blur-[100px] pointer-events-none z-0 transform-gpu"></div>
 
         <div className="container mx-auto px-4 md:px-8 relative z-20">
           
@@ -216,7 +216,7 @@ const CareersPage = () => {
             {/* Right Image Half */}
             <div className="flex-1 relative min-h-[60px] sm:min-h-[140px] md:min-h-[400px] lg:min-h-0 p-1 md:p-6 lg:p-8">
               <div className="w-full h-full relative rounded-[1.5rem] md:rounded-[2rem] overflow-hidden group shadow-2xl">
-                <motion.img 
+                <motion.img loading="lazy" decoding="async" 
                   initial={{ scale: 1.15 }}
                   whileInView={{ scale: 1 }}
                   transition={{ duration: 1.5, ease: premiumEase }}

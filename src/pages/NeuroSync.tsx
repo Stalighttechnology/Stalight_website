@@ -40,16 +40,16 @@ const AnimatedNumber = ({ value, duration = 2.5 }: { value: number; duration?: n
 
 // --- Content for NeuroSync ---
 const features = [
-  { icon: Mic, title: "NEURA Interview AI", desc: "Realistic, voice-driven mock interviews powered by advanced LLMs. Get instant feedback on tone, sentiment, and technical accuracy.", imgSrc: neurosync1Img },
+  { icon: Mic, title: "NEURA Smart Interview", desc: "Realistic, voice-driven mock interviews powered by advanced LLMs. Get instant feedback on tone, sentiment, and technical accuracy.", imgSrc: neurosync1Img },
   { icon: Code, title: "Multi-Language IDE", desc: "Enterprise-grade cloud editor for Python, Java, and C++. Real-time execution with automated test-suite validation and complexity scoring.", imgSrc: neurosync22Img },
   { icon: Briefcase, title: "Placement Officer Hub", desc: "Dedicated command center to track cohort readiness, manage recruiter drives, and export stakeholder-ready placement reports.", imgSrc: neurosync33Img },
-  { icon: ClipboardList, title: "Smart Assessments", desc: "Deploy high-stakes exams with AI-proctoring, custom question banks, and automated grading mapped to corporate standards.", imgSrc: neurosync11Img },
+  { icon: ClipboardList, title: "Smart Assessments", desc: "Deploy high-stakes exams with smart proctoring, custom question banks, and automated grading mapped to corporate standards.", imgSrc: neurosync11Img },
   { icon: Award, title: "Skill Certification", desc: "Generate verifiable micro-credentials as students master specific tech stacks, instantly shareable to professional networks.", imgSrc: leadboardneurosyncImg },
   { icon: Users, title: "Batch Admin Controls", desc: "Granular access management to segment students by year, branch, or performance tier for targeted training interventions.", imgSrc: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" },
 ];
 
 const reviews = [
-  { name: "Vijayashree", role: "Final Year CSE", institution: "JIT Bangalore", text: "NeuroSync's AI mock interviews were incredibly realistic. The voice recognition and feedback helped me improve my communication skills tremendously. Got placed at Google!", rating: 5 },
+  { name: "Vijayashree", role: "Final Year CSE", institution: "JIT Bangalore", text: "NeuroSync's smart mock interviews were incredibly realistic. The voice recognition and feedback helped me improve my communication skills tremendously. Got placed at Google!", rating: 5 },
   { name: "Sheetal", role: "Pre-final Year ISE", institution: "JSS", text: "The coding lab interface is exactly like LeetCode but with better explanations. The system design whiteboard feature helped me crack my Amazon interview.", rating: 5 },
   { name: "Poornachandra", role: "Final Year Data Science", institution: "BKIT", text: "The Placement Readiness Index gave me confidence to apply for FAANG roles. The communication scoring helped me understand my weak areas and improve them.", rating: 4 },
   { name: "Sinchana M", role: "Final Year CSE-AIML", institution: "AMC Institution", text: "Mock assessment drills prepared me perfectly for TCS recruitment. The timed rounds and difficulty levels matched exactly what I faced in the actual placement.", rating: 5 },
@@ -67,7 +67,7 @@ const scrollingFeatures = [
   { title: "Assessments", icon: ClipboardList },
   { title: "Placement Drives", icon: Briefcase }, 
   { title: "Rank Prediction", icon: BarChart3 },
-  { title: "Proctoring AI", icon: ShieldCheck },
+  { title: "Smart Proctoring", icon: ShieldCheck },
   { title: "Certifications", icon: Award }, 
   { title: "Performance Metrics", icon: Activity },
   { title: "Batch Controls", icon: Users },
@@ -260,11 +260,11 @@ const NeuroSync = () => {
     <div ref={containerRef} className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900 overflow-x-hidden relative">
       <SEO 
         title="Stalight Sync | Stalight Technologies"
-        description="Empower your candidates with AI-driven interview simulations and real-time coding assessments. One platform. Total placement readiness."
+        description="Empower your candidates with smart interview simulations and real-time coding assessments. One platform. Total placement readiness."
         jsonLd={[
           generateWebPageSchema(
             "Stalight Sync",
-            "Empower your candidates with AI-driven interview simulations and real-time coding assessments.",
+            "Empower your candidates with smart interview simulations and real-time coding assessments.",
             "/neurosync"
           ),
           generateBreadcrumbSchema([
@@ -284,8 +284,8 @@ const NeuroSync = () => {
           className="absolute inset-[-100%] bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:32px_32px] opacity-70"
         ></motion.div>
         
-        <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[300px] sm:h-[400px] w-[90%] sm:w-[600px] rounded-full bg-purple-500 opacity-[0.08] blur-[100px] sm:blur-[120px]"></div>
-        <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[150%] sm:w-[120%] max-w-6xl h-[400px] sm:h-[600px] bg-gradient-to-b from-pink-50/50 via-white/20 to-transparent rounded-b-[100%] blur-2xl sm:blur-3xl opacity-80"></div>
+        <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[300px] sm:h-[400px] w-[90%] sm:w-[600px] rounded-full bg-purple-500 opacity-[0.08] blur-[100px] sm:blur-[120px] transform-gpu"></div>
+        <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[150%] sm:w-[120%] max-w-6xl h-[400px] sm:h-[600px] bg-gradient-to-b from-pink-50/50 via-white/20 to-transparent rounded-b-[100%] blur-2xl sm:blur-3xl opacity-80 transform-gpu"></div>
 
         {/* Brand Colored SVG Waves */}
         <svg className="absolute w-full h-full opacity-[0.25]" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -319,7 +319,7 @@ const NeuroSync = () => {
             </h1>
             
             <motion.p variants={fadeUpVariants} className="text-slate-600 font-light text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8 sm:mb-10 px-4">
-              Empower your candidates with AI-driven interview simulations and real-time coding assessments. One platform. Total placement readiness.
+              Empower your candidates with smart interview simulations and real-time coding assessments. One platform. Total placement readiness.
             </motion.p>
             
             <motion.div variants={fadeUpVariants} className="relative z-20 mb-12 sm:mb-20">
@@ -355,7 +355,7 @@ const NeuroSync = () => {
       {/* --- AESTHETIC FEATURES GRID --- */}
       <section className="py-12 sm:py-20 bg-white relative overflow-hidden">
         {/* Subtle background glow */}
-        <div className="absolute top-[20%] left-[-10%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-purple-500/5 rounded-full blur-[80px] sm:blur-[120px] pointer-events-none z-0"></div>
+        <div className="absolute top-[20%] left-[-10%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-purple-500/5 rounded-full blur-[80px] sm:blur-[120px] pointer-events-none z-0 transform-gpu"></div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-10 sm:mb-14">
@@ -375,7 +375,7 @@ const NeuroSync = () => {
                 className="group bg-white border border-slate-200/60 rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden hover:shadow-[0_20px_40px_-15px_rgba(103,58,183,0.15)] hover:border-purple-200 hover:-translate-y-1 transition-all duration-500 flex flex-col h-full"
               >
                 <div className="h-40 sm:h-48 md:h-56 overflow-hidden relative border-b border-slate-100">
-                  <OptimizedImage src={f.imgSrc} alt={`${f.title} - Stalight Sync AI Feature`} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out" />
+                  <OptimizedImage src={f.imgSrc} alt={`${f.title} - Stalight Sync Feature`} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out" />
                   
                   <div className="absolute bottom-3 sm:bottom-4 left-4 sm:left-5 w-10 sm:w-12 h-10 sm:h-12 bg-white rounded-xl flex items-center justify-center shadow-lg group-hover:bg-gradient-to-br group-hover:from-purple-500 group-hover:to-blue-500 transition-all duration-500">
                     <f.icon className="w-4 h-4 sm:w-5 sm:h-5 text-slate-700 group-hover:text-white" strokeWidth={2} />
@@ -442,8 +442,8 @@ const NeuroSync = () => {
 
       {/* --- CTA SECTION --- */}
       <section id="contact" className="py-12 sm:py-16 md:py-24 bg-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-48 sm:w-64 h-48 sm:h-64 bg-pink-100 rounded-full blur-[60px] sm:blur-[80px] opacity-60 pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-48 sm:w-64 h-48 sm:h-64 bg-blue-100 rounded-full blur-[60px] sm:blur-[80px] opacity-60 pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-48 sm:w-64 h-48 sm:h-64 bg-pink-100 rounded-full blur-[60px] sm:blur-[80px] opacity-60 pointer-events-none transform-gpu"></div>
+        <div className="absolute bottom-0 left-0 w-48 sm:w-64 h-48 sm:h-64 bg-blue-100 rounded-full blur-[60px] sm:blur-[80px] opacity-60 pointer-events-none transform-gpu"></div>
         
         <div className="container mx-auto px-4">
           <motion.div whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 40 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="max-w-4xl mx-auto bg-slate-50 border border-slate-200 rounded-[2rem] sm:rounded-[3rem] p-8 sm:p-12 md:p-24 text-center relative shadow-xl z-10">

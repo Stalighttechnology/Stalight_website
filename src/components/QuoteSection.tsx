@@ -22,11 +22,10 @@ const QuoteSection = () => {
 
   // Crisp, fast blur reveal for words
   const wordVariants = {
-    hidden: { opacity: 0, y: 15, filter: "blur(8px)" },
+    hidden: { opacity: 0, y: 15 },
     visible: { 
       opacity: 1, 
-      y: 0, 
-      filter: "blur(0px)",
+      y: 0,
       transition: { duration: 0.8, ease: powerEase } 
     },
   };
@@ -91,8 +90,8 @@ const QuoteSection = () => {
         ></div>
 
         {/* Layer 2: Brand Ambient Glows (Scaled for mobile) */}
-        <div className="absolute top-0 right-[-10%] w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-purple-500/5 rounded-full blur-[80px] sm:blur-[100px] pointer-events-none z-0"></div>
-        <div className="absolute bottom-0 left-[-10%] w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-blue-500/5 rounded-full blur-[80px] sm:blur-[100px] pointer-events-none z-0"></div>
+        <div className="absolute top-0 right-[-10%] w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-purple-500/5 rounded-full blur-[80px] sm:blur-[100px] pointer-events-none z-0 transform-gpu"></div>
+        <div className="absolute bottom-0 left-[-10%] w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-blue-500/5 rounded-full blur-[80px] sm:blur-[100px] pointer-events-none z-0 transform-gpu"></div>
 
         {/* Layer 3: Massive Floating Quote Mark (Scaled down on mobile) */}
         <motion.div 

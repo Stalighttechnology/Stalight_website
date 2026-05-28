@@ -57,11 +57,11 @@ const services = [
   },
   {
     icon: <Zap className="w-8 h-8 text-purple-600" />,
-    title: "AI Automation",
-    desc: "Automate workflows, customer interactions, and repetitive tasks using AI-powered solutions.",
+    title: "Workflow Automation",
+    desc: "Automate workflows, customer interactions, and repetitive tasks using advanced solutions.",
     details: [
       "Intelligent workflow automation with LLMs and RPA",
-      "AI-driven customer support (chatbots & voice agents)",
+      "automated customer support (chatbots & voice agents)",
       "Process orchestration, monitoring and analytics",
       "Integration with CRMs, ERPs and enterprise systems",
     ],
@@ -456,7 +456,7 @@ const ITServices = () => {
                         >
                           <option value="" disabled>Select an area...</option>
                           <option value="Cloud & Hosting Solutions">Cloud & Hosting Solutions</option>
-                          <option value="AI & Workflow Automation">AI & Workflow Automation</option>
+                          <option value="Advanced Workflow Automation">Advanced Workflow Automation</option>
                           <option value="Performance Optimization">Performance Optimization</option>
                           <option value="Infrastructure & Ops">Infrastructure & Ops</option>
                           <option value="General Managed Services">General Managed Services</option>

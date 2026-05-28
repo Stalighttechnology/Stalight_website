@@ -114,7 +114,7 @@ const Navbar = () => {
             
             {/* --- LOGO --- */}
             <Link to="/" className="flex items-center gap-2.5 shrink-0 group" aria-label="Home">
-              <img src={stalightLogo} alt="Logo" className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105" />
+              <img loading="lazy" decoding="async" src={stalightLogo} alt="Logo" className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105" />
               <div className="hidden sm:flex flex-col leading-none">
                 <span className="text-sm md:text-[16px] font-black text-slate-900 tracking-tight">Stalight</span>
                 <span className="text-[9px] md:text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">Technologies</span>
@@ -160,7 +160,7 @@ const Navbar = () => {
                               animate={{ opacity: 1, y: 0, scale: 1 }}
                               exit={{ opacity: 0, y: 10, scale: 0.95 }}
                               transition={{ type: "spring", stiffness: 350, damping: 26 }}
-                              className="min-w-[210px] bg-white/95 backdrop-blur-2xl border border-slate-100 rounded-2xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] p-2 overflow-hidden flex flex-col gap-1"
+                              className="min-w-[210px] bg-white/95 backdrop-blur-2xl border border-slate-100 rounded-2xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] p-2 overflow-hidden flex flex-col gap-1 transform-gpu"
                             >
                               {items.map((item) => (
                                 <Link

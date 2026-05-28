@@ -106,8 +106,8 @@ const AboutUs = () => {
         </div>
 
         {/* Ambient Neon Halos */}
-        <div className="absolute top-0 right-0 w-[550px] h-[550px] bg-purple-100/40 rounded-full blur-[120px] translate-x-1/4 -translate-y-1/4 pointer-events-none z-0"></div>
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-100/50 rounded-full blur-[100px] -translate-x-1/4 translate-y-1/4 pointer-events-none z-0"></div>
+        <div className="absolute top-0 right-0 w-[550px] h-[550px] bg-purple-100/40 rounded-full blur-[120px] translate-x-1/4 -translate-y-1/4 pointer-events-none z-0 transform-gpu"></div>
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-100/50 rounded-full blur-[100px] -translate-x-1/4 translate-y-1/4 pointer-events-none z-0 transform-gpu"></div>
 
         <div className="container mx-auto px-6 relative z-10">
           <motion.div 
@@ -200,7 +200,7 @@ const AboutUs = () => {
       <section className="py-24 md:py-36 relative bg-white overflow-hidden">
         
         {/* Soft decorative background glows */}
-        <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] bg-purple-50/30 rounded-full blur-[100px] pointer-events-none z-0"></div>
+        <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] bg-purple-50/30 rounded-full blur-[100px] pointer-events-none z-0 transform-gpu"></div>
 
         <div className="container mx-auto px-6 relative z-10">
           <motion.div 
@@ -229,8 +229,8 @@ const AboutUs = () => {
                 {/* Slow Zoom Parallax Image */}
                 <motion.div 
                   variants={{
-                    hidden: { opacity: 0, scale: 1.05, filter: "blur(8px)" },
-                    visible: { opacity: 1, scale: 1, filter: "blur(0px)", transition: { duration: 1.6, ease: techEase } }
+                    hidden: { opacity: 0, scale: 1.05 },
+                    visible: { opacity: 1, scale: 1, transition: { duration: 1.6, ease: techEase } }
                   }}
                   className="w-full h-full"
                 >
@@ -351,7 +351,7 @@ const AboutUs = () => {
               
               <h4 className="text-3xl font-semibold text-slate-900 mb-4 tracking-tight group-hover:text-[#D32027] transition-colors duration-300">IT Skill & Professional Training</h4>
               <p className="text-slate-600 font-light leading-relaxed text-[16px]">
-                Bridging the industry-academia gap through intensive training programs in Full Stack Dev, AI/ML, and Cloud Architecture. We turn students into deployable engineers.
+                Bridging the industry-academia gap through intensive training programs in Full Stack Dev, Machine Learning, and Cloud Architecture. We turn students into deployable engineers.
               </p>
             </motion.div>
 
@@ -380,7 +380,7 @@ const AboutUs = () => {
       {/* --- PARTNERS SECTION (Always in color, Aesthetic Glassmorphism) --- */}
       <section className="py-24 md:py-36 bg-white relative overflow-hidden">
         {/* Deep ambient background glows */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[800px] h-[600px] md:h-[800px] bg-red-50 rounded-full blur-[100px] opacity-70 z-0"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[800px] h-[600px] md:h-[800px] bg-red-50 rounded-full blur-[100px] opacity-70 z-0 transform-gpu"></div>
 
         <div className="container mx-auto px-6 relative z-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={containerVariants} className="text-center mb-20 flex flex-col items-center">

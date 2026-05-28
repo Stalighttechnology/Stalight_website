@@ -104,14 +104,14 @@ const tourFeatures = [
 const institutionalPillars = [
   {
     title: "Intelligent Core & Automation",
-    subtitle: "AI-driven biometric and off-campus verification systems.",
+    subtitle: "Advanced biometric and off-campus verification systems.",
     gradient: "from-pink-500/10 via-purple-500/5 to-transparent",
     borderHover: "group-hover:border-pink-300",
     iconColor: "text-pink-600",
     iconBg: "bg-pink-50",
     icon: Zap,
     features: [
-      { key: "stalight-ai", icon: Brain, title: "Stalight AI", desc: "AI-driven insights and personalised recommendations for students and faculty." },
+      { key: "stalight-ai", icon: Brain, title: "Stalight Smart Systems", desc: "Smart insights and personalised recommendations for students and faculty." },
       { key: "facial-recognition-attendance", icon: ScanFace, title: "Facial Recognition Attendance", desc: "High-precision facial recognition to automate attendance and prevent proxy marking." },
       { key: "student-info-face-scan", icon: User, title: "Student Info on Face Scan", desc: "Instantly surface student profile and academic info on face-based scan." },
       { key: "location-based-attendance", icon: MapPin, title: "Location Based Attendance", desc: "Geo-fenced attendance options for off-campus activities and fieldwork." }
@@ -252,11 +252,11 @@ const NeuroCampus = () => {
     <div ref={containerRef} className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900 overflow-x-hidden relative">
       <SEO
         title="Stalight Campus | Stalight Technologies"
-        description="A next-generation academic management platform unifying AI-driven analytics, blockchain security, and automated operations."
+        description="A next-generation academic management platform unifying advanced analytics, blockchain security, and automated operations."
         jsonLd={[
           generateWebPageSchema(
             "Stalight Campus",
-            "A next-generation academic management platform unifying AI-driven analytics, blockchain security, and automated operations.",
+            "A next-generation academic management platform unifying advanced analytics, blockchain security, and automated operations.",
             "/neuro-campus"
           ),
           generateBreadcrumbSchema([
@@ -276,21 +276,21 @@ const NeuroCampus = () => {
         <motion.div
           animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.05, 1] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute left-1/2 top-0 h-[500px] w-[120%] -translate-x-1/2 rounded-full bg-gradient-to-b from-purple-500/10 via-pink-500/5 to-transparent blur-[100px] md:w-[70%]"
+          className="absolute left-1/2 top-0 h-[500px] w-[120%] -translate-x-1/2 rounded-full bg-gradient-to-b from-purple-500/10 via-pink-500/5 to-transparent blur-[100px] md:w-[70%] transform-gpu"
         />
 
         {/* Floating Accent Orb 1 */}
         <motion.div
           animate={{ y: [0, -15, 0], x: [0, 15, 0] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[15%] left-[5%] md:left-[10%] h-48 w-48 rounded-full bg-pink-500/10 blur-[60px] md:h-72 md:w-72"
+          className="absolute top-[15%] left-[5%] md:left-[10%] h-48 w-48 rounded-full bg-pink-500/10 blur-[60px] md:h-72 md:w-72 transform-gpu"
         />
 
         {/* Floating Accent Orb 2 */}
         <motion.div
           animate={{ y: [0, 15, 0], x: [0, -15, 0] }}
           transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[30%] right-[5%] md:right-[10%] h-56 w-56 rounded-full bg-blue-500/10 blur-[70px] md:h-80 md:w-80"
+          className="absolute top-[30%] right-[5%] md:right-[10%] h-56 w-56 rounded-full bg-blue-500/10 blur-[70px] md:h-80 md:w-80 transform-gpu"
         />
       </div>
 
@@ -312,7 +312,7 @@ const NeuroCampus = () => {
             </h1>
 
             <motion.p variants={fadeUpVariants} className="text-slate-600 font-light text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed mb-6 px-2">
-              A next-generation academic management platform unifying AI-driven analytics, blockchain security, and automated operations.
+              A next-generation academic management platform unifying advanced analytics, blockchain security, and automated operations.
             </motion.p>
 
             <motion.div variants={fadeUpVariants} className="relative z-20 mb-6 sm:mb-12">
@@ -530,8 +530,8 @@ const NeuroCampus = () => {
 
       {/* --- CTA SECTION --- */}
       <section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-48 h-48 sm:w-64 sm:h-64 bg-pink-100 rounded-full blur-[60px] sm:blur-[80px] opacity-50 sm:opacity-60 pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-48 h-48 sm:w-64 sm:h-64 bg-blue-100 rounded-full blur-[60px] sm:blur-[80px] opacity-50 sm:opacity-60 pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-48 h-48 sm:w-64 sm:h-64 bg-pink-100 rounded-full blur-[60px] sm:blur-[80px] opacity-50 sm:opacity-60 pointer-events-none transform-gpu"></div>
+        <div className="absolute bottom-0 left-0 w-48 h-48 sm:w-64 sm:h-64 bg-blue-100 rounded-full blur-[60px] sm:blur-[80px] opacity-50 sm:opacity-60 pointer-events-none transform-gpu"></div>
 
         <div className="container mx-auto px-4 sm:px-6">
           <motion.div whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 40 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="max-w-4xl mx-auto bg-slate-50 border border-slate-200 rounded-2xl sm:rounded-[2.5rem] lg:rounded-[3rem] p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20 text-center relative shadow-lg sm:shadow-xl z-10">

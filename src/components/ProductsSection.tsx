@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
@@ -35,6 +35,7 @@ const fadeUpVariants = {
 const ProductsSection = () => {
   const [ncIndex, setNcIndex] = useState(0);
   const [nsIndex, setNsIndex] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const ncTimer = setInterval(() => {
@@ -65,8 +66,8 @@ const ProductsSection = () => {
       ></div>
 
       {/* Ambient Glows */}
-      <div className="absolute top-0 right-[-5%] sm:right-[-10%] w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[500px] bg-purple-500/5 rounded-full blur-[80px] sm:blur-[100px] md:blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-0 left-[-5%] sm:left-[-10%] w-[350px] sm:w-[450px] md:w-[600px] h-[350px] sm:h-[450px] md:h-[600px] bg-blue-500/5 rounded-full blur-[80px] sm:blur-[100px] md:blur-[150px] pointer-events-none"></div>
+      <div className="absolute top-0 right-[-5%] sm:right-[-10%] w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[500px] bg-purple-500/5 rounded-full blur-[80px] sm:blur-[100px] md:blur-[120px] pointer-events-none transform-gpu"></div>
+      <div className="absolute bottom-0 left-[-5%] sm:left-[-10%] w-[350px] sm:w-[450px] md:w-[600px] h-[350px] sm:h-[450px] md:h-[600px] bg-blue-500/5 rounded-full blur-[80px] sm:blur-[100px] md:blur-[150px] pointer-events-none transform-gpu"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
@@ -85,7 +86,7 @@ const ProductsSection = () => {
         </motion.div>
 
         {/* ===================== NEURO CAMPUS CARD ===================== */}
-        <Link to="/neuro-campus" onClick={scrollToTop} className="block group mb-8 sm:mb-12 lg:mb-16 xl:mb-20">
+        <div onClick={() => { scrollToTop(); navigate('/neuro-campus'); }} className="block group mb-8 sm:mb-12 lg:mb-16 xl:mb-20 cursor-pointer">
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={containerVariants}
             className="relative bg-white rounded-2xl sm:rounded-3xl lg:rounded-[3rem] border border-slate-200/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_30px_60px_-15px_rgba(168,85,247,0.2)] hover:border-purple-200 transition-all duration-700 overflow-hidden flex flex-col lg:flex-row"
@@ -96,7 +97,6 @@ const ProductsSection = () => {
             {/* Content Side */}
             <div className="w-full lg:w-[45%] p-6 sm:p-8 md:p-10 lg:p-12 xl:p-16 flex flex-col justify-center relative z-10">
               <motion.div variants={fadeUpVariants}>
-                <div className="w-8 h-0.5 sm:w-10 sm:h-1 lg:w-12 lg:h-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full mb-4 sm:mb-6 lg:mb-8"></div>
 
                 <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-slate-900 tracking-tight mb-3 sm:mb-4 lg:mb-6">
                   <span className="font-light">Stalight</span>{' '}
@@ -134,7 +134,7 @@ const ProductsSection = () => {
             {/* Image Side (Sleek UI Window) */}
             <div className="w-full lg:w-[55%] bg-slate-50/50 border-t lg:border-t-0 lg:border-l border-slate-100 relative p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 flex items-center justify-center overflow-hidden">
               {/* Decorative background shape */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] sm:w-[75%] lg:w-[80%] h-[70%] sm:h-[75%] lg:h-[80%] bg-purple-200/40 rounded-full blur-[40px] sm:blur-[60px] lg:blur-[80px] group-hover:bg-purple-300/50 transition-colors duration-700"></div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] sm:w-[75%] lg:w-[80%] h-[70%] sm:h-[75%] lg:h-[80%] bg-purple-200/40 rounded-full blur-[40px] sm:blur-[60px] lg:blur-[80px] group-hover:bg-purple-300/50 transition-colors duration-700 transform-gpu"></div>
 
               <motion.div variants={fadeUpVariants} className="relative w-full max-w-[500px] sm:max-w-[550px] lg:max-w-[600px] aspect-[4/3] bg-white rounded-xl sm:rounded-2xl shadow-xl border border-slate-200 overflow-hidden group-hover:-translate-y-1 sm:group-hover:-translate-y-2 group-hover:scale-[1.01] sm:group-hover:scale-[1.02] transition-all duration-700">
                 {/* Mac-style header */}
@@ -146,12 +146,12 @@ const ProductsSection = () => {
                 {/* Image Crossfade */}
                 <div className="relative w-full h-[calc(100%-1.5rem)] sm:h-[calc(100%-1.75rem)] lg:h-[calc(100%-2rem)]">
                   <AnimatePresence mode="wait">
-                    <motion.img
+                    <motion.img loading="lazy" decoding="async"
                       key={`nc-${ncIndex}`}
                       src={neuroCampusImages[ncIndex]}
                       className="absolute inset-0 w-full h-full object-cover object-top"
-                      initial={{ opacity: 0, filter: "blur(4px)" }}
-                      animate={{ opacity: 1, filter: "blur(0px)" }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
                       exit={{ opacity: 0, transition: { duration: 0.3 } }}
                       transition={{ duration: 0.8 }}
                     />
@@ -160,10 +160,10 @@ const ProductsSection = () => {
               </motion.div>
             </div>
           </motion.div>
-        </Link>
+        </div>
 
         {/* ===================== NEURO SYNC CARD ===================== */}
-        <Link to="/neurosync" onClick={scrollToTop} className="block group">
+        <div onClick={() => { scrollToTop(); navigate('/neurosync'); }} className="block group cursor-pointer">
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={containerVariants}
             className="relative bg-white rounded-2xl sm:rounded-3xl lg:rounded-[3rem] border border-slate-200/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_30px_60px_-15px_rgba(59,130,246,0.2)] hover:border-blue-200 transition-all duration-700 overflow-hidden flex flex-col-reverse lg:flex-row"
@@ -174,7 +174,7 @@ const ProductsSection = () => {
             {/* Image Side (Sleek UI Window) */}
             <div className="w-full lg:w-[55%] bg-slate-50/50 border-b lg:border-b-0 lg:border-r border-slate-100 relative p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 flex items-center justify-center overflow-hidden">
               {/* Decorative background shape */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] sm:w-[75%] lg:w-[80%] h-[70%] sm:h-[75%] lg:h-[80%] bg-blue-200/40 rounded-full blur-[40px] sm:blur-[60px] lg:blur-[80px] group-hover:bg-blue-300/50 transition-colors duration-700"></div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] sm:w-[75%] lg:w-[80%] h-[70%] sm:h-[75%] lg:h-[80%] bg-blue-200/40 rounded-full blur-[40px] sm:blur-[60px] lg:blur-[80px] group-hover:bg-blue-300/50 transition-colors duration-700 transform-gpu"></div>
 
               <motion.div variants={fadeUpVariants} className="relative w-full max-w-[500px] sm:max-w-[550px] lg:max-w-[600px] aspect-[4/3] bg-white rounded-xl sm:rounded-2xl shadow-xl border border-slate-200 overflow-hidden group-hover:-translate-y-1 sm:group-hover:-translate-y-2 group-hover:scale-[1.01] sm:group-hover:scale-[1.02] transition-all duration-700">
                 {/* Mac-style header */}
@@ -186,12 +186,12 @@ const ProductsSection = () => {
                 {/* Image Crossfade */}
                 <div className="relative w-full h-[calc(100%-1.5rem)] sm:h-[calc(100%-1.75rem)] lg:h-[calc(100%-2rem)]">
                   <AnimatePresence mode="wait">
-                    <motion.img
+                    <motion.img loading="lazy" decoding="async"
                       key={`ns-${nsIndex}`}
                       src={neuroSyncImages[nsIndex]}
                       className="absolute inset-0 w-full h-full object-cover object-top"
-                      initial={{ opacity: 0, filter: "blur(4px)" }}
-                      animate={{ opacity: 1, filter: "blur(0px)" }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
                       exit={{ opacity: 0, transition: { duration: 0.3 } }}
                       transition={{ duration: 0.8 }}
                     />
@@ -203,7 +203,6 @@ const ProductsSection = () => {
             {/* Content Side */}
             <div className="w-full lg:w-[45%] p-6 sm:p-8 md:p-10 lg:p-12 xl:p-16 flex flex-col justify-center relative z-10">
               <motion.div variants={fadeUpVariants}>
-                <div className="w-8 h-0.5 sm:w-10 sm:h-1 lg:w-12 lg:h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mb-4 sm:mb-6 lg:mb-8"></div>
 
                 <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-slate-900 tracking-tight mb-3 sm:mb-4 lg:mb-6">
                   <span className="font-light">Stalight</span>{' '}
@@ -236,7 +235,7 @@ const ProductsSection = () => {
               </motion.div>
             </div>
           </motion.div>
-        </Link>
+        </div>
 
       </div>
     </section>

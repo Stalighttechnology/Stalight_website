@@ -15,11 +15,10 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 24, filter: "blur(8px)" },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.85, ease: easeOutExpo },
   },
 };
@@ -75,56 +74,11 @@ const HeroSection = () => {
 
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(248,247,243,0.52),rgba(248,247,243,0.86)_58%,rgba(248,247,243,1)_100%)] md:bg-[linear-gradient(90deg,rgba(248,247,243,0.98)_0%,rgba(248,247,243,0.82)_36%,rgba(248,247,243,0.18)_100%)]" />
 
-        <motion.div
-          animate={
-            reduceMotion
-              ? {}
-              : {
-                  y: [0, -floatY, 0],
-                  x: [0, 10, 0],
-                }
-          }
-          transition={{
-            duration: floatDuration,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute top-[14%] left-[7%] h-36 w-36 rounded-full bg-[#D32027]/10 blur-3xl md:h-56 md:w-56 md:bg-[#D32027]/12"
-        />
+        <div className="absolute top-[14%] left-[7%] h-36 w-36 rounded-full bg-[#D32027]/10 blur-3xl md:h-56 md:w-56 md:bg-[#D32027]/12 transform-gpu" />
 
-        <motion.div
-          animate={
-            reduceMotion
-              ? {}
-              : {
-                  y: [0, 16, 0],
-                  x: [0, -12, 0],
-                }
-          }
-          transition={{
-            duration: floatDuration + 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute bottom-[12%] right-[8%] h-40 w-40 rounded-full bg-slate-900/8 blur-3xl md:h-64 md:w-64 md:bg-slate-900/10"
-        />
+        <div className="absolute bottom-[12%] right-[8%] h-40 w-40 rounded-full bg-slate-900/8 blur-3xl md:h-64 md:w-64 md:bg-slate-900/10 transform-gpu" />
 
-        <motion.div
-          animate={
-            reduceMotion
-              ? {}
-              : {
-                  opacity: [0.3, 0.55, 0.3],
-                  scale: [1, 1.08, 1],
-                }
-          }
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute left-1/2 top-1/2 h-[70%] w-[120%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/35 blur-[80px] md:w-[58%]"
-        />
+        <div className="absolute left-1/2 top-1/2 h-[70%] w-[120%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/35 blur-[80px] md:w-[58%] transform-gpu" />
 
         <div className="absolute inset-0 opacity-[0.05] [background-image:linear-gradient(rgba(15,23,42,0.35)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.35)_1px,transparent_1px)] [background-size:72px_72px]" />
       </div>
@@ -164,7 +118,7 @@ const HeroSection = () => {
           variants={itemVariants}
           className="max-w-2xl text-[15px] font-medium leading-7 text-slate-600 sm:text-base md:text-lg"
         >
-          Bridging academic rigor and enterprise-grade AI with secure, scalable
+          Bridging academic rigor and enterprise-grade technology with secure, scalable
           platforms designed for institutional trust and measurable impact.
         </motion.p>
 

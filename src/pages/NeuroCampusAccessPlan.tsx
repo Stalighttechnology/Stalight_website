@@ -59,7 +59,7 @@ const NeuroCampusAccessPlan = () => {
       bgColor: "bg-indigo-50",
       badge: "Enterprise",
       features: [
-        "AI-Powered Assistance",
+        "Smart Assistance",
         "Career Intelligence",
         "Biometric & Location Security",
         "Automated Grading Engine",
@@ -76,7 +76,7 @@ const NeuroCampusAccessPlan = () => {
     <div className="min-h-screen bg-slate-50 font-sans">
       <SEO 
         title="Stalight Campus Access Plans & Pricing | Stalight Technologies"
-        description="Choose the perfect plan for your institution's needs. Scale seamlessly from essential daily operations to enterprise-grade AI intelligence."
+        description="Choose the perfect plan for your institution's needs. Scale seamlessly from essential daily operations to enterprise-grade intelligence."
         jsonLd={[
           generateWebPageSchema(
             "Stalight Campus Access Plans",
@@ -241,7 +241,7 @@ const NeuroCampusAccessPlan = () => {
                   "Digital Classrooms",
                   "Advanced Analytics Dashboard",
                   "Biometric Security",
-                  "AI-Powered Assistance",
+                  "Smart Assistance",
                   "Automated Grading Engine",
                   "Multi-Factor Authentication",
                   "Cloud Infrastructure",
@@ -258,7 +258,7 @@ const NeuroCampusAccessPlan = () => {
                     <td className="text-center py-4 px-4">
                       {![
                         "Biometric Security",
-                        "AI-Powered Assistance",
+                        "Smart Assistance",
                         "Automated Grading Engine",
                         "Career Intelligence",
                         "Enterprise RBAC",
@@ -294,7 +294,7 @@ const NeuroCampusAccessPlan = () => {
       <section className="py-24 px-4 md:px-8 lg:px-16">
         <div className="max-w-5xl mx-auto bg-slate-900 rounded-[3rem] p-12 md:p-16 text-center text-white relative overflow-hidden shadow-2xl">
           {/* Decorative background blur */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-r from-fuchsia-500 to-blue-600 rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-r from-fuchsia-500 to-blue-600 rounded-full blur-[100px] opacity-20 pointer-events-none transform-gpu"></div>
           
           <div className="relative z-10">
             <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight">
