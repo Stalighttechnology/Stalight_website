@@ -90,7 +90,7 @@ const ProductLaunchHero = () => {
   };
 
   return (
-    <section className="relative isolate flex h-[100dvh] w-full items-start lg:items-center justify-center overflow-y-auto overflow-x-hidden bg-white font-sans border-b border-slate-200 custom-scrollbar">
+    <section className="relative isolate flex min-h-[100dvh] w-full items-start lg:items-center justify-center overflow-y-auto overflow-x-hidden bg-white font-sans border-b border-slate-200 custom-scrollbar">
       
       {/* Dynamic Background */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden h-full min-h-[1000px]">
@@ -127,25 +127,25 @@ const ProductLaunchHero = () => {
                       <div className="w-2 h-2 rounded-full bg-pink-500 animate-pulse"></div>
                       <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">{TARGET_LAUNCH_DISPLAY}</span>
                     </div>
-                    <div className="flex items-center gap-3 sm:gap-4 px-2">
-                      <div className="flex flex-col items-center min-w-[50px]">
-                        <span className="text-3xl sm:text-4xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.days).padStart(2, '0')}</span>
-                        <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1.5">Days</span>
+                    <div className="flex items-center justify-center gap-3 sm:gap-5 md:gap-8 px-2 sm:px-4 w-full">
+                      <div className="flex flex-col items-center min-w-[60px] sm:min-w-[75px]">
+                        <span className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.days).padStart(2, '0')}</span>
+                        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400 mt-2">Days</span>
                       </div>
-                      <span className="text-2xl sm:text-3xl font-black text-slate-300 mb-4 animate-pulse">:</span>
-                      <div className="flex flex-col items-center min-w-[50px]">
-                        <span className="text-3xl sm:text-4xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.hours).padStart(2, '0')}</span>
-                        <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1.5">Hours</span>
+                      <span className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-300 pb-5 sm:pb-6 animate-pulse">:</span>
+                      <div className="flex flex-col items-center min-w-[60px] sm:min-w-[75px]">
+                        <span className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.hours).padStart(2, '0')}</span>
+                        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400 mt-2">Hours</span>
                       </div>
-                      <span className="text-2xl sm:text-3xl font-black text-slate-300 mb-4 animate-pulse">:</span>
-                      <div className="flex flex-col items-center min-w-[50px]">
-                        <span className="text-3xl sm:text-4xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.minutes).padStart(2, '0')}</span>
-                        <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1.5">Mins</span>
+                      <span className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-300 pb-5 sm:pb-6 animate-pulse">:</span>
+                      <div className="flex flex-col items-center min-w-[60px] sm:min-w-[75px]">
+                        <span className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400 mt-2">Mins</span>
                       </div>
-                      <span className="text-2xl sm:text-3xl font-black text-slate-300 mb-4 animate-pulse">:</span>
-                      <div className="flex flex-col items-center min-w-[50px]">
-                        <span className="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-b from-pink-500 to-purple-600 tabular-nums leading-none tracking-tight">{String(timeLeft.seconds).padStart(2, '0')}</span>
-                        <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-pink-500 mt-1.5">Secs</span>
+                      <span className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-300 pb-5 sm:pb-6 animate-pulse">:</span>
+                      <div className="flex flex-col items-center min-w-[60px] sm:min-w-[75px]">
+                        <span className="text-3xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-pink-500 to-purple-600 tabular-nums leading-none tracking-tight">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-pink-500 mt-2">Secs</span>
                       </div>
                     </div>
                   </div>
