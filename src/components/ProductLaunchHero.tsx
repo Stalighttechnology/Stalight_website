@@ -97,11 +97,11 @@ const ProductLaunchHero = () => {
         <div className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(rgba(15,23,42,1)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,1)_1px,transparent_1px)] [background-size:60px_60px]" />
         
         {/* Gradients */}
-        <div className="absolute top-[-10%] right-[-10%] h-[500px] w-[500px] rounded-full bg-gradient-to-br from-purple-500/10 to-pink-500/10 blur-[100px] transform-gpu" />
-        <div className="absolute bottom-[-10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-blue-500/10 to-purple-500/10 blur-[100px] transform-gpu" />
+        <div className="absolute top-[-10%] right-[-10%] h-[500px] w-[500px] rounded-full bg-gradient-to-br from-purple-500/10 to-pink-500/10 blur-3xl" />
+        <div className="absolute bottom-[-10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-blue-500/10 to-purple-500/10 blur-3xl" />
       </div>
 
-      <div className="container relative z-10 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 px-5 pt-32 pb-32 lg:py-24 sm:px-6 lg:px-8 max-w-[1400px]">
+      <div className="container relative z-10 mx-auto grid grid-cols-1 xl:grid-cols-2 gap-12 xl:gap-8 px-5 pt-28 pb-32 xl:py-24 sm:px-6 lg:px-8 max-w-[1400px]">
         
         {/* Left Column: Core Value Prop */}
         <motion.div
@@ -121,8 +121,8 @@ const ProductLaunchHero = () => {
                 className="relative w-full max-w-full sm:w-auto sm:inline-flex group origin-top pb-6 sm:p-8 sm:-m-8"
               >
                 <div className="mb-8 mt-2 relative">
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 blur-lg opacity-40 group-hover:opacity-75 transition-opacity duration-700 transform-gpu"></div>
-                  <div className="relative bg-white/95 backdrop-blur-xl border border-white/60 rounded-2xl p-4 flex flex-col items-center sm:items-start gap-2 shadow-2xl">
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 blur-md opacity-30 group-hover:opacity-60 transition-opacity duration-700"></div>
+                  <div className="relative bg-white/95 backdrop-blur-md border border-white/60 rounded-2xl p-4 flex flex-col items-center sm:items-start gap-2 shadow-2xl">
                     <div className="flex items-center gap-2 mb-1 px-1">
                       <div className="w-2 h-2 rounded-full bg-pink-500 animate-pulse"></div>
                       <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">{TARGET_LAUNCH_DISPLAY}</span>
@@ -155,7 +155,7 @@ const ProductLaunchHero = () => {
           </AnimatePresence>
 
           {/* Main Heading */}
-          <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-6xl tracking-tight leading-none text-slate-900 mb-3 uppercase flex flex-wrap gap-2">
+          <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-none text-slate-900 mb-3 uppercase flex flex-wrap gap-2">
             <span className="font-light">STALIGHT</span> 
             <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600">Campus</span>
           </motion.h1>
@@ -188,7 +188,7 @@ const ProductLaunchHero = () => {
           </motion.div>
 
           {/* CTAs */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto relative min-h-[60px] flex-wrap">
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto relative min-h-[60px] flex-wrap z-20">
             <AnimatePresence mode="wait">
               {!isLaunched ? (
                 <motion.button 
@@ -224,7 +224,7 @@ const ProductLaunchHero = () => {
 
         {/* Right Column: Full Features Grid */}
         <motion.div
-          className="relative h-full hidden lg:flex flex-col justify-center"
+          className="relative h-full hidden xl:flex flex-col justify-center w-full"
           initial="hidden"
           animate="visible"
           variants={containerVariants}
@@ -255,7 +255,7 @@ const ProductLaunchHero = () => {
           </div>
           
           {/* Subtle decoration for the module grid */}
-          <div className="absolute -right-6 -bottom-6 w-32 h-32 bg-gradient-to-tr from-pink-500/20 to-purple-500/20 rounded-full blur-2xl transform-gpu -z-10"></div>
+          <div className="absolute -right-6 -bottom-6 w-32 h-32 bg-gradient-to-tr from-pink-500/20 to-purple-500/20 rounded-full blur-xl -z-10"></div>
         </motion.div>
       </div>
 
