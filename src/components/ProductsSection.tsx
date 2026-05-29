@@ -40,11 +40,11 @@ const ProductsSection = () => {
   useEffect(() => {
     const ncTimer = setInterval(() => {
       setNcIndex((prev) => (prev + 1) % neuroCampusImages.length);
-    }, 4000);
+    }, 8000);
 
     const nsTimer = setInterval(() => {
       setNsIndex((prev) => (prev + 1) % neuroSyncImages.length);
-    }, 4500);
+    }, 8000);
 
     return () => {
       clearInterval(ncTimer);
