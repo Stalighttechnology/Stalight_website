@@ -8,7 +8,16 @@ const HeroCarousel = () => {
   const [isHovered, setIsHovered] = useState(false);
   const slides = [HeroSection, ProductLaunchHero];
 
-  // We removed setInterval. The slide change is now driven perfectly by the progress bar's completion.
+  useEffect(() => {
+    if (isHovered) return;
+    
+    const duration = activeIndex === 0 ? 4000 : 10000;
+    const timer = setTimeout(() => {
+      setActiveIndex((current) => (current === 0 ? 1 : 0));
+    }, duration);
+    
+    return () => clearTimeout(timer);
+  }, [activeIndex, isHovered]);
 
   const CurrentSlide = slides[activeIndex];
 
@@ -52,11 +61,6 @@ const HeroCarousel = () => {
                 transition={{
                   duration: activeIndex === 0 ? 4 : 10,
                   ease: "linear"
-                }}
-                onAnimationComplete={() => {
-                  if (!isHovered) {
-                    setActiveIndex((current) => (current === 0 ? 1 : 0));
-                  }
                 }}
               />
             )}
