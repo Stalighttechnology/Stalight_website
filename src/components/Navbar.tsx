@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
 // Ensure your path is correct
 import stalightLogo from "@/assets/logos/stalightlogo.png";
 
@@ -14,7 +13,6 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
-// Subtext/descriptions removed as requested
 const productsDropdownItems = [
   { label: "Stalight Campus", href: "/neuro-campus" },
   { label: "Stalight Sync", href: "/neurosync" },
@@ -24,7 +22,6 @@ const servicesDropdownItems = [
   { label: "Skill Development", href: "/skill-development" },
   { label: "Software Development", href: "/software-development" },
   { label: "IT Services", href: "/it-services" },
-  
 ];
 
 const Navbar = () => {
@@ -97,18 +94,16 @@ const Navbar = () => {
 
   return (
     <>
-      <motion.header
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: visible ? 0 : -120, opacity: visible ? 1 : 0 }}
-        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-4 md:top-6 left-0 right-0 z-50 px-4 sm:px-6 pointer-events-none"
+      <header
+        className={`fixed top-4 md:top-6 left-0 right-0 z-50 px-4 sm:px-6 pointer-events-none transition-all duration-400 ease-out transform-gpu ${
+          visible ? "translate-y-0 opacity-100" : "-translate-y-28 opacity-0"
+        }`}
       >
         <div className={`mx-auto max-w-7xl pointer-events-auto transition-all duration-500 rounded-full ${
             scrolled 
               ? "bg-white/90 backdrop-blur-sm shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-slate-200/60 py-2 md:py-2.5" 
               : "bg-white/50 backdrop-blur-md shadow-[0_4px_20px_rgb(0,0,0,0.02)] border border-white/60 py-2 md:py-3"
           }`}
-
         >
           <div className="flex items-center justify-between px-3 md:px-5">
             
@@ -151,32 +146,26 @@ const Navbar = () => {
                         <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-300 ${isOpen ? "rotate-180 text-slate-900" : ""}`} />
                       </Link>
 
-                      {/* Dropdown Menu */}
-                      <div className={`absolute top-full left-0 pt-3 ${isOpen ? "pointer-events-auto" : "pointer-events-none"}`}>
-                        <AnimatePresence>
-                          {isOpen && (
-                            <motion.div
-                              initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                              animate={{ opacity: 1, y: 0, scale: 1 }}
-                              exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                              transition={{ type: "spring", stiffness: 350, damping: 26 }}
-                              className="min-w-[210px] bg-white/95 backdrop-blur-2xl border border-slate-100 rounded-2xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] p-2 overflow-hidden flex flex-col gap-1 transform-gpu"
+                      {/* Dropdown Menu - pure CSS transition instead of AnimatePresence */}
+                      <div 
+                        className={`absolute top-full left-0 pt-3 transition-all duration-300 ease-out transform origin-top-left ${
+                          isOpen ? "opacity-100 scale-100 translate-y-0 pointer-events-auto" : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
+                        }`}
+                      >
+                        <div className="min-w-[210px] bg-white/95 backdrop-blur-2xl border border-slate-100 rounded-2xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12)] p-2 overflow-hidden flex flex-col gap-1">
+                          {items.map((item) => (
+                            <Link
+                              key={item.href}
+                              to={item.href}
+                              className="group flex items-center px-4 py-2.5 rounded-xl hover:bg-slate-50 transition-colors"
+                              onClick={() => setOpen(false)}
                             >
-                              {items.map((item) => (
-                                <Link
-                                  key={item.href}
-                                  to={item.href}
-                                  className="group flex items-center px-4 py-2.5 rounded-xl hover:bg-slate-50 transition-colors"
-                                  onClick={() => setOpen(false)}
-                                >
-                                  <span className="text-[14px] font-semibold text-slate-700 group-hover:text-[#D32027] transition-colors">
-                                    {item.label}
-                                  </span>
-                                </Link>
-                              ))}
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
+                              <span className="text-[14px] font-semibold text-slate-700 group-hover:text-[#D32027] transition-colors">
+                                {item.label}
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   );
@@ -221,93 +210,79 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-      </motion.header>
+      </header>
 
-      {/* --- MOBILE NAVIGATION --- */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
-            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            className="fixed inset-0 z-40 bg-white/80 pt-28 pb-6 px-6 lg:hidden overflow-y-auto"
-          >
-            <nav className="flex flex-col gap-3">
-              {navLinks.map((link, i) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
+      {/* --- MOBILE NAVIGATION - pure CSS transition instead of AnimatePresence --- */}
+      <div
+        className={`fixed inset-0 z-40 bg-white/80 pt-28 pb-6 px-6 lg:hidden overflow-y-auto transition-all duration-300 ease-out transform ${
+          mobileOpen ? "opacity-100 pointer-events-auto translate-y-0" : "opacity-0 pointer-events-none -translate-y-4"
+        }`}
+        style={{ backdropFilter: mobileOpen ? "blur(20px)" : "blur(0px)" }}
+      >
+        <nav className="flex flex-col gap-3">
+          {navLinks.map((link, i) => (
+            <div
+              key={link.href}
+              className={`transition-all duration-300 delay-[calc(i*50ms)] transform ${mobileOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"}`}
+            >
+              { (link.label === "Products") ? (
+                <div>
+                  <button
+                    onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
+                    aria-expanded={mobileProductsOpen}
+                    className={`w-full flex items-center justify-between px-6 py-4 rounded-3xl font-bold text-lg shadow-sm border bg-white text-slate-800 border-slate-100 hover:bg-slate-50 transition-colors`}
+                  >
+                    {link.label}
+                    <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${mobileProductsOpen ? 'rotate-180' : ''}`} />
+                  </button>
+
+                  <div className={`overflow-hidden transition-all duration-300 ease-in-out ${mobileProductsOpen ? 'max-h-[500px] opacity-100 mt-2 px-4' : 'max-h-0 opacity-0 px-4'}`}>
+                    <div className="flex flex-col gap-2">
+                      {productsDropdownItems.map((item) => (
+                        <Link key={item.href} to={item.href} onClick={() => { setMobileOpen(false); setMobileProductsOpen(false); }} className="px-4 py-3 rounded-xl bg-white border border-slate-100 hover:bg-slate-50">{item.label}</Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (link.label === "Services") ? (
+                <div>
+                  <button
+                    onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                    aria-expanded={mobileServicesOpen}
+                    className={`w-full flex items-center justify-between px-6 py-4 rounded-3xl font-bold text-lg shadow-sm border bg-white text-slate-800 border-slate-100 hover:bg-slate-50 transition-colors`}
+                  >
+                    {link.label}
+                    <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                  </button>
+
+                  <div className={`overflow-hidden transition-all duration-300 ease-in-out ${mobileServicesOpen ? 'max-h-[500px] opacity-100 mt-2 px-4' : 'max-h-0 opacity-0 px-4'}`}>
+                    <div className="flex flex-col gap-2">
+                      {servicesDropdownItems.map((item) => (
+                        <Link key={item.href} to={item.href} onClick={() => { setMobileOpen(false); setMobileServicesOpen(false); }} className="px-4 py-3 rounded-xl bg-white border border-slate-100 hover:bg-slate-50">{item.label}</Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  to={link.href.startsWith("/") ? link.href : (isHome ? link.href : `/${link.href}`)}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className={`flex items-center justify-between px-6 py-4 rounded-3xl font-bold text-lg shadow-sm border ${
+                    link.label === "Contact" 
+                      ? "bg-[#D32027] text-white border-transparent shadow-[0_8px_20px_-6px_rgba(211,32,39,0.3)]" 
+                      : "bg-white text-slate-800 border-slate-100 hover:bg-slate-50 transition-colors"
+                  }`}
                 >
-                  { (link.label === "Products") ? (
-                    <div>
-                      <button
-                        onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
-                        aria-expanded={mobileProductsOpen}
-                        className={`w-full flex items-center justify-between px-6 py-4 rounded-3xl font-bold text-lg shadow-sm border bg-white text-slate-800 border-slate-100 hover:bg-slate-50 transition-colors`}
-                      >
-                        {link.label}
-                        <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${mobileProductsOpen ? 'rotate-180' : ''}`} />
-                      </button>
-
-                      <AnimatePresence>
-                        {mobileProductsOpen && (
-                          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden mt-2 px-4">
-                            <div className="flex flex-col gap-2">
-                              {productsDropdownItems.map((item) => (
-                                <Link key={item.href} to={item.href} onClick={() => { setMobileOpen(false); setMobileProductsOpen(false); }} className="px-4 py-3 rounded-xl bg-white border border-slate-100 hover:bg-slate-50">{item.label}</Link>
-                              ))}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  ) : (link.label === "Services") ? (
-                    <div>
-                      <button
-                        onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                        aria-expanded={mobileServicesOpen}
-                        className={`w-full flex items-center justify-between px-6 py-4 rounded-3xl font-bold text-lg shadow-sm border bg-white text-slate-800 border-slate-100 hover:bg-slate-50 transition-colors`}
-                      >
-                        {link.label}
-                        <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
-                      </button>
-
-                      <AnimatePresence>
-                        {mobileServicesOpen && (
-                          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden mt-2 px-4">
-                            <div className="flex flex-col gap-2">
-                              {servicesDropdownItems.map((item) => (
-                                <Link key={item.href} to={item.href} onClick={() => { setMobileOpen(false); setMobileServicesOpen(false); }} className="px-4 py-3 rounded-xl bg-white border border-slate-100 hover:bg-slate-50">{item.label}</Link>
-                              ))}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  ) : (
-                    <Link
-                      to={link.href.startsWith("/") ? link.href : (isHome ? link.href : `/${link.href}`)}
-                      onClick={(e) => handleNavClick(e, link.href)}
-                      className={`flex items-center justify-between px-6 py-4 rounded-3xl font-bold text-lg shadow-sm border ${
-                        link.label === "Contact" 
-                          ? "bg-[#D32027] text-white border-transparent shadow-[0_8px_20px_-6px_rgba(211,32,39,0.3)]" 
-                          : "bg-white text-slate-800 border-slate-100 hover:bg-slate-50 transition-colors"
-                      }`}
-                    >
-                      {link.label}
-                      {link.label === "Contact" ? (
-                        <ArrowRight className="w-5 h-5" />
-                      ) : null}
-                    </Link>
-                  )}
-                </motion.div>
-              ))}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                  {link.label}
+                  {link.label === "Contact" ? (
+                    <ArrowRight className="w-5 h-5" />
+                  ) : null}
+                </Link>
+              )}
+            </div>
+          ))}
+        </nav>
+      </div>
     </>
   );
 };

@@ -1,10 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform, useMotionValue, animate, useInView, AnimatePresence, Variants } from "framer-motion";
 import {
   Mic, Code, ClipboardList, BarChart3, CheckCircle2, ArrowRight, Star,
   Briefcase, Award, ShieldCheck, Users, Target, Activity, Quote,
-  Bell, ScanFace, LayoutDashboard, Calendar, User, TrendingUp, Cpu, Zap, Send, Loader2
+  Bell, ScanFace, LayoutDashboard, Calendar, User, Send, Loader2
 } from "lucide-react";
 import { supabase } from "@/lib/supabaseClient";
 import Navbar from "@/components/Navbar";
@@ -20,22 +19,37 @@ import neurosync11Img from "@/assets/products/neurosync11.jpg";
 import neurosync22Img from "@/assets/products/neurosync22.jpg";
 import neurosync33Img from "@/assets/products/neurosync33.jpg";
 import leadboardneurosyncImg from "@/assets/screenshots/leadboardneurosync.jpg";
-import neurosynchandsetImg from "@/assets/products/neurosynchandset.jpg";
 
-// --- Custom Animated Number Component ---
-const AnimatedNumber = ({ value, duration = 2.5 }: { value: number; duration?: number }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const motionValue = useMotionValue(0);
-  const rounded = useTransform(motionValue, (latest) => Math.round(latest));
+// --- Custom pure React Animated Number Component ---
+const AnimatedNumber = ({ value }: { value: number }) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (isInView) {
-      animate(motionValue, value, { duration: duration, ease: "easeOut" });
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        const duration = 2000;
+        const startTime = performance.now();
+        const step = (now: number) => {
+          const progress = Math.min((now - startTime) / duration, 1);
+          const easeOutQuad = progress * (2 - progress);
+          setCount(Math.floor(easeOutQuad * value));
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          }
+        };
+        requestAnimationFrame(step);
+        observer.disconnect();
+      }
+    }, { threshold: 0.1 });
+    
+    if (ref.current) {
+      observer.observe(ref.current);
     }
-  }, [isInView, value, duration, motionValue]);
+    return () => observer.disconnect();
+  }, [value]);
 
-  return <motion.span ref={ref}>{rounded}</motion.span>;
+  return <span ref={ref}>{count}</span>;
 };
 
 // --- Content for NeuroSync ---
@@ -57,8 +71,6 @@ const reviews = [
   { name: "Krishna H", role: "3rd Year CSE", institution: "AMC Institution", text: "The personalized learning paths adapted to my speed. I went from struggling with dynamic programming to clearing advanced rounds in just two months.", rating: 5 },
 ];
 
-const dashboardScreenshots = [neurosync11Img, neurosync22Img, neurosync33Img, leadboardneurosyncImg];
-
 const scrollingFeatures = [
   { title: "Live Coding IDE", icon: Code },
   { title: "Mock Interviews", icon: Mic },
@@ -73,42 +85,9 @@ const scrollingFeatures = [
   { title: "Batch Controls", icon: Users },
 ];
 
-// Data for Interactive Placement Hub
-// --- Premium Animation Variants ---
-const customEase: [number, number, number, number] = [0.19, 1.0, 0.22, 1.0];
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
-};
-
-const fadeUpVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 1.0, ease: customEase } },
-};
-
-const scaleUpVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: customEase } },
-};
-
-const textRevealVariants: Variants = {
-  hidden: { y: "100%", opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { duration: 1.2, ease: customEase } },
-};
-
-const MaskedText = ({ children, className }: { children: React.ReactNode; className?: string }) => (
-  <div className="overflow-hidden inline-block w-full leading-tight py-1 md:py-2">
-    <motion.div variants={textRevealVariants} className={className}>{children}</motion.div>
-  </div>
-);
-
 const NeuroSync = () => {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
-  const yParallax = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
   const { isLaunched, timeLeft, isReady } = useLaunchCountdown();
-  // Scroll to top when page loads
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -142,7 +121,6 @@ const NeuroSync = () => {
       setIsSubmitting(false);
 
       if (error) {
-        // eslint-disable-next-line no-alert
         alert("Error: " + error.message);
         return;
       }
@@ -178,7 +156,7 @@ const NeuroSync = () => {
             </Link>
           </div>
         ) : (
-          <div className="bg-white rounded-[1.5rem] p-6 sm:p-8 border border-slate-100 shadow-sm mt-4 relative">
+          <div className="bg-white rounded-[1.5rem] p-6 sm:p-8 border border-slate-100 shadow-sm mt-4 relative text-left">
             <div className="absolute left-0 right-0 top-0 h-1 rounded-t-[1rem] bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600" />
             <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="sm:col-span-2">
@@ -256,8 +234,6 @@ const NeuroSync = () => {
     );
   };
   
-  // State for the Interactive Placement Overview Section
-  
   if (!isReady) return null;
 
   if (!isLaunched) {
@@ -273,21 +249,21 @@ const NeuroSync = () => {
           <div className="absolute bottom-[-10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-blue-500/10 to-purple-500/10 blur-[100px] transform-gpu" />
         </div>
 
-        <motion.div initial="hidden" animate="visible" variants={containerVariants} className="relative z-10 flex flex-col items-center text-center px-4 mt-20">
-          <motion.div variants={fadeUpVariants} className="mb-6 flex items-center justify-center gap-3">
+        <div className="relative z-10 flex flex-col items-center text-center px-4 mt-20 transition-all duration-500">
+          <div className="mb-6 flex items-center justify-center gap-3">
             <h1 className="text-2xl sm:text-3xl tracking-tight text-slate-800 flex flex-wrap justify-center gap-2 uppercase">
               <span className="font-light">STALIGHT</span> <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">Sync</span>
             </h1>
-          </motion.div>
+          </div>
 
-          <motion.h2 variants={fadeUpVariants} className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-900 mb-4">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-900 mb-4">
             Coming Soon
-          </motion.h2>
-          <motion.p variants={fadeUpVariants} className="text-lg text-slate-600 mb-10 max-w-md mx-auto">
+          </h2>
+          <p className="text-lg text-slate-600 mb-10 max-w-md mx-auto">
             The ultimate placement readiness platform is almost here. Get ready to sync your success.
-          </motion.p>
+          </p>
 
-          <motion.div variants={fadeUpVariants} className="relative inline-flex mb-8 group">
+          <div className="relative inline-flex mb-8 group">
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 blur-lg opacity-40 group-hover:opacity-75 transition-opacity duration-700 transform-gpu"></div>
             <div className="relative bg-white/95 backdrop-blur-xl border border-white/60 rounded-2xl p-6 sm:p-8 flex flex-col items-center gap-4 shadow-2xl">
               <span className="text-xs font-bold uppercase tracking-widest text-slate-500">{TARGET_LAUNCH_DISPLAY}</span>
@@ -313,20 +289,20 @@ const NeuroSync = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div variants={fadeUpVariants}>
+          <div>
              <Link to="/" className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-purple-600 transition-colors">
-               <ArrowRight className="w-4 h-4 rotate-180" /> Back to Home
+                <ArrowRight className="w-4 h-4 rotate-180" /> Back to Home
              </Link>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900 overflow-x-hidden relative">
+    <div className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900 overflow-x-hidden relative">
       <SEO 
         title="Stalight Sync | Stalight Technologies"
         description="Empower your candidates with smart interview simulations and real-time coding assessments. One platform. Total placement readiness."
@@ -375,35 +351,37 @@ const NeuroSync = () => {
         <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.08]" style={{ backgroundImage: 'linear-gradient(to right, rgba(15, 23, 42, 0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(15, 23, 42, 0.12) 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
         
         <div className="relative container mx-auto px-4 sm:px-6 z-10 w-full text-center">
-          <motion.div initial="hidden" animate="visible" variants={containerVariants} className="max-w-6xl mx-auto flex flex-col items-center">
+          <div className="max-w-6xl mx-auto flex flex-col items-center transition-all duration-700 ease-out">
             
             {/* Title */}
             <h1 className="text-[3.25rem] sm:text-6xl md:text-[7rem] lg:text-[8.5rem] font-light text-slate-950 tracking-tighter leading-[0.95] mb-4 sm:mb-6 px-2">
-              <MaskedText>
+              <div className="overflow-hidden inline-block w-full leading-tight py-1 md:py-2">
+                <div className="transition-all duration-700 ease-out">
                   <span className="font-light">Stalight</span>{' '}
                   <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500">Sync</span>
-                </MaskedText>
+                </div>
+              </div>
             </h1>
             
-            <motion.p variants={fadeUpVariants} className="text-slate-600 font-light text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8 sm:mb-10 px-4">
+            <p className="text-slate-600 font-light text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8 sm:mb-10 px-4">
               Empower your candidates with smart interview simulations and real-time coding assessments. One platform. Total placement readiness.
-            </motion.p>
+            </p>
             
-            <motion.div variants={fadeUpVariants} className="relative z-20 mb-12 sm:mb-20">
+            <div className="relative z-20 mb-12 sm:mb-20">
               <a href="#contact" className="group relative inline-flex items-center justify-center px-8 sm:px-10 py-4 sm:py-5 bg-slate-950 text-white rounded-xl overflow-hidden shadow-[0_20px_40px_-10px_rgba(168,85,247,0.3)] hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto">
                 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
                 <span className="relative z-10 flex items-center gap-3 text-[11px] sm:text-[12px] font-bold tracking-[0.2em] uppercase">
                   Schedule Demo <ArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform" />
                 </span>
               </a>
-            </motion.div>
+            </div>
 
-            {/* Scrolling Features Marquee */}
-            <motion.div variants={fadeUpVariants} className="w-full max-w-full relative overflow-hidden py-4 sm:py-6 border-y border-slate-200/50 bg-white/40 backdrop-blur-xl shadow-sm">
+            {/* Scrolling Features Marquee using hardware-accelerated CSS keyframe */}
+            <div className="w-full max-w-full relative overflow-hidden py-4 sm:py-6 border-y border-slate-200/50 bg-white/40 backdrop-blur-xl shadow-sm">
               <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-r from-[#FAFAFA] to-transparent z-10 pointer-events-none"></div>
               <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-l from-[#FAFAFA] to-transparent z-10 pointer-events-none"></div>
               
-              <motion.div className="flex gap-3 sm:gap-6 px-4 w-max will-change-transform" animate={{ x: ["0%", "-50%"] }} transition={{ ease: "linear", duration: 40, repeat: Infinity }}>
+              <div className="flex gap-3 sm:gap-6 px-4 w-max animate-marquee hover:[animation-play-state:paused]">
                 {[...scrollingFeatures, ...scrollingFeatures, ...scrollingFeatures].map((feat, idx) => (
                   <div key={idx} className="flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 sm:py-3 bg-white border border-slate-200/80 shadow-[0_4px_20px_rgb(0,0,0,0.03)] rounded-full shrink-0 hover:border-purple-300 hover:shadow-md transition-all duration-300 cursor-default">
                     <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-purple-50 flex items-center justify-center shrink-0 border border-purple-100/50">
@@ -412,10 +390,10 @@ const NeuroSync = () => {
                     <span className="text-[11px] sm:text-[13px] font-bold text-slate-700 tracking-wide pr-1 sm:pr-2 whitespace-nowrap">{feat.title}</span>
                   </div>
                 ))}
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -431,14 +409,10 @@ const NeuroSync = () => {
             </h2>
           </div>
           
-          <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={containerVariants} 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
-          >
-            {features.map((f, i) => (
-              <motion.div 
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {features.map((f) => (
+              <div 
                 key={f.title} 
-                variants={fadeUpVariants} 
                 className="group bg-white border border-slate-200/60 rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden hover:shadow-[0_20px_40px_-15px_rgba(103,58,183,0.15)] hover:border-purple-200 hover:-translate-y-1 transition-all duration-500 flex flex-col h-full"
               >
                 <div className="h-40 sm:h-48 md:h-56 overflow-hidden relative border-b border-slate-100">
@@ -452,31 +426,26 @@ const NeuroSync = () => {
                   <h3 className="font-bold text-base sm:text-lg text-slate-900 mb-2 group-hover:text-purple-600 transition-colors">{f.title}</h3>
                   <p className="text-slate-500 text-sm font-light leading-relaxed flex-grow">{f.desc}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* --- CUTE MINIMALIST REVIEWS MARQUEE --- */}
       <section className="py-12 sm:py-16 md:py-24 bg-white overflow-hidden z-10 relative">
         <div className="container mx-auto px-4 sm:px-6 mb-10 sm:mb-12 md:mb-16">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={containerVariants} className="text-center max-w-3xl mx-auto relative z-10">
-            <MaskedText className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 font-bold tracking-[0.2em] uppercase text-[10px] sm:text-xs mb-3 sm:mb-4">Testimonials</MaskedText>
+          <div className="text-center max-w-3xl mx-auto relative z-10">
+            <div className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 font-bold tracking-[0.2em] uppercase text-[10px] sm:text-xs mb-3 sm:mb-4">Testimonials</div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-slate-950 tracking-tight">What Students Say</h2>
-          </motion.div>
+          </div>
         </div>
 
         <div className="relative w-full flex flex-col overflow-hidden py-4">
           <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-24 md:w-48 bg-gradient-to-r from-white to-transparent z-20 pointer-events-none"></div>
           <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-24 md:w-48 bg-gradient-to-l from-white to-transparent z-20 pointer-events-none"></div>
 
-          <motion.div 
-            className="flex gap-4 sm:gap-5 md:gap-6 px-4 w-max will-change-transform"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ ease: "linear", duration: 50, repeat: Infinity }}
-            whileHover={{ animationPlayState: "paused" }}
-          >
+          <div className="flex gap-4 sm:gap-5 md:gap-6 px-4 w-max animate-marquee hover:[animation-play-state:paused]">
             {[...reviews, ...reviews, ...reviews].map((review, idx) => (
               <div key={`review-${idx}`} className="relative w-[280px] sm:w-[320px] md:w-[350px] shrink-0 bg-slate-50/50 p-6 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] shadow-[0_8px_30px_-12px_rgba(0,0,0,0.06)] border border-slate-100 flex flex-col justify-between group hover:-translate-y-2 hover:shadow-[0_15px_40px_-15px_rgba(168,85,247,0.15)] hover:border-purple-100 transition-all duration-500 cursor-default">
                 
@@ -503,7 +472,7 @@ const NeuroSync = () => {
                 </div>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -513,13 +482,13 @@ const NeuroSync = () => {
         <div className="absolute bottom-0 left-0 w-48 sm:w-64 h-48 sm:h-64 bg-blue-100 rounded-full blur-[60px] sm:blur-[80px] opacity-60 pointer-events-none transform-gpu"></div>
         
         <div className="container mx-auto px-4">
-          <motion.div whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 40 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="max-w-4xl mx-auto bg-slate-50 border border-slate-200 rounded-[2rem] sm:rounded-[3rem] p-8 sm:p-12 md:p-24 text-center relative shadow-xl z-10">
+          <div className="max-w-4xl mx-auto bg-slate-50 border border-slate-200 rounded-[2rem] sm:rounded-[3rem] p-8 sm:p-12 md:p-24 text-center relative shadow-xl z-10 transition-all duration-500">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-slate-900 mb-4 sm:mb-6 tracking-tight">Ready to <span className="font-black bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-600">Sync Your Placements?</span></h2>
             <p className="text-slate-500 font-light text-sm sm:text-base md:text-lg mb-8 sm:mb-10 max-w-xl mx-auto px-2">Get in touch with our team to schedule a personalised architectural walkthrough of Stalight Sync.</p>
 
             {/* Inline contact form area */}
             <ContactArea />
-          </motion.div>
+          </div>
         </div>
       </section>
 
