@@ -12,7 +12,7 @@ import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { generateWebPageSchema, generateBreadcrumbSchema } from "@/utils/seoUtils";
 import { OptimizedImage } from "@/components/OptimizedImage";
-
+import { useLaunchCountdown, TARGET_LAUNCH_DISPLAY } from "@/hooks/useLaunchCountdown";
 
 // Import NeuroSync images
 import neurosync1Img from "@/assets/products/neurosync1.jpg";
@@ -107,6 +107,7 @@ const NeuroSync = () => {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
   const yParallax = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const { isLaunched, timeLeft, isReady } = useLaunchCountdown();
   // Scroll to top when page loads
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -256,6 +257,74 @@ const NeuroSync = () => {
   };
   
   // State for the Interactive Placement Overview Section
+  
+  if (!isReady) return null;
+
+  if (!isLaunched) {
+    return (
+      <div className="min-h-screen bg-[#FAFAFA] flex flex-col items-center justify-center font-sans relative overflow-hidden">
+        <SEO title="Coming Soon | Stalight Sync" description="Stalight Sync is launching soon." />
+        <Navbar />
+        
+        {/* Dynamic Background */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden h-full">
+          <div className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(rgba(15,23,42,1)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,1)_1px,transparent_1px)] [background-size:60px_60px]" />
+          <div className="absolute top-[-10%] right-[-10%] h-[500px] w-[500px] rounded-full bg-gradient-to-br from-purple-500/10 to-pink-500/10 blur-[100px] transform-gpu" />
+          <div className="absolute bottom-[-10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-blue-500/10 to-purple-500/10 blur-[100px] transform-gpu" />
+        </div>
+
+        <motion.div initial="hidden" animate="visible" variants={containerVariants} className="relative z-10 flex flex-col items-center text-center px-4 mt-20">
+          <motion.div variants={fadeUpVariants} className="mb-6 flex items-center justify-center gap-3">
+            <h1 className="text-2xl sm:text-3xl tracking-tight text-slate-800 flex flex-wrap justify-center gap-2 uppercase">
+              <span className="font-light">STALIGHT</span> <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">Sync</span>
+            </h1>
+          </motion.div>
+
+          <motion.h2 variants={fadeUpVariants} className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-900 mb-4">
+            Coming Soon
+          </motion.h2>
+          <motion.p variants={fadeUpVariants} className="text-lg text-slate-600 mb-10 max-w-md mx-auto">
+            The ultimate placement readiness platform is almost here. Get ready to sync your success.
+          </motion.p>
+
+          <motion.div variants={fadeUpVariants} className="relative inline-flex mb-8 group">
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 blur-lg opacity-40 group-hover:opacity-75 transition-opacity duration-700 transform-gpu"></div>
+            <div className="relative bg-white/95 backdrop-blur-xl border border-white/60 rounded-2xl p-6 sm:p-8 flex flex-col items-center gap-4 shadow-2xl">
+              <span className="text-xs font-bold uppercase tracking-widest text-slate-500">{TARGET_LAUNCH_DISPLAY}</span>
+              <div className="flex items-center gap-4 sm:gap-6">
+                <div className="flex flex-col items-center min-w-[60px]">
+                  <span className="text-4xl sm:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.days).padStart(2, '0')}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-2">Days</span>
+                </div>
+                <span className="text-3xl sm:text-4xl font-black text-slate-300 animate-pulse mb-6">:</span>
+                <div className="flex flex-col items-center min-w-[60px]">
+                  <span className="text-4xl sm:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.hours).padStart(2, '0')}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-2">Hours</span>
+                </div>
+                <span className="text-3xl sm:text-4xl font-black text-slate-300 animate-pulse mb-6">:</span>
+                <div className="flex flex-col items-center min-w-[60px]">
+                  <span className="text-4xl sm:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-2">Mins</span>
+                </div>
+                <span className="text-3xl sm:text-4xl font-black text-slate-300 animate-pulse mb-6">:</span>
+                <div className="flex flex-col items-center min-w-[60px]">
+                  <span className="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-pink-500 to-purple-600 tabular-nums leading-none tracking-tight">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-pink-500 mt-2">Secs</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div variants={fadeUpVariants}>
+             <Link to="/" className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-purple-600 transition-colors">
+               <ArrowRight className="w-4 h-4 rotate-180" /> Back to Home
+             </Link>
+          </motion.div>
+        </motion.div>
+      </div>
+    );
+  }
+
   return (
     <div ref={containerRef} className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900 overflow-x-hidden relative">
       <SEO 
@@ -278,11 +347,9 @@ const NeuroSync = () => {
 
       {/* --- AMBIENT BACKGROUND GLOWS & BRAND THEMED WAVES --- */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <motion.div 
-          animate={{ y: [0, 24] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+        <div 
           className="absolute inset-[-100%] bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:32px_32px] opacity-70"
-        ></motion.div>
+        ></div>
         
         <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[300px] sm:h-[400px] w-[90%] sm:w-[600px] rounded-full bg-purple-500 opacity-[0.08] blur-[100px] sm:blur-[120px] transform-gpu"></div>
         <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[150%] sm:w-[120%] max-w-6xl h-[400px] sm:h-[600px] bg-gradient-to-b from-pink-50/50 via-white/20 to-transparent rounded-b-[100%] blur-2xl sm:blur-3xl opacity-80 transform-gpu"></div>
@@ -296,8 +363,8 @@ const NeuroSync = () => {
               <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" /> 
             </linearGradient>
           </defs>
-          <motion.path d="M0,30 Q25,10 50,30 T100,30" stroke="url(#waveGrad)" strokeWidth="0.15" fill="none" animate={{ d: ["M0,30 Q25,10 50,30 T100,30", "M0,30 Q25,50 50,30 T100,30", "M0,30 Q25,10 50,30 T100,30"] }} transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }} />
-          <motion.path d="M0,50 Q25,30 50,50 T100,50" stroke="url(#waveGrad)" strokeWidth="0.2" fill="none" animate={{ d: ["M0,50 Q25,30 50,50 T100,50", "M0,50 Q25,70 50,50 T100,50", "M0,50 Q25,30 50,50 T100,50"] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }} />
+          <path d="M0,30 Q25,10 50,30 T100,30" stroke="url(#waveGrad)" strokeWidth="0.15" fill="none" />
+          <path d="M0,50 Q25,30 50,50 T100,50" stroke="url(#waveGrad)" strokeWidth="0.2" fill="none" />
         </svg>
       </div>
 
@@ -324,7 +391,7 @@ const NeuroSync = () => {
             
             <motion.div variants={fadeUpVariants} className="relative z-20 mb-12 sm:mb-20">
               <a href="#contact" className="group relative inline-flex items-center justify-center px-8 sm:px-10 py-4 sm:py-5 bg-slate-950 text-white rounded-xl overflow-hidden shadow-[0_20px_40px_-10px_rgba(168,85,247,0.3)] hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto">
-                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
+                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
                 <span className="relative z-10 flex items-center gap-3 text-[11px] sm:text-[12px] font-bold tracking-[0.2em] uppercase">
                   Schedule Demo <ArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform" />
                 </span>
@@ -336,7 +403,7 @@ const NeuroSync = () => {
               <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-r from-[#FAFAFA] to-transparent z-10 pointer-events-none"></div>
               <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-l from-[#FAFAFA] to-transparent z-10 pointer-events-none"></div>
               
-              <motion.div className="flex gap-3 sm:gap-6 px-4 w-max" animate={{ x: ["0%", "-50%"] }} transition={{ ease: "linear", duration: 40, repeat: Infinity }}>
+              <motion.div className="flex gap-3 sm:gap-6 px-4 w-max will-change-transform" animate={{ x: ["0%", "-50%"] }} transition={{ ease: "linear", duration: 40, repeat: Infinity }}>
                 {[...scrollingFeatures, ...scrollingFeatures, ...scrollingFeatures].map((feat, idx) => (
                   <div key={idx} className="flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 sm:py-3 bg-white border border-slate-200/80 shadow-[0_4px_20px_rgb(0,0,0,0.03)] rounded-full shrink-0 hover:border-purple-300 hover:shadow-md transition-all duration-300 cursor-default">
                     <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-purple-50 flex items-center justify-center shrink-0 border border-purple-100/50">
@@ -405,7 +472,7 @@ const NeuroSync = () => {
           <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-24 md:w-48 bg-gradient-to-l from-white to-transparent z-20 pointer-events-none"></div>
 
           <motion.div 
-            className="flex gap-4 sm:gap-5 md:gap-6 px-4 w-max"
+            className="flex gap-4 sm:gap-5 md:gap-6 px-4 w-max will-change-transform"
             animate={{ x: ["0%", "-50%"] }}
             transition={{ ease: "linear", duration: 50, repeat: Infinity }}
             whileHover={{ animationPlayState: "paused" }}

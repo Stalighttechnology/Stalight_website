@@ -5,7 +5,8 @@ import {
   Brain, BarChart3, ShieldCheck, Users, User,
   CheckCircle2, Star, Calendar, FileText,
   ClipboardCheck, BookOpen, GraduationCap, MapPin, Quote,
-  Bell, ScanFace, LayoutDashboard, Home, Printer, ArrowRight, Zap, Activity, X, Loader2, Send
+  Bell, ScanFace, LayoutDashboard, Home, Printer, ArrowRight, Zap, Activity, X, Loader2, Send,
+  Globe, Megaphone, BarChart, Bus, Library, Target, Wallet, UserPlus, Layout
 } from "lucide-react";
 import { supabase } from "@/lib/supabaseClient";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
@@ -14,6 +15,7 @@ import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { generateWebPageSchema, generateBreadcrumbSchema } from "@/utils/seoUtils";
 import { OptimizedImage } from "@/components/OptimizedImage";
+import { useLaunchCountdown, TARGET_LAUNCH_DISPLAY } from "@/hooks/useLaunchCountdown";
 
 // --- Image Imports ---
 import campusImg from "@/assets/screenshots/mobileloginpage1.jpg";
@@ -129,7 +131,9 @@ const institutionalPillars = [
       { key: "timetable-scheduling", icon: Calendar, title: "Timetable & Scheduling", desc: "Automated timetable management with conflict detection and real-time updates." },
       { key: "exam-scheduling", icon: Bell, title: "Exam Scheduling", desc: "Schedule exams, publish timetables and send notifications to stakeholders." },
       { key: "assignment-workflow", icon: FileText, title: "Assignment Workflow", desc: "Creation, submission tracking, grading and deadline enforcement for assignments." },
-      { key: "study-material-hub", icon: BookOpen, title: "Study Material Hub", desc: "Centralised digital library for faculty-uploaded resources and student access." }
+      { key: "study-material-hub", icon: BookOpen, title: "Study Material Hub", desc: "Centralised digital library for faculty-uploaded resources and student access." },
+      { key: "student-management", icon: Users, title: "Student Management", desc: "Admissions, profiles, lifecycle" },
+      { key: "course-management", icon: BookOpen, title: "Course Management", desc: "Curriculum, subjects, electives" }
     ]
   },
   {
@@ -143,7 +147,9 @@ const institutionalPillars = [
     features: [
       { key: "leave-approvals", icon: ClipboardCheck, title: "Leave & Approvals", desc: "Structured leave requests with multi-level approvals, tracking, and notifications." },
       { key: "role-based-dashboards", icon: LayoutDashboard, title: "Role-Based Dashboards", desc: "Personalised interfaces for students, faculty, and administrators with relevant data at-a-glance." },
-      { key: "question-paper-workflow", icon: Printer, title: "Question Paper Workflow System", desc: "Secure question paper creation, review and distribution workflow." }
+      { key: "question-paper-workflow", icon: Printer, title: "Question Paper Workflow System", desc: "Secure question paper creation, review and distribution workflow." },
+      { key: "announcements", icon: Megaphone, title: "Announcements", desc: "Push notifications, broadcasts" },
+      { key: "admission-lifecycle", icon: UserPlus, title: "Admission Lifecycle", desc: "End-to-end pipeline from lead generation to student onboarding." }
     ]
   },
   {
@@ -157,7 +163,11 @@ const institutionalPillars = [
     features: [
       { key: "copo-attainment", icon: BarChart3, title: "CO/PO Attainment", desc: "Monitor and report course and program outcomes with analytics and visualisations." },
       { key: "hostel-management", icon: Home, title: "Hostel Management", desc: "Manage hostel allocations, requests, and student housing workflows." },
-      { key: "fees-collections", icon: Activity, title: "Fees Collections", desc: "Track fee payments, receipts, and automated reminders for outstanding dues." }
+      { key: "fees-collections", icon: Activity, title: "Fees Collections", desc: "Track fee payments, receipts, and automated reminders for outstanding dues." },
+      { key: "performance-analytics", icon: BarChart, title: "Performance Analytics", desc: "Data-driven academic insights" },
+      { key: "transport-management", icon: Bus, title: "Transport Management", desc: "Live tracking, fleet routes" },
+      { key: "library-management", icon: Library, title: "Library Management", desc: "Digital catalog, issue tracking" },
+      { key: "college-website", icon: Layout, title: "Inbuilt College Website", desc: "Ready-to-use customisable templates for institutional branding." }
     ]
   }
 ];
@@ -198,6 +208,7 @@ const MaskedText = ({ children, className }: { children: React.ReactNode; classN
 const NeuroCampus = () => {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
+  const { isLaunched, timeLeft, isReady } = useLaunchCountdown();
 
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [formData, setFormData] = useState({ full_name: "", official_email: "", phone: "", organization: "", designation: "", interested_solution: "", preferred_date: "", preferred_time: "", message: "" });
@@ -248,6 +259,73 @@ const NeuroCampus = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  if (!isReady) return null;
+
+  if (!isLaunched) {
+    return (
+      <div className="min-h-screen bg-[#FAFAFA] flex flex-col items-center justify-center font-sans relative overflow-hidden">
+        <SEO title="Coming Soon | Stalight Campus" description="Stalight Campus is launching soon." />
+        <Navbar />
+        
+        {/* Dynamic Background */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden h-full">
+          <div className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(rgba(15,23,42,1)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,1)_1px,transparent_1px)] [background-size:60px_60px]" />
+          <div className="absolute top-[-10%] right-[-10%] h-[500px] w-[500px] rounded-full bg-gradient-to-br from-purple-500/10 to-pink-500/10 blur-[100px] transform-gpu" />
+          <div className="absolute bottom-[-10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-blue-500/10 to-purple-500/10 blur-[100px] transform-gpu" />
+        </div>
+
+        <motion.div initial="hidden" animate="visible" variants={containerVariants} className="relative z-10 flex flex-col items-center text-center px-4 mt-20">
+          <motion.div variants={fadeUpVariants} className="mb-6 flex items-center justify-center gap-3">
+            <h1 className="text-2xl sm:text-3xl tracking-tight text-slate-800 flex flex-wrap justify-center gap-2 uppercase">
+              <span className="font-light">STALIGHT</span> <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">Campus</span>
+            </h1>
+          </motion.div>
+
+          <motion.h2 variants={fadeUpVariants} className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-900 mb-4">
+            Coming Soon
+          </motion.h2>
+          <motion.p variants={fadeUpVariants} className="text-lg text-slate-600 mb-10 max-w-md mx-auto">
+            We are preparing something amazing. The next-generation academic management platform is almost here.
+          </motion.p>
+
+          <motion.div variants={fadeUpVariants} className="relative inline-flex mb-8 group">
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 blur-lg opacity-40 group-hover:opacity-75 transition-opacity duration-700 transform-gpu"></div>
+            <div className="relative bg-white/95 backdrop-blur-xl border border-white/60 rounded-2xl p-6 sm:p-8 flex flex-col items-center gap-4 shadow-2xl">
+              <span className="text-xs font-bold uppercase tracking-widest text-slate-500">{TARGET_LAUNCH_DISPLAY}</span>
+              <div className="flex items-center gap-4 sm:gap-6">
+                <div className="flex flex-col items-center min-w-[60px]">
+                  <span className="text-4xl sm:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.days).padStart(2, '0')}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-2">Days</span>
+                </div>
+                <span className="text-3xl sm:text-4xl font-black text-slate-300 animate-pulse mb-6">:</span>
+                <div className="flex flex-col items-center min-w-[60px]">
+                  <span className="text-4xl sm:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.hours).padStart(2, '0')}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-2">Hours</span>
+                </div>
+                <span className="text-3xl sm:text-4xl font-black text-slate-300 animate-pulse mb-6">:</span>
+                <div className="flex flex-col items-center min-w-[60px]">
+                  <span className="text-4xl sm:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-2">Mins</span>
+                </div>
+                <span className="text-3xl sm:text-4xl font-black text-slate-300 animate-pulse mb-6">:</span>
+                <div className="flex flex-col items-center min-w-[60px]">
+                  <span className="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-pink-500 to-purple-600 tabular-nums leading-none tracking-tight">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-pink-500 mt-2">Secs</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div variants={fadeUpVariants}>
+             <Link to="/" className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-purple-600 transition-colors">
+               <ArrowRight className="w-4 h-4 rotate-180" /> Back to Home
+             </Link>
+          </motion.div>
+        </motion.div>
+      </div>
+    );
+  }
+
   return (
     <div ref={containerRef} className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900 overflow-x-hidden relative">
       <SEO
@@ -273,25 +351,13 @@ const NeuroCampus = () => {
         <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(rgba(15,23,42,0.4)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.4)_1px,transparent_1px)] [background-size:64px_64px]" />
 
         {/* Center Spotlight Glow */}
-        <motion.div
-          animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.05, 1] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute left-1/2 top-0 h-[500px] w-[120%] -translate-x-1/2 rounded-full bg-gradient-to-b from-purple-500/10 via-pink-500/5 to-transparent blur-[100px] md:w-[70%] transform-gpu"
-        />
+        <div className="absolute left-1/2 top-0 h-[500px] w-[120%] -translate-x-1/2 rounded-full bg-gradient-to-b from-purple-500/10 via-pink-500/5 to-transparent blur-[100px] md:w-[70%] transform-gpu animate-pulse" />
 
         {/* Floating Accent Orb 1 */}
-        <motion.div
-          animate={{ y: [0, -15, 0], x: [0, 15, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[15%] left-[5%] md:left-[10%] h-48 w-48 rounded-full bg-pink-500/10 blur-[60px] md:h-72 md:w-72 transform-gpu"
-        />
+        <div className="absolute top-[15%] left-[5%] md:left-[10%] h-48 w-48 rounded-full bg-pink-500/10 blur-[60px] md:h-72 md:w-72 transform-gpu" />
 
         {/* Floating Accent Orb 2 */}
-        <motion.div
-          animate={{ y: [0, 15, 0], x: [0, -15, 0] }}
-          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[30%] right-[5%] md:right-[10%] h-56 w-56 rounded-full bg-blue-500/10 blur-[70px] md:h-80 md:w-80 transform-gpu"
-        />
+        <div className="absolute top-[30%] right-[5%] md:right-[10%] h-56 w-56 rounded-full bg-blue-500/10 blur-[70px] md:h-80 md:w-80 transform-gpu" />
       </div>
 
       {/* --- HERO SECTION --- */}
@@ -316,15 +382,15 @@ const NeuroCampus = () => {
             </motion.p>
 
             <motion.div variants={fadeUpVariants} className="relative z-20 mb-6 sm:mb-12">
-              <div className="flex flex-col sm:flex-row items-center gap-3 max-w-md mx-auto">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-2xl mx-auto">
                 <a
                   href="https://campus.stalight.in/stalightcampus"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative inline-flex items-center justify-center px-8 sm:px-10 py-3 sm:py-4 bg-slate-950 text-white rounded-xl overflow-hidden shadow-[0_20px_40px_-10px_rgba(168,85,247,0.3)] hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto"
+                  className="group relative inline-flex items-center justify-center h-12 sm:h-14 px-6 w-full sm:w-[220px] bg-slate-950 text-white rounded-xl overflow-hidden shadow-[0_20px_40px_-10px_rgba(168,85,247,0.3)] hover:-translate-y-1 transition-all duration-300"
                 >
                   <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                  <span className="relative z-10 flex items-center gap-3 text-[11px] sm:text-[12px] font-bold tracking-[0.2em] uppercase">
+                  <span className="relative z-10 flex items-center gap-3 text-[11px] sm:text-[12px] font-bold tracking-[0.2em] uppercase whitespace-nowrap">
                     Get Access <ArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform" />
                   </span>
                 </a>
@@ -333,12 +399,10 @@ const NeuroCampus = () => {
                   href="https://campus.stalight.in/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center justify-center px-6 py-3 rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white shadow-md hover:brightness-105 transition-all duration-200 w-full sm:w-auto"
+                  className="group relative inline-flex items-center justify-center h-12 sm:h-14 px-6 w-full sm:w-[220px] rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white shadow-[0_20px_40px_-10px_rgba(168,85,247,0.3)] hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
                 >
-                  <span className="flex items-center gap-2 font-semibold text-sm">
-                    <span className="text-xs text-white/90 mr-2">Already have Campus?</span>
-                    <span className="underline decoration-white/30">Login</span>
-                    <ArrowRight size={14} />
+                  <span className="relative z-10 flex items-center gap-3 font-bold text-[11px] sm:text-[12px] uppercase tracking-[0.2em] whitespace-nowrap">
+                    Campus Login <ArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform" />
                   </span>
                 </a>
               </div>
@@ -357,7 +421,7 @@ const NeuroCampus = () => {
           <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#FAFAFA] to-transparent z-10 pointer-events-none"></div>
 
           <motion.div
-            className="flex gap-3 sm:gap-4 w-max px-4"
+            className="flex gap-6 sm:gap-10 items-center justify-center w-max opacity-60 hover:opacity-100 transition-opacity duration-300 will-change-transform"
             animate={{ x: ["0%", "-50%"] }}
             transition={{ ease: "linear", duration: 35, repeat: Infinity }}
           >
@@ -375,6 +439,16 @@ const NeuroCampus = () => {
       </section>
 
       {/* --- DASHBOARD SHOWCASE --- */}
+      <style>{`
+        @keyframes marquee-reverse {
+          from { transform: translateX(-50%); }
+          to { transform: translateX(0%); }
+        }
+        .animate-marquee-reverse {
+          animation: marquee-reverse 40s linear infinite;
+          will-change: transform;
+        }
+      `}</style>
       <section id="features" className="py-20 sm:py-28 bg-[#FAFAFC] overflow-hidden relative z-10">
         <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.4]" style={{ backgroundImage: 'linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px)', backgroundSize: '60px 100%' }}></div>
 
@@ -398,17 +472,7 @@ const NeuroCampus = () => {
           <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-40 bg-gradient-to-r from-[#FAFAFC] to-transparent z-20 pointer-events-none"></div>
           <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-40 bg-gradient-to-l from-[#FAFAFC] to-transparent z-20 pointer-events-none"></div>
 
-          <motion.div
-            className="flex gap-8 w-max px-8"
-            style={{ willChange: "transform" }}
-            animate={{ x: ["-50%", "0%"] }}
-            transition={{
-              ease: "linear",
-              duration: 40,
-              repeat: Infinity,
-              repeatType: "loop"
-            }}
-          >
+          <div className="flex gap-8 w-max px-8 animate-marquee-reverse hover:[animation-play-state:paused]">
             {[...tourFeatures, ...tourFeatures].map((feat, idx) => {
               const Icon = feat.icon;
               return (
@@ -454,7 +518,7 @@ const NeuroCampus = () => {
                 </div>
               );
             })}
-          </motion.div>
+          </div>
         </div>
       </section>
 
