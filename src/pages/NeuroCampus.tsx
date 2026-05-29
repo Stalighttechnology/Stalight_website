@@ -1,11 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { motion, useScroll, useTransform, useMotionValue, animate, useInView, Variants } from "framer-motion";
 import {
   Brain, BarChart3, ShieldCheck, Users, User,
   CheckCircle2, Star, Calendar, FileText,
-  ClipboardCheck, BookOpen, GraduationCap, MapPin,
+  ClipboardCheck, BookOpen, GraduationCap, MapPin, Quote,
   Bell, ScanFace, LayoutDashboard, Home, Printer, ArrowRight, Zap, Activity, X, Loader2, Send,
-  Megaphone, Bus, Library, Layout
+  Globe, Megaphone, BarChart, Bus, Library, Target, Wallet, UserPlus, Layout
 } from "lucide-react";
 import { supabase } from "@/lib/supabaseClient";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
@@ -26,36 +27,20 @@ import nebulaaiImg from "@/assets/products/nebulaai.png";
 import facerecognImg from "@/assets/products/facerecogn.jpg";
 import resultsImg from "@/assets/screenshots/results.png";
 
-// --- Custom pure React Animated Number Component ---
-const AnimatedNumber = ({ value }: { value: number }) => {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
+// --- Custom Animated Number Component ---
+const AnimatedNumber = ({ value, duration = 2.5 }: { value: number; duration?: number }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const motionValue = useMotionValue(0);
+  const rounded = useTransform(motionValue, (latest) => Math.round(latest));
 
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        const duration = 2000;
-        const startTime = performance.now();
-        const step = (now: number) => {
-          const progress = Math.min((now - startTime) / duration, 1);
-          const easeOutQuad = progress * (2 - progress);
-          setCount(Math.floor(easeOutQuad * value));
-          if (progress < 1) {
-            requestAnimationFrame(step);
-          }
-        };
-        requestAnimationFrame(step);
-        observer.disconnect();
-      }
-    }, { threshold: 0.1 });
-    
-    if (ref.current) {
-      observer.observe(ref.current);
+    if (isInView) {
+      animate(motionValue, value, { duration: duration, ease: "easeOut" });
     }
-    return () => observer.disconnect();
-  }, [value]);
+  }, [isInView, value, duration, motionValue]);
 
-  return <span ref={ref}>{count}</span>;
+  return <motion.span ref={ref}>{rounded}</motion.span>;
 };
 
 // --- Content ---
@@ -196,7 +181,33 @@ const featurePills = [
   { title: "IA Marks", icon: BarChart3 },
 ];
 
+// --- Animations ---
+const customEase = [0.16, 1.0, 0.3, 1.0];
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+};
+
+const fadeUpVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: customEase } },
+};
+
+const textRevealVariants: Variants = {
+  hidden: { y: "100%", opacity: 0 },
+  visible: { y: 0, opacity: 1, transition: { duration: 1.0, ease: customEase } },
+};
+
+const MaskedText = ({ children, className }: { children: React.ReactNode; className?: string }) => (
+  <div className="overflow-hidden md:overflow-visible inline-block w-full leading-tight py-1 md:py-2">
+    <motion.div variants={textRevealVariants} className={className}>{children}</motion.div>
+  </div>
+);
+
 const NeuroCampus = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
   const { isLaunched, timeLeft, isReady } = useLaunchCountdown();
 
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -263,21 +274,21 @@ const NeuroCampus = () => {
           <div className="absolute bottom-[-10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-blue-500/10 to-purple-500/10 blur-[100px] transform-gpu" />
         </div>
 
-        <div className="relative z-10 flex flex-col items-center text-center px-4 mt-20 transition-all duration-500">
-          <div className="mb-6 flex items-center justify-center gap-3">
+        <motion.div initial="hidden" animate="visible" variants={containerVariants} className="relative z-10 flex flex-col items-center text-center px-4 mt-20">
+          <motion.div variants={fadeUpVariants} className="mb-6 flex items-center justify-center gap-3">
             <h1 className="text-2xl sm:text-3xl tracking-tight text-slate-800 flex flex-wrap justify-center gap-2 uppercase">
               <span className="font-light">STALIGHT</span> <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">Campus</span>
             </h1>
-          </div>
+          </motion.div>
 
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-900 mb-4">
+          <motion.h2 variants={fadeUpVariants} className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-900 mb-4">
             Coming Soon
-          </h2>
-          <p className="text-lg text-slate-600 mb-10 max-w-md mx-auto">
+          </motion.h2>
+          <motion.p variants={fadeUpVariants} className="text-lg text-slate-600 mb-10 max-w-md mx-auto">
             We are preparing something amazing. The next-generation academic management platform is almost here.
-          </p>
+          </motion.p>
 
-          <div className="relative inline-flex mb-8 group">
+          <motion.div variants={fadeUpVariants} className="relative inline-flex mb-8 group">
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 blur-lg opacity-40 group-hover:opacity-75 transition-opacity duration-700 transform-gpu"></div>
             <div className="relative bg-white/95 backdrop-blur-xl border border-white/60 rounded-2xl p-6 sm:p-8 flex flex-col items-center gap-4 shadow-2xl">
               <span className="text-xs font-bold uppercase tracking-widest text-slate-500">{TARGET_LAUNCH_DISPLAY}</span>
@@ -303,20 +314,20 @@ const NeuroCampus = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div variants={fadeUpVariants}>
              <Link to="/" className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-purple-600 transition-colors">
-                <ArrowRight className="w-4 h-4 rotate-180" /> Back to Home
+               <ArrowRight className="w-4 h-4 rotate-180" /> Back to Home
              </Link>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900 overflow-x-hidden relative">
+    <div ref={containerRef} className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900 overflow-x-hidden relative">
       <SEO
         title="Stalight Campus | Stalight Technologies"
         description="A next-generation academic management platform unifying advanced analytics, blockchain security, and automated operations."
@@ -352,23 +363,25 @@ const NeuroCampus = () => {
       {/* --- HERO SECTION --- */}
       <section className="relative pt-32 sm:pt-36 md:pt-44 lg:pt-52 xl:pt-56 pb-6 sm:pb-10 md:pb-16 z-10 w-full flex flex-col items-center min-h-[48vh] md:min-h-[85vh]">
         <div className="container mx-auto px-4 sm:px-6 relative z-10 w-full text-center mb-8 sm:mb-12">
-          <div className="max-w-6xl mx-auto flex flex-col items-center">
+          <motion.div initial="hidden" animate="visible" variants={containerVariants} className="max-w-6xl mx-auto flex flex-col items-center">
             <h1 className="text-[3.25rem] sm:text-6xl md:text-[7rem] lg:text-[8.5rem] font-light text-slate-900 tracking-tighter leading-[0.95] mb-3 sm:mb-6 px-2 max-w-full text-center">
-              <div className="overflow-hidden inline-block w-full leading-tight py-1 md:py-2">
-                <div className="transition-all duration-700 ease-out">
+                <MaskedText>
                   <span className="block sm:inline font-light normal-case">Stalight</span>{' '}
-                  <span className="block sm:inline font-logo font-extrabold uppercase text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 tracking-[0.02em] float-subtle animate-bounce-slow">
+                  <motion.span
+                    className="block sm:inline font-logo font-extrabold uppercase text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-gradient-animate mt-1 sm:mt-0 tracking-[0.02em] float-subtle"
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                  >
                     Campus
-                  </span>
-                </div>
-              </div>
+                  </motion.span>
+                </MaskedText>
             </h1>
 
-            <p className="text-slate-600 font-light text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed mb-6 px-2">
+            <motion.p variants={fadeUpVariants} className="text-slate-600 font-light text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed mb-6 px-2">
               A next-generation academic management platform unifying advanced analytics, blockchain security, and automated operations.
-            </p>
+            </motion.p>
 
-            <div className="relative z-20 mb-6 sm:mb-12">
+            <motion.div variants={fadeUpVariants} className="relative z-20 mb-6 sm:mb-12">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-2xl mx-auto">
                 <a
                   href="https://campus.stalight.in/stalightcampus"
@@ -393,16 +406,25 @@ const NeuroCampus = () => {
                   </span>
                 </a>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
 
-        {/* FULL WIDTH Infinite Feature Marquee using hardware-accelerated CSS keyframe */}
-        <div className="w-full relative overflow-hidden py-4">
+        {/* FULL WIDTH Infinite Feature Marquee */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="w-full relative overflow-hidden py-4"
+        >
           <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#FAFAFA] to-transparent z-10 pointer-events-none"></div>
           <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#FAFAFA] to-transparent z-10 pointer-events-none"></div>
 
-          <div className="flex gap-6 sm:gap-10 items-center justify-center w-max opacity-60 hover:opacity-100 transition-opacity duration-300 animate-marquee">
+          <motion.div
+            className="flex gap-6 sm:gap-10 items-center justify-center w-max opacity-60 hover:opacity-100 transition-opacity duration-300 will-change-transform"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ ease: "linear", duration: 35, repeat: Infinity }}
+          >
             {[...featurePills, ...featurePills, ...featurePills, ...featurePills].map((pill, idx) => (
               <div key={idx} className="flex items-center gap-1.5 sm:gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm border border-slate-200/80 shadow-sm rounded-full shrink-0 hover:border-purple-200 hover:shadow-md transition-all duration-300">
                 <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-br from-pink-50 to-blue-50 flex items-center justify-center">
@@ -411,16 +433,28 @@ const NeuroCampus = () => {
                 <span className="text-xs sm:text-sm font-semibold text-slate-700 tracking-wide whitespace-nowrap">{pill.title}</span>
               </div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
+
       </section>
 
       {/* --- DASHBOARD SHOWCASE --- */}
+      <style>{`
+        @keyframes marquee-reverse {
+          from { transform: translateX(-50%); }
+          to { transform: translateX(0%); }
+        }
+        .animate-marquee-reverse {
+          animation: marquee-reverse 40s linear infinite;
+          will-change: transform;
+        }
+      `}</style>
       <section id="features" className="py-20 sm:py-28 bg-[#FAFAFC] overflow-hidden relative z-10">
         <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.4]" style={{ backgroundImage: 'linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px)', backgroundSize: '60px 100%' }}></div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-16 relative z-10">
           <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
+
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-light text-slate-950 tracking-tight leading-[1.15] mb-5">
               One Dashboard. <br className="sm:hidden" />
               <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500">
@@ -502,8 +536,13 @@ const NeuroCampus = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {institutionalPillars.map((pillar, pillarIdx) => (
-              <div
+              <motion.div
                 key={pillarIdx}
+                variants={fadeUpVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.6, delay: pillarIdx * 0.08 }}
                 className="group relative bg-white border border-slate-200/70 hover:border-slate-300 rounded-3xl p-6 sm:p-7 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden"
               >
                 <div className={`absolute inset-0 bg-gradient-to-b ${pillar.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}></div>
@@ -547,7 +586,7 @@ const NeuroCampus = () => {
                   <span className="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
                   Active Module
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -559,7 +598,7 @@ const NeuroCampus = () => {
         <div className="absolute bottom-0 left-0 w-48 h-48 sm:w-64 sm:h-64 bg-blue-100 rounded-full blur-[60px] sm:blur-[80px] opacity-50 sm:opacity-60 pointer-events-none transform-gpu"></div>
 
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="max-w-4xl mx-auto bg-slate-50 border border-slate-200 rounded-2xl sm:rounded-[2.5rem] lg:rounded-[3rem] p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20 text-center relative shadow-lg sm:shadow-xl z-10 transition-all duration-500">
+          <motion.div whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 40 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="max-w-4xl mx-auto bg-slate-50 border border-slate-200 rounded-2xl sm:rounded-[2.5rem] lg:rounded-[3rem] p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20 text-center relative shadow-lg sm:shadow-xl z-10">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-slate-900 mb-4 sm:mb-6 tracking-tight">
               Ready to <span className="font-black bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-600">Modernise Your Campus?</span>
             </h2>
@@ -567,7 +606,7 @@ const NeuroCampus = () => {
               Get in touch with our team to schedule a personalised architectural walkthrough of Stalight Campus.
             </p>
 
-            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+              <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
               <button onClick={() => setIsFormOpen(true)} className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 text-white rounded-full font-bold uppercase text-xs sm:text-sm tracking-widest shadow-lg hover:shadow-purple-500/25 hover:-translate-y-0.5 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition-all duration-300 w-full sm:w-auto">
                 Schedule Demo <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
               </button>
@@ -575,7 +614,7 @@ const NeuroCampus = () => {
                 Back to Home
               </Link>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -641,7 +680,7 @@ const NeuroCampus = () => {
                       <SelectValue placeholder="Select a solution" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="stalight_campus">Stalight Campus</SelectItem>
+                      <SelectItem value="stalight_campus">Stalight   Campus</SelectItem>
                       <SelectItem value="neurosync">NeuroSync</SelectItem>
                       <SelectItem value="both">Both / Integration</SelectItem>
                       <SelectItem value="custom">Custom / Other</SelectItem>

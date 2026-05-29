@@ -1,8 +1,30 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Clock, ArrowRight, Loader, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { submitContactToSupabase } from "@/lib/supabaseContactService";
 import { sendContactEmail } from "@/lib/emailService";
+
+
+// --- Premium Animation Variants ---
+const customEase = [0.19, 1.0, 0.22, 1.0];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+  },
+};
+
+const fadeUpVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1.0, ease: customEase }
+  },
+};
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -103,29 +125,39 @@ const ContactSection = () => {
       });
     }
   };
-
   return (
     <section id="contact" className="relative py-16 md:py-24 bg-white overflow-hidden border-t border-slate-100">
 
-      {/* --- Optimized Ambient Background Glows --- */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-red-50/40 rounded-full blur-[40px] translate-x-1/3 -translate-y-1/3 pointer-events-none z-0 transform-gpu"></div>
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-slate-50 rounded-full blur-[40px] -translate-x-1/3 translate-y-1/3 pointer-events-none z-0 transform-gpu"></div>
+      {/* --- Ambient Background Glows (Matches NeuroCampus Theme) --- */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-red-50/60 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3 pointer-events-none z-0 transform-gpu"></div>
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-slate-50 rounded-full blur-[100px] -translate-x-1/3 translate-y-1/3 pointer-events-none z-0 transform-gpu"></div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={containerVariants}
+          className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start"
+        >
 
           {/* --- LEFT COLUMN: Contact Info --- */}
           <div className="flex flex-col justify-center h-full">
-            <h2 className="font-sans text-4xl md:text-5xl font-light text-slate-950 mb-6 tracking-tight leading-[1.1]">
+
+            {/* Enlarged, Premium Contact Us Badge */}
+
+
+            <motion.h2 variants={fadeUpVariants} className="font-sans text-4xl md:text-5xl font-light text-slate-950 mb-6 tracking-tight leading-[1.1]">
               Let's Discuss Your <br />
               <span className="font-bold">Requirements.</span>
-            </h2>
+            </motion.h2>
 
-            <p className="text-slate-500 font-light text-lg mb-12 max-w-md leading-relaxed">
+            <motion.p variants={fadeUpVariants} className="text-slate-500 font-light text-lg mb-12 max-w-md leading-relaxed">
               Whether you are evaluating platforms for your institution or exploring partnership opportunities — our team is ready to help.
-            </p>
+            </motion.p>
 
-            <div className="space-y-8">
+            <motion.div variants={containerVariants} className="space-y-8">
+
               {/* Contact Items Array Mapping */}
               {[
                 { icon: Mail, title: "Email", text: "info@stalight.in", link: "mailto:info@stalight.in" },
@@ -133,8 +165,8 @@ const ContactSection = () => {
                 { icon: MapPin, title: "Headquarters", text: "Rajajinagar, Bengaluru, Karnataka", link: null },
                 { icon: Clock, title: "Business Hours", text: "Monday – Saturday, 9:00 AM – 7:00 PM IST", link: null },
               ].map((item, idx) => (
-                <div key={idx} className="flex items-start gap-5 group">
-                  <div className="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100 group-hover:border-red-100 group-hover:bg-red-50 transition-colors duration-300 shadow-sm">
+                <motion.div key={idx} variants={fadeUpVariants} className="flex items-start gap-5 group">
+                  <div className="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100 group-hover:border-red-100 group-hover:bg-red-50 transition-colors duration-500 shadow-sm">
                     <item.icon className="w-6 h-6 text-[#D32027]" strokeWidth={1.5} />
                   </div>
                   <div className="pt-1">
@@ -149,17 +181,18 @@ const ContactSection = () => {
                       </p>
                     )}
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+
+            </motion.div>
           </div>
 
           {/* --- RIGHT COLUMN: 3D Form Container --- */}
-          <div className="relative mt-8 lg:mt-0">
+          <motion.div variants={fadeUpVariants} className="relative mt-8 lg:mt-0">
             {/* Offset Shadow Layer for 3D Effect */}
             <div className="absolute inset-0 bg-gradient-to-b from-slate-100 to-white rounded-[2rem] transform translate-x-4 translate-y-4 border border-slate-200/50 -z-10 hidden sm:block"></div>
 
-            <div className="bg-white border border-slate-200 p-8 md:p-12 lg:p-14 rounded-[2rem] shadow-md relative z-10">
+            <div className="bg-white border border-slate-200 p-8 md:p-12 lg:p-14 rounded-[2rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] relative z-10">
               <h3 className="font-sans text-2xl font-bold text-slate-900 mb-8 tracking-tight">
                 Send Us a Message
               </h3>
@@ -215,7 +248,8 @@ const ContactSection = () => {
                   disabled={loading}
                   className="group relative w-full inline-flex items-center justify-center px-10 py-5 bg-slate-950 text-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 mt-4 disabled:opacity-70"
                 >
-                  <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#D32027] to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"></div>
+                  {/* Hover Gradient Fill */}
+                  <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#D32027] to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
 
                   <span className="relative z-10 flex items-center gap-3 text-[12px] font-bold tracking-[0.2em] uppercase">
                     {loading ? (
@@ -233,9 +267,9 @@ const ContactSection = () => {
                 </button>
               </form>
             </div>
-          </div>
+          </motion.div>
 
-        </div>
+        </motion.div>
       </div>
       {showSuccess && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
