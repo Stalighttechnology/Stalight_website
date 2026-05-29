@@ -118,7 +118,7 @@ const ProductLaunchHero = () => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto", transition: { duration: 0.5, ease: easeOutExpo } }}
                 exit={{ opacity: 0, height: 0, scale: 0.95, transition: { duration: 0.4 } }}
-                className="relative inline-flex group origin-top overflow-hidden p-8 -m-8"
+                className="relative w-full max-w-full sm:w-auto sm:inline-flex group origin-top pb-6 sm:p-8 sm:-m-8"
               >
                 <div className="mb-8 mt-2 relative">
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 blur-lg opacity-40 group-hover:opacity-75 transition-opacity duration-700 transform-gpu"></div>
@@ -127,23 +127,23 @@ const ProductLaunchHero = () => {
                       <div className="w-2 h-2 rounded-full bg-pink-500 animate-pulse"></div>
                       <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">{TARGET_LAUNCH_DISPLAY}</span>
                     </div>
-                    <div className="flex items-center justify-center gap-3 sm:gap-5 md:gap-8 px-2 sm:px-4 w-full">
-                      <div className="flex flex-col items-center min-w-[60px] sm:min-w-[75px]">
+                    <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 px-1 sm:px-4 w-full">
+                      <div className="flex flex-col items-center min-w-[50px] sm:min-w-[65px] md:min-w-[70px]">
                         <span className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.days).padStart(2, '0')}</span>
                         <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400 mt-2">Days</span>
                       </div>
-                      <span className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-300 pb-5 sm:pb-6 animate-pulse">:</span>
-                      <div className="flex flex-col items-center min-w-[60px] sm:min-w-[75px]">
+                      <span className="text-xl sm:text-3xl md:text-4xl font-black text-slate-300 pb-5 sm:pb-6 animate-pulse">:</span>
+                      <div className="flex flex-col items-center min-w-[50px] sm:min-w-[65px] md:min-w-[70px]">
                         <span className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.hours).padStart(2, '0')}</span>
                         <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400 mt-2">Hours</span>
                       </div>
-                      <span className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-300 pb-5 sm:pb-6 animate-pulse">:</span>
-                      <div className="flex flex-col items-center min-w-[60px] sm:min-w-[75px]">
+                      <span className="text-xl sm:text-3xl md:text-4xl font-black text-slate-300 pb-5 sm:pb-6 animate-pulse">:</span>
+                      <div className="flex flex-col items-center min-w-[50px] sm:min-w-[65px] md:min-w-[70px]">
                         <span className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.minutes).padStart(2, '0')}</span>
                         <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400 mt-2">Mins</span>
                       </div>
-                      <span className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-300 pb-5 sm:pb-6 animate-pulse">:</span>
-                      <div className="flex flex-col items-center min-w-[60px] sm:min-w-[75px]">
+                      <span className="text-xl sm:text-3xl md:text-4xl font-black text-slate-300 pb-5 sm:pb-6 animate-pulse">:</span>
+                      <div className="flex flex-col items-center min-w-[50px] sm:min-w-[65px] md:min-w-[70px]">
                         <span className="text-3xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-pink-500 to-purple-600 tabular-nums leading-none tracking-tight">{String(timeLeft.seconds).padStart(2, '0')}</span>
                         <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-pink-500 mt-2">Secs</span>
                       </div>
@@ -188,7 +188,7 @@ const ProductLaunchHero = () => {
           </motion.div>
 
           {/* CTAs */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto relative min-h-[60px]">
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto relative min-h-[60px] flex-wrap">
             <AnimatePresence mode="wait">
               {!isLaunched ? (
                 <motion.button 
