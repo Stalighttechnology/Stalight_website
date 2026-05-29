@@ -5,29 +5,44 @@ import heroBg from "@/assets/backgrounds/hero-bg.jpg";
 const easeOutExpo = [0.16, 1, 0.3, 1];
 
 const containerVariants = {
-  hidden: { opacity: 0, y: 8 },
+  hidden: {},
   visible: {
-    opacity: 1,
-    y: 0,
     transition: {
-      duration: 0.4,
-      ease: easeOutExpo,
-      staggerChildren: 0.08,
-      delayChildren: 0.05,
+      staggerChildren: 0.12,
+      delayChildren: 0.15,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 6 },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.35, ease: easeOutExpo },
+    transition: { duration: 0.85, ease: easeOutExpo },
   },
 };
 
-const HeroSection = ({ isTransitioning = false }: { isTransitioning?: boolean }) => {
+const lineVariants = {
+  hidden: { scaleX: 0, opacity: 0 },
+  visible: {
+    scaleX: 1,
+    opacity: 1,
+    transition: { duration: 0.7, ease: easeOutExpo, delay: 0.3 },
+  },
+};
+
+const backgroundVariants = {
+  hidden: { opacity: 0, scale: 1.08 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 1.8, ease: easeOutExpo },
+  },
+};
+
+const HeroSection = () => {
+  const reduceMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -37,54 +52,65 @@ const HeroSection = ({ isTransitioning = false }: { isTransitioning?: boolean })
     return () => window.removeEventListener("resize", check);
   }, []);
 
+  const floatY = reduceMotion ? 0 : isMobile ? 10 : 22;
+  const floatDuration = isMobile ? 8 : 10;
+
   return (
     <section
       id="home"
       className="relative isolate flex min-h-[100dvh] w-full items-center justify-center overflow-hidden bg-[#F8F7F3] font-sans border-b border-slate-200"
     >
-      {/* Background Section */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Background Image Container without clipPath */}
-        <div
-          className="absolute inset-y-0 right-0 w-full md:w-[72%] bg-cover bg-center bg-no-repeat opacity-95"
+        <motion.div
+          variants={backgroundVariants}
+          initial="hidden"
+          animate="visible"
+          className="absolute inset-y-0 right-0 w-full md:w-[72%]"
           style={{
-            backgroundImage: `url(${heroBg})`,
+            clipPath: "polygon(24% 0, 100% 0, 100% 100%, 0 100%)",
+            background: `url(${heroBg}) center/cover no-repeat`,
           }}
         />
 
-        {/* 
-          Slanted Slit / Visual Split: 
-          Instead of clip-path polygon, we use a sharp linear-gradient background overlay.
-          For desktop: slanted cut starting at 24% width.
-          For mobile: fades the background out so the text is fully legible.
-        */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(248,247,243,0.52),rgba(248,247,243,0.86)_58%,rgba(248,247,243,1)_100%)] md:bg-gradient-to-r md:from-[#F8F7F3] md:via-[#F8F7F3]/90 md:to-transparent md:via-[26%] md:from-[24%]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(248,247,243,0.52),rgba(248,247,243,0.86)_58%,rgba(248,247,243,1)_100%)] md:bg-[linear-gradient(90deg,rgba(248,247,243,0.98)_0%,rgba(248,247,243,0.82)_36%,rgba(248,247,243,0.18)_100%)]" />
 
-        {/* Soft Decorative Ambient Glows - Blur reduced to 40px for paint optimization */}
-        <div className="absolute top-[5%] left-[0%] h-64 w-64 md:h-96 md:w-96 bg-[radial-gradient(circle,rgba(211,32,39,0.04)_0%,transparent_70%)] pointer-events-none" />
-        <div className="absolute bottom-[0%] right-[0%] h-72 w-72 md:h-[400px] md:w-[400px] bg-[radial-gradient(circle,rgba(15,23,42,0.03)_0%,transparent_70%)] pointer-events-none" />
-        <div className="absolute inset-0 opacity-[0.01] [background-image:linear-gradient(rgba(15,23,42,0.35)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.35)_1px,transparent_1px)] [background-size:72px_72px]" />
+        <div className="absolute top-[14%] left-[7%] h-36 w-36 rounded-full bg-[#D32027]/10 blur-3xl md:h-56 md:w-56 md:bg-[#D32027]/12 transform-gpu" />
+
+        <div className="absolute bottom-[12%] right-[8%] h-40 w-40 rounded-full bg-slate-900/8 blur-3xl md:h-64 md:w-64 md:bg-slate-900/10 transform-gpu" />
+
+        <div className="absolute left-1/2 top-1/2 h-[70%] w-[120%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/35 blur-[80px] md:w-[58%] transform-gpu" />
+
+        <div className="absolute inset-0 opacity-[0.05] [background-image:linear-gradient(rgba(15,23,42,0.35)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.35)_1px,transparent_1px)] [background-size:72px_72px]" />
       </div>
 
       <motion.div
-        className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center px-5 py-24 text-center sm:px-6 lg:px-8 transform-gpu"
+        className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center px-5 py-24 text-center sm:px-6 lg:px-8"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
-        <motion.h1 className="flex flex-col gap-3 md:gap-4" variants={itemVariants}>
-          <span className="text-sm font-medium uppercase tracking-[0.32em] text-slate-500 sm:text-base">
+        
+
+        <motion.h1 className="flex flex-col gap-3 md:gap-4">
+          <motion.span
+            variants={itemVariants}
+            className="text-sm font-medium uppercase tracking-[0.32em] text-slate-500 sm:text-base"
+          >
             The Standard for
-          </span>
-          <span className="mx-auto max-w-5xl text-[3rem] font-black leading-[0.92] tracking-[-0.05em] text-[#0B101E] sm:text-6xl md:text-7xl lg:text-8xl">
-            Enterprise <br className="block md:hidden" />
+          </motion.span>
+
+          <motion.span
+            variants={itemVariants}
+            className="mx-auto max-w-5xl text-[3rem] font-black leading-[0.92] tracking-[-0.05em] text-[#0B101E] sm:text-6xl md:text-7xl lg:text-8xl"
+          >
+            Enterprise{" "}
+            <br className="block md:hidden" />
             Intelligence
-          </span>
+          </motion.span>
         </motion.h1>
 
-        {/* Separator Line */}
         <motion.div
-          variants={itemVariants}
+          variants={lineVariants}
           className="mt-7 mb-8 h-1.5 w-14 origin-center rounded-full bg-[#D32027] md:w-16"
         />
 
@@ -108,6 +134,7 @@ const HeroSection = ({ isTransitioning = false }: { isTransitioning?: boolean })
               if (el) {
                 el.scrollIntoView({ behavior: "smooth", block: "start" });
               } else {
+                // fallback: change hash
                 window.location.hash = "#services";
               }
             }}
@@ -124,7 +151,7 @@ const HeroSection = ({ isTransitioning = false }: { isTransitioning?: boolean })
 
           <a
             href="#products"
-            className="flex w-full min-w-[220px] items-center justify-center rounded-xl border border-slate-200 bg-white px-6 py-4 text-[11px] font-bold uppercase tracking-[0.22em] text-[#0B101E] transition-all duration-300 hover:bg-slate-50 hover:shadow-[0_12px_30px_rgba(15,23,42,0.08)] sm:w-auto"
+            className="flex w-full min-w-[220px] items-center justify-center rounded-xl border border-slate-200 bg-white/70 px-6 py-4 text-[11px] font-bold uppercase tracking-[0.22em] text-[#0B101E] backdrop-blur-md transition-all duration-300 hover:bg-white hover:shadow-[0_12px_30px_rgba(15,23,42,0.08)] sm:w-auto"
           >
             View Solutions
           </a>
