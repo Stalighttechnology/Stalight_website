@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShieldCheck, Layers, Smartphone, LayoutDashboard, ArrowRight, GraduationCap, BookOpen, Calendar, FileCheck, BarChart, Target, Wallet, Bus, Library, Home, Users, Lock, Globe, Bell, X, Loader2, Send } from "lucide-react";
 import { supabase } from "@/lib/supabaseClient";
@@ -90,29 +90,28 @@ const ProductLaunchHero = () => {
   };
 
   return (
-    <section className="relative isolate flex min-h-[100dvh] w-full items-start lg:items-center justify-center overflow-y-auto overflow-x-hidden bg-white font-sans border-b border-slate-200 custom-scrollbar">
+    // FIX: Removed justify-center so content flows naturally and doesn't get clipped on short screens
+    <section className="relative isolate flex flex-col w-full min-h-[100dvh] overflow-x-hidden bg-white font-sans border-b border-slate-200">
 
       {/* Dynamic Background */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden h-full min-h-[1000px]">
         <div className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(rgba(15,23,42,1)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,1)_1px,transparent_1px)] [background-size:60px_60px]" />
-
-        {/* Gradients */}
-        <div className="absolute top-[-10%] right-[-10%] h-[500px] w-[500px] rounded-full bg-gradient-to-br from-purple-500/10 to-pink-500/10 blur-3xl" />
-        <div className="absolute bottom-[-10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-blue-500/10 to-purple-500/10 blur-3xl" />
+        <div className="absolute top-[-10%] right-[-10%] h-[300px] w-[300px] sm:h-[500px] sm:w-[500px] rounded-full bg-gradient-to-br from-purple-500/10 to-pink-500/10 blur-3xl" />
+        <div className="absolute bottom-[-10%] left-[-10%] h-[300px] w-[300px] sm:h-[500px] sm:w-[500px] rounded-full bg-gradient-to-tr from-blue-500/10 to-purple-500/10 blur-3xl" />
       </div>
 
-      <div className="container relative z-10 mx-auto px-5 pt-36 pb-32 xl:pt-44 xl:pb-24 sm:px-6 lg:px-8 max-w-[1400px]">
+      {/* FIX: Reduced extreme paddings to allow content to fit perfectly on laptop screens */}
+      <div className="container relative z-10 mx-auto px-4 pt-28 pb-12 sm:pt-32 sm:pb-16 lg:pt-32 lg:pb-16 w-full max-w-[1400px]">
 
         {/* Hero Top Content */}
         <motion.div
-          className="flex flex-col justify-center items-center text-center pt-8 lg:pt-08 max-w-4xl mx-auto"
+          className="flex flex-col items-center text-center max-w-4xl mx-auto"
           initial="hidden"
           animate="visible"
           variants={containerVariants}
         >
-
           {/* Main Heading */}
-          <motion.h1 variants={itemVariants} className="text-5xl sm:text-6xl md:text-7xl xl:text-8xl tracking-tight leading-none text-slate-900 mb-4 flex flex-wrap justify-center gap-3 sm:gap-4">
+          <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-7xl xl:text-8xl tracking-tight leading-none text-slate-900 mb-4 flex flex-wrap justify-center gap-2 sm:gap-4">
             <span className="font-light uppercase">STALIGHT</span>
             <motion.span
               animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
@@ -124,11 +123,12 @@ const ProductLaunchHero = () => {
           </motion.h1>
 
           {/* Tagline */}
-          <motion.h2 variants={itemVariants} className="text-lg sm:text-xl md:text-2xl font-medium leading-[1.3] tracking-wide text-slate-500 mb-6 text-center">
+          <motion.h2 variants={itemVariants} className="text-base sm:text-lg md:text-2xl font-medium leading-[1.3] tracking-wide text-slate-500 mb-4 text-center">
             Smart Campus. Better Learning.
           </motion.h2>
 
-          <motion.p variants={itemVariants} className="text-base sm:text-lg text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed text-center">
+          {/* FIX: Reduced margin bottom here from mb-10 to mb-6 */}
+          <motion.p variants={itemVariants} className="text-sm sm:text-base md:text-lg text-slate-600 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed text-center px-2">
             An All-in-One Campus Management Solution for Modern Educational Institutions. Streamline administration, improve communication, and deliver a better learning experience.
           </motion.p>
 
@@ -140,33 +140,34 @@ const ProductLaunchHero = () => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto", transition: { duration: 0.5, ease: easeOutExpo } }}
                 exit={{ opacity: 0, height: 0, scale: 0.95, transition: { duration: 0.4 } }}
-                className="relative w-full max-w-full sm:w-auto sm:inline-flex group origin-top pb-6 sm:p-8 sm:-m-8 justify-center"
+                className="relative w-full max-w-sm sm:max-w-auto sm:inline-flex group origin-top pb-6 justify-center mx-auto"
               >
-                <div className="mb-8 mt-2 relative">
+                <div className="mb-4 sm:mb-6 mt-2 relative w-full sm:w-auto">
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 blur-md opacity-30 group-hover:opacity-60 transition-opacity duration-700"></div>
-                  <div className="relative bg-white/95 backdrop-blur-md border border-white/60 rounded-2xl p-4 flex flex-col items-center gap-2 shadow-2xl">
+                  <div className="relative bg-white/95 backdrop-blur-md border border-white/60 rounded-2xl p-3 sm:p-5 flex flex-col items-center gap-2 shadow-2xl w-full">
                     <div className="flex items-center justify-center gap-2 mb-1 px-1">
                       <div className="w-2 h-2 rounded-full bg-pink-500 animate-pulse"></div>
                       <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">{TARGET_LAUNCH_DISPLAY}</span>
                     </div>
-                    <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-5 px-1 sm:px-4 w-full">
-                      <div className="flex flex-col items-center min-w-[45px] sm:min-w-[60px] md:min-w-[70px]">
-                        <span className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.days).padStart(2, '0')}</span>
+                    
+                    <div className="flex items-center justify-center gap-1 sm:gap-4 md:gap-5 px-1 sm:px-4 w-full">
+                      <div className="flex flex-col items-center min-w-[50px] sm:min-w-[60px] md:min-w-[70px]">
+                        <span className="text-2xl sm:text-4xl md:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.days).padStart(2, '0')}</span>
                         <span className="text-[9px] sm:text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-400 mt-1 sm:mt-2">Days</span>
                       </div>
-                      <span className="text-lg sm:text-2xl md:text-4xl font-black text-slate-300 pb-3 sm:pb-5 md:pb-6 animate-pulse">:</span>
-                      <div className="flex flex-col items-center min-w-[45px] sm:min-w-[60px] md:min-w-[70px]">
-                        <span className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.hours).padStart(2, '0')}</span>
+                      <span className="text-xl sm:text-3xl md:text-4xl font-black text-slate-300 pb-3 sm:pb-5 animate-pulse">:</span>
+                      <div className="flex flex-col items-center min-w-[50px] sm:min-w-[60px] md:min-w-[70px]">
+                        <span className="text-2xl sm:text-4xl md:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.hours).padStart(2, '0')}</span>
                         <span className="text-[9px] sm:text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-400 mt-1 sm:mt-2">Hours</span>
                       </div>
-                      <span className="text-lg sm:text-2xl md:text-4xl font-black text-slate-300 pb-3 sm:pb-5 md:pb-6 animate-pulse">:</span>
-                      <div className="flex flex-col items-center min-w-[45px] sm:min-w-[60px] md:min-w-[70px]">
-                        <span className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                      <span className="text-xl sm:text-3xl md:text-4xl font-black text-slate-300 pb-3 sm:pb-5 animate-pulse">:</span>
+                      <div className="flex flex-col items-center min-w-[50px] sm:min-w-[60px] md:min-w-[70px]">
+                        <span className="text-2xl sm:text-4xl md:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.minutes).padStart(2, '0')}</span>
                         <span className="text-[9px] sm:text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-400 mt-1 sm:mt-2">Mins</span>
                       </div>
-                      <span className="text-lg sm:text-2xl md:text-4xl font-black text-slate-300 pb-3 sm:pb-5 md:pb-6 animate-pulse">:</span>
-                      <div className="flex flex-col items-center min-w-[45px] sm:min-w-[60px] md:min-w-[70px]">
-                        <span className="text-2xl sm:text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-pink-500 to-purple-600 tabular-nums leading-none tracking-tight">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                      <span className="text-xl sm:text-3xl md:text-4xl font-black text-slate-300 pb-3 sm:pb-5 animate-pulse">:</span>
+                      <div className="flex flex-col items-center min-w-[50px] sm:min-w-[60px] md:min-w-[70px]">
+                        <span className="text-2xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-pink-500 to-purple-600 tabular-nums leading-none tracking-tight">{String(timeLeft.seconds).padStart(2, '0')}</span>
                         <span className="text-[9px] sm:text-[10px] md:text-xs font-bold uppercase tracking-widest text-pink-500 mt-1 sm:mt-2">Secs</span>
                       </div>
                     </div>
@@ -177,29 +178,29 @@ const ProductLaunchHero = () => {
           </AnimatePresence>
 
           {/* Why Choose Stalight */}
-          <motion.div variants={itemVariants} className="mb-10 w-full max-w-4xl mx-auto">
-            <div className="flex items-center justify-center gap-4 mb-8">
-              <span className="h-[1px] w-12 bg-slate-200"></span>
-              <p className="text-xs font-bold uppercase tracking-widest text-slate-400">
+          <motion.div variants={itemVariants} className="mb-8 w-full max-w-4xl mx-auto px-2">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <span className="h-[1px] w-8 sm:w-12 bg-slate-200"></span>
+              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400">
                 Why Choose Us
               </p>
-              <span className="h-[1px] w-12 bg-slate-200"></span>
+              <span className="h-[1px] w-8 sm:w-12 bg-slate-200"></span>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 text-center">
               {whyChoose.map((item, idx) => (
-                <div key={idx} className="flex flex-col items-center gap-2">
-                  <div className="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center mb-2">
-                    <item.icon size={24} className="text-purple-600" />
+                <div key={idx} className="flex flex-col items-center gap-2 p-2">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-purple-50 flex items-center justify-center mb-1 sm:mb-2">
+                    <item.icon size={20} className="text-purple-600 sm:w-6 sm:h-6" />
                   </div>
-                  <span className="text-sm font-bold text-slate-800">{item.title}</span>
-                  <span className="text-xs text-slate-500">{item.desc}</span>
+                  <span className="text-xs sm:text-sm font-bold text-slate-800 leading-tight">{item.title}</span>
+                  <span className="text-[10px] sm:text-xs text-slate-500 leading-tight">{item.desc}</span>
                 </div>
               ))}
             </div>
           </motion.div>
 
           {/* CTAs */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto relative min-h-[60px] flex-wrap z-20 mx-auto">
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto relative flex-wrap z-20 mx-auto px-4">
             <AnimatePresence mode="wait">
               {!isLaunched ? (
                 <motion.button
@@ -208,7 +209,7 @@ const ProductLaunchHero = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -15, filter: "blur(4px)" }}
                   transition={{ duration: 0.4, ease: easeOutExpo }}
-                  onClick={() => setIsFormOpen(true)} className="group relative flex w-full sm:w-auto min-w-[200px] items-center justify-center rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 px-6 py-4 text-[12px] font-bold uppercase tracking-widest text-white shadow-lg shadow-purple-500/25 transition-all hover:shadow-purple-500/40 hover:-translate-y-0.5 overflow-hidden">
+                  onClick={() => setIsFormOpen(true)} className="group relative flex w-full sm:w-auto min-w-[200px] items-center justify-center rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 px-6 py-3.5 sm:py-4 text-[12px] font-bold uppercase tracking-widest text-white shadow-lg shadow-purple-500/25 transition-all hover:shadow-purple-500/40 hover:-translate-y-0.5 overflow-hidden">
                   <span className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
                   <span className="relative flex items-center gap-2">
                     Join Waitlist <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -221,7 +222,7 @@ const ProductLaunchHero = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -15, filter: "blur(4px)" }}
                   transition={{ duration: 0.4, ease: easeOutExpo }}
-                  href="https://campus.stalight.in/stalightcampus" target="_blank" rel="noopener noreferrer" className="group relative flex w-full sm:w-auto min-w-[200px] items-center justify-center rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 px-6 py-4 text-[12px] font-bold uppercase tracking-widest text-white shadow-lg shadow-purple-500/25 transition-all hover:shadow-purple-500/40 hover:-translate-y-0.5 overflow-hidden">
+                  href="https://campus.stalight.in/stalightcampus" target="_blank" rel="noopener noreferrer" className="group relative flex w-full sm:w-auto min-w-[200px] items-center justify-center rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 px-6 py-3.5 sm:py-4 text-[12px] font-bold uppercase tracking-widest text-white shadow-lg shadow-purple-500/25 transition-all hover:shadow-purple-500/40 hover:-translate-y-0.5 overflow-hidden">
                   <span className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
                   <span className="relative flex items-center gap-2">
                     Get Access <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -233,9 +234,9 @@ const ProductLaunchHero = () => {
 
         </motion.div>
 
-        {/* Core Modules - Now below the hero */}
+        {/* Core Modules Marquee - FIX: Reduced top margin significantly so it tucks nicely under the button */}
         <motion.div
-          className="relative mt-12 sm:mt-16 w-full max-w-[1200px] mx-auto z-20"
+          className="relative mt-12 sm:mt-14 lg:mt-16 w-full max-w-[1200px] mx-auto z-20 pb-4"
           initial="hidden"
           animate="visible"
           variants={containerVariants}
@@ -264,24 +265,23 @@ const ProductLaunchHero = () => {
             </div>
           </div>
           
-          {/* subtle glow */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-20 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-blue-500/10 blur-2xl -z-10 rounded-full pointer-events-none"></div>
         </motion.div>
       </div>
 
       <style>{`
         .custom-scrollbar::-webkit-scrollbar {
-          width: 4px;
+          width: 6px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
           background: transparent;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #e2e8f0;
+          background: #cbd5e1;
           border-radius: 10px;
         }
         .custom-scrollbar:hover::-webkit-scrollbar-thumb {
-          background: #cbd5e1;
+          background: #94a3b8;
         }
         @keyframes marquee {
           0% { transform: translateX(0); }
@@ -297,11 +297,10 @@ const ProductLaunchHero = () => {
 
       {/* Demo Modal */}
       {isFormOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 overflow-hidden">
-          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setIsFormOpen(false)} />
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 overflow-hidden">
+          <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setIsFormOpen(false)} />
 
-          <div className="relative z-[110] w-full max-w-2xl bg-white rounded-3xl sm:rounded-[2.5rem] shadow-2xl border border-slate-100 max-h-[95dvh] sm:max-h-[90vh] flex flex-col overflow-hidden">
-
+          <div className="relative z-[110] w-full max-w-2xl bg-white rounded-3xl sm:rounded-[2.5rem] shadow-2xl border border-slate-100 max-h-[90dvh] flex flex-col overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-1.5 sm:h-2 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 z-20"></div>
 
             <div className="flex items-center justify-between px-5 sm:px-8 py-4 sm:py-6 shrink-0 border-b border-slate-100 bg-white relative z-10">
@@ -385,7 +384,6 @@ const ProductLaunchHero = () => {
                 {isSubmitting ? 'Submitting...' : 'Request Demo'}
               </button>
             </div>
-
           </div>
         </div>
       )}

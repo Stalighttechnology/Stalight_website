@@ -6,7 +6,7 @@ import {
   CheckCircle2, Star, Calendar, FileText,
   ClipboardCheck, BookOpen, GraduationCap, MapPin, Quote,
   Bell, ScanFace, LayoutDashboard, Home, Printer, ArrowRight, Zap, Activity, X, Loader2, Send,
-  Globe, Megaphone, BarChart, Bus, Library, Target, Wallet, UserPlus, Layout
+  Globe, Megaphone, BarChart, Bus, Library, Target, Wallet, Layout
 } from "lucide-react";
 import { supabase } from "@/lib/supabaseClient";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
@@ -149,7 +149,7 @@ const institutionalPillars = [
       { key: "role-based-dashboards", icon: LayoutDashboard, title: "Role-Based Dashboards", desc: "Personalised interfaces for students, faculty, and administrators with relevant data at-a-glance." },
       { key: "question-paper-workflow", icon: Printer, title: "Question Paper Workflow System", desc: "Secure question paper creation, review and distribution workflow." },
       { key: "announcements", icon: Megaphone, title: "Announcements", desc: "Push notifications, broadcasts" },
-      { key: "admission-lifecycle", icon: UserPlus, title: "Admission Lifecycle", desc: "End-to-end pipeline from lead generation to student onboarding." }
+      { key: "admission-lifecycle", icon: User, title: "Admission Lifecycle", desc: "End-to-end pipeline from lead generation to student onboarding." }
     ]
   },
   {
@@ -274,17 +274,18 @@ const NeuroCampus = () => {
           <div className="absolute bottom-[-10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-blue-500/10 to-purple-500/10 blur-[100px] transform-gpu" />
         </div>
 
-        <motion.div initial="hidden" animate="visible" variants={containerVariants} className="relative z-10 flex flex-col items-center text-center px-4 mt-20">
+        <motion.div initial="hidden" animate="visible" variants={containerVariants} className="relative z-10 flex flex-col items-center text-center px-4 mt-28 sm:mt-32">
           <motion.div variants={fadeUpVariants} className="mb-6 flex items-center justify-center gap-3">
-            <h1 className="text-2xl sm:text-3xl tracking-tight text-slate-800 flex flex-wrap justify-center gap-2 uppercase">
-              <span className="font-light">STALIGHT</span> <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">Campus</span>
+            <h1 className="tracking-tight text-slate-800 flex flex-wrap justify-center gap-2 uppercase" style={{ fontSize: 'clamp(1.25rem, 5.5vw, 2.25rem)', lineHeight: 1 }}>
+              <span className="font-light">STALIGHT</span>
+              <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">Campus</span>
             </h1>
           </motion.div>
 
-          <motion.h2 variants={fadeUpVariants} className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-900 mb-4">
+          <motion.h2 variants={fadeUpVariants} className="font-black tracking-tight text-slate-900 mb-4" style={{ fontSize: 'clamp(2rem, 7.5vw, 4.25rem)', lineHeight: 1 }}>
             Coming Soon
           </motion.h2>
-          <motion.p variants={fadeUpVariants} className="text-lg text-slate-600 mb-10 max-w-md mx-auto">
+          <motion.p variants={fadeUpVariants} className="text-base sm:text-lg text-slate-600 mb-10 max-w-md mx-auto" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.125rem)' }}>
             We are preparing something amazing. The next-generation academic management platform is almost here.
           </motion.p>
 
@@ -294,22 +295,22 @@ const NeuroCampus = () => {
               <span className="text-xs font-bold uppercase tracking-widest text-slate-500">{TARGET_LAUNCH_DISPLAY}</span>
               <div className="flex items-center gap-4 sm:gap-6">
                 <div className="flex flex-col items-center min-w-[60px]">
-                  <span className="text-4xl sm:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.days).padStart(2, '0')}</span>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-2">Days</span>
-                </div>
+                    <span className="font-black text-slate-800 tabular-nums leading-none tracking-tight" style={{ fontSize: 'clamp(2rem, 7vw, 3.5rem)' }}>{String(timeLeft.days).padStart(2, '0')}</span>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-2">Days</span>
+                  </div>
                 <span className="text-3xl sm:text-4xl font-black text-slate-300 animate-pulse mb-6">:</span>
                 <div className="flex flex-col items-center min-w-[60px]">
-                  <span className="text-4xl sm:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.hours).padStart(2, '0')}</span>
+                  <span className="font-black text-slate-800 tabular-nums leading-none tracking-tight" style={{ fontSize: 'clamp(2rem, 7vw, 3.5rem)' }}>{String(timeLeft.hours).padStart(2, '0')}</span>
                   <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-2">Hours</span>
                 </div>
                 <span className="text-3xl sm:text-4xl font-black text-slate-300 animate-pulse mb-6">:</span>
                 <div className="flex flex-col items-center min-w-[60px]">
-                  <span className="text-4xl sm:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                  <span className="font-black text-slate-800 tabular-nums leading-none tracking-tight" style={{ fontSize: 'clamp(2rem, 7vw, 3.5rem)' }}>{String(timeLeft.minutes).padStart(2, '0')}</span>
                   <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-2">Mins</span>
                 </div>
                 <span className="text-3xl sm:text-4xl font-black text-slate-300 animate-pulse mb-6">:</span>
                 <div className="flex flex-col items-center min-w-[60px]">
-                  <span className="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-pink-500 to-purple-600 tabular-nums leading-none tracking-tight">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                  <span className="font-black text-transparent bg-clip-text bg-gradient-to-b from-pink-500 to-purple-600 tabular-nums leading-none tracking-tight" style={{ fontSize: 'clamp(2rem, 7vw, 3.5rem)' }}>{String(timeLeft.seconds).padStart(2, '0')}</span>
                   <span className="text-[10px] font-bold uppercase tracking-widest text-pink-500 mt-2">Secs</span>
                 </div>
               </div>
