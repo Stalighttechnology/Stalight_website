@@ -144,7 +144,15 @@ const Navbar = () => {
                     >
                       <Link 
                         to={link.href.startsWith("/") ? link.href : (isHome ? link.href : `/${link.href}`)}
-                        onClick={(e) => handleNavClick(e, link.href)}
+                        onClick={(e) => {
+                          // On touch/tablet devices clicking should open the dropdown
+                          if (isDropdown) {
+                            e.preventDefault();
+                            setOpen((v) => !v);
+                          } else {
+                            handleNavClick(e, link.href);
+                          }
+                        }}
                         className={pillLinkStyle}
                       >
                         {link.label}
