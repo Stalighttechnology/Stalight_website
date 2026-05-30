@@ -6,6 +6,7 @@ import ProductLaunchHero from "./ProductLaunchHero";
 const HeroCarousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const slides = [HeroSection, ProductLaunchHero];
 
   useEffect(() => {
@@ -13,6 +14,7 @@ const HeroCarousel = () => {
     
     const duration = activeIndex === 0 ? 4000 : 10000;
     const timer = setTimeout(() => {
+      setIsTransitioning(true);
       setActiveIndex((current) => (current === 0 ? 1 : 0));
     }, duration);
     
@@ -23,25 +25,25 @@ const HeroCarousel = () => {
 
   return (
     <div
-      className="relative w-full h-[100dvh] overflow-hidden bg-[#F8F7F3]"
+      className="relative w-full h-[100dvh] min-h-[100dvh] overflow-hidden bg-[#F8F7F3]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <AnimatePresence>
+      <AnimatePresence mode="wait" onExitComplete={() => setIsTransitioning(false)}>
         <motion.div
           key={activeIndex}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }}
+          exit={{ opacity: 0, y: 10, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }}
           className="absolute inset-0 w-full h-full"
+          style={{ willChange: "transform, opacity" }}
         >
-          <CurrentSlide />
+          <CurrentSlide isTransitioning={isTransitioning} />
         </motion.div>
       </AnimatePresence>
-
     </div>
   );
 };
 
 export default HeroCarousel;
+

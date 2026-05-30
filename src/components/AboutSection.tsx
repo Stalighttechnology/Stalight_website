@@ -1,7 +1,5 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-// Note: images removed for a cleaner professional layout
 
 const features = [
   {
@@ -18,31 +16,11 @@ const features = [
   }
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { type: "spring", stiffness: 80, damping: 20 } 
-  }
-};
-
 const AboutSection = () => {
-  const sectionRef = useRef(null);
-
   return (
     <section 
       id="about" 
-      ref={sectionRef}
-      className="relative min-h-screen flex items-center bg-[#FAFAFC] py-20 lg:py-28 overflow-hidden z-0"
+      className="relative flex items-center bg-[#FAFAFC] py-16 lg:py-24 overflow-hidden z-0"
     >
       
       {/* Animated Ambient Background */}
@@ -51,9 +29,9 @@ const AboutSection = () => {
         <div className="absolute inset-0 opacity-[0.03]"
              style={{ backgroundImage: 'linear-gradient(#0f172a 1px, transparent 1px), linear-gradient(90deg, #0f172a 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
         
-        {/* Subtle ambient glows (static for performance) */}
-        <div className="absolute top-0 right-[-6%] w-[360px] h-[360px] bg-orange-400/12 rounded-full blur-[24px]  transform-gpu" style={{pointerEvents: 'none'}} />
-        <div className="absolute bottom-[-6%] left-[-6%] w-[300px] h-[300px] bg-pink-400/12 rounded-full blur-[20px]  transform-gpu" style={{pointerEvents: 'none'}} />
+        {/* Subtle ambient glows */}
+        <div className="absolute top-0 right-[-6%] w-[360px] h-[360px] bg-orange-400/12 rounded-full blur-[24px] transform-gpu" style={{pointerEvents: 'none'}} />
+        <div className="absolute bottom-[-6%] left-[-6%] w-[300px] h-[300px] bg-pink-400/12 rounded-full blur-[20px] transform-gpu" style={{pointerEvents: 'none'}} />
       </div>
 
       <div className="container mx-auto px-6 lg:px-12 xl:px-20 relative z-10">
@@ -61,29 +39,21 @@ const AboutSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 xl:gap-20 items-center">
           
           {/* LEFT COLUMN: Text & Value Propositions */}
-          <motion.div 
-            className="lg:col-span-5 flex flex-col justify-center text-center lg:text-left"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            <motion.div variants={itemVariants}>
+          <div className="lg:col-span-5 flex flex-col justify-center text-center lg:text-left">
+            <div>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm mb-8 hover:shadow-md transition-shadow">
                 <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
                 <span className="text-slate-700 font-bold tracking-[0.15em] uppercase text-[10px] sm:text-xs">
                   About Our Excellence
                 </span>
               </div>
-            </motion.div>
+            </div>
             
-            <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.1] tracking-tight mb-6 ">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.1] tracking-tight mb-6">
               Building Your <br className="hidden lg:block" />
               <span className="relative inline-block mt-2">
-                {/* Flowing Gradient Text Animation */}
-                <span
-                  className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 bg-[length:200%_auto]"
-                >
+                {/* Flowing Gradient Text */}
+                <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 bg-[length:200%_auto]">
                   Digital Future
                 </span>
                 
@@ -98,12 +68,12 @@ const AboutSection = () => {
                   </defs>
                 </svg>
               </span>
-            </motion.h1>
+            </h1>
             
-            <motion.p variants={itemVariants} className="text-slate-500 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10">
+            <p className="text-slate-500 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10">
               We bridge the gap between complex technology and your business goals. By delivering scalable software, modern IT infrastructure, and top-tier technical education, we empower you to lead in a digital-first world.
-            </motion.p>
-            {/* Compact feature summary (no repeated descriptions) */}
+            </p>
+            {/* Compact feature summary */}
             <div className="mb-10 mx-auto lg:mx-0 max-w-md">
               <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
                 <span className="px-3 py-1 rounded-full bg-orange-50 text-orange-600 text-xs font-semibold">Technical education</span>
@@ -112,7 +82,7 @@ const AboutSection = () => {
               </div>
             </div>
 
-            <motion.div variants={itemVariants}>
+            <div>
               <Link to="/about-us" className="group relative inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-full overflow-hidden shadow-xl shadow-slate-900/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-orange-500/25">
                 <span className="absolute inset-0 bg-gradient-to-r from-orange-500 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></span>
                 <span className="relative z-10 flex items-center gap-2 text-sm font-bold tracking-[0.1em] uppercase">
@@ -120,10 +90,10 @@ const AboutSection = () => {
                   <span className="ml-1 transform group-hover:translate-x-1 transition-transform duration-300">→</span>
                 </span>
               </Link>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
-          {/* RIGHT COLUMN: Professional Feature Cards (images removed) */}
+          {/* RIGHT COLUMN: Professional Feature Cards */}
           <div className="lg:col-span-7 mt-12 lg:mt-0 w-full relative">
 
             {/* Ambient Back Glow for Depth */}
@@ -133,7 +103,7 @@ const AboutSection = () => {
               {features.map((feature, idx) => (
                 <div
                   key={idx}
-                  className="group bg-white/60 border border-slate-100 rounded-2xl p-6 shadow-sm transition-all duration-200 "
+                  className="group bg-white/60 border border-slate-100 rounded-2xl p-6 shadow-sm transition-all duration-200"
                 >
                   <div className="flex items-start gap-4">
                     <div className="mt-1 w-3 h-3 rounded-full bg-orange-500 shrink-0" />
@@ -144,10 +114,6 @@ const AboutSection = () => {
                   </div>
                 </div>
               ))}
-
-              {/* Call-to-action panel */}
-              
-
             </div>
           </div>
           

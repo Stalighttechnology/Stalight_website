@@ -1,22 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShieldCheck, Layers, Smartphone, LayoutDashboard, ArrowRight, GraduationCap, BookOpen, Calendar, FileCheck, BarChart, Target, Wallet, Bus, Library, Home, Users, Lock, Globe, Bell, X, Loader2, Send } from "lucide-react";
 import { supabase } from "@/lib/supabaseClient";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
-import { useLaunchCountdown, TARGET_LAUNCH_DISPLAY } from "@/hooks/useLaunchCountdown";
+import { useLaunchCountdown, useIsLaunched, TARGET_LAUNCH_DISPLAY } from "@/hooks/useLaunchCountdown";
 
 const easeOutExpo = [0.16, 1, 0.3, 1];
 
 const containerVariants = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
   },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: easeOutExpo } },
+const titleVariants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOutExpo } },
+};
+
+const descVariants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOutExpo } },
+};
+
+const ctaVariants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOutExpo } },
+};
+
+const cardsVariants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOutExpo } },
 };
 
 const whyChoose = [
@@ -40,11 +55,52 @@ const allModules = [
   { icon: Users, name: "Faculty & HR", desc: "Staff profiles, leave, attendance" },
   { icon: Lock, name: "Role-Based Access", desc: "Isolated dashboards per role" },
   { icon: Globe, name: "Multi-Campus Admin", desc: "Centralized superadmin dashboard" },
-  { icon: Bell, name: "Announcements", desc: "Push notifications, broadcoasts" },
+  { icon: Bell, name: "Announcements", desc: "Push notifications, broadcasts" },
 ];
 
-const ProductLaunchHero = () => {
+const CountdownTimer = React.memo(() => {
   const { isLaunched, timeLeft, isReady } = useLaunchCountdown();
+  if (isLaunched || !isReady) return null;
+
+  return (
+    <div className="relative w-full max-w-full sm:w-auto sm:inline-flex group origin-top pb-4 sm:p-6 sm:-m-6 justify-center">
+      <div className="mb-5 relative">
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 blur-sm opacity-20"></div>
+        <div className="relative bg-white border border-slate-100 rounded-2xl p-4 flex flex-col items-center gap-2 shadow-xl">
+          <div className="flex items-center justify-center gap-2 mb-1 px-1">
+            <div className="w-2 h-2 rounded-full bg-pink-500 animate-pulse"></div>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">{TARGET_LAUNCH_DISPLAY}</span>
+          </div>
+          <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-5 px-1 sm:px-4 w-full">
+            <div className="flex flex-col items-center min-w-[45px] sm:min-w-[60px] md:min-w-[70px]">
+              <span className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.days).padStart(2, '0')}</span>
+              <span className="text-[9px] sm:text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-400 mt-1 sm:mt-2">Days</span>
+            </div>
+            <span className="text-lg sm:text-2xl md:text-4xl font-black text-slate-300 pb-3 sm:pb-5 md:pb-6 animate-pulse">:</span>
+            <div className="flex flex-col items-center min-w-[45px] sm:min-w-[60px] md:min-w-[70px]">
+              <span className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.hours).padStart(2, '0')}</span>
+              <span className="text-[9px] sm:text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-400 mt-1 sm:mt-2">Hours</span>
+            </div>
+            <span className="text-lg sm:text-2xl md:text-4xl font-black text-slate-300 pb-3 sm:pb-5 md:pb-6 animate-pulse">:</span>
+            <div className="flex flex-col items-center min-w-[45px] sm:min-w-[60px] md:min-w-[70px]">
+              <span className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.minutes).padStart(2, '0')}</span>
+              <span className="text-[9px] sm:text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-400 mt-1 sm:mt-2">Mins</span>
+            </div>
+            <span className="text-lg sm:text-2xl md:text-4xl font-black text-slate-300 pb-3 sm:pb-5 md:pb-6 animate-pulse">:</span>
+            <div className="flex flex-col items-center min-w-[45px] sm:min-w-[60px] md:min-w-[70px]">
+              <span className="text-2xl sm:text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-pink-500 to-purple-600 tabular-nums leading-none tracking-tight">{String(timeLeft.seconds).padStart(2, '0')}</span>
+              <span className="text-[9px] sm:text-[10px] md:text-xs font-bold uppercase tracking-widest text-pink-500 mt-1 sm:mt-2">Secs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+});
+CountdownTimer.displayName = "CountdownTimer";
+
+const ProductLaunchHero = ({ isTransitioning = false }: { isTransitioning?: boolean }) => {
+  const { isLaunched } = useIsLaunched();
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [formData, setFormData] = useState({ full_name: "", official_email: "", phone: "", organization: "", designation: "", interested_solution: "", preferred_date: "", preferred_time: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -72,7 +128,7 @@ const ProductLaunchHero = () => {
       created_at: new Date().toISOString()
     };
 
-    const { data, error } = await supabase.from('neurocampus_inquiries').insert([payload]);
+    const { error } = await supabase.from('neurocampus_inquiries').insert([payload]);
     setIsSubmitting(false);
 
     if (error) {
@@ -90,128 +146,118 @@ const ProductLaunchHero = () => {
   };
 
   return (
-    <section className="relative isolate flex min-h-[100dvh] w-full items-start lg:items-center justify-center overflow-y-auto overflow-x-hidden bg-white font-sans border-b border-slate-200 custom-scrollbar">
-      
+    <section className="relative isolate flex flex-col min-h-[100dvh] w-full overflow-hidden bg-white font-sans border-b border-slate-200 custom-scrollbar">
+
       {/* Dynamic Background */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden h-full min-h-[1000px]">
-        <div className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(rgba(15,23,42,1)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,1)_1px,transparent_1px)] [background-size:60px_60px]" />
-        
-        {/* Gradients */}
-        <div className="absolute top-[-10%] right-[-10%] h-[500px] w-[500px] rounded-full bg-gradient-to-br from-purple-500/10 to-pink-500/10 blur-[100px] transform-gpu" />
-        <div className="absolute bottom-[-10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-blue-500/10 to-purple-500/10 blur-[100px] transform-gpu" />
+        <div className="absolute inset-0 opacity-[0.02] [background-image:linear-gradient(rgba(15,23,42,1)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,1)_1px,transparent_1px)] [background-size:60px_60px]" />
+
+        {/* Floating Gradients */}
+        <motion.div 
+          animate={isTransitioning ? { x: 0, y: 0, scale: 1 } : { 
+            x: [0, 50, 0], 
+            y: [0, 30, 0],
+            scale: [1, 1.05, 1]
+          }}
+          transition={isTransitioning ? { duration: 0.5 } : { duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          style={{ willChange: "transform" }}
+          className="absolute top-[-20%] right-[-10%] h-[800px] w-[800px] bg-[radial-gradient(circle,rgba(168,85,247,0.1)_0%,rgba(236,72,153,0.02)_40%,transparent_70%)] pointer-events-none" 
+        />
+        <motion.div 
+          animate={isTransitioning ? { x: 0, y: 0, scale: 1 } : { 
+            x: [0, -40, 0], 
+            y: [0, -50, 0],
+            scale: [1, 1.1, 1]
+          }}
+          transition={isTransitioning ? { duration: 0.5 } : { duration: 25, repeat: Infinity, ease: "easeInOut" }}
+          style={{ willChange: "transform" }}
+          className="absolute bottom-[-20%] left-[-10%] h-[800px] w-[800px] bg-[radial-gradient(circle,rgba(59,130,246,0.1)_0%,rgba(168,85,247,0.02)_40%,transparent_70%)] pointer-events-none" 
+        />
       </div>
 
-      <div className="container relative z-10 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 px-5 pt-32 pb-32 lg:py-24 sm:px-6 lg:px-8 max-w-[1400px]">
-        
-        {/* Left Column: Core Value Prop */}
+      <div className="container relative z-10 mx-auto px-5 pt-28 pb-8 xl:pt-32 xl:pb-12 sm:px-6 lg:px-8 max-w-[1400px]">
+
+        {/* Hero Content */}
         <motion.div
-          className="flex flex-col justify-center items-start pt-4 lg:pt-0"
+          className="flex flex-col items-center text-center max-w-4xl mx-auto"
           initial="hidden"
           animate="visible"
           variants={containerVariants}
         >
-          {/* Launch Countdown */}
-          <AnimatePresence>
-            {(!isLaunched || !isReady) && (
-              <motion.div 
-                key="timer-box"
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto", transition: { duration: 0.5, ease: easeOutExpo } }}
-                exit={{ opacity: 0, height: 0, scale: 0.95, transition: { duration: 0.4 } }}
-                className="relative w-full max-w-full sm:w-auto sm:inline-flex group origin-top pb-6 sm:p-8 sm:-m-8"
-              >
-                <div className="mb-8 mt-2 relative">
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 blur-lg opacity-40 group-hover:opacity-75 transition-opacity duration-700 transform-gpu"></div>
-                  <div className="relative bg-white/95 backdrop-blur-xl border border-white/60 rounded-2xl p-4 flex flex-col items-center sm:items-start gap-2 shadow-2xl">
-                    <div className="flex items-center gap-2 mb-1 px-1">
-                      <div className="w-2 h-2 rounded-full bg-pink-500 animate-pulse"></div>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">{TARGET_LAUNCH_DISPLAY}</span>
-                    </div>
-                    <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 px-1 sm:px-4 w-full">
-                      <div className="flex flex-col items-center min-w-[50px] sm:min-w-[65px] md:min-w-[70px]">
-                        <span className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.days).padStart(2, '0')}</span>
-                        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400 mt-2">Days</span>
-                      </div>
-                      <span className="text-xl sm:text-3xl md:text-4xl font-black text-slate-300 pb-5 sm:pb-6 animate-pulse">:</span>
-                      <div className="flex flex-col items-center min-w-[50px] sm:min-w-[65px] md:min-w-[70px]">
-                        <span className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.hours).padStart(2, '0')}</span>
-                        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400 mt-2">Hours</span>
-                      </div>
-                      <span className="text-xl sm:text-3xl md:text-4xl font-black text-slate-300 pb-5 sm:pb-6 animate-pulse">:</span>
-                      <div className="flex flex-col items-center min-w-[50px] sm:min-w-[65px] md:min-w-[70px]">
-                        <span className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-800 tabular-nums leading-none tracking-tight">{String(timeLeft.minutes).padStart(2, '0')}</span>
-                        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400 mt-2">Mins</span>
-                      </div>
-                      <span className="text-xl sm:text-3xl md:text-4xl font-black text-slate-300 pb-5 sm:pb-6 animate-pulse">:</span>
-                      <div className="flex flex-col items-center min-w-[50px] sm:min-w-[65px] md:min-w-[70px]">
-                        <span className="text-3xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-pink-500 to-purple-600 tabular-nums leading-none tracking-tight">{String(timeLeft.seconds).padStart(2, '0')}</span>
-                        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-pink-500 mt-2">Secs</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
 
           {/* Main Heading */}
-          <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-6xl tracking-tight leading-none text-slate-900 mb-3 uppercase flex flex-wrap gap-2">
-            <span className="font-light">STALIGHT</span> 
-            <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600">Campus</span>
+          <motion.h1 variants={titleVariants} className="text-5xl sm:text-6xl md:text-7xl xl:text-8xl tracking-tight leading-none text-slate-900 mb-4 flex flex-wrap justify-center gap-3 sm:gap-4">
+            <span className="font-light uppercase">STALIGHT</span>
+            <motion.span
+              animate={isTransitioning ? { backgroundPosition: '0% 50%' } : { backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+              transition={isTransitioning ? { duration: 0.5 } : { duration: 6, repeat: Infinity, ease: 'linear' }}
+              className="font-black uppercase text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 bg-[length:200%_auto]"
+            >
+              Campus
+            </motion.span>
           </motion.h1>
 
           {/* Tagline */}
-          <motion.h2 variants={itemVariants} className="text-2xl sm:text-3xl font-bold leading-[1.2] tracking-tight text-slate-700 mb-6">
+          <motion.h2 variants={titleVariants} className="text-lg sm:text-xl md:text-2xl font-medium leading-[1.3] tracking-wide text-slate-500 mb-4 text-center">
             Smart Campus. Better Learning.
           </motion.h2>
 
-          <motion.p variants={itemVariants} className="text-base sm:text-lg text-slate-600 mb-10 max-w-lg leading-relaxed">
+          <motion.p variants={descVariants} className="text-base sm:text-lg text-slate-600 mb-6 max-w-2xl mx-auto leading-relaxed text-center">
             An All-in-One Campus Management Solution for Modern Educational Institutions. Streamline administration, improve communication, and deliver a better learning experience.
           </motion.p>
 
+          {/* Launch Countdown Container (memoized, isolated component) */}
+          <CountdownTimer />
+
           {/* Why Choose Stalight */}
-          <motion.div variants={itemVariants} className="mb-10 w-full max-w-lg">
-            <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-4">
-              Why Choose Us <span className="h-[1px] flex-1 bg-slate-200"></span>
-            </p>
-            <div className="grid grid-cols-2 gap-4">
+          <motion.div variants={ctaVariants} className="mb-6 sm:mb-8 w-full max-w-4xl mx-auto">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <span className="h-[1px] w-12 bg-slate-200"></span>
+              <p className="text-xs font-bold uppercase tracking-widest text-slate-400">
+                Why Choose Us
+              </p>
+              <span className="h-[1px] w-12 bg-slate-200"></span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
               {whyChoose.map((item, idx) => (
-                <div key={idx} className="flex flex-col gap-1">
-                  <div className="flex items-center gap-2 text-slate-800">
-                    <item.icon size={16} className="text-purple-600" />
-                    <span className="text-sm font-bold">{item.title}</span>
+                <div key={idx} className="group flex flex-col items-center gap-2 p-5 rounded-3xl bg-slate-50 hover:bg-slate-100 border border-slate-100 transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/5 cursor-pointer">
+                  <div className="w-14 h-14 rounded-[1.1rem] bg-gradient-to-br from-purple-50 to-blue-50 group-hover:from-purple-500 group-hover:to-blue-600 flex items-center justify-center mb-2 transition-all duration-500 group-hover:scale-110 shadow-sm group-hover:shadow-purple-500/25">
+                    <item.icon size={26} className="text-purple-600 group-hover:text-white transition-colors duration-500" />
                   </div>
-                  <span className="text-xs text-slate-500 pl-6">{item.desc}</span>
+                  <span className="text-sm font-bold text-slate-800 group-hover:text-purple-700 transition-colors duration-300">{item.title}</span>
+                  <span className="text-xs text-slate-500">{item.desc}</span>
                 </div>
               ))}
             </div>
           </motion.div>
 
           {/* CTAs */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto relative min-h-[60px] flex-wrap">
+          <motion.div variants={ctaVariants} className="flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto relative min-h-[60px] flex-wrap z-20 mx-auto">
             <AnimatePresence mode="wait">
               {!isLaunched ? (
-                <motion.button 
+                <motion.button
                   key="waitlist-btn"
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15, filter: "blur(4px)" }}
+                  exit={{ opacity: 0, y: -15 }}
                   transition={{ duration: 0.4, ease: easeOutExpo }}
-                  onClick={() => setIsFormOpen(true)} className="group relative flex min-w-[200px] items-center justify-center rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 px-6 py-4 text-[12px] font-bold uppercase tracking-widest text-white shadow-lg shadow-purple-500/25 transition-all hover:shadow-purple-500/40 hover:-translate-y-0.5 overflow-hidden">
+                  onClick={() => setIsFormOpen(true)} className="group relative flex w-full sm:w-auto min-w-[200px] items-center justify-center rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 px-6 py-4 text-[12px] font-bold uppercase tracking-widest text-white shadow-lg shadow-purple-500/25 transition-all hover:shadow-purple-500/40 hover:-translate-y-0.5 overflow-hidden">
                   <span className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
+                  <span className="absolute inset-0 rounded-xl ring-2 ring-purple-500/30 animate-ping opacity-20"></span>
                   <span className="relative flex items-center gap-2">
                     Join Waitlist <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                   </span>
                 </motion.button>
               ) : (
-                <motion.a 
+                <motion.a
                   key="access-btn"
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15, filter: "blur(4px)" }}
+                  exit={{ opacity: 0, y: -15 }}
                   transition={{ duration: 0.4, ease: easeOutExpo }}
-                  href="https://campus.stalight.in/stalightcampus" target="_blank" rel="noopener noreferrer" className="group relative flex min-w-[200px] items-center justify-center rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 px-6 py-4 text-[12px] font-bold uppercase tracking-widest text-white shadow-lg shadow-purple-500/25 transition-all hover:shadow-purple-500/40 hover:-translate-y-0.5 overflow-hidden">
+                  href="https://campus.stalight.in/stalightcampus" target="_blank" rel="noopener noreferrer" className="group relative flex w-full sm:w-auto min-w-[200px] items-center justify-center rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 px-6 py-4 text-[12px] font-bold uppercase tracking-widest text-white shadow-lg shadow-purple-500/25 transition-all hover:shadow-purple-500/40 hover:-translate-y-0.5 overflow-hidden">
                   <span className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
+                  <span className="absolute inset-0 rounded-xl ring-2 ring-purple-500/30 animate-ping opacity-20"></span>
                   <span className="relative flex items-center gap-2">
                     Get Access <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                   </span>
@@ -222,44 +268,40 @@ const ProductLaunchHero = () => {
 
         </motion.div>
 
-        {/* Right Column: Full Features Grid */}
+        {/* Core Modules - Now below the hero */}
         <motion.div
-          className="relative h-full hidden lg:flex flex-col justify-center"
+          className="relative mt-6 sm:mt-8 w-full max-w-[1200px] mx-auto z-20"
           initial="hidden"
           animate="visible"
           variants={containerVariants}
         >
-          <div className="bg-white/60 backdrop-blur-xl border border-slate-200/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-3xl p-6 sm:p-8">
-            <motion.div variants={itemVariants} className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-bold text-slate-900 tracking-tight">Core Modules</h3>
-              <span className="text-xs font-bold uppercase tracking-widest text-purple-600 bg-purple-50 px-3 py-1 rounded-full">14+ Features</span>
-            </motion.div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
-              {allModules.map((mod, idx) => (
-                <motion.div 
-                  variants={itemVariants}
-                  key={idx} 
-                  className="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-colors group"
+          <div className="relative flex overflow-hidden w-full group py-2 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+            <div 
+              className="flex w-max min-w-full animate-marquee gap-3 sm:gap-4 px-2 hover:[animation-play-state:paused]"
+              style={{ animationPlayState: isTransitioning ? "paused" : "running" }}
+            >
+              {[...allModules, ...allModules].map((mod, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-[1.25rem] bg-[#FAFAFA] hover:bg-white border border-slate-100 hover:border-purple-300/60 shadow-[0_4px_12px_-8px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_24px_-8px_rgba(168,85,247,0.15)] transition-all group duration-500 hover:-translate-y-1 w-[230px] sm:w-[280px] shrink-0 cursor-pointer"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center text-purple-600 shrink-0 group-hover:bg-purple-100 transition-colors">
-                    <mod.icon size={20} strokeWidth={2} />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-[14px] bg-gradient-to-br from-purple-100/80 to-blue-50/80 flex items-center justify-center text-purple-600 group-hover:from-purple-500 group-hover:to-pink-500 group-hover:text-white transition-all duration-500 group-hover:scale-110 shadow-sm group-hover:shadow-purple-500/25">
+                    <mod.icon size={20} strokeWidth={2} className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-slate-800 leading-tight mb-1">{mod.name}</h4>
-                    <p className="text-xs text-slate-500 leading-snug">{mod.desc}</p>
+                  <div className="flex flex-col overflow-hidden">
+                    <h4 className="text-[12px] sm:text-[14px] font-bold text-slate-800 leading-tight mb-0.5 group-hover:text-purple-700 transition-colors truncate">{mod.name}</h4>
+                    <p className="text-[10px] sm:text-[12px] text-slate-500 font-medium leading-tight truncate">{mod.desc}</p>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
           
-          {/* Subtle decoration for the module grid */}
-          <div className="absolute -right-6 -bottom-6 w-32 h-32 bg-gradient-to-tr from-pink-500/20 to-purple-500/20 rounded-full blur-2xl transform-gpu -z-10"></div>
+          {/* subtle glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-20 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-blue-500/10 blur-2xl -z-10 rounded-full pointer-events-none"></div>
         </motion.div>
       </div>
 
-      {/* Global CSS for scrollbar inside the grid */}
       <style>{`
         .custom-scrollbar::-webkit-scrollbar {
           width: 4px;
@@ -274,17 +316,25 @@ const ProductLaunchHero = () => {
         .custom-scrollbar:hover::-webkit-scrollbar-thumb {
           background: #cbd5e1;
         }
+        @keyframes marquee {
+          0% { transform: translate3d(0, 0, 0); }
+          100% { transform: translate3d(-50%, 0, 0); }
+        }
+        .animate-marquee {
+          animation: marquee 25s linear infinite;
+          will-change: transform;
+        }
       `}</style>
 
       {/* Demo Modal */}
       {isFormOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 overflow-hidden">
-          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setIsFormOpen(false)} />
-          
+          <div className="absolute inset-0 bg-slate-900/60" onClick={() => setIsFormOpen(false)} />
+
           <div className="relative z-[110] w-full max-w-2xl bg-white rounded-3xl sm:rounded-[2.5rem] shadow-2xl border border-slate-100 max-h-[95dvh] sm:max-h-[90vh] flex flex-col overflow-hidden">
-            
+
             <div className="absolute top-0 left-0 right-0 h-1.5 sm:h-2 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 z-20"></div>
-            
+
             <div className="flex items-center justify-between px-5 sm:px-8 py-4 sm:py-6 shrink-0 border-b border-slate-100 bg-white relative z-10">
               <h3 className="text-lg sm:text-xl font-bold text-slate-900">Schedule a Live Demo</h3>
               <button onClick={() => setIsFormOpen(false)} className="p-2 -mr-2 rounded-full text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-colors">
@@ -366,7 +416,7 @@ const ProductLaunchHero = () => {
                 {isSubmitting ? 'Submitting...' : 'Request Demo'}
               </button>
             </div>
-            
+
           </div>
         </div>
       )}
@@ -375,3 +425,4 @@ const ProductLaunchHero = () => {
 };
 
 export default ProductLaunchHero;
+

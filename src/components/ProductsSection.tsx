@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 // --- Images ---
@@ -12,25 +11,6 @@ import nsImg2 from "@/assets/products/neurosync22.jpg";
 
 const neuroCampusImages = [ncImg1, ncImg2];
 const neuroSyncImages = [nsImg1, nsImg2];
-
-const customEase = [0.19, 1.0, 0.22, 1.0];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
-  },
-};
-
-const fadeUpVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 1.0, ease: customEase },
-  },
-};
 
 const ProductsSection = () => {
   const [ncIndex, setNcIndex] = useState(0);
@@ -59,60 +39,50 @@ const ProductsSection = () => {
   return (
     <section id="products" className="py-12 sm:py-16 md:py-20 lg:py-24 bg-[#FAFAFC] relative overflow-hidden z-10">
 
-      {/* Background Architectural Grid */}
+      {/* Background Grid */}
       <div
-        className="absolute inset-0 z-0 pointer-events-none opacity-[0.3] sm:opacity-[0.4] md:opacity-[0.5]"
-        style={{ backgroundImage: 'linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px)', backgroundSize: '60px 60px sm:80px 80px' }}
+        className="absolute inset-0 z-0 pointer-events-none opacity-[0.2]"
+        style={{ backgroundImage: 'linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px)', backgroundSize: '60px 60px' }}
       ></div>
 
-      {/* Ambient Glows */}
-      <div className="absolute top-0 right-[-5%] sm:right-[-10%] w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[500px] bg-purple-500/5 rounded-full blur-[80px] sm:blur-[100px] md:blur-[120px] pointer-events-none transform-gpu"></div>
-      <div className="absolute bottom-0 left-[-5%] sm:left-[-10%] w-[350px] sm:w-[450px] md:w-[600px] h-[350px] sm:h-[450px] md:h-[600px] bg-blue-500/5 rounded-full blur-[80px] sm:blur-[100px] md:blur-[150px] pointer-events-none transform-gpu"></div>
+      {/* Optimized Ambient Glows */}
+      <div className="absolute top-0 right-[-5%] sm:right-[-10%] w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-purple-500/5 rounded-full blur-[40px] pointer-events-none transform-gpu"></div>
+      <div className="absolute bottom-0 left-[-5%] sm:left-[-10%] w-[350px] sm:w-[450px] h-[350px] sm:h-[450px] bg-blue-500/5 rounded-full blur-[40px] pointer-events-none transform-gpu"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* --- HEADER --- */}
-        <motion.div
-          initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={containerVariants}
-          className="text-center mb-12 sm:mb-16 md:mb-20 lg:mb-24 max-w-4xl mx-auto"
-        >
-          <motion.h2 variants={fadeUpVariants} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-slate-900 mb-4 sm:mb-6 tracking-tight leading-[1.1]">
+        <div className="text-center mb-12 sm:mb-16 md:mb-20 max-w-4xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-slate-900 mb-4 sm:mb-6 tracking-tight leading-[1.1]">
             Enterprise-Grade <br className="hidden sm:block"/>
             <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500">Platforms</span>
-          </motion.h2>
-          <motion.p variants={fadeUpVariants} className="text-slate-600 text-sm sm:text-base md:text-lg lg:text-xl font-light leading-relaxed max-w-3xl mx-auto px-4">
+          </h2>
+          <p className="text-slate-600 text-sm sm:text-base md:text-lg lg:text-xl font-light leading-relaxed max-w-3xl mx-auto px-4">
             Designed for scalability, performance, and institutional transformation. Empower your campus with platforms built for reliability and impact.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         {/* ===================== NEURO CAMPUS CARD ===================== */}
-        <div onClick={() => { scrollToTop(); navigate('/neuro-campus'); }} className="block group mb-8 sm:mb-12 lg:mb-16 xl:mb-20 cursor-pointer">
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={containerVariants}
-            className="relative bg-white rounded-2xl sm:rounded-3xl lg:rounded-[3rem] border border-slate-200/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_30px_60px_-15px_rgba(168,85,247,0.2)] hover:border-purple-200 transition-all duration-700 overflow-hidden flex flex-col lg:flex-row"
-          >
-            {/* Hover Gradient Aura */}
-            <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
-
+        <div onClick={() => { scrollToTop(); navigate('/neuro-campus'); }} className="block group mb-8 sm:mb-12 lg:mb-16 cursor-pointer">
+          <div className="relative bg-white rounded-2xl sm:rounded-3xl lg:rounded-[3rem] border border-slate-200/60 shadow-sm hover:border-purple-200 transition-all duration-500 overflow-hidden flex flex-col lg:flex-row">
             {/* Content Side */}
-            <div className="w-full lg:w-[45%] p-6 sm:p-8 md:p-10 lg:p-12 xl:p-16 flex flex-col justify-center relative z-10">
-              <motion.div variants={fadeUpVariants}>
-
+            <div className="w-full lg:w-[45%] p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-center relative z-10">
+              <div>
                 <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-slate-900 tracking-tight mb-3 sm:mb-4 lg:mb-6">
                   <span className="font-light">Stalight</span>{' '}
                   <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500">Campus</span>
                 </h3>
 
-                <p className="text-slate-600 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-6 sm:mb-8 lg:mb-10">
+                <p className="text-slate-600 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-6 sm:mb-8">
                   A unified campus platform that streamlines operations, secures access, and elevates academic outcomes.
                 </p>
 
                 {/* Buttons */}
                 <div className="flex flex-col items-start gap-3">
-                  <div className="relative inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-6 lg:px-8 py-3 sm:py-3.5 lg:py-4 bg-slate-900 text-white rounded-full overflow-hidden shadow-md">
+                  <div className="relative inline-flex items-center gap-2 px-5 py-3 bg-slate-900 text-white rounded-full overflow-hidden shadow-sm">
                     <span className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
-                    <span className="relative z-10 flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs lg:text-sm font-bold tracking-[0.15em] uppercase">
-                      Explore Platform <ArrowRight size={12} className="sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 group-hover:translate-x-1 transition-transform" />
+                    <span className="relative z-10 flex items-center gap-1.5 text-xs font-bold tracking-[0.15em] uppercase">
+                      Explore Platform <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
                     </span>
                   </div>
 
@@ -128,101 +98,90 @@ const ProductsSection = () => {
                     <span className="underline font-semibold">Login</span>
                   </a>
                 </div>
-              </motion.div>
+              </div>
             </div>
 
-            {/* Image Side (Sleek UI Window) */}
-            <div className="w-full lg:w-[55%] bg-slate-50/50 border-t lg:border-t-0 lg:border-l border-slate-100 relative p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 flex items-center justify-center overflow-hidden">
-              {/* Decorative background shape */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] sm:w-[75%] lg:w-[80%] h-[70%] sm:h-[75%] lg:h-[80%] bg-purple-200/40 rounded-full blur-[40px] sm:blur-[60px] lg:blur-[80px] group-hover:bg-purple-300/50 transition-colors duration-700 transform-gpu"></div>
+            {/* Image Side */}
+            <div className="w-full lg:w-[55%] bg-slate-50/50 border-t lg:border-t-0 lg:border-l border-slate-100 relative p-4 sm:p-6 lg:p-10 flex items-center justify-center overflow-hidden">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] sm:w-[75%] h-[70%] sm:h-[75%] bg-purple-200/20 rounded-full blur-[40px] pointer-events-none transform-gpu"></div>
 
-              <motion.div variants={fadeUpVariants} className="relative w-full max-w-[500px] sm:max-w-[550px] lg:max-w-[600px] aspect-[4/3] bg-white rounded-xl sm:rounded-2xl shadow-xl border border-slate-200 overflow-hidden group-hover:-translate-y-1 sm:group-hover:-translate-y-2 group-hover:scale-[1.01] sm:group-hover:scale-[1.02] transition-all duration-700">
-                {/* Mac-style header */}
-                <div className="h-6 sm:h-7 lg:h-8 bg-slate-100 border-b border-slate-200 flex items-center px-3 sm:px-4 gap-1 sm:gap-1.5 z-20 relative">
-                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-slate-300 group-hover:bg-red-400 transition-colors"></div>
-                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-slate-300 group-hover:bg-amber-400 transition-colors"></div>
-                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-slate-300 group-hover:bg-emerald-400 transition-colors"></div>
+              <div className="relative w-full max-w-[500px] sm:max-w-[550px] aspect-[4/3] bg-white rounded-xl sm:rounded-2xl shadow-md border border-slate-200 overflow-hidden group-hover:-translate-y-1 transition-all duration-500">
+                {/* Mac header */}
+                <div className="h-6 sm:h-7 bg-slate-100 border-b border-slate-200 flex items-center px-3 gap-1 z-20 relative">
+                  <div className="w-2 h-2 rounded-full bg-slate-300"></div>
+                  <div className="w-2 h-2 rounded-full bg-slate-300"></div>
+                  <div className="w-2 h-2 rounded-full bg-slate-300"></div>
                 </div>
                 {/* Image Crossfade */}
-                <div className="relative w-full h-[calc(100%-1.5rem)] sm:h-[calc(100%-1.75rem)] lg:h-[calc(100%-2rem)]">
-                  <AnimatePresence mode="wait">
-                    <motion.img loading="lazy" decoding="async"
-                      key={`nc-${ncIndex}`}
-                      src={neuroCampusImages[ncIndex]}
-                      className="absolute inset-0 w-full h-full object-cover object-top"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0, transition: { duration: 0.3 } }}
-                      transition={{ duration: 0.8 }}
+                <div className="relative w-full h-[calc(100%-1.5rem)] sm:h-[calc(100%-1.75rem)]">
+                  {neuroCampusImages.map((img, idx) => (
+                    <img
+                      key={idx}
+                      src={img}
+                      alt="Campus screenshot"
+                      className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 ease-in-out ${
+                        idx === ncIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+                      }`}
                     />
-                  </AnimatePresence>
+                  ))}
                 </div>
-              </motion.div>
+              </div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* ===================== NEURO SYNC CARD ===================== */}
         <div onClick={() => { scrollToTop(); navigate('/neurosync'); }} className="block group cursor-pointer">
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={containerVariants}
-            className="relative bg-white rounded-2xl sm:rounded-3xl lg:rounded-[3rem] border border-slate-200/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_30px_60px_-15px_rgba(59,130,246,0.2)] hover:border-blue-200 transition-all duration-700 overflow-hidden flex flex-col-reverse lg:flex-row"
-          >
-            {/* Hover Gradient Aura */}
-            <div className="absolute inset-0 bg-gradient-to-bl from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+          <div className="relative bg-white rounded-2xl sm:rounded-3xl lg:rounded-[3rem] border border-slate-200/60 shadow-sm hover:border-blue-200 transition-all duration-500 overflow-hidden flex flex-col-reverse lg:flex-row">
+            {/* Image Side */}
+            <div className="w-full lg:w-[55%] bg-slate-50/50 border-b lg:border-b-0 lg:border-r border-slate-100 relative p-4 sm:p-6 lg:p-10 flex items-center justify-center overflow-hidden">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] sm:w-[75%] h-[70%] sm:h-[75%] bg-blue-200/20 rounded-full blur-[40px] pointer-events-none transform-gpu"></div>
 
-            {/* Image Side (Sleek UI Window) */}
-            <div className="w-full lg:w-[55%] bg-slate-50/50 border-b lg:border-b-0 lg:border-r border-slate-100 relative p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 flex items-center justify-center overflow-hidden">
-              {/* Decorative background shape */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] sm:w-[75%] lg:w-[80%] h-[70%] sm:h-[75%] lg:h-[80%] bg-blue-200/40 rounded-full blur-[40px] sm:blur-[60px] lg:blur-[80px] group-hover:bg-blue-300/50 transition-colors duration-700 transform-gpu"></div>
-
-              <motion.div variants={fadeUpVariants} className="relative w-full max-w-[500px] sm:max-w-[550px] lg:max-w-[600px] aspect-[4/3] bg-white rounded-xl sm:rounded-2xl shadow-xl border border-slate-200 overflow-hidden group-hover:-translate-y-1 sm:group-hover:-translate-y-2 group-hover:scale-[1.01] sm:group-hover:scale-[1.02] transition-all duration-700">
-                {/* Mac-style header */}
-                <div className="h-6 sm:h-7 lg:h-8 bg-slate-100 border-b border-slate-200 flex items-center px-3 sm:px-4 gap-1 sm:gap-1.5 z-20 relative">
-                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-slate-300 group-hover:bg-red-400 transition-colors"></div>
-                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-slate-300 group-hover:bg-amber-400 transition-colors"></div>
-                  <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-slate-300 group-hover:bg-emerald-400 transition-colors"></div>
+              <div className="relative w-full max-w-[500px] sm:max-w-[550px] aspect-[4/3] bg-white rounded-xl sm:rounded-2xl shadow-md border border-slate-200 overflow-hidden group-hover:-translate-y-1 transition-all duration-500">
+                {/* Mac header */}
+                <div className="h-6 sm:h-7 bg-slate-100 border-b border-slate-200 flex items-center px-3 gap-1 z-20 relative">
+                  <div className="w-2 h-2 rounded-full bg-slate-300"></div>
+                  <div className="w-2 h-2 rounded-full bg-slate-300"></div>
+                  <div className="w-2 h-2 rounded-full bg-slate-300"></div>
                 </div>
                 {/* Image Crossfade */}
-                <div className="relative w-full h-[calc(100%-1.5rem)] sm:h-[calc(100%-1.75rem)] lg:h-[calc(100%-2rem)]">
-                  <AnimatePresence mode="wait">
-                    <motion.img loading="lazy" decoding="async"
-                      key={`ns-${nsIndex}`}
-                      src={neuroSyncImages[nsIndex]}
-                      className="absolute inset-0 w-full h-full object-cover object-top"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0, transition: { duration: 0.3 } }}
-                      transition={{ duration: 0.8 }}
+                <div className="relative w-full h-[calc(100%-1.5rem)] sm:h-[calc(100%-1.75rem)]">
+                  {neuroSyncImages.map((img, idx) => (
+                    <img
+                      key={idx}
+                      src={img}
+                      alt="Sync screenshot"
+                      className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 ease-in-out ${
+                        idx === nsIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+                      }`}
                     />
-                  </AnimatePresence>
+                  ))}
                 </div>
-              </motion.div>
+              </div>
             </div>
 
             {/* Content Side */}
-            <div className="w-full lg:w-[45%] p-6 sm:p-8 md:p-10 lg:p-12 xl:p-16 flex flex-col justify-center relative z-10">
-              <motion.div variants={fadeUpVariants}>
-
+            <div className="w-full lg:w-[45%] p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-center relative z-10">
+              <div>
                 <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-slate-900 tracking-tight mb-3 sm:mb-4 lg:mb-6">
                   <span className="font-light">Stalight</span>{' '}
                   <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">Sync</span>
                 </h3>
 
-                <p className="text-slate-600 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-6 sm:mb-8 lg:mb-10">
+                <p className="text-slate-600 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-6 sm:mb-8">
                   An assessment and upskilling platform with cloud-based execution, performance benchmarking, and hands-on practice.
                 </p>
 
                 {/* Buttons */}
                 <div className="flex flex-col items-start gap-3">
-                  <div className="relative inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-6 lg:px-8 py-3 sm:py-3.5 lg:py-4 bg-slate-900 text-white rounded-full overflow-hidden shadow-md">
+                  <div className="relative inline-flex items-center gap-2 px-5 py-3 bg-slate-900 text-white rounded-full overflow-hidden shadow-sm">
                     <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
-                    <span className="relative z-10 flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs lg:text-sm font-bold tracking-[0.15em] uppercase">
-                      Explore Platform <ArrowRight size={12} className="sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 group-hover:translate-x-1 transition-transform" />
+                    <span className="relative z-10 flex items-center gap-1.5 text-xs font-bold tracking-[0.15em] uppercase">
+                      Explore Platform <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
                     </span>
                   </div>
 
-                  {/* NeuroSync Login (internal page) */}
+                  {/* NeuroSync Login (external page) */}
                   <Link
                     to="/neurosync"
                     onClick={(e) => { e.stopPropagation(); scrollToTop(); }}
@@ -232,9 +191,9 @@ const ProductsSection = () => {
                     <span className="underline font-semibold">Login</span>
                   </Link>
                 </div>
-              </motion.div>
+              </div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
       </div>

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { motion, Variants, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import devImg from "@/assets/products/it services.jpg";
@@ -29,17 +28,6 @@ import {
 
 // IMPORTANT: We are now using the direct supabase client instead of the helper file!
 import { supabase } from "@/lib/supabaseClient";
-
-// --- Smooth Animation Variants ---
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } }
-};
-
-const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
-};
 
 // --- Service Data ---
 const services = [
@@ -188,17 +176,17 @@ const SoftwareDevelopment = () => {
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 relative z-10 w-full text-center mb-8 sm:mb-12">
-          <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="max-w-5xl mx-auto flex flex-col items-center">
+          <div className="max-w-5xl mx-auto flex flex-col items-center">
             <h1 className="text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[4.5rem] font-light text-slate-950 tracking-tighter leading-[0.98] mb-6 px-2">
               <span className="font-light">Build exactly</span>{' '}
               <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500">what your business needs.</span>
             </h1>
 
-            <motion.p variants={fadeUp} className="text-slate-600 font-light text-lg max-w-3xl mx-auto leading-relaxed mb-6 px-2">
+            <p className="text-slate-600 font-light text-lg max-w-3xl mx-auto leading-relaxed mb-6 px-2">
               From intuitive websites to complex enterprise software, we engineer bespoke digital solutions. We turn your specific requirements into scalable, secure, and beautiful applications.
-            </motion.p>
+            </p>
 
-            <motion.div variants={fadeUp} className="relative z-20 mb-8 sm:mb-12">
+            <div className="relative z-20 mb-8 sm:mb-12">
               <a
                 href="#estimate"
                 onClick={scrollToEstimate}
@@ -209,40 +197,27 @@ const SoftwareDevelopment = () => {
                   Start a Project <ArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform" />
                 </span>
               </a>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* --- Detailed Services Section --- */}
       <section className="py-24 bg-white border-t border-slate-100">
         <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={staggerContainer}
-            className="mb-16 max-w-3xl"
-          >
-            <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
+          <div className="mb-16 max-w-3xl">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
               Engineering solutions tailored to your workflow.
-            </motion.h2>
-            <motion.p variants={fadeUp} className="text-slate-600 text-lg leading-relaxed">
+            </h2>
+            <p className="text-slate-600 text-lg leading-relaxed">
               We don't believe in one-size-fits-all. Whether you need a sleek customer-facing website, an internal management dashboard, or a complete system overhaul, our development process adapts to your goals.
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={staggerContainer}
-            className="grid md:grid-cols-2 gap-x-8 gap-y-12"
-          >
+          <div className="grid md:grid-cols-2 gap-x-8 gap-y-12">
             {services.map((service, index) => (
-              <motion.div
+              <div
                 key={index}
-                variants={fadeUp}
                 className="group flex flex-col sm:flex-row gap-6 p-6 rounded-2xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100"
               >
                 <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-purple-50 flex items-center justify-center transform transition-transform group-hover:-translate-y-1 group-hover:shadow-sm">
@@ -309,9 +284,9 @@ const SoftwareDevelopment = () => {
                     </Dialog>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -322,146 +297,126 @@ const SoftwareDevelopment = () => {
             {/* Top gradient border highlight */}
             <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500"></div>
             
-            <AnimatePresence mode="wait">
-              {!isFormOpen ? (
-                /* Initial CTA View */
-                <motion.div
-                  key="cta"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
-                  className="p-10 md:p-16 text-center flex flex-col items-center justify-center h-full"
+            {!isFormOpen ? (
+              /* Initial CTA View */
+              <div className="p-10 md:p-16 text-center flex flex-col items-center justify-center h-full transition-all duration-300">
+                <h2 className="text-4xl md:text-5xl font-black mb-6">Ready to build something custom?</h2>
+                <p className="text-slate-600 text-lg mb-10 max-w-2xl">
+                  Share your project requirements and our engineering team will craft a tailored strategy and timeline for your business.
+                </p>
+                <button
+                  onClick={() => setIsFormOpen(true)}
+                  className="group relative inline-flex items-center justify-center px-8 sm:px-10 py-3 sm:py-4 bg-slate-950 text-white rounded-xl overflow-hidden shadow-[0_20px_40px_-10px_rgba(168,85,247,0.12)] hover:-translate-y-1 transition-all duration-300"
                 >
-                  <h2 className="text-4xl md:text-5xl font-black mb-6">Ready to build something custom?</h2>
-                  <p className="text-slate-600 text-lg mb-10 max-w-2xl">
-                    Share your project requirements and our engineering team will craft a tailored strategy and timeline for your business.
-                  </p>
-                  <button
-                    onClick={() => setIsFormOpen(true)}
-                    className="group relative inline-flex items-center justify-center px-8 sm:px-10 py-3 sm:py-4 bg-slate-950 text-white rounded-xl overflow-hidden shadow-[0_20px_40px_-10px_rgba(168,85,247,0.12)] hover:-translate-y-1 transition-all duration-300"
-                  >
-                    <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                    <span className="relative z-10 flex items-center gap-3 text-sm font-bold tracking-[0.08em] uppercase">
-                      Start an Inquiry <ArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </button>
-                </motion.div>
-              ) : isSubmitted ? (
-                /* Success View */
-                <motion.div
-                  key="success"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  className="p-10 md:p-16 text-center flex flex-col items-center justify-center h-full min-h-[400px]"
-                >
-                  <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <CheckCircle2 className="w-10 h-10 text-green-500" />
+                  <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
+                  <span className="relative z-10 flex items-center gap-3 text-sm font-bold tracking-[0.08em] uppercase">
+                    Start an Inquiry <ArrowRight size={14} className="transform group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </button>
+              </div>
+            ) : isSubmitted ? (
+              /* Success View */
+              <div className="p-10 md:p-16 text-center flex flex-col items-center justify-center h-full min-h-[400px] transition-all duration-300">
+                <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle2 className="w-10 h-10 text-green-500" />
+                </div>
+                <h3 className="text-3xl font-black mb-4">Inquiry Received Successfully!</h3>
+                <p className="text-slate-600 text-lg">Our engineering team will review your requirements and reach out within 1 business day.</p>
+              </div>
+            ) : (
+              /* Form View */
+              <div className="p-8 md:p-12 transition-all duration-300">
+                <div className="flex justify-between items-center mb-8 pb-6 border-b border-slate-100">
+                  <div>
+                    <h3 className="text-2xl font-black">Project Inquiry</h3>
+                    <p className="text-sm text-slate-500 mt-1">Please provide your professional details and project scope.</p>
                   </div>
-                  <h3 className="text-3xl font-black mb-4">Inquiry Received Successfully!</h3>
-                  <p className="text-slate-600 text-lg">Our engineering team will review your requirements and reach out within 1 business day.</p>
-                </motion.div>
-              ) : (
-                /* Form View */
-                <motion.div
-                  key="form"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
-                  className="p-8 md:p-12"
-                >
-                  <div className="flex justify-between items-center mb-8 pb-6 border-b border-slate-100">
+                  <button 
+                    onClick={() => setIsFormOpen(false)}
+                    className="p-2 bg-slate-50 hover:bg-slate-100 rounded-full transition-colors text-slate-500"
+                    aria-label="Close form"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                <form onSubmit={handleFormSubmit} className="space-y-5">
+                  {/* Row 1: Name & Email */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div>
-                      <h3 className="text-2xl font-black">Project Inquiry</h3>
-                      <p className="text-sm text-slate-500 mt-1">Please provide your professional details and project scope.</p>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Full Name <span className="text-pink-500">*</span></label>
+                      <input name="full_name" type="text" required placeholder="Jane Doe" className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
                     </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Work Email <span className="text-pink-500">*</span></label>
+                      <input name="email" type="email" required placeholder="jane@company.com" className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+                    </div>
+                  </div>
+
+                  {/* Row 2: Phone & Company */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Phone Number <span className="text-pink-500">*</span></label>
+                      <input name="phone" type="tel" required placeholder="+1 (555) 000-0000" className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Company Name <span className="text-pink-500">*</span></label>
+                      <input name="company_name" type="text" required placeholder="Your Organization" className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
+                    </div>
+                  </div>
+
+                  {/* Row 3: Service & Timeline */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Service Required <span className="text-pink-500">*</span></label>
+                      <select defaultValue="" name="service_required" required className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm appearance-none cursor-pointer">
+                        <option value="" disabled>Select service...</option>
+                        <option value="web-app">Web & App Development</option>
+                        <option value="custom-software">Custom Software Solutions</option>
+                        <option value="enterprise">Enterprise Modernization</option>
+                        <option value="api">API & Microservices</option>
+                        <option value="other">Other Requirements</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Expected Timeline</label>
+                      <select defaultValue="" name="timeline" className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm appearance-none cursor-pointer">
+                        <option value="" disabled>Select timeline...</option>
+                        <option value="immediate">Immediate Start</option>
+                        <option value="1-3-months">1 to 3 Months</option>
+                        <option value="3-6-months">3 to 6 Months</option>
+                        <option value="exploring">Just Exploring Options</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Row 4: Details */}
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Project Requirements <span className="text-pink-500">*</span></label>
+                    <textarea name="details"
+                      required 
+                      rows={4} 
+                      placeholder="Please describe your current challenges, desired outcomes, and key technical requirements..." 
+                      className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm resize-none"
+                    ></textarea>
+                  </div>
+
+                  <div className="pt-2">
                     <button 
-                      onClick={() => setIsFormOpen(false)}
-                      className="p-2 bg-slate-50 hover:bg-slate-100 rounded-full transition-colors text-slate-500"
-                      aria-label="Close form"
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
                     >
-                      <X className="w-5 h-5" />
+                      {isSubmitting ? (
+                        <><Loader2 className="w-5 h-5 animate-spin" /> Submitting...</>
+                      ) : (
+                        <>Submit Request <Send className="w-4 h-4" /></>
+                      )}
                     </button>
                   </div>
-
-                  <form onSubmit={handleFormSubmit} className="space-y-5">
-                    {/* Row 1: Name & Email */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                      <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Full Name <span className="text-pink-500">*</span></label>
-                        <input name="full_name" type="text" required placeholder="Jane Doe" className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
-                      </div>
-                      <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Work Email <span className="text-pink-500">*</span></label>
-                        <input name="email" type="email" required placeholder="jane@company.com" className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
-                      </div>
-                    </div>
-
-                    {/* Row 2: Phone & Company */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                      <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Phone Number <span className="text-pink-500">*</span></label>
-                        <input name="phone" type="tel" required placeholder="+1 (555) 000-0000" className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
-                      </div>
-                      <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Company Name <span className="text-pink-500">*</span></label>
-                        <input name="company_name" type="text" required placeholder="Your Organization" className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm" />
-                      </div>
-                    </div>
-
-                    {/* Row 3: Service & Timeline */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                      <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Service Required <span className="text-pink-500">*</span></label>
-                        <select defaultValue="" name="service_required" required className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm appearance-none cursor-pointer">
-                          <option value="" disabled>Select service...</option>
-                          <option value="web-app">Web & App Development</option>
-                          <option value="custom-software">Custom Software Solutions</option>
-                          <option value="enterprise">Enterprise Modernization</option>
-                          <option value="api">API & Microservices</option>
-                          <option value="other">Other Requirements</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Expected Timeline</label>
-                        <select defaultValue="" name="timeline" className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm appearance-none cursor-pointer">
-                          <option value="" disabled>Select timeline...</option>
-                          <option value="immediate">Immediate Start</option>
-                          <option value="1-3-months">1 to 3 Months</option>
-                          <option value="3-6-months">3 to 6 Months</option>
-                          <option value="exploring">Just Exploring Options</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    {/* Row 4: Details */}
-                    <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Project Requirements <span className="text-pink-500">*</span></label>
-                      <textarea name="details"
-                        required 
-                        rows={4} 
-                        placeholder="Please describe your current challenges, desired outcomes, and key technical requirements..." 
-                        className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm resize-none"
-                      ></textarea>
-                    </div>
-
-                    <div className="pt-2">
-                      <button 
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
-                      >
-                        {isSubmitting ? (
-                          <><Loader2 className="w-5 h-5 animate-spin" /> Submitting...</>
-                        ) : (
-                          <>Submit Request <Send className="w-4 h-4" /></>
-                        )}
-                      </button>
-                    </div>
-                  </form>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                </form>
+              </div>
+            )}
           </div>
         </div>
       </section>
