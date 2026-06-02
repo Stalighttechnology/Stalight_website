@@ -75,9 +75,6 @@ const CareersPage = () => {
     offset: ["start end", "end start"],
   });
 
-  const yParallax = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
-  const opacityParallax = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
-
   return (
     <div ref={containerRef} className="font-sans antialiased text-slate-900 bg-white selection:bg-[#D32027] selection:text-white">
       
@@ -164,12 +161,12 @@ const CareersPage = () => {
       </section>
 
       {/* ----------------------------------------------------------------- */}
-      {/* SECTION 2: Network (Dark Theme Premium Split Card) */}
+      {/* SECTION 2: Network (Seamless Image Blend) */}
       {/* ----------------------------------------------------------------- */}
-      <section id="connect-grow" className="relative w-full py-2 md:py-24 bg-slate-800 overflow-hidden">
+      <section id="connect-grow" className="relative w-full py-16 md:py-24 bg-transparent overflow-hidden">
         
         {/* Subtle ambient background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#D32027]/10 rounded-full blur-[100px] pointer-events-none z-0 transform-gpu"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#D32027]/5 rounded-full blur-[100px] pointer-events-none z-0 transform-gpu"></div>
 
         <div className="container mx-auto px-4 md:px-8 relative z-20">
           
@@ -178,7 +175,8 @@ const CareersPage = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
             variants={containerVariants}
-            className="w-full max-w-7xl mx-auto bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-[2rem] md:rounded-[3rem] shadow-[0_30px_80px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col lg:flex-row relative"
+            // Exact dark navy/slate matching your screenshot
+            className="w-full max-w-7xl mx-auto bg-[#0A111F] border border-slate-800/50 rounded-[2rem] md:rounded-[3rem] shadow-2xl overflow-hidden relative flex min-h-[450px] lg:min-h-[500px]"
           >
             {/* Animated Laser Accent Line */}
             <motion.div 
@@ -186,23 +184,37 @@ const CareersPage = () => {
               className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#D32027] via-[#D32027]/50 to-transparent origin-left z-30"
             ></motion.div>
 
-            {/* Left Content Half */}
-            <div className="flex-1 p-2 md:p-14 lg:p-20 flex flex-col justify-center relative z-20">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold mb-0 md:mb-6 tracking-tight text-white leading-[1.15]">
+            {/* IMAGE LAYER (Pinned Right, Absolute) */}
+            {/* On mobile, it spans the full width but fades heavily. On desktop, it takes the right 60% */}
+            <div className="absolute top-0 right-0 w-full md:w-[60%] h-full z-0">
+              <img loading="lazy" decoding="async"
+                src={campusImg}
+                alt="Corporate Campus"
+                onError={(e: any) => { e.currentTarget.src = carrier2Img; e.currentTarget.style.filter = 'none'; }}
+                className="w-full h-full object-cover object-right filter brightness-[0.85] transition-all duration-1000 ease-out hover:scale-105 origin-center"
+              />
+              {/* The Magic Gradient: Forces the left side of the image to fade perfectly into the #0A111F background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0A111F] via-[#0A111F]/90 md:via-[#0A111F]/50 to-transparent pointer-events-none"></div>
+            </div>
+
+            {/* TEXT CONTENT LAYER (Constrained to the left half, stays above the image) */}
+            <div className="w-full md:w-[55%] p-8 sm:p-12 lg:p-20 flex flex-col justify-center relative z-10">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold mb-4 tracking-tight text-white leading-[1.15]">
                 <MaskedText>Connect &</MaskedText>
                 <MaskedText><span className="text-[#D32027] font-light italic">Grow together.</span></MaskedText>
               </h2>
               
-              <motion.p variants={fadeUpVariants} className="text-base md:text-lg font-light text-slate-400 leading-relaxed mb-2 md:mb-10 border-l-2 border-[#D32027]/30 pl-3">
+              <motion.p variants={fadeUpVariants} className="text-base md:text-lg font-light text-slate-300 leading-relaxed mb-8 md:mb-10 border-l-2 border-[#D32027]/30 pl-4 max-w-md">
                 Beyond the corporate hierarchy, join a synchronized community of creators and system thinkers.
               </motion.p>
               
-              <motion.div variants={fadeUpVariants} className="mt-auto md:mt-4">
+              <motion.div variants={fadeUpVariants}>
                 <a
                   href="https://www.linkedin.com/company/stalight-technologies-pvt-ltd/about/?viewAsMember=true"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative inline-flex items-center justify-center bg-white text-slate-950 px-8 py-4 text-[11px] font-bold tracking-[0.25em] uppercase transition-all duration-500 hover:shadow-[0_0_30px_-5px_rgba(211,32,39,0.4)] overflow-hidden rounded-full w-full sm:w-auto"
+                  // Clean pill button shape
+                  className="group relative inline-flex items-center justify-center bg-white text-slate-950 px-8 py-4 text-[11px] font-bold tracking-[0.25em] uppercase transition-all duration-500 hover:shadow-[0_0_30px_-5px_rgba(211,32,39,0.4)] overflow-hidden rounded-[2rem] w-fit"
                   aria-label="Open Stalight Technologies LinkedIn"
                 >
                   <span className="absolute inset-0 w-full h-full bg-[#D32027] transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500 ease-out origin-bottom z-0"></span>
@@ -211,22 +223,6 @@ const CareersPage = () => {
                   </span>
                 </a>
               </motion.div>
-            </div>
-
-            {/* Right Image Half */}
-            <div className="flex-1 relative min-h-[60px] sm:min-h-[140px] md:min-h-[400px] lg:min-h-0 p-1 md:p-6 lg:p-8">
-              <div className="w-full h-full relative rounded-[1.5rem] md:rounded-[2rem] overflow-hidden group shadow-2xl">
-                <motion.img loading="lazy" decoding="async" 
-                  initial={{ scale: 1.15 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ duration: 1.5, ease: premiumEase }}
-                  src={campusImg} 
-                  alt="Corporate Campus" 
-                  className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.75] group-hover:scale-105 group-hover:brightness-95 transition-all duration-1000 ease-out origin-center"
-                />
-                {/* Inner shadow gradient to blend image with card */}
-                <div className="absolute inset-0 bg-gradient-to-bl from-slate-800/40 via-transparent to-slate-800/80 pointer-events-none"></div>
-              </div>
             </div>
 
           </motion.div>
