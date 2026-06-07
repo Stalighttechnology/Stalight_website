@@ -19,6 +19,7 @@ const SkillDevelopment = lazy(() => import("./pages/SkillDevelopment.tsx"));
 const ITServices = lazy(() => import("./pages/ITServices.tsx"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.tsx"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService.tsx"));
+const AccountDeletion = lazy(() => import("./pages/AccountDeletion.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ const App = () => (
             <Route path="/neuro-campus-access" element={<NeuroCampusAccessPlan />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/account-deletion" element={<AccountDeletion />} />
             
             {/* CATCH-ALL ROUTE */}
             <Route path="*" element={<NotFound />} />

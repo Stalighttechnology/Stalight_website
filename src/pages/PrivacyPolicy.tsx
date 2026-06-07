@@ -12,7 +12,7 @@ const PrivacyPolicy = () => {
       <SEO title="Privacy Policy | Stalight Technologies" description="Privacy policy of Stalight Technologies." />
       <Navbar />
 
-      <main className="container mx-auto px-6 py-20 max-w-4xl">
+      <main className="container mx-auto px-6 pt-32 pb-20 md:pt-40 max-w-4xl">
         <div className="flex items-center gap-4 mb-8">
           <img loading="lazy" decoding="async" src={stalightLogo} alt="Stalight logo" className="h-12 w-auto object-contain" />
           <div>
