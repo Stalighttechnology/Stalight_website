@@ -83,6 +83,9 @@ const ProductsSection = () => {
           <motion.p variants={fadeUpVariants} className="text-slate-600 text-sm sm:text-base md:text-lg lg:text-xl font-light leading-relaxed max-w-3xl mx-auto px-4">
             Designed for scalability, performance, and institutional transformation. Empower your campus with platforms built for reliability and impact.
           </motion.p>
+          <motion.div variants={fadeUpVariants} className="mt-4 text-sm text-slate-500">
+            For product enquiries: <a href="mailto:sales@stalight.in" className="text-slate-800 font-medium">sales@stalight.in</a> • <a href="tel:+917349551102" className="text-slate-800 font-medium">73495 51102</a>
+          </motion.div>
         </motion.div>
 
         {/* ===================== NEURO CAMPUS CARD ===================== */}

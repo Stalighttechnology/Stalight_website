@@ -14,9 +14,9 @@ export const generateOrganizationSchema = () => ({
   "logo": `${BASE_URL}/full_logo.png`,
   "contactPoint": {
     "@type": "ContactPoint",
-    "telephone": "+91-86601-44040",
+    "telephone": "+91-73495-51102",
     "contactType": "customer service",
-    "email": "info@stalight.in"
+    "email": "support@stalight.in"
   },
   "sameAs": [
     "https://www.linkedin.com/company/stalight-technologies",
@@ -33,7 +33,7 @@ export const generateLocalBusinessSchema = () => ({
   "image": `${BASE_URL}/office.jpeg`,
   "@id": `${BASE_URL}/#localbusiness`,
   "url": BASE_URL,
-  "telephone": "+91-86601-44040",
+  "telephone": "+91-73495-51102",
   "priceRange": "$$",
   "address": {
     "@type": "PostalAddress",

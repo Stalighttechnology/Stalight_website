@@ -83,7 +83,7 @@ const PrivacyPolicy = () => {
           <p>
             STALIGHT TECHNOLOGIES LIMITED<br />
             Email: <a href="mailto:privacy@stalight.in">privacy@stalight.in</a><br />
-            Phone: +91 866 014 4040<br />
+            Phone: +91 73495 51102<br />
             Registered office: Bengaluru, India
           </p>
 
