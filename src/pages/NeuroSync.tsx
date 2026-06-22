@@ -172,9 +172,9 @@ const NeuroSync = () => {
       <div>
         {!open ? (
           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-            <button onClick={() => setOpen(true)} className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-4 sm:py-5 bg-slate-900 text-white rounded-xl sm:rounded-full font-bold uppercase text-[11px] sm:text-xs tracking-widest shadow-lg hover:shadow-purple-500/25 hover:-translate-y-1 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition-all duration-300 w-full sm:w-auto">
+            <Link to="/#contact" className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-4 sm:py-5 bg-slate-900 text-white rounded-xl sm:rounded-full font-bold uppercase text-[11px] sm:text-xs tracking-widest shadow-lg hover:shadow-purple-500/25 hover:-translate-y-1 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition-all duration-300 w-full sm:w-auto">
               Contact Us <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
+            </Link>
             <Link to="/" className="flex items-center justify-center px-6 sm:px-8 py-4 sm:py-5 bg-white border border-slate-300 text-slate-700 rounded-xl sm:rounded-full font-bold uppercase text-[11px] sm:text-xs tracking-widest hover:bg-slate-50 hover:text-slate-900 transition-all duration-300 w-full sm:w-auto">
               Back to Home
             </Link>
