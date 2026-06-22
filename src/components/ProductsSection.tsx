@@ -77,7 +77,7 @@ const ProductsSection = () => {
           className="text-center mb-12 sm:mb-16 md:mb-20 lg:mb-24 max-w-4xl mx-auto"
         >
           <motion.h2 variants={fadeUpVariants} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-slate-900 mb-4 sm:mb-6 tracking-tight leading-[1.1]">
-            Enterprise-Grade <br className="hidden sm:block"/>
+            Enterprise-Grade <br className="hidden sm:block" />
             <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500">Platforms</span>
           </motion.h2>
           <motion.p variants={fadeUpVariants} className="text-slate-600 text-sm sm:text-base md:text-lg lg:text-xl font-light leading-relaxed max-w-3xl mx-auto px-4">
@@ -89,7 +89,7 @@ const ProductsSection = () => {
         </motion.div>
 
         {/* ===================== NEURO CAMPUS CARD ===================== */}
-        <div onClick={() => { scrollToTop(); navigate('/neuro-campus'); }} className="block group mb-8 sm:mb-12 lg:mb-16 xl:mb-20 cursor-pointer">
+        <div onClick={() => { scrollToTop(); navigate('/stalight-campus'); }} className="block group mb-8 sm:mb-12 lg:mb-16 xl:mb-20 cursor-pointer">
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={containerVariants}
             className="relative bg-white rounded-2xl sm:rounded-3xl lg:rounded-[3rem] border border-slate-200/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_30px_60px_-15px_rgba(168,85,247,0.2)] hover:border-purple-200 transition-all duration-700 overflow-hidden flex flex-col lg:flex-row"
@@ -167,7 +167,7 @@ const ProductsSection = () => {
         </div>
 
         {/* ===================== NEURO SYNC CARD ===================== */}
-        <div onClick={() => { scrollToTop(); navigate('/neurosync'); }} className="block group cursor-pointer">
+        <div onClick={() => { scrollToTop(); navigate('/Stalight-Sync'); }} className="block group cursor-pointer">
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={containerVariants}
             className="relative bg-white rounded-2xl sm:rounded-3xl lg:rounded-[3rem] border border-slate-200/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_30px_60px_-15px_rgba(59,130,246,0.2)] hover:border-blue-200 transition-all duration-700 overflow-hidden flex flex-col-reverse lg:flex-row"
@@ -227,15 +227,15 @@ const ProductsSection = () => {
                     </span>
                   </div>
 
-                  {/* NeuroSync Login (internal page) */}
-                  <Link
-                    to="/neurosync"
-                    onClick={(e) => { e.stopPropagation(); scrollToTop(); }}
+                  {/* NeuroSync Login */}
+                  <a
+                    href="https://sync.stalight.in/login"
+                    onClick={(e) => { e.stopPropagation(); }}
                     className="inline-flex items-center justify-center px-4 py-2 border border-slate-200 rounded-full text-slate-900 bg-white hover:bg-slate-50 transition-colors duration-150 text-sm"
                   >
                     <span className="text-xs text-slate-500 mr-2">Already have Sync?</span>
                     <span className="underline font-semibold">Login</span>
-                  </Link>
+                  </a>
                 </div>
               </motion.div>
             </div>
