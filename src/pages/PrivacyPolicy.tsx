@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import stalightLogo from "@/assets/logos/stalightlogo.png";
@@ -9,7 +10,11 @@ const PrivacyPolicy = () => {
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-[#D32027] selection:text-white">
-      <SEO title="Privacy Policy | Stalight Technologies" description="Privacy policy of Stalight Technologies." />
+      <SEO 
+        title="Privacy Policy | Stalight Technologies - Software Development Company"
+        description="Privacy policy for Stalight Technologies, a leading AI-first software development company in Bengaluru, India."
+        keywords="Stalight Technologies, Privacy Policy, Software Development, Bengaluru, AI Company, India"
+      />
       <Navbar />
 
       <main className="container mx-auto px-6 pt-32 pb-20 md:pt-40 max-w-4xl">
@@ -93,6 +98,10 @@ const PrivacyPolicy = () => {
             effective date.
           </p>
         </section>
+        
+        <div className="mt-12 pt-6 border-t border-slate-100 text-xs text-slate-500">
+          <p>© 2026 <Link to="/" className="text-slate-900 font-bold hover:underline">Stalight Technologies</Link>. All rights reserved.</p>
+        </div>
       </main>
 
       <Footer />

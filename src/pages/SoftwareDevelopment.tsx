@@ -161,12 +161,13 @@ const SoftwareDevelopment = () => {
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900">
       <SEO
-        title="Custom Software Development | Stalight Technologies"
-        description="From intuitive websites to complex enterprise software, we engineer bespoke digital solutions. We turn your specific requirements into scalable, secure applications."
+        title="Custom Software Development in Bengaluru | Stalight Technologies"
+        description="Stalight Technologies builds custom software, web applications, enterprise systems, and mobile apps for businesses and institutions across India. Scalable, secure, and tailored to your requirements — developed in Bengaluru, Karnataka."
+        keywords="custom software development Bengaluru, web application development India, enterprise software solutions, mobile app development Bengaluru, software development company Karnataka, bespoke software development, scalable software solutions, business software development India, software engineering company Bengaluru, Stalight Technologies"
         jsonLd={[
           generateWebPageSchema(
-            "Software Development",
-            "Bespoke software engineering designed to solve complex challenges and scale alongside your growth.",
+            "Custom Software Development — Stalight Technologies Bengaluru",
+            "Custom software development services including web applications, enterprise systems, and mobile apps for businesses and institutions across India.",
             "/software-development"
           ),
           generateBreadcrumbSchema([

@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { SEO } from "@/components/SEO";
 
@@ -12,8 +12,8 @@ const NotFound = () => {
   return (
     <div className="min-h-screen bg-[#FAFAFA] flex flex-col items-center justify-center relative overflow-hidden font-sans">
       <SEO 
-        title="404 - Page Not Found | Stalight Technologies"
-        description="The page you are looking for does not exist on Stalight Technologies."
+        title="Page Not Found | Stalight Technologies - Software Development Company"
+        description="Oops! The page you're looking for doesn't exist. Return to Stalight Technologies, a leading software development company in Bengaluru."
         noIndex={true}
       />
       
@@ -31,12 +31,12 @@ const NotFound = () => {
           <p className="text-slate-500 text-lg md:text-xl font-light max-w-md mx-auto mb-10 leading-relaxed">
             The architectural blueprint for this route seems to be missing or relocated.
           </p>
-          <a 
-            href="/" 
+          <Link 
+            to="/" 
             className="inline-flex items-center justify-center px-8 py-4 bg-slate-950 text-white rounded-full font-bold uppercase text-xs tracking-[0.2em] shadow-xl hover:bg-[#D32027] hover:-translate-y-1 transition-all duration-300"
           >
-            Return to Headquarters
-          </a>
+            Return to Stalight Technologies Homepage
+          </Link>
         </div>
       </div>
     </div>

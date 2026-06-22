@@ -150,6 +150,7 @@ const ProductsSection = () => {
                 <div className="relative w-full h-[calc(100%-1.5rem)] sm:h-[calc(100%-1.75rem)] lg:h-[calc(100%-2rem)]">
                   <AnimatePresence mode="wait">
                     <motion.img loading="lazy" decoding="async"
+                      alt="Stalight Technologies - Leading Software Development Company in Bengaluru"
                       key={`nc-${ncIndex}`}
                       src={neuroCampusImages[ncIndex]}
                       className="absolute inset-0 w-full h-full object-cover object-top"
@@ -190,6 +191,7 @@ const ProductsSection = () => {
                 <div className="relative w-full h-[calc(100%-1.5rem)] sm:h-[calc(100%-1.75rem)] lg:h-[calc(100%-2rem)]">
                   <AnimatePresence mode="wait">
                     <motion.img loading="lazy" decoding="async"
+                      alt="Stalight Technologies - Leading Software Development Company in Bengaluru"
                       key={`ns-${nsIndex}`}
                       src={neuroSyncImages[nsIndex]}
                       className="absolute inset-0 w-full h-full object-cover object-top"

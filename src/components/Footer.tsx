@@ -101,17 +101,17 @@ const Footer = () => {
               </div>
 
               {/* Address Component properly stacked */}
-                <div className="w-full text-sm text-stone-600 font-medium leading-relaxed max-w-[280px] lg:text-right">
-                  <a
-                    href="https://www.google.com/maps/place/13%C2%B000'03.1%22N+77%C2%B033'10.4%22E/@13.000873,77.552898,640m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d13.000873!4d77.552898?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Open Stalight address in Google Maps"
-                    className="hover:text-stone-900 underline"
-                  >
-                    No.129, 1st Block, Dr. Rajkumar Road Rajajinagar, Bengaluru-560010
-                  </a>
-                </div>
+              <div className="w-full text-sm text-stone-600 font-medium leading-relaxed max-w-[280px] lg:text-right">
+                <a
+                  href="https://www.google.com/maps/place/13%C2%B000'03.1%22N+77%C2%B033'10.4%22E/@13.000873,77.552898,640m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d13.000873!4d77.552898?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open Stalight address in Google Maps"
+                  className="hover:text-stone-900 underline"
+                >
+                  No.129, 1st Block, Dr. Rajkumar Road Rajajinagar, Bengaluru-560010
+                </a>
+              </div>
 
             </div>
           </div>

@@ -45,13 +45,17 @@ export default defineConfig(({ mode }) => ({
       exclude: ["/googlefc67a6c63a16b977"],
       dynamicRoutes: [
         "/",
-        "/neuro-campus",
-        "/neuro-campus-access",
-        "/neurosync",
+        "/about-us",
+        "/it-services",
         "/software-development",
         "/skill-development",
-        "/it-services",
-        "/about-us"
+        "/neurosync",
+        "/neuro-campus",
+        "/neuro-campus-access",
+        "/privacy",
+        "/terms",
+        "/account-deletion",
+        "/onboarding"
       ],
       generateRobotsTxt: false
     })

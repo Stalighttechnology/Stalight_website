@@ -13,7 +13,7 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
-import { generateWebPageSchema, generateBreadcrumbSchema } from "@/utils/seoUtils";
+import { generateWebPageSchema, generateBreadcrumbSchema, neuroCampusSchema } from "@/utils/seoUtils";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { useLaunchCountdown, TARGET_LAUNCH_DISPLAY } from "@/hooks/useLaunchCountdown";
 
@@ -267,7 +267,7 @@ const NeuroCampus = () => {
       <div className="min-h-screen bg-[#FAFAFA] flex flex-col items-center justify-center font-sans relative overflow-hidden">
         <SEO title="Coming Soon | Stalight Campus" description="Stalight Campus is launching soon." />
         <Navbar />
-        
+
         {/* Dynamic Background */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden h-full">
           <div className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(rgba(15,23,42,1)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,1)_1px,transparent_1px)] [background-size:60px_60px]" />
@@ -296,9 +296,9 @@ const NeuroCampus = () => {
               <span className="text-xs font-bold uppercase tracking-widest text-slate-500">{TARGET_LAUNCH_DISPLAY}</span>
               <div className="flex items-center gap-4 sm:gap-6">
                 <div className="flex flex-col items-center min-w-[60px]">
-                    <span className="font-black text-slate-800 tabular-nums leading-none tracking-tight" style={{ fontSize: 'clamp(2rem, 7vw, 3.5rem)' }}>{String(timeLeft.days).padStart(2, '0')}</span>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-2">Days</span>
-                  </div>
+                  <span className="font-black text-slate-800 tabular-nums leading-none tracking-tight" style={{ fontSize: 'clamp(2rem, 7vw, 3.5rem)' }}>{String(timeLeft.days).padStart(2, '0')}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-2">Days</span>
+                </div>
                 <span className="text-3xl sm:text-4xl font-black text-slate-300 animate-pulse mb-6">:</span>
                 <div className="flex flex-col items-center min-w-[60px]">
                   <span className="font-black text-slate-800 tabular-nums leading-none tracking-tight" style={{ fontSize: 'clamp(2rem, 7vw, 3.5rem)' }}>{String(timeLeft.hours).padStart(2, '0')}</span>
@@ -319,9 +319,9 @@ const NeuroCampus = () => {
           </motion.div>
 
           <motion.div variants={fadeUpVariants}>
-             <Link to="/" className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-purple-600 transition-colors">
-               <ArrowRight className="w-4 h-4 rotate-180" /> Back to Home
-             </Link>
+            <Link to="/" className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-purple-600 transition-colors">
+              <ArrowRight className="w-4 h-4 rotate-180" /> Back to Home
+            </Link>
           </motion.div>
         </motion.div>
       </div>
@@ -331,18 +331,20 @@ const NeuroCampus = () => {
   return (
     <div ref={containerRef} className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900 overflow-x-hidden relative">
       <SEO
-        title="Stalight Campus | Stalight Technologies"
-        description="A next-generation academic management platform unifying advanced analytics, blockchain security, and automated operations."
+        title="Stalight Campus | Smart Campus Management System for Schools & Colleges"
+        description="Stalight Campus is a next-generation campus management system for schools and colleges in India. Features include biometric attendance, student tracking, academic analytics, and automated operations — built by Stalight Technologies, Bengaluru."
+        keywords="Stalight Campus, campus management system, school ERP software India, college management software, academic management system, biometric attendance system, student tracking software, educational ERP India, school automation software, Stalight Technologies Bengaluru"
         jsonLd={[
           generateWebPageSchema(
-            "Stalight Campus",
-            "A next-generation academic management platform unifying advanced analytics, blockchain security, and automated operations.",
+            "Stalight Campus — Smart Campus Management System",
+            "A next-generation campus management platform for schools and colleges featuring biometric attendance, academic analytics, student tracking, and automated operations.",
             "/neuro-campus"
           ),
           generateBreadcrumbSchema([
             { name: "Home", item: "/" },
             { name: "Stalight Campus", item: "/neuro-campus" }
-          ])
+          ]),
+          neuroCampusSchema
         ]}
       />
       <Navbar />
@@ -367,16 +369,16 @@ const NeuroCampus = () => {
         <div className="container mx-auto px-4 sm:px-6 relative z-10 w-full text-center mb-8 sm:mb-12">
           <motion.div initial="hidden" animate="visible" variants={containerVariants} className="max-w-6xl mx-auto flex flex-col items-center">
             <h1 className="text-[3.25rem] sm:text-6xl md:text-[7rem] lg:text-[8.5rem] font-light text-slate-900 tracking-tighter leading-[0.95] mb-3 sm:mb-6 px-2 max-w-full text-center">
-                <MaskedText>
-                  <span className="block sm:inline font-light normal-case">Stalight</span>{' '}
-                  <motion.span
-                    className="block sm:inline font-logo font-extrabold uppercase text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-gradient-animate mt-1 sm:mt-0 tracking-[0.02em] float-subtle"
-                    animate={{ y: [0, -6, 0] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    Campus
-                  </motion.span>
-                </MaskedText>
+              <MaskedText>
+                <span className="block sm:inline font-light normal-case">Stalight</span>{' '}
+                <motion.span
+                  className="block sm:inline font-logo font-extrabold uppercase text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-gradient-animate mt-1 sm:mt-0 tracking-[0.02em] float-subtle"
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  Campus
+                </motion.span>
+              </MaskedText>
             </h1>
 
             <motion.p variants={fadeUpVariants} className="text-slate-600 font-light text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed mb-6 px-2">
@@ -501,7 +503,7 @@ const NeuroCampus = () => {
                   <div className="relative h-[180px] sm:h-[260px] md:h-[300px] bg-slate-950/5 flex items-center justify-center p-4 sm:p-6 overflow-hidden">
                     <OptimizedImage
                       src={feat.img}
-                      alt={feat.caption}
+                      alt={`${feat.caption} - Neuro Campus ERP System by Stalight Technologies`}
                       className="w-full h-full object-contain rounded-lg drop-shadow-md group-hover:scale-[1.02] transition-transform duration-500"
                     />
                   </div>
@@ -808,7 +810,7 @@ const NeuroCampus = () => {
               Get in touch with our team to schedule a personalised architectural walkthrough of Stalight Campus.
             </p>
 
-              <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
               <button onClick={() => setIsFormOpen(true)} className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 text-white rounded-full font-bold uppercase text-xs sm:text-sm tracking-widest shadow-lg hover:shadow-purple-500/25 hover:-translate-y-0.5 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition-all duration-300 w-full sm:w-auto">
                 Schedule Demo <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
               </button>
@@ -827,12 +829,12 @@ const NeuroCampus = () => {
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 overflow-hidden">
           {/* Subtle blurred backdrop */}
           <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setIsFormOpen(false)} />
-          
+
           <div className="relative z-[110] w-full max-w-2xl bg-white rounded-3xl sm:rounded-[2.5rem] shadow-2xl border border-slate-100 max-h-[95dvh] sm:max-h-[90vh] flex flex-col overflow-hidden">
-            
+
             {/* Top Decorative Line */}
             <div className="absolute top-0 left-0 right-0 h-1.5 sm:h-2 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 z-20"></div>
-            
+
             {/* Sticky Header */}
             <div className="flex items-center justify-between px-5 sm:px-8 py-4 sm:py-6 shrink-0 border-b border-slate-100 bg-white relative z-10">
               <h3 className="text-lg sm:text-xl font-bold text-slate-900">Schedule a Live Demo</h3>
@@ -917,7 +919,7 @@ const NeuroCampus = () => {
                 {isSubmitting ? 'Submitting...' : 'Request Demo'}
               </button>
             </div>
-            
+
           </div>
         </div>
       )}

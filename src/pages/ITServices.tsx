@@ -162,9 +162,21 @@ const ITServices = () => {
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-slate-900 overflow-hidden selection:bg-purple-100 selection:text-purple-900">
-      <SEO 
-        title="Managed IT Services & Operations | Stalight Technologies"
-        description="Empower your institution with robust managed operations, reliable cloud & hosting, and proactive support. We handle the tech so you can focus on growth."
+      <SEO
+        title="IT Services in Bengaluru | Managed IT, Cloud & Software Development"
+        description="Stalight Technologies offers managed IT services, custom software development, cloud hosting, workflow automation, and infrastructure management for schools, colleges, and enterprises across India. Based in Bengaluru, Karnataka."
+        keywords="IT services Bengaluru, managed IT services India, custom software development Bengaluru, cloud hosting services India, workflow automation software, infrastructure management, IT consulting Bengaluru, enterprise IT solutions, software development company Karnataka, Stalight Technologies"
+        jsonLd={[
+          generateWebPageSchema(
+            "IT Services & Custom Software Development — Stalight Technologies",
+            "Managed IT services, custom software development, cloud hosting, workflow automation, and infrastructure management for enterprises and institutions across India.",
+            "/it-services"
+          ),
+          generateBreadcrumbSchema([
+            { name: "Home", item: "/" },
+            { name: "IT Services", item: "/it-services" }
+          ])
+        ]}
       />
       <Navbar />
 
