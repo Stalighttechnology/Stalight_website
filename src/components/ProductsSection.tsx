@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 
 // --- Images ---
 import ncImg1 from "@/assets/screenshots/leavereqimage.png";
-import ncImg2 from "@/assets/products/neurocampus11.jpg";
+import ncImg2 from "@/assets/products/princydah.png";
 
 import nsImg1 from "@/assets/products/neurosync11.jpg";
 import nsImg2 from "@/assets/products/neurosync22.jpg";

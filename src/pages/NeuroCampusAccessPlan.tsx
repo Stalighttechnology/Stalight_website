@@ -27,7 +27,7 @@ const NeuroCampusAccessPlan = () => {
         "Digital Classrooms",
         "Core Fee Management",
         "Communication Hub",
-        "User Administration",
+        "Mobile App Access",
       ],
     },
     {
@@ -47,7 +47,7 @@ const NeuroCampusAccessPlan = () => {
         "Elevated User Experience",
         "Real-Time Operations",
         "Academic Progression",
-        "Everything in Basic +",
+        "iOS & Android Apps",
       ],
     },
     {
@@ -61,13 +61,12 @@ const NeuroCampusAccessPlan = () => {
       features: [
         "Smart Assistance",
         "Career Intelligence",
-        "Biometric & Location Security",
+        "Advanced Mobile Analytics",
         "Automated Grading Engine",
         "Enterprise Access Control",
         "High-Level Security",
         "Cloud Infrastructure",
         "System Integrity",
-        "Everything in Pro +",
       ],
     },
   ];
@@ -240,7 +239,7 @@ const NeuroCampusAccessPlan = () => {
                   "Real-time Attendance Tracking",
                   "Digital Classrooms",
                   "Advanced Analytics Dashboard",
-                  "Biometric Security",
+                  "Mobile App Access",
                   "Smart Assistance",
                   "Automated Grading Engine",
                   "Multi-Factor Authentication",
@@ -257,7 +256,7 @@ const NeuroCampusAccessPlan = () => {
                     </td>
                     <td className="text-center py-4 px-4">
                       {![
-                        "Biometric Security",
+                        "Mobile App Access",
                         "Smart Assistance",
                         "Automated Grading Engine",
                         "Career Intelligence",
@@ -270,7 +269,6 @@ const NeuroCampusAccessPlan = () => {
                     </td>
                     <td className="text-center py-4 px-4 bg-purple-50/30">
                       {![
-                        "Biometric Security",
                         "Career Intelligence",
                         "Enterprise RBAC",
                       ].includes(feature) ? (

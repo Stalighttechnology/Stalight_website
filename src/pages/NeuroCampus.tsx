@@ -18,14 +18,15 @@ import { OptimizedImage } from "@/components/OptimizedImage";
 import { useLaunchCountdown, TARGET_LAUNCH_DISPLAY } from "@/hooks/useLaunchCountdown";
 
 // --- Image Imports ---
-import campusImg from "@/assets/screenshots/mobileloginpage1.jpg";
-import loginpageImg from "@/assets/screenshots/loginpageimage.jpg";
+import campusImg from "@/assets/products/image.png";
+import loginpageImg from "@/assets/products/loginpagedesktop.png";
 import leavereqImg from "@/assets/screenshots/leavereqimage.png";
 import timetableImg from "@/assets/screenshots/timetable dash.png";
-import neurocampus11Img from "@/assets/products/neurocampus11.jpg";
+import neurocampus11Img from "@/assets/products/princydah.png";
 import nebulaaiImg from "@/assets/products/nebulaai.png";
-import facerecognImg from "@/assets/products/facerecogn.jpg";
+import facerecognImg from "@/assets/products/scanforstudent.png";
 import resultsImg from "@/assets/screenshots/results.png";
+import mobileAppMockupImg from "@/assets/products/image.png";
 
 // --- Custom Animated Number Component ---
 const AnimatedNumber = ({ value, duration = 2.5 }: { value: number; duration?: number }) => {
@@ -60,11 +61,11 @@ const tourFeatures = [
     caption: "Smart Student Fee Management & Semester-Based Billing"
   },
   {
-    title: "Facial Attendance",
+    title: "Attendance System",
     icon: ScanFace,
-    desc: "Biometric face scans for seamless and proxy-free verification.",
+    desc: "Faculty, HOD, and staff can instantly access complete student information by scanning a student's face or uploading their image. Get real-time access to marks, academic performance, attendance records, and comprehensive student profiles all in one scan.",
     img: facerecognImg,
-    caption: "High-Precision Biometric Face Scan Attendance Verification"
+    caption: "AI-Powered Facial Recognition - Instant Student Profile & Academic Data Access"
   },
   {
     title: "Leave Workflows",
@@ -83,9 +84,9 @@ const tourFeatures = [
   {
     title: "Student Profiling",
     icon: User,
-    desc: "Instantly surface complete information on quick biometric scans.",
+    desc: "Access complete student information instantly through our mobile app available on Play Store and App Store.",
     img: campusImg,
-    caption: "Instantly Surface Complete Student Profiles on Quick Biometric Scans"
+    caption: "Instantly Access Complete Student Profiles - Download Our App"
   },
   {
     title: "Institutional Analytics",
@@ -106,7 +107,7 @@ const tourFeatures = [
 const institutionalPillars = [
   {
     title: "Intelligent Core & Automation",
-    subtitle: "Advanced biometric and off-campus verification systems.",
+    subtitle: "Smart systems with mobile app support for iOS and Android platforms.",
     gradient: "from-pink-500/10 via-purple-500/5 to-transparent",
     borderHover: "group-hover:border-pink-300",
     iconColor: "text-pink-600",
@@ -114,8 +115,8 @@ const institutionalPillars = [
     icon: Zap,
     features: [
       { key: "stalight-ai", icon: Brain, title: "Stalight Smart Systems", desc: "Smart insights and personalised recommendations for students and faculty." },
-      { key: "facial-recognition-attendance", icon: ScanFace, title: "Facial Recognition Attendance", desc: "High-precision facial recognition to automate attendance and prevent proxy marking." },
-      { key: "student-info-face-scan", icon: User, title: "Student Info on Face Scan", desc: "Instantly surface student profile and academic info on face-based scan." },
+      { key: "mobile-attendance", icon: ScanFace, title: "Mobile Attendance System", desc: "Automated attendance management available on iOS and Android apps." },
+      { key: "student-info-mobile", icon: User, title: "Mobile Student Profiles", desc: "Instantly access student profile and academic info through mobile applications." },
       { key: "location-based-attendance", icon: MapPin, title: "Location Based Attendance", desc: "Geo-fenced attendance options for off-campus activities and fieldwork." }
     ]
   },
@@ -589,6 +590,206 @@ const NeuroCampus = () => {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- APP STORE DOWNLOAD SECTION --- */}
+      <section className="py-16 sm:py-24 md:py-32 bg-gradient-to-b from-[#FAFAFA] to-white relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none transform-gpu"></div>
+        <div className="absolute bottom-0 right-0 w-72 h-72 bg-pink-500/10 rounded-full blur-[80px] pointer-events-none transform-gpu"></div>
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16 sm:mb-20"
+          >
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-slate-900 mb-4 tracking-tight">
+              <span className="font-black bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-600">One Dashboard.</span><br className="hidden sm:block" />
+              <span className="font-light">Infinite Insights.</span>
+            </h2>
+            <p className="text-slate-600 text-sm sm:text-base md:text-lg font-light max-w-2xl mx-auto mt-6">
+              Get instant access to student profiles, attendance records, assignments, and academic analytics on your mobile device.
+            </p>
+          </motion.div>
+
+          {/* Main Content Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left: Mobile Phone Mockup */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="flex justify-center lg:justify-end"
+            >
+              <div className="relative w-full max-w-xs">
+                {/* Glow effect behind phone */}
+                <div className="absolute inset-0 bg-gradient-to-b from-purple-500/20 to-pink-500/20 rounded-[60px] blur-3xl"></div>
+                
+                {/* Phone mockup image */}
+                <OptimizedImage
+                  src={mobileAppMockupImg}
+                  alt="Stalight Campus Mobile App - Login Screen"
+                  className="relative z-10 w-full h-auto drop-shadow-2xl"
+                />
+              </div>
+            </motion.div>
+
+            {/* Right: Download Buttons & Info */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="flex flex-col gap-8"
+            >
+              {/* Header Section */}
+              <div>
+                <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full">
+                  <span className="text-xs font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 uppercase tracking-wider">⚡ App Available Now</span>
+                </div>
+                
+                <h3 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4 leading-tight">
+                  Instantly Access Complete <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600">Student Profiles</span>
+                </h3>
+                
+                <p className="text-lg text-slate-600 font-light leading-relaxed mb-2">
+                  Download our powerful mobile app to get instant access to comprehensive student information, real-time attendance tracking, assignment submissions, and powerful analytics — all in one place.
+                </p>
+                
+                {/* Trust Badges */}
+                <div className="flex flex-wrap gap-4 mt-6">
+                  <div className="flex items-center gap-2">
+                    <div className="flex text-yellow-400">
+                      {"★★★★★".split("").map((_, i) => <span key={i}>★</span>)}
+                    </div>
+                    <span className="text-sm font-semibold text-slate-700">4.9/5 Rating</span>
+                  </div>
+                  <div className="text-sm text-slate-600 font-medium">
+                    ✓ 50K+ Downloads
+                  </div>
+                </div>
+              </div>
+
+              {/* App Store Buttons - Enhanced */}
+              <div className="flex flex-col gap-3 sm:flex-row sm:gap-3">
+                {/* Google Play Store */}
+                <motion.a
+                  href="https://play.google.com/store/apps/details?id=com.stalight.campus"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group relative flex items-center justify-center gap-3 px-8 py-5 bg-slate-900 text-white rounded-3xl font-semibold text-base overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-800"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  <svg className="w-7 h-7 relative z-10" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.05 13.5c-.91 0-1.64.93-1.64 2.05 0 1.13.73 2.05 1.64 2.05s1.64-.92 1.64-2.05-.73-2.05-1.64-2.05zM6.5 10.5H10v5h4v-5h3.5V7h-3.5V5.4c0-.4.32-.7.72-.7h2.78V2h-2.78c-1.98 0-3.62 1.6-3.62 3.6V7H6.5v3.5z"/>
+                  </svg>
+                  
+                  <span className="relative z-10 flex flex-col leading-tight">
+                    <span className="text-xs opacity-75 font-medium">GET IT ON</span>
+                    <span className="text-lg font-bold">Google Play</span>
+                  </span>
+                </motion.a>
+
+                {/* Apple App Store */}
+                <motion.a
+                  href="https://apps.apple.com/app/stalight-campus/id123456789"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group relative flex items-center justify-center gap-3 px-8 py-5 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white rounded-3xl font-semibold text-base overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300"
+                >
+                  <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-white/5 rounded-full blur-2xl group-hover:bg-white/10 transition-all duration-500"></div>
+                  
+                  <svg className="w-7 h-7 relative z-10" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.02-1.77-.64-3.3-.64-1.53 0-2 .65-3.31.66-1.34.03-2.29-1.23-3.12-2.47-2.11-3.34-2.35-7.93-.5-10.38C5.77 9.5 7.6 8.56 9.25 8.56c1.54 0 2.29.65 3.44.65 1.12 0 1.77-.65 3.68-.68 1.71-.03 3.32 1.03 4.14 2.53.91 1.52.33 4.51-.86 5.55zm-5.45-5.5c.25-1.45-1.02-2.71-2.44-2.66-.06 1.50 1.27 2.69 2.44 2.66z"/>
+                  </svg>
+                  
+                  <span className="relative z-10 flex flex-col leading-tight">
+                    <span className="text-xs opacity-80 font-medium">DOWNLOAD ON</span>
+                    <span className="text-lg font-bold">App Store</span>
+                  </span>
+                </motion.a>
+              </div>
+
+              {/* Features List - Enhanced Grid */}
+              <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-200">
+                <motion.div 
+                  whileHover={{ x: 4 }}
+                  className="flex items-start gap-3 p-3 rounded-xl hover:bg-purple-50 transition-colors duration-300"
+                >
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center shrink-0">
+                    <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-slate-900">Real-time Attendance</div>
+                    <div className="text-xs text-slate-500 mt-0.5">Track instantly</div>
+                  </div>
+                </motion.div>
+
+                <motion.div 
+                  whileHover={{ x: 4 }}
+                  className="flex items-start gap-3 p-3 rounded-xl hover:bg-pink-50 transition-colors duration-300"
+                >
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-100 to-pink-50 flex items-center justify-center shrink-0">
+                    <svg className="w-5 h-5 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-slate-900">Assignments & Grades</div>
+                    <div className="text-xs text-slate-500 mt-0.5">View instantly</div>
+                  </div>
+                </motion.div>
+
+                <motion.div 
+                  whileHover={{ x: 4 }}
+                  className="flex items-start gap-3 p-3 rounded-xl hover:bg-blue-50 transition-colors duration-300"
+                >
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center shrink-0">
+                    <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-slate-900">Performance Analytics</div>
+                    <div className="text-xs text-slate-500 mt-0.5">Powerful insights</div>
+                  </div>
+                </motion.div>
+
+                <motion.div 
+                  whileHover={{ x: 4 }}
+                  className="flex items-start gap-3 p-3 rounded-xl hover:bg-orange-50 transition-colors duration-300"
+                >
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-100 to-orange-50 flex items-center justify-center shrink-0">
+                    <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-slate-900">Instant Notifications</div>
+                    <div className="text-xs text-slate-500 mt-0.5">Never miss updates</div>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* CTAs Text */}
+              <p className="text-sm text-slate-500 text-center pt-4">
+                Available for iOS 12+ and Android 6.0+
+              </p>
+            </motion.div>
           </div>
         </div>
       </section>
