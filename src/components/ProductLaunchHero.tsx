@@ -358,7 +358,7 @@ const ProductLaunchHero = () => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="stalight_campus">Stalight Campus</SelectItem>
-                      <SelectItem value="neurosync">NeuroSync</SelectItem>
+                      <SelectItem value="neurosync">Stalight Sync</SelectItem>
                       <SelectItem value="both">Both / Integration</SelectItem>
                       <SelectItem value="custom">Custom / Other</SelectItem>
                     </SelectContent>

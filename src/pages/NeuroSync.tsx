@@ -49,11 +49,11 @@ const features = [
 ];
 
 const reviews = [
-  { name: "Vijayashree", role: "Final Year CSE", institution: "JIT Bangalore", text: "NeuroSync's smart mock interviews were incredibly realistic. The voice recognition and feedback helped me improve my communication skills tremendously. Got placed at Google!", rating: 5 },
+  { name: "Vijayashree", role: "Final Year CSE", institution: "JIT Bangalore", text: "Stalight Sync's smart mock interviews were incredibly realistic. The voice recognition and feedback helped me improve my communication skills tremendously. Got placed at Google!", rating: 5 },
   { name: "Sheetal", role: "Pre-final Year ISE", institution: "JSS", text: "The coding lab interface is exactly like LeetCode but with better explanations. The system design whiteboard feature helped me crack my Amazon interview.", rating: 5 },
   { name: "Poornachandra", role: "Final Year Data Science", institution: "BKIT", text: "The Placement Readiness Index gave me confidence to apply for FAANG roles. The communication scoring helped me understand my weak areas and improve them.", rating: 4 },
   { name: "Sinchana M", role: "Final Year CSE-AIML", institution: "AMC Institution", text: "Mock assessment drills prepared me perfectly for TCS recruitment. The timed rounds and difficulty levels matched exactly what I faced in the actual placement.", rating: 5 },
-  { name: "Dr. Ramakrishna", role: "Placement Director", institution: "AMC Engineering", text: "NeuroSync completely automated our screening process. The analytics dashboard gives me a bird's eye view of the entire batch's readiness before campus drives begin.", rating: 5 },
+  { name: "Dr. Ramakrishna", role: "Placement Director", institution: "AMC Engineering", text: "Stalight Sync completely automated our screening process. The analytics dashboard gives me a bird's eye view of the entire batch's readiness before campus drives begin.", rating: 5 },
   { name: "Krishna H", role: "3rd Year CSE", institution: "AMC Institution", text: "The personalized learning paths adapted to my speed. I went from struggling with dynamic programming to clearing advanced rounds in just two months.", rating: 5 },
 ];
 
@@ -118,6 +118,7 @@ const NeuroSync = () => {
     const [open, setOpen] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [prefilledProduct] = useState("Stalight Sync"); // Auto-set to Stalight Sync for this page
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -132,6 +133,7 @@ const NeuroSync = () => {
         designation: fd.get('designation')?.toString() || null,
         number_of_students: fd.get('number_of_students')?.toString() || null,
         current_process: fd.get('current_process')?.toString() || null,
+        product_interested: prefilledProduct,
         preferred_date: fd.get('preferred_date')?.toString() || null,
         preferred_time: fd.get('preferred_time')?.toString() || null,
         message: fd.get('message')?.toString() || null,
@@ -380,7 +382,7 @@ const NeuroSync = () => {
           <motion.div initial="hidden" animate="visible" variants={containerVariants} className="max-w-6xl mx-auto flex flex-col items-center">
 
             {/* Title */}
-            <h1 className="sr-only"><strong>NeuroSync</strong> | AI-Powered <strong>Enterprise Software</strong> by <strong>Stalight Technologies</strong></h1>
+            <h1 className="sr-only"><strong>Stalight Sync</strong> | AI-Powered <strong>Enterprise Software</strong> by <strong>Stalight Technologies</strong></h1>
             <h1 className="text-[3.25rem] sm:text-6xl md:text-[7rem] lg:text-[8.5rem] font-light text-slate-950 tracking-tighter leading-[0.95] mb-4 sm:mb-6 px-2" aria-hidden="true">
               <MaskedText>
                 <span className="font-light">Stalight</span>{' '}
@@ -445,7 +447,7 @@ const NeuroSync = () => {
                 className="group bg-white border border-slate-200/60 rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden hover:shadow-[0_20px_40px_-15px_rgba(103,58,183,0.15)] hover:border-purple-200 hover:-translate-y-1 transition-all duration-500 flex flex-col h-full"
               >
                 <div className="h-40 sm:h-48 md:h-56 overflow-hidden relative border-b border-slate-100">
-                  <OptimizedImage src={f.imgSrc} alt={`${f.title} - NeuroSync AI Placement Platform by Stalight Technologies`} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out" />
+                  <OptimizedImage src={f.imgSrc} alt={`${f.title} - Stalight Sync AI Placement Platform by Stalight Technologies`} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out" />
 
                   <div className="absolute bottom-3 sm:bottom-4 left-4 sm:left-5 w-10 sm:w-12 h-10 sm:h-12 bg-white rounded-xl flex items-center justify-center shadow-lg group-hover:bg-gradient-to-br group-hover:from-purple-500 group-hover:to-blue-500 transition-all duration-500">
                     <f.icon className="w-4 h-4 sm:w-5 sm:h-5 text-slate-700 group-hover:text-white" strokeWidth={2} />

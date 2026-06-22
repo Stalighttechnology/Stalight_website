@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 const defaultProps = {
   title: 'Stalight Technologies | AI-First Enterprise Software Development Company in Bengaluru',
   description: 'Stalight Technologies is a leading software development company in Bengaluru, specializing in AI-first enterprise solutions, campus automation, and custom software for businesses in India.',
-  keywords: 'Stalight Technologies, Stalight, Software Development, Enterprise Software Development, AI Software Development, Custom Software Development, Bengaluru, India, Campus Automation, Workforce Assessment, Neuro Campus, NeuroSync',
+  keywords: 'Stalight Technologies, Stalight, Software Development, Enterprise Software Development, AI Software Development, Custom Software Development, Bengaluru, India, Campus Automation, Workforce Assessment, Stalight Campus, Stalight Sync',
   author: 'Stalight Technologies Pvt Ltd',
 };
 

@@ -16,8 +16,8 @@ const navLinks = [
 
 // Subtext/descriptions removed as requested
 const productsDropdownItems = [
-  { label: "Stalight Campus", href: "/neuro-campus" },
-  { label: "Stalight Sync", href: "/neurosync" },
+  { label: "Stalight-Campus", href: "/Stalight-Campus" },
+  { label: "Stalight-Sync", href: "/Stalight-Sync" },
 ];
 
 const servicesDropdownItems = [

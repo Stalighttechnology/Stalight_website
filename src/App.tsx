@@ -41,9 +41,9 @@ const App = () => (
             <Route path="/products" element={<SoftwareDevelopment />} />
             <Route path="/software-development" element={<SoftwareDevelopment />} />
             <Route path="/skill-development" element={<SkillDevelopment />} />
-            <Route path="/neurosync" element={<NeuroSync />} />
-            <Route path="/neuro-campus" element={<NeuroCampus />} />
-            <Route path="/neuro-campus-access" element={<NeuroCampusAccessPlan />} />
+            <Route path="/Stalight-Sync" element={<NeuroSync />} />
+            <Route path="/Stalight-Campus" element={<NeuroCampus />} />
+            <Route path="/Stalight-Campus-Access" element={<NeuroCampusAccessPlan />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/account-deletion" element={<AccountDeletion />} />

@@ -212,9 +212,14 @@ const NeuroCampus = () => {
   const { isLaunched, timeLeft, isReady } = useLaunchCountdown();
 
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [formData, setFormData] = useState({ full_name: "", official_email: "", phone: "", organization: "", designation: "", interested_solution: "", preferred_date: "", preferred_time: "", message: "" });
+  const [formData, setFormData] = useState({ full_name: "", official_email: "", phone: "", organization: "", designation: "", interested_solution: "stalight_campus", preferred_date: "", preferred_time: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    // Auto-select Stalight Campus since we're on the Campus page
+    setFormData((prev) => ({ ...prev, interested_solution: "stalight_campus" }));
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target as HTMLInputElement;
@@ -503,7 +508,7 @@ const NeuroCampus = () => {
                   <div className="relative h-[180px] sm:h-[260px] md:h-[300px] bg-slate-950/5 flex items-center justify-center p-4 sm:p-6 overflow-hidden">
                     <OptimizedImage
                       src={feat.img}
-                      alt={`${feat.caption} - Neuro Campus ERP System by Stalight Technologies`}
+                      alt={`${feat.caption} - Stalight Campus ERP System by Stalight Technologies`}
                       className="w-full h-full object-contain rounded-lg drop-shadow-md group-hover:scale-[1.02] transition-transform duration-500"
                     />
                   </div>
@@ -885,7 +890,7 @@ const NeuroCampus = () => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="stalight_campus">Stalight   Campus</SelectItem>
-                      <SelectItem value="neurosync">NeuroSync</SelectItem>
+                      <SelectItem value="neurosync">Stalight Sync</SelectItem>
                       <SelectItem value="both">Both / Integration</SelectItem>
                       <SelectItem value="custom">Custom / Other</SelectItem>
                     </SelectContent>

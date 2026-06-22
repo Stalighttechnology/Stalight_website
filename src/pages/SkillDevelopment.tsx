@@ -190,7 +190,7 @@ const SkillDevelopment = () => {
                     <span className="text-xs font-bold text-slate-700">Real Projects</span>
                   </div>
                 </div>
-                <p className="text-sm text-slate-600 mt-4">Enrolled students receive complimentary access to NeuroSync labs for hands-on experimentation and extended learning.</p>
+                <p className="text-sm text-slate-600 mt-4">Enrolled students receive complimentary access to Stalight Sync labs for hands-on experimentation and extended learning.</p>
               </div>
             </div>
           </motion.div>
