@@ -3,4 +3,9 @@ Allow: /
 Disallow: /admin
 Disallow: /googlefc67a6c63a16b977
 
+# Block utility/internal pages from indexing
+Disallow: /account-deletion
+Disallow: /onboarding
+
+# Sitemap location
 Sitemap: https://stalight.in/sitemap.xml
