@@ -278,6 +278,10 @@
   background: #fafafa;
 }
 .nda-consent-item:hover { border-color: #a78bfa; background: #faf5ff; }
+.nda-consent-item:active { border-color: #a78bfa; background: #faf5ff; }
+@media (max-width: 767px) {
+  .nda-consent-item { border-color: #a78bfa; background: #faf5ff; }
+}
 .nda-consent-item.checked { border-color: #8b5cf6; background: #f5f3ff; }
 .nda-consent-item.optional { border-style: dashed; }
 .nda-consent-cb {
@@ -453,12 +457,27 @@
   box-shadow: 0 6px 18px rgba(139,92,246,.45);
   transform: translateY(-1px);
 }
+.nda-btn-primary:active:not(:disabled) {
+  background: linear-gradient(135deg, #6d28d9, #7c3aed);
+  box-shadow: 0 6px 18px rgba(139,92,246,.45);
+  transform: translateY(-1px);
+}
+@media (max-width: 767px) {
+  .nda-btn-primary {
+    background: linear-gradient(135deg, #6d28d9, #7c3aed);
+    box-shadow: 0 6px 18px rgba(139,92,246,.45);
+  }
+}
 .nda-btn-secondary {
   background: #f3f4f6;
   color: #374151;
   border: 1.5px solid #e5e7eb;
 }
 .nda-btn-secondary:hover:not(:disabled) { background: #e9ebf0; }
+.nda-btn-secondary:active:not(:disabled) { background: #e9ebf0; }
+@media (max-width: 767px) {
+  .nda-btn-secondary { background: #e9ebf0; }
+}
 .nda-btn-success {
   background: linear-gradient(135deg, #059669, #10b981);
   color: #ffffff;
@@ -468,6 +487,15 @@
   background: linear-gradient(135deg, #047857, #059669);
   transform: translateY(-1px);
 }
+.nda-btn-success:active:not(:disabled) {
+  background: linear-gradient(135deg, #047857, #059669);
+  transform: translateY(-1px);
+}
+@media (max-width: 767px) {
+  .nda-btn-success {
+    background: linear-gradient(135deg, #047857, #059669);
+  }
+}
 .nda-btn-ghost {
   background: transparent;
   color: #7c3aed;
@@ -476,6 +504,10 @@
   font-size: 13px;
 }
 .nda-btn-ghost:hover:not(:disabled) { background: #f5f3ff; }
+.nda-btn-ghost:active:not(:disabled) { background: #f5f3ff; }
+@media (max-width: 767px) {
+  .nda-btn-ghost { background: #f5f3ff; }
+}
 
 /* ── Loading state ── */
 .nda-loading-overlay {
