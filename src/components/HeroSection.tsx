@@ -83,9 +83,9 @@ const HeroSection = () => {
       {/* ──── BACKGROUND SYSTEM ──── */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-white">
         {/* Dynamic responsive background image */}
-        <div 
+        <div
           className="absolute inset-0 w-full h-full bg-cover"
-          style={{ 
+          style={{
             backgroundImage: `url(${getBgImage()})`,
             backgroundPosition: deviceType === "desktop" ? "left center" : "center center",
             backgroundRepeat: "no-repeat",
@@ -95,7 +95,7 @@ const HeroSection = () => {
 
       {/* ──── CONTENT GRID ──── */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-20 lg:px-12 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 min-h-[100dvh]">
-        
+
         {/* LEFT COLUMN: Typography & Copy */}
         <motion.div
           className="flex-1 max-w-2xl text-left flex flex-col justify-center pt-16 lg:pt-0"
@@ -113,14 +113,16 @@ const HeroSection = () => {
             </motion.span>
           </div>
 
-          {/* Heading */}
+          {/* Heading with pink-purple-blue color grading on 'Intelligence' */}
           <motion.h1
             variants={itemVariants}
             className="text-[3.25rem] sm:text-[4rem] md:text-[5.25rem] font-bold leading-[1.04] tracking-[-0.04em] text-[#0F172A] font-sans"
           >
             Enterprise
             <br />
-            Intelligence
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#EC4899] via-[#8B5CF6] to-[#3B82F6] inline-block pb-3 -mb-3">
+              Intelligence
+            </span>
           </motion.h1>
 
           {/* Horizontal Red Line - Placed directly below heading */}
@@ -149,12 +151,15 @@ const HeroSection = () => {
                 e.preventDefault();
                 handleScroll("services");
               }}
-              className="group relative flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-[#0B101E] px-7 py-4 text-[11px] font-bold uppercase tracking-[0.22em] text-white shadow-xl transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
+              className="group relative flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-[#0B101E] px-7 py-4 text-[11px] font-bold uppercase tracking-[0.22em] text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-orange-500/25 active:translate-y-0"
             >
-              <span>Explore Services</span>
-              <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
+              <span className="absolute inset-0 bg-gradient-to-r from-orange-500 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></span>
+              <span className="relative z-10 flex items-center gap-2">
+                <span>Explore Services</span>
+                <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </span>
             </a>
 
             {/* Secondary button: Outlined white */}

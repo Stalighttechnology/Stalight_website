@@ -94,6 +94,7 @@ const ITServices = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [openDialogIndex, setOpenDialogIndex] = useState<number | null>(null);
 
   // Form State matching the Supabase it_assessments table
   const [formData, setFormData] = useState({
@@ -152,12 +153,15 @@ const ITServices = () => {
   };
 
   const scrollToAssessment = (e) => {
-    e.preventDefault();
-    const el = document.getElementById('assessment');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      setIsFormOpen(true);
-    }
+    if (e) e.preventDefault();
+    setOpenDialogIndex(null);
+    setIsFormOpen(true);
+    setTimeout(() => {
+      const el = document.getElementById('assessment');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 120);
   };
 
   return (
@@ -268,7 +272,10 @@ const ITServices = () => {
                   <p className="text-slate-600 leading-relaxed">{service.desc}</p>
 
                   <div className="mt-4">
-                    <Dialog>
+                    <Dialog
+                      open={openDialogIndex === index}
+                      onOpenChange={(open) => setOpenDialogIndex(open ? index : null)}
+                    >
                       <DialogTrigger asChild>
                         <button className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-md text-sm font-medium hover:bg-purple-700 transition">
                           Learn More
