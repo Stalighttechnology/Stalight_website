@@ -547,9 +547,29 @@ const NeuroCampus = () => {
             variants={containerVariants}
             className="max-w-6xl mx-auto"
           >
+            {/* Mobile: Heading Section (visible only on mobile) */}
+            <motion.div variants={fadeUpVariants} className="lg:hidden mb-8 text-center">
+              <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-slate-200/50 rounded-full mb-6 w-full justify-center">
+                <div className="flex gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={16} className="fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <span className="font-semibold text-slate-900 text-sm">4.9/5 Rating</span>
+                <span className="text-slate-600 text-sm">✓ 50K+ Downloads</span>
+              </div>
+              
+              <h2 className="text-4xl sm:text-5xl font-light text-slate-900 tracking-tight mb-4 leading-tight">
+                Your Complete <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600">Campus, Anywhere</span>
+              </h2>
+              <p className="text-slate-600 text-base sm:text-lg font-light mb-6 leading-relaxed">
+                Download our powerful mobile app to get instant access to comprehensive student information, real-time attendance tracking, assignment submissions, and powerful analytics — all in one place.
+              </p>
+            </motion.div>
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              {/* Left: Phone Mockup */}
-              <motion.div variants={fadeUpVariants} className="flex items-center justify-center order-2 lg:order-1">
+              {/* Phone Mockup */}
+              <motion.div variants={fadeUpVariants} className="flex items-center justify-center order-1 lg:order-1">
                 <div className="relative w-full max-w-sm mx-auto">
                   {/* Glow effect behind phone */}
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-[3rem] blur-2xl transform-gpu" />
@@ -562,8 +582,8 @@ const NeuroCampus = () => {
                 </div>
               </motion.div>
 
-              {/* Right: Content & Buttons */}
-              <motion.div variants={fadeUpVariants} className="flex flex-col justify-center order-1 lg:order-2">
+              {/* Desktop: Content & Buttons (visible only on desktop) */}
+              <motion.div variants={fadeUpVariants} className="hidden lg:flex lg:flex-col lg:justify-center">
                 <div className="inline-flex items-center justify-center lg:justify-start gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-slate-200/50 rounded-full mb-6 w-fit">
                   <div className="flex gap-1">
                     {[...Array(5)].map((_, i) => (
@@ -634,6 +654,61 @@ const NeuroCampus = () => {
                 </div>
               </motion.div>
             </div>
+
+            {/* Mobile: Buttons Section (visible only on mobile) */}
+            <motion.div variants={fadeUpVariants} className="lg:hidden mt-8">
+              <div className="flex flex-col gap-3">
+                {/* Google Play Store Button with Icon */}
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.stalight.campus"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative w-full overflow-hidden rounded-2xl bg-slate-900 px-6 py-3 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-3"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <img src={playstoreImg} alt="Google Play Store" className="w-6 h-6 relative z-10" />
+                  <div className="relative z-10 flex flex-col text-white text-left">
+                    <div className="text-xs font-medium opacity-90">GET IT ON</div>
+                    <div className="font-bold text-sm">Google Play</div>
+                  </div>
+                </a>
+
+                {/* App Store Button with Icon */}
+                <a
+                  href="https://apps.apple.com/app/stalight-campus/id6502458957"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-3"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-700 to-pink-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <img src={applestoreImg} alt="Apple App Store" className="w-6 h-6 relative z-10" />
+                  <div className="relative z-10 flex flex-col text-white text-left">
+                    <div className="text-xs font-medium opacity-90">DOWNLOAD ON</div>
+                    <div className="font-bold text-sm">App Store</div>
+                  </div>
+                </a>
+              </div>
+
+              {/* Mobile: Features pills */}
+              <div className="grid grid-cols-2 gap-3 mt-6">
+                <div className="flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-lg hover:bg-white/80 transition-colors">
+                  <CheckCircle2 size={18} className="text-purple-600 shrink-0" />
+                  <span className="text-sm font-medium text-slate-700">Real-time Attendance</span>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-lg hover:bg-white/80 transition-colors">
+                  <CheckCircle2 size={18} className="text-pink-600 shrink-0" />
+                  <span className="text-sm font-medium text-slate-700">Assignments & Grades</span>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-lg hover:bg-white/80 transition-colors">
+                  <CheckCircle2 size={18} className="text-blue-600 shrink-0" />
+                  <span className="text-sm font-medium text-slate-700">Performance Analytics</span>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-lg hover:bg-white/80 transition-colors">
+                  <CheckCircle2 size={18} className="text-amber-600 shrink-0" />
+                  <span className="text-sm font-medium text-slate-700">Instant Notifications</span>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
