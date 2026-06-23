@@ -337,11 +337,11 @@ const NeuroSync = () => {
           generateWebPageSchema(
             "Stalight Sync — AI Coding Assessment & Recruitment Platform",
             "An AI-powered coding assessment and recruitment platform for campus placements, technical evaluations, and automated proctoring for colleges and enterprises across India.",
-            "/neurosync"
+            "/Stalight-Sync"
           ),
           generateBreadcrumbSchema([
             { name: "Home", item: "/" },
-            { name: "Stalight Sync", item: "/neurosync" }
+            { name: "Stalight Sync", item: "/Stalight-Sync" }
           ]),
           neuroSyncSchema
         ]}
@@ -381,9 +381,7 @@ const NeuroSync = () => {
         <div className="relative container mx-auto px-4 sm:px-6 z-10 w-full text-center">
           <motion.div initial="hidden" animate="visible" variants={containerVariants} className="max-w-6xl mx-auto flex flex-col items-center">
 
-            {/* Title */}
-            <h1 className="sr-only"><strong>Stalight Sync</strong> | AI-Powered <strong>Enterprise Software</strong> by <strong>Stalight Technologies</strong></h1>
-            <h1 className="text-[3.25rem] sm:text-6xl md:text-[7rem] lg:text-[8.5rem] font-light text-slate-950 tracking-tighter leading-[0.95] mb-4 sm:mb-6 px-2" aria-hidden="true">
+            <h1 className="text-[3.25rem] sm:text-6xl md:text-[7rem] lg:text-[8.5rem] font-light text-slate-950 tracking-tighter leading-[0.95] mb-4 sm:mb-6 px-2">
               <MaskedText>
                 <span className="font-light">Stalight</span>{' '}
                 <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500">Sync</span>

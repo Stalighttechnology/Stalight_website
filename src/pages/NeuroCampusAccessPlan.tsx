@@ -81,12 +81,12 @@ const NeuroCampusAccessPlan = () => {
           generateWebPageSchema(
             "Stalight Campus Pricing Plans",
             "Flexible subscription tiers for Stalight Technologies' AI-powered campus management system. Compare plans and features for schools, colleges, and universities in Bengaluru, India.",
-            "/neuro-campus-access-plan"
+            "/Stalight-Campus-Access"
           ),
           generateBreadcrumbSchema([
             { name: "Home", item: "/" },
-            { name: "Stalight Campus", item: "/neuro-campus" },
-            { name: "Pricing & Access Plans", item: "/neuro-campus-access-plan" }
+            { name: "Stalight Campus", item: "/Stalight-Campus" },
+            { name: "Pricing & Access Plans", item: "/Stalight-Campus-Access" }
           ]),
           generateFAQSchema([
             {
