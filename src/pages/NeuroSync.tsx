@@ -344,11 +344,11 @@ const NeuroSync = () => {
           generateWebPageSchema(
             "Stalight Sync — AI Coding Assessment & Recruitment Platform",
             "An AI-powered coding assessment and recruitment platform for campus placements, technical evaluations, and automated proctoring for colleges and enterprises across India.",
-            "/Stalight-Sync"
+            "/neurosync"
           ),
           generateBreadcrumbSchema([
             { name: "Home", item: "/" },
-            { name: "Stalight Sync", item: "/Stalight-Sync" }
+            { name: "Stalight Sync", item: "/neurosync" }
           ]),
           neuroSyncSchema
         ]}

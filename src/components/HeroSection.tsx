@@ -88,6 +88,7 @@ const HeroSection = () => {
         initial="hidden"
         animate="visible"
         variants={containerVariants}
+      >
         <motion.h1 className="flex flex-col gap-3 md:gap-4">
           <motion.span
             variants={itemVariants}
