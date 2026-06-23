@@ -331,3 +331,17 @@ html {
 html.smooth-scroll {
   scroll-behavior: smooth;
 }
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.group-hover\:animate-shine {
+  animation: shine 0.8s ease-in-out forwards;
+}
+
