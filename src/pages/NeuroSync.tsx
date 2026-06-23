@@ -21,6 +21,13 @@ import neurosync22Img from "@/assets/products/neurosync22.jpg";
 import neurosync33Img from "@/assets/products/neurosync33.jpg";
 import leadboardneurosyncImg from "@/assets/screenshots/leadboardneurosync.jpg";
 import neurosynchandsetImg from "@/assets/products/neurosynchandset.jpg";
+import adminDahhImg from "@/assets/products/admindahhh.png";
+import adminResultImg from "@/assets/products/adminreult.png";
+import learnPracticeImg from "@/assets/products/learn and practie.png";
+import resultImg from "@/assets/products/reult.png";
+import studentDashboardImg from "@/assets/products/tudentdahboard.png";
+import adminDashboardImg from "@/assets/products/adminnnn.png";
+import profileImg from "@/assets/products/profile.png";
 
 // --- Custom Animated Number Component ---
 const AnimatedNumber = ({ value, duration = 2.5 }: { value: number; duration?: number }) => {
@@ -40,12 +47,12 @@ const AnimatedNumber = ({ value, duration = 2.5 }: { value: number; duration?: n
 
 // --- Content for NeuroSync ---
 const features = [
-  { icon: Mic, title: "NEURA Smart Interview", desc: "Realistic, voice-driven mock interviews powered by advanced LLMs. Get instant feedback on tone, sentiment, and technical accuracy.", imgSrc: neurosync1Img },
-  { icon: Code, title: "Multi-Language IDE", desc: "Enterprise-grade cloud editor for Python, Java, and C++. Real-time execution with automated test-suite validation and complexity scoring.", imgSrc: neurosync22Img },
-  { icon: Briefcase, title: "Placement Officer Hub", desc: "Dedicated command center to track cohort readiness, manage recruiter drives, and export stakeholder-ready placement reports.", imgSrc: neurosync33Img },
-  { icon: ClipboardList, title: "Smart Assessments", desc: "Deploy high-stakes exams with smart proctoring, custom question banks, and automated grading mapped to corporate standards.", imgSrc: neurosync11Img },
-  { icon: Award, title: "Skill Certification", desc: "Generate verifiable micro-credentials as students master specific tech stacks, instantly shareable to professional networks.", imgSrc: leadboardneurosyncImg },
-  { icon: Users, title: "Batch Admin Controls", desc: "Granular access management to segment students by year, branch, or performance tier for targeted training interventions.", imgSrc: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" },
+  { icon: BarChart3, title: "Assessment Results Dashboard", desc: "Track student assessment performance with real-time insights, score analytics, interview results, and detailed progress monitoring in a centralized dashboard.", imgSrc: adminResultImg },
+  { icon: Mic, title: "Create Interview Page", desc: "Create and configure AI-powered voice, coding, and aptitude interviews with customizable assessment formats and evaluation criteria tailored to your institution.", imgSrc: adminDahhImg },
+  { icon: TrendingUp, title: "Student Dashboard", desc: "Visualize interview progress, skill development, leaderboard rankings, and performance metrics through interactive analytics and actionable insights.", imgSrc: studentDashboardImg },
+  { icon: Code, title: "Learn & Practice", desc: "Enhance technical and interview skills through coding challenges, SQL practice, and AI-powered mock interview preparation with real-time feedback.", imgSrc: learnPracticeImg },
+  { icon: LayoutDashboard, title: "Admin Dashboard", desc: "Manage students, batches, interviews, and platform activities with comprehensive analytics, detailed reports, and granular administrative controls.", imgSrc: adminDashboardImg },
+  { icon: User, title: "Professional Student Profile", desc: "Showcase academic achievements, technical skills, career information, and professional identity in a personalized student profile.", imgSrc: profileImg },
 ];
 
 const reviews = [
@@ -425,9 +432,9 @@ const NeuroSync = () => {
       </section>
 
       {/* --- AESTHETIC FEATURES GRID --- */}
-      <section className="py-12 sm:py-20 bg-white relative overflow-hidden">
-        {/* Subtle background glow */}
-        <div className="absolute top-[20%] left-[-10%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-purple-500/5 rounded-full blur-[80px] sm:blur-[120px] pointer-events-none z-0 transform-gpu"></div>
+      <section className="py-16 sm:py-20 md:py-28 bg-white/70 backdrop-blur-none relative overflow-hidden">
+        {/* Subtle background glow - reduced blur */}
+        <div className="absolute top-[20%] left-[-10%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-purple-500/3 rounded-full blur-[40px] sm:blur-[60px] pointer-events-none z-0 transform-gpu"></div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-10 sm:mb-14">
@@ -444,18 +451,22 @@ const NeuroSync = () => {
               <motion.div
                 key={f.title}
                 variants={fadeUpVariants}
-                className="group bg-white border border-slate-200/60 rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden hover:shadow-[0_20px_40px_-15px_rgba(103,58,183,0.15)] hover:border-purple-200 hover:-translate-y-1 transition-all duration-500 flex flex-col h-full"
+                className="group bg-white border border-slate-200/80 rounded-2xl sm:rounded-3xl overflow-hidden hover:shadow-[0_25px_50px_-12px_rgba(103,58,183,0.2)] hover:border-blue-300/60 hover:-translate-y-2 transition-all duration-500 flex flex-col h-full"
               >
-                <div className="h-40 sm:h-48 md:h-56 overflow-hidden relative border-b border-slate-100">
-                  <OptimizedImage src={f.imgSrc} alt={`${f.title} - Stalight Sync AI Placement Platform by Stalight Technologies`} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out" />
+                <div className="h-48 sm:h-56 md:h-64 overflow-hidden relative bg-gradient-to-br from-slate-50 to-slate-100 border-b border-slate-200/60">
+                  <OptimizedImage 
+                    src={f.imgSrc} 
+                    alt={`${f.title} - Stalight Sync AI Placement Platform by Stalight Technologies`} 
+                    className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out filter brightness-100 contrast-105" 
+                  />
 
-                  <div className="absolute bottom-3 sm:bottom-4 left-4 sm:left-5 w-10 sm:w-12 h-10 sm:h-12 bg-white rounded-xl flex items-center justify-center shadow-lg group-hover:bg-gradient-to-br group-hover:from-purple-500 group-hover:to-blue-500 transition-all duration-500">
-                    <f.icon className="w-4 h-4 sm:w-5 sm:h-5 text-slate-700 group-hover:text-white" strokeWidth={2} />
+                  <div className="absolute bottom-4 sm:bottom-5 left-5 sm:left-6 w-11 sm:w-13 h-11 sm:h-13 bg-white/95 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-xl border border-white/40 group-hover:bg-gradient-to-br group-hover:from-blue-500 group-hover:to-purple-500 group-hover:shadow-2xl group-hover:border-white/60 transition-all duration-500">
+                    <f.icon className="w-5 sm:w-6 h-5 sm:h-6 text-slate-700 group-hover:text-white" strokeWidth={2.2} />
                   </div>
                 </div>
-                <div className="p-5 sm:p-6 pt-6 sm:pt-8 flex-grow flex flex-col">
-                  <h3 className="font-bold text-base sm:text-lg text-slate-900 mb-2 group-hover:text-purple-600 transition-colors">{f.title}</h3>
-                  <p className="text-slate-500 text-sm font-light leading-relaxed flex-grow">{f.desc}</p>
+                <div className="p-6 sm:p-7 md:p-8 flex-grow flex flex-col">
+                  <h3 className="font-bold text-lg sm:text-xl text-slate-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">{f.title}</h3>
+                  <p className="text-slate-600 text-sm sm:text-base font-light leading-relaxed flex-grow">{f.desc}</p>
                 </div>
               </motion.div>
             ))}

@@ -7,11 +7,57 @@ import { ArrowRight } from "lucide-react";
 import ncImg1 from "@/assets/screenshots/leavereqimage.png";
 import ncImg2 from "@/assets/products/princydah.png";
 
-import nsImg1 from "@/assets/products/neurosync11.jpg";
-import nsImg2 from "@/assets/products/neurosync22.jpg";
+import nsImg1 from "@/assets/products/admindahhh.png";
+import nsImg2 from "@/assets/products/adminreult.png";
+import nsImg3 from "@/assets/products/learn and practie.png";
+import nsImg4 from "@/assets/products/reult.png";
+import nsImg5 from "@/assets/products/tudentdahboard.png";
+import nsImgCarousel1 from "@/assets/products/neurosync1.jpg";
+import nsImgCarousel2 from "@/assets/products/neurosync22.jpg";
+import nsImgCarousel3 from "@/assets/products/neurosync33.jpg";
 
 const neuroCampusImages = [ncImg1, ncImg2];
-const neuroSyncImages = [nsImg1, nsImg2];
+const neuroSyncImages = [nsImg1, nsImg2, nsImg3, nsImg4, nsImg5];
+
+// NeuroSync Products Data
+const neuroSyncProducts = [
+  {
+    id: 1,
+    title: "NEURA Smart Interview",
+    description: "Realistic, voice-driven mock interviews powered by advanced LLMs. Get instant feedback on tone, sentiment, and technical accuracy.",
+    image: nsImgCarousel1,
+  },
+  {
+    id: 2,
+    title: "Multi-Language IDE",
+    description: "Enterprise-grade cloud editor for Python, Java, and C++. Real-time execution with automated test-suite validation and complexity scoring.",
+    image: nsImgCarousel2,
+  },
+  {
+    id: 3,
+    title: "Placement Officer Hub",
+    description: "Dedicated command center to track cohort readiness, manage recruiter drives, and export stakeholder-ready placement reports.",
+    image: nsImg1,
+  },
+  {
+    id: 4,
+    title: "Smart Assessments",
+    description: "Deploy high-stakes exams with smart proctoring, custom question banks, and automated grading mapped to corporate standards.",
+    image: nsImg2,
+  },
+  {
+    id: 5,
+    title: "Skill Certification",
+    description: "Generate verifiable micro-credentials as students master specific tech stacks, instantly shareable to professional networks.",
+    image: nsImg3,
+  },
+  {
+    id: 6,
+    title: "Batch Admin Controls",
+    description: "Granular access management to segment students by year, branch, or performance tier for targeted training interventions.",
+    image: nsImg5,
+  },
+];
 
 const customEase = [0.19, 1.0, 0.22, 1.0];
 
@@ -214,7 +260,7 @@ const ProductsSection = () => {
                 </h3>
 
                 <p className="text-slate-600 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-6 sm:mb-8 lg:mb-10">
-                  An assessment and upskilling platform with cloud-based execution, performance benchmarking, and hands-on practice.
+                  Empower placements with smart interviews, live coding challenges, proctored assessments, and real-time performance analytics for institutions.
                 </p>
 
                 {/* Buttons */}
@@ -239,6 +285,64 @@ const ProductsSection = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* ===================== NEURO SYNC PRODUCTS GRID ===================== */}
+        <motion.div
+          initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={containerVariants}
+          className="mt-20 sm:mt-24 md:mt-28 lg:mt-32 pt-12 sm:pt-16 md:pt-20 border-t border-slate-200"
+        >
+          <motion.div variants={fadeUpVariants} className="text-center mb-12 sm:mb-16 md:mb-20">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-slate-900 tracking-tight mb-3 sm:mb-4">
+              <span className="font-light">NeuroSync </span>
+              <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">Product Suite</span>
+            </h3>
+            <p className="text-slate-600 text-sm sm:text-base md:text-lg font-light max-w-2xl mx-auto mt-4">
+              Comprehensive tools built for modern placement cells
+            </p>
+          </motion.div>
+
+          {/* Products Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
+            {neuroSyncProducts.map((product, index) => (
+              <motion.div
+                key={product.id}
+                variants={fadeUpVariants}
+                className="group relative bg-white rounded-2xl lg:rounded-3xl border border-slate-200 shadow-md hover:shadow-xl hover:border-slate-300 transition-all duration-500 overflow-hidden flex flex-col"
+              >
+                {/* Image Container */}
+                <div className="relative w-full h-56 sm:h-64 md:h-72 bg-gradient-to-br from-slate-100 to-slate-50 overflow-hidden">
+                  {/* Decorative gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 pointer-events-none z-10"></div>
+                  
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                </div>
+
+                {/* Content Container */}
+                <div className="flex-1 p-6 sm:p-7 md:p-8 flex flex-col">
+                  <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-900 mb-3 sm:mb-4 leading-tight group-hover:text-blue-600 transition-colors duration-300">
+                    {product.title}
+                  </h4>
+                  
+                  <p className="text-slate-600 text-sm sm:text-base font-light leading-relaxed flex-grow mb-4 sm:mb-6">
+                    {product.description}
+                  </p>
+
+                  {/* Hover arrow indicator */}
+                  <div className="flex items-center text-blue-600 font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span>Learn More</span>
+                    <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
       </div>
     </section>
