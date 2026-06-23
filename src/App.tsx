@@ -47,7 +47,7 @@ const App = () => (
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/account-deletion" element={<AccountDeletion />} />
-            <Route path="/onboarding" element={<NDAOnboarding />} />
+            <Route path="/550e8400-e29b-41d4-a716-446655440000-onboarding" element={<NDAOnboarding />} />
             
             {/* CATCH-ALL ROUTE */}
             <Route path="*" element={<NotFound />} />
