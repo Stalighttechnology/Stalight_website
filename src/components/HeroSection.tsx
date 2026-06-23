@@ -88,10 +88,7 @@ const HeroSection = () => {
         initial="hidden"
         animate="visible"
         variants={containerVariants}
-      >
-        <h1 className="sr-only">AI-First <strong>Software Development</strong> for Enterprises | <strong>Stalight Technologies</strong>, Bengaluru</h1>
-
-        <motion.h1 className="flex flex-col gap-3 md:gap-4" aria-hidden="true">
+        <motion.h1 className="flex flex-col gap-3 md:gap-4">
           <motion.span
             variants={itemVariants}
             className="text-sm font-medium uppercase tracking-[0.32em] text-slate-500 sm:text-base"

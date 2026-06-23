@@ -343,11 +343,11 @@ const NeuroCampus = () => {
           generateWebPageSchema(
             "Stalight Campus — Smart Campus Management System",
             "A next-generation campus management platform for schools and colleges featuring biometric attendance, academic analytics, student tracking, and automated operations.",
-            "/neuro-campus"
+            "/Stalight-Campus"
           ),
           generateBreadcrumbSchema([
             { name: "Home", item: "/" },
-            { name: "Stalight Campus", item: "/neuro-campus" }
+            { name: "Stalight Campus", item: "/Stalight-Campus" }
           ]),
           neuroCampusSchema
         ]}
