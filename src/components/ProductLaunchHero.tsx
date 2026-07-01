@@ -43,13 +43,38 @@ const allModules = [
   { icon: Bell, name: "Announcements", desc: "Push notifications, broadcoasts" },
 ];
 
+import confetti from 'canvas-confetti';
+
 const ProductLaunchHero = () => {
   const { isLaunched, timeLeft, isReady } = useLaunchCountdown();
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [formData, setFormData] = useState({ full_name: "", official_email: "", phone: "", organization: "", designation: "", interested_solution: "", preferred_date: "", preferred_time: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    if (isLaunched && isReady) {
+      const duration = 15 * 1000;
+      const animationEnd = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1000 };
+
+      const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
+
+      const interval: any = setInterval(function() {
+        const timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+          return clearInterval(interval);
+        }
+
+        const particleCount = 50 * (timeLeft / duration);
+        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+      }, 250);
+
+      return () => clearInterval(interval);
+    }
+  }, [isLaunched, isReady]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target as HTMLInputElement;
@@ -90,14 +115,8 @@ const ProductLaunchHero = () => {
     setFormData({ full_name: "", official_email: "", phone: "", organization: "", designation: "", interested_solution: "", preferred_date: "", preferred_time: "", message: "" });
   };
 
-  useEffect(() => {
-    const t = setTimeout(() => setVisible(false), 5000);
-    return () => clearTimeout(t);
-  }, []);
-
   return (
     <AnimatePresence>
-      {visible && (
         <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, height: 0, transition: { duration: 0.45 } }} className="relative isolate flex flex-col w-full min-h-[100dvh] overflow-x-hidden bg-white font-sans border-b border-slate-200">
 
       {/* Dynamic Background */}
@@ -209,20 +228,7 @@ const ProductLaunchHero = () => {
           {/* CTAs */}
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto relative flex-wrap z-20 mx-auto px-4">
             <AnimatePresence mode="wait">
-              {!isLaunched ? (
-                <motion.button
-                  key="waitlist-btn"
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15, filter: "blur(4px)" }}
-                  transition={{ duration: 0.4, ease: easeOutExpo }}
-                  onClick={() => setIsFormOpen(true)} className="group relative flex w-full sm:w-auto min-w-[200px] items-center justify-center rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 px-6 py-3.5 sm:py-4 text-[12px] font-bold uppercase tracking-widest text-white shadow-lg shadow-purple-500/25 transition-all hover:shadow-purple-500/40 hover:-translate-y-0.5 overflow-hidden">
-                  <span className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
-                  <span className="relative flex items-center gap-2">
-                    Join Waitlist <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </motion.button>
-              ) : (
+              {isLaunched && (
                 <motion.a
                   key="access-btn"
                   initial={{ opacity: 0, y: 15 }}
@@ -253,24 +259,7 @@ const ProductLaunchHero = () => {
             <p className="text-[11px] sm:text-sm text-slate-500 text-center px-4 font-medium">Everything you need to manage your institution</p>
           </motion.div>
 
-          <div className="relative flex overflow-hidden w-full group py-2 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-            <div className="flex w-max min-w-full animate-marquee gap-3 sm:gap-4 px-2 hover:[animation-play-state:paused]">
-              {[...allModules, ...allModules].map((mod, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-center gap-3 p-3 sm:p-3.5 rounded-2xl bg-white/60 backdrop-blur-md hover:bg-white border border-slate-200/50 shadow-sm hover:shadow-md hover:border-purple-200 transition-all group duration-300 w-[240px] sm:w-[260px] shrink-0 cursor-pointer"
-                >
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-xl bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center text-purple-600 group-hover:from-purple-500 group-hover:to-pink-500 group-hover:text-white transition-all duration-300 shadow-sm">
-                    <mod.icon size={18} strokeWidth={2} className="sm:w-5 sm:h-5" />
-                  </div>
-                  <div className="flex flex-col overflow-hidden">
-                    <h4 className="text-[11px] sm:text-sm font-bold text-slate-800 leading-tight mb-0.5 group-hover:text-purple-700 transition-colors truncate">{mod.name}</h4>
-                    <p className="text-[9px] sm:text-[11px] text-slate-500 leading-tight truncate">{mod.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+
           
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-20 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-blue-500/10 blur-2xl -z-10 rounded-full pointer-events-none"></div>
         </motion.div>
@@ -395,7 +384,6 @@ const ProductLaunchHero = () => {
         </div>
       )}
         </motion.section>
-      )}
     </AnimatePresence>
   );
 };
