@@ -138,7 +138,7 @@ const ServicesSection = () => {
                       transition={{ duration: 1.5, ease: customEase, delay: i * 0.1 }}
                       src={item.image}
                       alt={item.title}
-                      className="w-full h-full object-cover scale-110 md:scale-100 md:group-hover:scale-110 transition-transform duration-[1500ms] ease-out"
+                      className="w-full h-full object-cover scale-110 md:scale-100 md:group-hover:scale-110 transition-transform [transition-duration:1500ms] ease-out"
                     />
                     {/* Subtle gradient so the white floating badge looks good over light images */}
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-80 group-hover:opacity-40 transition-opacity duration-500"></div>

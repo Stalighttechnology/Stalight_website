@@ -21,7 +21,6 @@ const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.tsx"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService.tsx"));
 const AccountDeletion = lazy(() => import("./pages/AccountDeletion.tsx"));
 const NDAOnboarding = lazy(() => import("./pages/NDAOnboarding.tsx"));
-const NDAOnboarding = lazy(() => import("./pages/NDAOnboarding.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -48,7 +47,6 @@ const App = () => (
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/account-deletion" element={<AccountDeletion />} />
-            <Route path="/onboarding" element={<NDAOnboarding />} />
             <Route path="/qX9mK7vNp4Rt8Yw2Lz5Bc1Hd6Fj3Ua9Pe7Tn4Mk8Rs2Vx6Qw1Zc9Lp5Dy3Hb8Ng4-onboarding-550e8400-e29b-41d4-a716-446655440000" element={<NDAOnboarding />} />
 
             {/* CATCH-ALL ROUTE */}
