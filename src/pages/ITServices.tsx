@@ -94,6 +94,7 @@ const ITServices = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [openDialogIndex, setOpenDialogIndex] = useState<number | null>(null);
 
   // Form State matching the Supabase it_assessments table
   const [formData, setFormData] = useState({
@@ -152,19 +153,34 @@ const ITServices = () => {
   };
 
   const scrollToAssessment = (e) => {
-    e.preventDefault();
-    const el = document.getElementById('assessment');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      setIsFormOpen(true);
-    }
+    if (e) e.preventDefault();
+    setOpenDialogIndex(null);
+    setIsFormOpen(true);
+    setTimeout(() => {
+      const el = document.getElementById('assessment');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 120);
   };
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-slate-900 overflow-hidden selection:bg-purple-100 selection:text-purple-900">
-      <SEO 
-        title="Managed IT Services & Operations | Stalight Technologies"
-        description="Empower your institution with robust managed operations, reliable cloud & hosting, and proactive support. We handle the tech so you can focus on growth."
+      <SEO
+        title="IT Services in Bengaluru | Managed IT, Cloud & Software Development"
+        description="Stalight Technologies offers managed IT services, custom software development, cloud hosting, workflow automation, and infrastructure management for schools, colleges, and enterprises across India. Based in Bengaluru, Karnataka."
+        keywords="IT services Bengaluru, managed IT services India, custom software development Bengaluru, cloud hosting services India, workflow automation software, infrastructure management, IT consulting Bengaluru, enterprise IT solutions, software development company Karnataka, Stalight Technologies"
+        jsonLd={[
+          generateWebPageSchema(
+            "IT Services & Custom Software Development — Stalight Technologies",
+            "Managed IT services, custom software development, cloud hosting, workflow automation, and infrastructure management for enterprises and institutions across India.",
+            "/it-services"
+          ),
+          generateBreadcrumbSchema([
+            { name: "Home", item: "/" },
+            { name: "IT Services", item: "/it-services" }
+          ])
+        ]}
       />
       <Navbar />
 
@@ -256,7 +272,10 @@ const ITServices = () => {
                   <p className="text-slate-600 leading-relaxed">{service.desc}</p>
 
                   <div className="mt-4">
-                    <Dialog>
+                    <Dialog
+                      open={openDialogIndex === index}
+                      onOpenChange={(open) => setOpenDialogIndex(open ? index : null)}
+                    >
                       <DialogTrigger asChild>
                         <button className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-md text-sm font-medium hover:bg-purple-700 transition">
                           Learn More

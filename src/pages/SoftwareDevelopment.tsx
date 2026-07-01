@@ -3,11 +3,11 @@ import { motion, Variants, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import devImg from "@/assets/products/it services.jpg";
-import { 
-  Code2, 
-  MonitorSmartphone, 
-  Cpu, 
-  Layers, 
+import {
+  Code2,
+  MonitorSmartphone,
+  Cpu,
+  Layers,
   ArrowRight,
   X,
   Send,
@@ -108,7 +108,7 @@ const SoftwareDevelopment = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
-    
+
     // Safety check for dropdown
     const serviceRequired = form.get("service_required");
     if (!serviceRequired) {
@@ -161,12 +161,13 @@ const SoftwareDevelopment = () => {
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900">
       <SEO
-        title="Custom Software Development | Stalight Technologies"
-        description="From intuitive websites to complex enterprise software, we engineer bespoke digital solutions. We turn your specific requirements into scalable, secure applications."
+        title="Custom Software Development in Bengaluru | Stalight Technologies"
+        description="Stalight Technologies builds custom software, web applications, enterprise systems, and mobile apps for businesses and institutions across India. Scalable, secure, and tailored to your requirements — developed in Bengaluru, Karnataka."
+        keywords="custom software development Bengaluru, web application development India, enterprise software solutions, mobile app development Bengaluru, software development company Karnataka, bespoke software development, scalable software solutions, business software development India, software engineering company Bengaluru, Stalight Technologies"
         jsonLd={[
           generateWebPageSchema(
-            "Software Development",
-            "Bespoke software engineering designed to solve complex challenges and scale alongside your growth.",
+            "Custom Software Development — Stalight Technologies Bengaluru",
+            "Custom software development services including web applications, enterprise systems, and mobile apps for businesses and institutions across India.",
             "/software-development"
           ),
           generateBreadcrumbSchema([
@@ -321,7 +322,7 @@ const SoftwareDevelopment = () => {
           <div className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.06)] border border-slate-100 relative overflow-hidden min-h-[400px]">
             {/* Top gradient border highlight */}
             <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500"></div>
-            
+
             <AnimatePresence mode="wait">
               {!isFormOpen ? (
                 /* Initial CTA View */
@@ -375,7 +376,7 @@ const SoftwareDevelopment = () => {
                       <h3 className="text-2xl font-black">Project Inquiry</h3>
                       <p className="text-sm text-slate-500 mt-1">Please provide your professional details and project scope.</p>
                     </div>
-                    <button 
+                    <button
                       onClick={() => setIsFormOpen(false)}
                       className="p-2 bg-slate-50 hover:bg-slate-100 rounded-full transition-colors text-slate-500"
                       aria-label="Close form"
@@ -438,15 +439,15 @@ const SoftwareDevelopment = () => {
                     <div>
                       <label className="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Project Requirements <span className="text-pink-500">*</span></label>
                       <textarea name="details"
-                        required 
-                        rows={4} 
-                        placeholder="Please describe your current challenges, desired outcomes, and key technical requirements..." 
+                        required
+                        rows={4}
+                        placeholder="Please describe your current challenges, desired outcomes, and key technical requirements..."
                         className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 outline-none transition-all text-sm resize-none"
                       ></textarea>
                     </div>
 
                     <div className="pt-2">
-                      <button 
+                      <button
                         type="submit"
                         disabled={isSubmitting}
                         className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"

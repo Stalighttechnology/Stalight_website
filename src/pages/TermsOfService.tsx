@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import stalightLogo from "@/assets/logos/stalightlogo.png";
@@ -9,7 +10,11 @@ const TermsOfService = () => {
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-[#D32027] selection:text-white">
-      <SEO title="Terms of Service | Stalight Technologies" description="Terms of service for Stalight Technologies." />
+      <SEO 
+        title="Terms of Service | Stalight Technologies - Software Development Company"
+        description="Terms of service for Stalight Technologies, a leading AI-first software development company in Bengaluru, India."
+        keywords="Stalight Technologies, Terms of Service, Software Development, Bengaluru, AI Company, India"
+      />
       <Navbar />
 
       <main className="container mx-auto px-6 py-20 max-w-4xl">
@@ -71,10 +76,14 @@ const TermsOfService = () => {
           <p>
             STALIGHT TECHNOLOGIES LIMITED<br />
             Email: <a href="mailto:legal@stalight.in">legal@stalight.in</a><br />
-            Phone: +91 866 014 4040<br />
+            Phone: +91 73495 51102<br />
             Registered office: Bengaluru, India
           </p>
         </section>
+        
+        <div className="mt-12 pt-6 border-t border-slate-100 text-xs text-slate-500">
+          <p>© 2026 <Link to="/" className="text-slate-900 font-bold hover:underline">Stalight Technologies</Link>. All rights reserved.</p>
+        </div>
       </main>
 
       <Footer />

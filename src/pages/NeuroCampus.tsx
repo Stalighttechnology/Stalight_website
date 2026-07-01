@@ -13,19 +13,22 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
-import { generateWebPageSchema, generateBreadcrumbSchema } from "@/utils/seoUtils";
+import { generateWebPageSchema, generateBreadcrumbSchema, neuroCampusSchema } from "@/utils/seoUtils";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { useLaunchCountdown, TARGET_LAUNCH_DISPLAY } from "@/hooks/useLaunchCountdown";
 
 // --- Image Imports ---
-import campusImg from "@/assets/screenshots/mobileloginpage1.jpg";
-import loginpageImg from "@/assets/screenshots/loginpageimage.jpg";
+import campusImg from "@/assets/products/image.png";
+import loginpageImg from "@/assets/products/loginpagedesktop.png";
 import leavereqImg from "@/assets/screenshots/leavereqimage.png";
 import timetableImg from "@/assets/screenshots/timetable dash.png";
-import neurocampus11Img from "@/assets/products/neurocampus11.jpg";
+import neurocampus11Img from "@/assets/products/princydah.png";
 import nebulaaiImg from "@/assets/products/nebulaai.png";
-import facerecognImg from "@/assets/products/facerecogn.jpg";
+import facerecognImg from "@/assets/products/scanforstudent.png";
 import resultsImg from "@/assets/screenshots/results.png";
+import mobileAppMockupImg from "@/assets/products/image.png";
+import playstoreImg from "@/assets/logos/playstore.png";
+import applestoreImg from "@/assets/logos/apple-store-icon.png";
 
 // --- Custom Animated Number Component ---
 const AnimatedNumber = ({ value, duration = 2.5 }: { value: number; duration?: number }) => {
@@ -60,11 +63,11 @@ const tourFeatures = [
     caption: "Smart Student Fee Management & Semester-Based Billing"
   },
   {
-    title: "Facial Attendance",
+    title: "Attendance System",
     icon: ScanFace,
-    desc: "Biometric face scans for seamless and proxy-free verification.",
+    desc: "Faculty, HOD, and staff can instantly access complete student information by scanning a student's face or uploading their image. Get real-time access to marks, academic performance, attendance records, and comprehensive student profiles all in one scan.",
     img: facerecognImg,
-    caption: "High-Precision Biometric Face Scan Attendance Verification"
+    caption: "AI-Powered Facial Recognition - Instant Student Profile & Academic Data Access"
   },
   {
     title: "Leave Workflows",
@@ -83,9 +86,9 @@ const tourFeatures = [
   {
     title: "Student Profiling",
     icon: User,
-    desc: "Instantly surface complete information on quick biometric scans.",
+    desc: "Access complete student information instantly through our mobile app available on Play Store and App Store.",
     img: campusImg,
-    caption: "Instantly Surface Complete Student Profiles on Quick Biometric Scans"
+    caption: "Instantly Access Complete Student Profiles - Download Our App"
   },
   {
     title: "Institutional Analytics",
@@ -106,7 +109,7 @@ const tourFeatures = [
 const institutionalPillars = [
   {
     title: "Intelligent Core & Automation",
-    subtitle: "Advanced biometric and off-campus verification systems.",
+    subtitle: "Smart systems with mobile app support for iOS and Android platforms.",
     gradient: "from-pink-500/10 via-purple-500/5 to-transparent",
     borderHover: "group-hover:border-pink-300",
     iconColor: "text-pink-600",
@@ -114,8 +117,8 @@ const institutionalPillars = [
     icon: Zap,
     features: [
       { key: "stalight-ai", icon: Brain, title: "Stalight Smart Systems", desc: "Smart insights and personalised recommendations for students and faculty." },
-      { key: "facial-recognition-attendance", icon: ScanFace, title: "Facial Recognition Attendance", desc: "High-precision facial recognition to automate attendance and prevent proxy marking." },
-      { key: "student-info-face-scan", icon: User, title: "Student Info on Face Scan", desc: "Instantly surface student profile and academic info on face-based scan." },
+      { key: "mobile-attendance", icon: ScanFace, title: "Mobile Attendance System", desc: "Automated attendance management available on iOS and Android apps." },
+      { key: "student-info-mobile", icon: User, title: "Mobile Student Profiles", desc: "Instantly access student profile and academic info through mobile applications." },
       { key: "location-based-attendance", icon: MapPin, title: "Location Based Attendance", desc: "Geo-fenced attendance options for off-campus activities and fieldwork." }
     ]
   },
@@ -211,9 +214,14 @@ const NeuroCampus = () => {
   const { isLaunched, timeLeft, isReady } = useLaunchCountdown();
 
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [formData, setFormData] = useState({ full_name: "", official_email: "", phone: "", organization: "", designation: "", interested_solution: "", preferred_date: "", preferred_time: "", message: "" });
+  const [formData, setFormData] = useState({ full_name: "", official_email: "", phone: "", organization: "", designation: "", interested_solution: "stalight_campus", preferred_date: "", preferred_time: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    // Auto-select Stalight Campus since we're on the Campus page
+    setFormData((prev) => ({ ...prev, interested_solution: "stalight_campus" }));
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target as HTMLInputElement;
@@ -266,7 +274,7 @@ const NeuroCampus = () => {
       <div className="min-h-screen bg-[#FAFAFA] flex flex-col items-center justify-center font-sans relative overflow-hidden">
         <SEO title="Coming Soon | Stalight Campus" description="Stalight Campus is launching soon." />
         <Navbar />
-        
+
         {/* Dynamic Background */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden h-full">
           <div className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(rgba(15,23,42,1)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,1)_1px,transparent_1px)] [background-size:60px_60px]" />
@@ -295,9 +303,9 @@ const NeuroCampus = () => {
               <span className="text-xs font-bold uppercase tracking-widest text-slate-500">{TARGET_LAUNCH_DISPLAY}</span>
               <div className="flex items-center gap-4 sm:gap-6">
                 <div className="flex flex-col items-center min-w-[60px]">
-                    <span className="font-black text-slate-800 tabular-nums leading-none tracking-tight" style={{ fontSize: 'clamp(2rem, 7vw, 3.5rem)' }}>{String(timeLeft.days).padStart(2, '0')}</span>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-2">Days</span>
-                  </div>
+                  <span className="font-black text-slate-800 tabular-nums leading-none tracking-tight" style={{ fontSize: 'clamp(2rem, 7vw, 3.5rem)' }}>{String(timeLeft.days).padStart(2, '0')}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-2">Days</span>
+                </div>
                 <span className="text-3xl sm:text-4xl font-black text-slate-300 animate-pulse mb-6">:</span>
                 <div className="flex flex-col items-center min-w-[60px]">
                   <span className="font-black text-slate-800 tabular-nums leading-none tracking-tight" style={{ fontSize: 'clamp(2rem, 7vw, 3.5rem)' }}>{String(timeLeft.hours).padStart(2, '0')}</span>
@@ -318,9 +326,9 @@ const NeuroCampus = () => {
           </motion.div>
 
           <motion.div variants={fadeUpVariants}>
-             <Link to="/" className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-purple-600 transition-colors">
-               <ArrowRight className="w-4 h-4 rotate-180" /> Back to Home
-             </Link>
+            <Link to="/" className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-purple-600 transition-colors">
+              <ArrowRight className="w-4 h-4 rotate-180" /> Back to Home
+            </Link>
           </motion.div>
         </motion.div>
       </div>
@@ -330,18 +338,20 @@ const NeuroCampus = () => {
   return (
     <div ref={containerRef} className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900 overflow-x-hidden relative">
       <SEO
-        title="Stalight Campus | Stalight Technologies"
-        description="A next-generation academic management platform unifying advanced analytics, blockchain security, and automated operations."
+        title="Stalight Campus | Smart Campus Management System for Schools & Colleges"
+        description="Stalight Campus is a next-generation campus management system for schools and colleges in India. Features include biometric attendance, student tracking, academic analytics, and automated operations — built by Stalight Technologies, Bengaluru."
+        keywords="Stalight Campus, campus management system, school ERP software India, college management software, academic management system, biometric attendance system, student tracking software, educational ERP India, school automation software, Stalight Technologies Bengaluru"
         jsonLd={[
           generateWebPageSchema(
-            "Stalight Campus",
-            "A next-generation academic management platform unifying advanced analytics, blockchain security, and automated operations.",
-            "/neuro-campus"
+            "Stalight Campus — Smart Campus Management System",
+            "A next-generation campus management platform for schools and colleges featuring biometric attendance, academic analytics, student tracking, and automated operations.",
+            "/Stalight-Campus"
           ),
           generateBreadcrumbSchema([
             { name: "Home", item: "/" },
-            { name: "Stalight Campus", item: "/neuro-campus" }
-          ])
+            { name: "Stalight Campus", item: "/Stalight-Campus" }
+          ]),
+          neuroCampusSchema
         ]}
       />
       <Navbar />
@@ -366,16 +376,16 @@ const NeuroCampus = () => {
         <div className="container mx-auto px-4 sm:px-6 relative z-10 w-full text-center mb-8 sm:mb-12">
           <motion.div initial="hidden" animate="visible" variants={containerVariants} className="max-w-6xl mx-auto flex flex-col items-center">
             <h1 className="text-[3.25rem] sm:text-6xl md:text-[7rem] lg:text-[8.5rem] font-light text-slate-900 tracking-tighter leading-[0.95] mb-3 sm:mb-6 px-2 max-w-full text-center">
-                <MaskedText>
-                  <span className="block sm:inline font-light normal-case">Stalight</span>{' '}
-                  <motion.span
-                    className="block sm:inline font-logo font-extrabold uppercase text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-gradient-animate mt-1 sm:mt-0 tracking-[0.02em] float-subtle"
-                    animate={{ y: [0, -6, 0] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    Campus
-                  </motion.span>
-                </MaskedText>
+              <MaskedText>
+                <span className="block sm:inline font-light normal-case">Stalight</span>{' '}
+                <motion.span
+                  className="block sm:inline font-logo font-extrabold uppercase text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-gradient-animate mt-1 sm:mt-0 tracking-[0.02em] float-subtle"
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  Campus
+                </motion.span>
+              </MaskedText>
             </h1>
 
             <motion.p variants={fadeUpVariants} className="text-slate-600 font-light text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed mb-6 px-2">
@@ -500,7 +510,7 @@ const NeuroCampus = () => {
                   <div className="relative h-[180px] sm:h-[260px] md:h-[300px] bg-slate-950/5 flex items-center justify-center p-4 sm:p-6 overflow-hidden">
                     <OptimizedImage
                       src={feat.img}
-                      alt={feat.caption}
+                      alt={`${feat.caption} - Stalight Campus ERP System by Stalight Technologies`}
                       className="w-full h-full object-contain rounded-lg drop-shadow-md group-hover:scale-[1.02] transition-transform duration-500"
                     />
                   </div>
@@ -520,6 +530,186 @@ const NeuroCampus = () => {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* --- MOBILE APP DOWNLOAD SECTION --- */}
+      <section className="py-16 sm:py-20 md:py-28 bg-gradient-to-b from-slate-50 via-purple-50/20 to-blue-50/20 relative overflow-hidden z-10">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl -z-0" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl -z-0" />
+        <div className="absolute inset-0 z-0 opacity-30" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(168, 85, 247, 0.08) 0%, transparent 50%)', }} />
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div 
+            initial="hidden" 
+            whileInView="visible" 
+            viewport={{ once: true, margin: "-50px" }} 
+            variants={containerVariants}
+            className="max-w-6xl mx-auto"
+          >
+            {/* Mobile: Heading Section (visible only on mobile) */}
+            <motion.div variants={fadeUpVariants} className="lg:hidden mb-8 text-center">
+              <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-slate-200/50 rounded-full mb-6 w-full justify-center">
+                <div className="flex gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={16} className="fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <span className="font-semibold text-slate-900 text-sm">4.9/5 Rating</span>
+                <span className="text-slate-600 text-sm">✓ 50K+ Downloads</span>
+              </div>
+              
+              <h2 className="text-4xl sm:text-5xl font-light text-slate-900 tracking-tight mb-4 leading-tight">
+                Your Complete <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600">Campus, Anywhere</span>
+              </h2>
+              <p className="text-slate-600 text-base sm:text-lg font-light mb-6 leading-relaxed">
+                Download our powerful mobile app to get instant access to comprehensive student information, real-time attendance tracking, assignment submissions, and powerful analytics — all in one place.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              {/* Phone Mockup */}
+              <motion.div variants={fadeUpVariants} className="flex items-center justify-center order-1 lg:order-1">
+                <div className="relative w-full max-w-sm mx-auto">
+                  {/* Glow effect behind phone */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-[3rem] blur-2xl transform-gpu" />
+                  {/* Phone mockup */}
+                  <OptimizedImage
+                    src={mobileAppMockupImg}
+                    alt="Stalight Campus Mobile App - iOS and Android"
+                    className="relative z-10 w-full h-auto drop-shadow-2xl rounded-3xl"
+                  />
+                </div>
+              </motion.div>
+
+              {/* Desktop: Content & Buttons (visible only on desktop) */}
+              <motion.div variants={fadeUpVariants} className="hidden lg:flex lg:flex-col lg:justify-center">
+                <div className="inline-flex items-center justify-center lg:justify-start gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-slate-200/50 rounded-full mb-6 w-fit">
+                  <div className="flex gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={16} className="fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <span className="font-semibold text-slate-900 text-sm">4.9/5 Rating</span>
+                  <span className="text-slate-600 text-sm">✓ 50K+ Downloads</span>
+                </div>
+                
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-light text-slate-900 tracking-tight mb-4 leading-tight">
+                  Your Complete <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600">Campus, Anywhere</span>
+                </h2>
+                <p className="text-slate-600 text-base sm:text-lg font-light mb-8 leading-relaxed">
+                  Download our powerful mobile app to get instant access to comprehensive student information, real-time attendance tracking, assignment submissions, and powerful analytics — all in one place.
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-5">
+                  {/* Google Play Store Button with Icon */}
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.stalight.campus"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative w-full sm:w-auto overflow-hidden rounded-2xl bg-slate-900 px-6 sm:px-8 py-3 sm:py-4 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-3"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <img src={playstoreImg} alt="Google Play Store" className="w-6 h-6 relative z-10" />
+                    <div className="relative z-10 flex flex-col text-white text-left">
+                      <div className="text-xs font-medium opacity-90">GET IT ON</div>
+                      <div className="font-bold text-sm">Google Play</div>
+                    </div>
+                  </a>
+
+                  {/* App Store Button with Icon */}
+                  <a
+                    href="https://apps.apple.com/app/stalight-campus/id6502458957"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative w-full sm:w-auto overflow-hidden rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 px-6 sm:px-8 py-3 sm:py-4 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-3"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-purple-700 to-pink-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <img src={applestoreImg} alt="Apple App Store" className="w-6 h-6 relative z-10" />
+                    <div className="relative z-10 flex flex-col text-white text-left">
+                      <div className="text-xs font-medium opacity-90">DOWNLOAD ON</div>
+                      <div className="font-bold text-sm">App Store</div>
+                    </div>
+                  </a>
+                </div>
+
+                {/* Features pills */}
+                <div className="grid grid-cols-2 gap-3 mt-8">
+                  <div className="flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-lg hover:bg-white/80 transition-colors">
+                    <CheckCircle2 size={18} className="text-purple-600 shrink-0" />
+                    <span className="text-sm font-medium text-slate-700">Real-time Attendance</span>
+                  </div>
+                  <div className="flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-lg hover:bg-white/80 transition-colors">
+                    <CheckCircle2 size={18} className="text-pink-600 shrink-0" />
+                    <span className="text-sm font-medium text-slate-700">Assignments & Grades</span>
+                  </div>
+                  <div className="flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-lg hover:bg-white/80 transition-colors">
+                    <CheckCircle2 size={18} className="text-blue-600 shrink-0" />
+                    <span className="text-sm font-medium text-slate-700">Performance Analytics</span>
+                  </div>
+                  <div className="flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-lg hover:bg-white/80 transition-colors">
+                    <CheckCircle2 size={18} className="text-amber-600 shrink-0" />
+                    <span className="text-sm font-medium text-slate-700">Instant Notifications</span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Mobile: Buttons Section (visible only on mobile) */}
+            <motion.div variants={fadeUpVariants} className="lg:hidden mt-8">
+              <div className="flex flex-col gap-3">
+                {/* Google Play Store Button with Icon */}
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.stalight.campus"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative w-full overflow-hidden rounded-2xl bg-slate-900 px-6 py-3 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-3"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <img src={playstoreImg} alt="Google Play Store" className="w-6 h-6 relative z-10" />
+                  <div className="relative z-10 flex flex-col text-white text-left">
+                    <div className="text-xs font-medium opacity-90">GET IT ON</div>
+                    <div className="font-bold text-sm">Google Play</div>
+                  </div>
+                </a>
+
+                {/* App Store Button with Icon */}
+                <a
+                  href="https://apps.apple.com/app/stalight-campus/id6502458957"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-3"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-700 to-pink-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <img src={applestoreImg} alt="Apple App Store" className="w-6 h-6 relative z-10" />
+                  <div className="relative z-10 flex flex-col text-white text-left">
+                    <div className="text-xs font-medium opacity-90">DOWNLOAD ON</div>
+                    <div className="font-bold text-sm">App Store</div>
+                  </div>
+                </a>
+              </div>
+
+              {/* Mobile: Features pills */}
+              <div className="grid grid-cols-2 gap-3 mt-6">
+                <div className="flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-lg hover:bg-white/80 transition-colors">
+                  <CheckCircle2 size={18} className="text-purple-600 shrink-0" />
+                  <span className="text-sm font-medium text-slate-700">Real-time Attendance</span>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-lg hover:bg-white/80 transition-colors">
+                  <CheckCircle2 size={18} className="text-pink-600 shrink-0" />
+                  <span className="text-sm font-medium text-slate-700">Assignments & Grades</span>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-lg hover:bg-white/80 transition-colors">
+                  <CheckCircle2 size={18} className="text-blue-600 shrink-0" />
+                  <span className="text-sm font-medium text-slate-700">Performance Analytics</span>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-lg hover:bg-white/80 transition-colors">
+                  <CheckCircle2 size={18} className="text-amber-600 shrink-0" />
+                  <span className="text-sm font-medium text-slate-700">Instant Notifications</span>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -607,7 +797,7 @@ const NeuroCampus = () => {
               Get in touch with our team to schedule a personalised architectural walkthrough of Stalight Campus.
             </p>
 
-              <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
               <button onClick={() => setIsFormOpen(true)} className="group flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-slate-900 text-white rounded-full font-bold uppercase text-xs sm:text-sm tracking-widest shadow-lg hover:shadow-purple-500/25 hover:-translate-y-0.5 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 transition-all duration-300 w-full sm:w-auto">
                 Schedule Demo <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
               </button>
@@ -626,12 +816,12 @@ const NeuroCampus = () => {
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 overflow-hidden">
           {/* Subtle blurred backdrop */}
           <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setIsFormOpen(false)} />
-          
+
           <div className="relative z-[110] w-full max-w-2xl bg-white rounded-3xl sm:rounded-[2.5rem] shadow-2xl border border-slate-100 max-h-[95dvh] sm:max-h-[90vh] flex flex-col overflow-hidden">
-            
+
             {/* Top Decorative Line */}
             <div className="absolute top-0 left-0 right-0 h-1.5 sm:h-2 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 z-20"></div>
-            
+
             {/* Sticky Header */}
             <div className="flex items-center justify-between px-5 sm:px-8 py-4 sm:py-6 shrink-0 border-b border-slate-100 bg-white relative z-10">
               <h3 className="text-lg sm:text-xl font-bold text-slate-900">Schedule a Live Demo</h3>
@@ -682,7 +872,7 @@ const NeuroCampus = () => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="stalight_campus">Stalight   Campus</SelectItem>
-                      <SelectItem value="neurosync">NeuroSync</SelectItem>
+                      <SelectItem value="neurosync">Stalight Sync</SelectItem>
                       <SelectItem value="both">Both / Integration</SelectItem>
                       <SelectItem value="custom">Custom / Other</SelectItem>
                     </SelectContent>
@@ -716,7 +906,7 @@ const NeuroCampus = () => {
                 {isSubmitting ? 'Submitting...' : 'Request Demo'}
               </button>
             </div>
-            
+
           </div>
         </div>
       )}

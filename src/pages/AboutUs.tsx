@@ -70,19 +70,20 @@ const AboutUs = () => {
     target: containerRef,
     offset: ["start start", "end end"],
   });
-  
+
   const yParallax = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
   const opacityParallax = useTransform(scrollYProgress, [0, 0.5], [0.6, 0]);
 
   return (
     <div ref={containerRef} className="min-h-screen bg-white text-slate-900 font-sans selection:bg-[#D32027] selection:text-white">
-      <SEO 
-        title="About Stalight Technologies | Software Development & Placements Company"
-        description="Learn about Stalight Technologies (Stalight Pvt Ltd), a leading software development, website making, and IT skill training provider in Rajajinagar, Bengaluru."
+      <SEO
+        title="About Stalight Technologies | Software & AI Solutions Company in Bengaluru"
+        description="Stalight Technologies is a Bengaluru-based software and AI solutions company specializing in campus management systems, coding assessment platforms, custom software development, and IT skill training. Serving schools, colleges, and enterprises across India from Rajajinagar, Bengaluru."
+        keywords="Stalight Technologies, software company Bengaluru, AI solutions India, Stalight Campus, Stalight Sync, campus management software, coding assessment platform, custom software development Bengaluru, IT training institute Bengaluru, Rajajinagar Bengaluru, software development company Karnataka"
         jsonLd={[
           generateWebPageSchema(
-            "About Stalight Technologies",
-            "Learn about Stalight Technologies, a leader in software development, website making, and skills training with placements.",
+            "About Stalight Technologies — Software & AI Solutions, Bengaluru",
+            "Stalight Technologies is a Bengaluru-based software and AI solutions company building campus management systems, coding assessment platforms, custom software, and IT training programs for institutions and enterprises across India.",
             "/about-us"
           ),
           generateBreadcrumbSchema([
@@ -96,13 +97,13 @@ const AboutUs = () => {
 
       {/* --- REDESIGNED HERO SECTION (Asymmetric Tech & Grid Design) --- */}
       <section className="relative min-h-[85vh] lg:min-h-[90vh] flex items-center pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden bg-slate-50/50">
-        
+
         {/* Technical Grid Pattern */}
-        <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.04]" 
-             style={{ 
-               backgroundImage: 'radial-gradient(#000 1.5px, transparent 1.5px)', 
-               backgroundSize: '32px 32px' 
-             }}>
+        <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.04]"
+          style={{
+            backgroundImage: 'radial-gradient(#000 1.5px, transparent 1.5px)',
+            backgroundSize: '32px 32px'
+          }}>
         </div>
 
         {/* Ambient Neon Halos */}
@@ -110,18 +111,18 @@ const AboutUs = () => {
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-100/50 rounded-full blur-[100px] -translate-x-1/4 translate-y-1/4 pointer-events-none z-0 transform-gpu"></div>
 
         <div className="container mx-auto px-6 relative z-10">
-          <motion.div 
-            initial="hidden" 
-            animate="visible" 
+          <motion.div
+            initial="hidden"
+            animate="visible"
             variants={containerVariants}
             className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center"
           >
-            
+
             {/* Left Content Column */}
             <div className="lg:col-span-7 flex flex-col items-start text-left">
-              
+
               {/* Pulse Indicator Pill */}
-              <motion.div 
+              <motion.div
                 variants={fadeUpVariants}
                 className="inline-flex items-center gap-2.5 px-4.5 py-2 rounded-full bg-white border border-purple-100 shadow-[0_2px_12px_rgba(168,85,247,0.04)] mb-8"
               >
@@ -131,42 +132,43 @@ const AboutUs = () => {
                 </span>
                 <span className="text-[10px] font-extrabold tracking-[0.25em] uppercase text-purple-600/90">The Architecture of Tomorrow</span>
               </motion.div>
-              
+
               {/* Elegant Responsive Headline */}
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[5.2rem] font-light text-slate-900 tracking-tight leading-[1.05] mb-8">
-                Engineering <br />
-                <span className="font-extrabold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">Sovereign Intelligence.</span>
+                About <strong>Stalight Technologies</strong> | <br />
+                <span className="font-extrabold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">Software Development</span> Experts in Bengaluru
               </h1>
-              
+
               {/* Detailed Technical Subtitle */}
-              <motion.p 
+              <motion.p
                 variants={fadeUpVariants}
                 className="text-slate-600 text-lg md:text-[19px] leading-relaxed max-w-xl font-light border-l-2 border-purple-500 pl-5"
               >
-                Stalight Technology translates rigorous engineering heritage into the digital fabric of modern enterprise. We bridge the gap between human potential and technical excellence.
+                <strong>Stalight Technologies Pvt Ltd</strong> is a <strong>software development company</strong> based in Bengaluru, India. Founded to revolutionize <strong>enterprise software</strong> with AI, we serve clients across academia, workforce management, and campus automation.
               </motion.p>
+
             </div>
 
             {/* Right Interactive Composite Media Column */}
             <div className="lg:col-span-5 relative mt-8 lg:mt-0">
-              
+
               {/* Behind-image shadow container */}
               <div className="absolute inset-0 bg-gradient-to-tr from-slate-200/30 to-purple-100/10 rounded-[2.5rem] transform translate-x-4 translate-y-4 -z-10 border border-slate-200/50"></div>
 
               {/* Main Masked Frame */}
               <div className="relative w-full aspect-[4/3] sm:aspect-[1.4/1] lg:aspect-[4/5] rounded-[2.5rem] bg-white border border-slate-200/60 shadow-[0_20px_50px_rgba(0,0,0,0.04)] overflow-hidden group">
-                
-                <motion.div 
+
+                <motion.div
                   initial={{ scale: 1.1 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 1.8, ease: techEase }}
                   className="w-full h-full"
                 >
-                  <OptimizedImage 
-                    src={stalightMainOfficeImg} 
-                    alt="Stalight Technologies Main Office Facade" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out brightness-[0.98]" 
-                    priority 
+                  <OptimizedImage
+                    src={stalightMainOfficeImg}
+                    alt="Stalight Technologies software development office building facade in Bengaluru"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out brightness-[0.98]"
+                    priority
                   />
                 </motion.div>
 
@@ -174,7 +176,7 @@ const AboutUs = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none"></div>
 
                 {/* Floating Micro-data Node Widget */}
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6, duration: 1.0, ease: techEase }}
@@ -198,46 +200,46 @@ const AboutUs = () => {
 
       {/* --- REDESIGNED & ANIMATED WHO WE ARE SECTION --- */}
       <section className="py-24 md:py-36 relative bg-white overflow-hidden">
-        
+
         {/* Soft decorative background glows */}
         <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] bg-purple-50/30 rounded-full blur-[100px] pointer-events-none z-0 transform-gpu"></div>
 
         <div className="container mx-auto px-6 relative z-10">
-          <motion.div 
+          <motion.div
             className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-center"
-            initial="hidden" 
-            whileInView="visible" 
-            viewport={{ once: true, margin: "-100px" }} 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
             variants={containerVariants}
           >
-            
+
             {/* Left Interactive Animated Image Showcase */}
             <div className="lg:col-span-6 relative flex justify-center items-center">
-              
+
               {/* Dynamic Breathing Container */}
-              <motion.div 
-                animate={{ 
+              <motion.div
+                animate={{
                   y: [0, -12, 0],
                 }}
-                transition={{ 
-                  duration: 6, 
-                  repeat: Infinity, 
-                  ease: "easeInOut" 
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut"
                 }}
                 className="relative w-full max-w-[540px] aspect-[4/3] sm:aspect-[1.3/1] lg:aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-200/60 bg-slate-100 group"
               >
                 {/* Slow Zoom Parallax Image */}
-                <motion.div 
+                <motion.div
                   variants={{
                     hidden: { opacity: 0, scale: 1.05 },
                     visible: { opacity: 1, scale: 1, transition: { duration: 1.6, ease: techEase } }
                   }}
                   className="w-full h-full"
                 >
-                  <OptimizedImage 
-                    src={stalightOfficeImg} 
-                    alt="Modern interior of Stalight Technologies software development center" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out origin-center" 
+                  <OptimizedImage
+                    src={stalightOfficeImg}
+                    alt="Modern interior design of Stalight Technologies software development office in Rajajinagar Bengaluru"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out origin-center"
                   />
                 </motion.div>
 
@@ -262,7 +264,7 @@ const AboutUs = () => {
 
             {/* Right Content Column */}
             <div className="lg:col-span-6 relative z-10">
-              
+
               {/* Category tag */}
               <motion.div variants={fadeUpVariants} className="mb-4">
                 <span className="text-[10px] font-extrabold tracking-[0.25em] text-purple-600 uppercase bg-purple-50 border border-purple-100 px-3 py-1 rounded-full">
@@ -271,15 +273,15 @@ const AboutUs = () => {
               </motion.div>
 
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight mb-10 text-slate-950 leading-[1.1]">
-                Beyond Software. <br/>
+                Beyond Software. <br />
                 <span className="font-extrabold bg-gradient-to-r from-purple-600 via-purple-700 to-indigo-600 bg-clip-text text-transparent">Digital Evolution.</span>
               </h2>
 
               {/* Interactive Advantage Cards */}
               <div className="space-y-6">
-                
+
                 {/* Advantage Card 1 */}
-                <motion.div 
+                <motion.div
                   variants={fadeUpVariants}
                   whileHover={{ x: 6, transition: { duration: 0.3 } }}
                   className="group flex gap-5 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-purple-200 hover:bg-purple-50/20 transition-all duration-500 shadow-sm"
@@ -296,7 +298,7 @@ const AboutUs = () => {
                 </motion.div>
 
                 {/* Advantage Card 2 */}
-                <motion.div 
+                <motion.div
                   variants={fadeUpVariants}
                   whileHover={{ x: 6, transition: { duration: 0.3 } }}
                   className="group flex gap-5 p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-purple-200 hover:bg-purple-50/20 transition-all duration-500 shadow-sm"
@@ -322,8 +324,8 @@ const AboutUs = () => {
       {/* --- CORE CAPABILITIES --- */}
       <section className="py-24 md:py-36 bg-[#FAFAFA] relative">
         {/* Subtle Tech Grid Background */}
-        <div className="absolute inset-0 pointer-events-none z-0 opacity-40" 
-             style={{ backgroundImage: 'radial-gradient(#cbd5e1 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
+        <div className="absolute inset-0 pointer-events-none z-0 opacity-40"
+          style={{ backgroundImage: 'radial-gradient(#cbd5e1 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
         </div>
 
         <div className="container mx-auto px-6 relative z-10">
@@ -332,23 +334,23 @@ const AboutUs = () => {
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-slate-950 tracking-tight">Integrated <span className="font-bold">IT Ecosystem</span></h2>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={containerVariants}
             className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto"
           >
             {/* Card 1: IT Skill & Training */}
-            <motion.div 
+            <motion.div
               variants={fadeUpVariants}
               className="group bg-white border border-slate-200/60 p-10 md:p-14 shadow-sm hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] transition-all duration-500 relative overflow-hidden rounded-2xl"
             >
               {/* Animated Top Border */}
               <div className="absolute top-0 left-0 w-full h-1 bg-[#D32027] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></div>
-              
+
               <div className="mb-6 inline-flex items-center gap-2 border border-red-100 rounded-full px-4 py-1.5 bg-red-50/50">
                 <span className="w-2 h-2 rounded-full bg-[#D32027] animate-pulse"></span>
                 <h3 className="text-[10px] font-bold tracking-[0.2em] text-[#D32027] uppercase">Workforce Empowerment</h3>
               </div>
-              
+
               <h4 className="text-3xl font-semibold text-slate-900 mb-4 tracking-tight group-hover:text-[#D32027] transition-colors duration-300">IT Skill & Professional Training</h4>
               <p className="text-slate-600 font-light leading-relaxed text-[16px]">
                 Bridging the industry-academia gap through intensive training programs in Full Stack Dev, Machine Learning, and Cloud Architecture. We turn students into deployable engineers.
@@ -356,13 +358,13 @@ const AboutUs = () => {
             </motion.div>
 
             {/* Card 2: Software Solutions */}
-            <motion.div 
+            <motion.div
               variants={fadeUpVariants}
               className="group bg-white border border-slate-200/60 p-10 md:p-14 shadow-sm hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] transition-all duration-500 relative overflow-hidden rounded-2xl"
             >
               {/* Animated Top Border */}
               <div className="absolute top-0 left-0 w-full h-1 bg-[#D32027] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></div>
-              
+
               <div className="mb-6 inline-flex items-center gap-2 border border-slate-200 rounded-full px-4 py-1.5 bg-slate-50">
                 <span className="w-2 h-2 rounded-full bg-slate-800"></span>
                 <h3 className="text-[10px] font-bold tracking-[0.2em] text-slate-700 uppercase">Technical Excellence</h3>
@@ -387,10 +389,10 @@ const AboutUs = () => {
             <h2 className="text-3xl md:text-5xl font-light text-slate-900 tracking-tight relative pb-4">
               Trusted by <span className="font-bold relative z-10">Karnataka's Finest</span>
               {/* Animated Red Swoosh Underline */}
-              <motion.svg 
-                className="absolute bottom-0 left-[30%] w-[70%] h-4 -z-10" 
-                viewBox="0 0 200 20" 
-                fill="none" 
+              <motion.svg
+                className="absolute bottom-0 left-[30%] w-[70%] h-4 -z-10"
+                viewBox="0 0 200 20"
+                fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <motion.path
@@ -407,7 +409,7 @@ const AboutUs = () => {
             </h2>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={containerVariants}
             className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto"
           >
@@ -421,7 +423,7 @@ const AboutUs = () => {
                 <a href={partner.url ?? "#"} target="_blank" rel="noopener noreferrer" aria-label={`${partner.name} - Official Partner`} className="block">
                   {/* Premium Glass Card */}
                   <div className="h-full bg-white/70 backdrop-blur-xl border border-slate-200/50 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.05)] group-hover:shadow-[0_20px_50px_-15px_rgba(211,32,39,0.15)] group-hover:border-red-100 rounded-[2rem] p-8 flex flex-col items-center justify-center gap-6 transition-all duration-500 overflow-hidden">
-                    
+
                     {/* Hover Glow Effect behind logo */}
                     <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-red-50/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
 
@@ -433,7 +435,7 @@ const AboutUs = () => {
                         className="max-w-full max-h-full object-contain transform group-hover:scale-110 transition-transform duration-500 drop-shadow-sm"
                       />
                     </div>
-                    
+
                     <div className="text-center relative z-10 mt-2">
                       <h3 className="text-[9px] md:text-[10px] font-bold tracking-[0.2em] text-slate-400 group-hover:text-[#D32027] uppercase transition-colors duration-300">
                         Official Partner

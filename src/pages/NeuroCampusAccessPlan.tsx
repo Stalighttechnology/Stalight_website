@@ -27,7 +27,7 @@ const NeuroCampusAccessPlan = () => {
         "Digital Classrooms",
         "Core Fee Management",
         "Communication Hub",
-        "User Administration",
+        "Mobile App Access",
       ],
     },
     {
@@ -47,7 +47,7 @@ const NeuroCampusAccessPlan = () => {
         "Elevated User Experience",
         "Real-Time Operations",
         "Academic Progression",
-        "Everything in Basic +",
+        "iOS & Android Apps",
       ],
     },
     {
@@ -61,41 +61,53 @@ const NeuroCampusAccessPlan = () => {
       features: [
         "Smart Assistance",
         "Career Intelligence",
-        "Biometric & Location Security",
+        "Advanced Mobile Analytics",
         "Automated Grading Engine",
         "Enterprise Access Control",
         "High-Level Security",
         "Cloud Infrastructure",
         "System Integrity",
-        "Everything in Pro +",
       ],
     },
   ];
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
-      <SEO 
-        title="Stalight Campus Access Plans & Pricing | Stalight Technologies"
-        description="Choose the perfect plan for your institution's needs. Scale seamlessly from essential daily operations to enterprise-grade intelligence."
+      <SEO
+        title="Stalight Campus Pricing | AI-Powered Campus Management System Plans by Stalight Technologies"
+        description="Explore Stalight Campus pricing plans by Stalight Technologies. Flexible subscription tiers for our AI-powered campus management system, academic ERP software, and school database solutions in Bengaluru, India. Compare features and select the best plan for your institution."
+        keywords="Stalight Campus pricing, Stalight Campus access plans, campus management system pricing, academic software subscription, school ERP pricing, college database software cost, educational ERP features, Stalight Technologies, Stalight Campus, AI-powered campus management, Bengaluru academic software, India school ERP, institution management system pricing, best campus management software pricing, affordable academic ERP, enterprise campus solutions, online school management system, college ERP pricing, university database software, Stalight Campus plans"
         jsonLd={[
           generateWebPageSchema(
-            "Stalight Campus Access Plans",
-            "Pricing and feature comparison for Stalight Campus academic management platform.",
-            "/neuro-campus-access-plan"
+            "Stalight Campus Pricing Plans",
+            "Flexible subscription tiers for Stalight Technologies' AI-powered campus management system. Compare plans and features for schools, colleges, and universities in Bengaluru, India.",
+            "/Stalight-Campus-Access"
           ),
           generateBreadcrumbSchema([
             { name: "Home", item: "/" },
-            { name: "Stalight Campus", item: "/neuro-campus" },
-            { name: "Access Plans", item: "/neuro-campus-access-plan" }
+            { name: "Stalight Campus", item: "/Stalight-Campus" },
+            { name: "Pricing & Access Plans", item: "/Stalight-Campus-Access" }
           ]),
           generateFAQSchema([
             {
-              question: "Can I upgrade or downgrade my plan anytime?",
-              answer: "Yes, you can change your plan at any time. Changes take effect in the next billing cycle."
+              question: "Can I upgrade or downgrade my Stalight Campus plan anytime?",
+              answer: "Yes, you can change your Stalight Campus plan at any time. Changes take effect in the next billing cycle."
             },
             {
               question: "Do you offer custom plans for enterprise institutions?",
-              answer: "Absolutely! We offer fully customized solutions for large institutions. Contact our sales team for a personalized quote."
+              answer: "Absolutely! We offer fully customized Stalight Campus solutions for large institutions. Contact our sales team for a personalized quote."
+            },
+            {
+              question: "What payment methods do you accept for Stalight Campus?",
+              answer: "We accept all major credit cards, UPI, bank transfers, and other secure payment methods for your convenience."
+            },
+            {
+              question: "Is there a free trial for Stalight Campus?",
+              answer: "Yes, we offer a free trial period for new customers. Sign up to experience Stalight Campus before committing."
+            },
+            {
+              question: "How does Stalight Campus pricing scale with institution size?",
+              answer: "Our pricing scales based on the number of users, features required, and institution size. We offer tiered plans for small schools to large university networks."
             }
           ])
         ]}
@@ -114,7 +126,7 @@ const NeuroCampusAccessPlan = () => {
             Choose the perfect plan for your institution's needs. Scale seamlessly from essential daily operations to enterprise-grade intelligence.
           </p>
           <p className="text-sm font-medium text-slate-500 bg-slate-100 inline-block px-4 py-2 rounded-full">
-             All plans include 24/7 support and regular updates
+            All plans include 24/7 support and regular updates
           </p>
         </div>
       </section>
@@ -126,9 +138,8 @@ const NeuroCampusAccessPlan = () => {
             {plans.map((plan, index) => (
               <div
                 key={index}
-                className={`relative group transition-all duration-300 ${
-                  plan.isPopular ? "md:scale-105 z-10" : "z-0"
-                }`}
+                className={`relative group transition-all duration-300 ${plan.isPopular ? "md:scale-105 z-10" : "z-0"
+                  }`}
               >
                 {/* Popular Badge */}
                 {plan.isPopular && (
@@ -140,11 +151,10 @@ const NeuroCampusAccessPlan = () => {
                 )}
 
                 <div
-                  className={`h-full bg-white rounded-3xl transition-all duration-300 flex flex-col ${
-                    plan.isPopular
-                      ? "ring-2 ring-purple-500 shadow-2xl shadow-purple-500/20"
-                      : "border border-slate-200 shadow-lg hover:shadow-xl"
-                  } overflow-hidden`}
+                  className={`h-full bg-white rounded-3xl transition-all duration-300 flex flex-col ${plan.isPopular
+                    ? "ring-2 ring-purple-500 shadow-2xl shadow-purple-500/20"
+                    : "border border-slate-200 shadow-lg hover:shadow-xl"
+                    } overflow-hidden`}
                 >
                   {/* Gradient Header */}
                   <div className={`bg-gradient-to-br ${plan.color} p-8 text-white text-center`}>
@@ -165,9 +175,8 @@ const NeuroCampusAccessPlan = () => {
                         return (
                           <div key={featureIndex} className="flex items-start gap-3">
                             <div
-                              className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 ${
-                                isHighlight ? "bg-slate-900" : plan.bgColor
-                              }`}
+                              className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 ${isHighlight ? "bg-slate-900" : plan.bgColor
+                                }`}
                             >
                               <Check
                                 size={14}
@@ -176,11 +185,10 @@ const NeuroCampusAccessPlan = () => {
                               />
                             </div>
                             <span
-                              className={`text-sm ${
-                                isHighlight
-                                  ? "font-bold text-slate-900"
-                                  : "text-slate-600 font-medium"
-                              }`}
+                              className={`text-sm ${isHighlight
+                                ? "font-bold text-slate-900"
+                                : "text-slate-600 font-medium"
+                                }`}
                             >
                               {feature}
                             </span>
@@ -191,11 +199,10 @@ const NeuroCampusAccessPlan = () => {
 
                     {/* CTA Button */}
                     <button
-                      className={`w-full py-3.5 px-6 rounded-full font-bold transition-all duration-300 uppercase text-xs tracking-widest ${
-                        plan.isPopular
-                          ? "bg-gradient-to-r from-fuchsia-500 to-purple-600 text-white hover:shadow-lg hover:shadow-purple-500/30 hover:-translate-y-0.5"
-                          : "bg-slate-100 text-slate-900 hover:bg-slate-200"
-                      }`}
+                      className={`w-full py-3.5 px-6 rounded-full font-bold transition-all duration-300 uppercase text-xs tracking-widest ${plan.isPopular
+                        ? "bg-gradient-to-r from-fuchsia-500 to-purple-600 text-white hover:shadow-lg hover:shadow-purple-500/30 hover:-translate-y-0.5"
+                        : "bg-slate-100 text-slate-900 hover:bg-slate-200"
+                        }`}
                     >
                       Get Started
                     </button>
@@ -240,7 +247,7 @@ const NeuroCampusAccessPlan = () => {
                   "Real-time Attendance Tracking",
                   "Digital Classrooms",
                   "Advanced Analytics Dashboard",
-                  "Biometric Security",
+                  "Mobile App Access",
                   "Smart Assistance",
                   "Automated Grading Engine",
                   "Multi-Factor Authentication",
@@ -257,7 +264,7 @@ const NeuroCampusAccessPlan = () => {
                     </td>
                     <td className="text-center py-4 px-4">
                       {![
-                        "Biometric Security",
+                        "Mobile App Access",
                         "Smart Assistance",
                         "Automated Grading Engine",
                         "Career Intelligence",
@@ -270,7 +277,6 @@ const NeuroCampusAccessPlan = () => {
                     </td>
                     <td className="text-center py-4 px-4 bg-purple-50/30">
                       {![
-                        "Biometric Security",
                         "Career Intelligence",
                         "Enterprise RBAC",
                       ].includes(feature) ? (
@@ -295,7 +301,7 @@ const NeuroCampusAccessPlan = () => {
         <div className="max-w-5xl mx-auto bg-slate-900 rounded-[3rem] p-12 md:p-16 text-center text-white relative overflow-hidden shadow-2xl">
           {/* Decorative background blur */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-r from-fuchsia-500 to-blue-600 rounded-full blur-[100px] opacity-20 pointer-events-none transform-gpu"></div>
-          
+
           <div className="relative z-10">
             <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight">
               Ready to Transform Your Campus?

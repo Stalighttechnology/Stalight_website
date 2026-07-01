@@ -230,6 +230,54 @@
   .reveal, .float-subtle { transition: none !important; animation: none !important; }
 }
 
+/* ──── Mobile Button Hover Effects ──── */
+/* Make hover color effects visible on mobile devices */
+@media (max-width: 768px) {
+  /* Buttons with hover classes - apply hover effect by default on mobile */
+  button:not(:disabled),
+  a[class*="hover:"],
+  [class*="hover:bg-"] {
+    @apply transition-all;
+  }
+
+  /* Purple/Violet primary buttons */
+  .hover\:bg-purple-700,
+  .hover\:bg-purple-600 { @apply !bg-purple-700; }
+  
+  /* Accent hover effects */
+  .hover\:bg-accent {
+    @apply !bg-accent;
+  }
+  
+  .hover\:text-accent-foreground {
+    @apply !text-accent-foreground;
+  }
+
+  /* Slate/Gray hover effects */
+  .hover\:bg-slate-100 { @apply !bg-slate-100; }
+
+  /* Primary color hover effects */
+  .hover\:bg-primary\/90 {
+    @apply !bg-primary/90;
+  }
+
+  /* Destructive hover effects */
+  .hover\:bg-destructive\/90 {
+    @apply !bg-destructive/90;
+  }
+
+  /* Secondary hover effects */
+  .hover\:bg-secondary\/80 {
+    @apply !bg-secondary/80;
+  }
+
+  /* Translate/transform effects */
+  .hover\:-translate-y-1,
+  .hover\:translate-y-\[-1px\] {
+    @apply !-translate-y-1;
+  }
+}
+
 .animate-fade-in-up {
   animation: fade-in-up 0.8s ease-out forwards;
 }
@@ -283,3 +331,17 @@ html {
 html.smooth-scroll {
   scroll-behavior: smooth;
 }
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.group-hover\:animate-shine {
+  animation: shine 0.8s ease-in-out forwards;
+}
+

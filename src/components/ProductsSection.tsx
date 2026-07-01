@@ -5,13 +5,59 @@ import { ArrowRight } from "lucide-react";
 
 // --- Images ---
 import ncImg1 from "@/assets/screenshots/leavereqimage.png";
-import ncImg2 from "@/assets/products/neurocampus11.jpg";
+import ncImg2 from "@/assets/products/princydah.png";
 
-import nsImg1 from "@/assets/products/neurosync11.jpg";
-import nsImg2 from "@/assets/products/neurosync22.jpg";
+import nsImg1 from "@/assets/products/admindahhh.png";
+import nsImg2 from "@/assets/products/adminreult.png";
+import nsImg3 from "@/assets/products/learn and practie.png";
+import nsImg4 from "@/assets/products/reult.png";
+import nsImg5 from "@/assets/products/tudentdahboard.png";
+import nsImgCarousel1 from "@/assets/products/neurosync1.jpg";
+import nsImgCarousel2 from "@/assets/products/neurosync22.jpg";
+import nsImgCarousel3 from "@/assets/products/neurosync33.jpg";
 
 const neuroCampusImages = [ncImg1, ncImg2];
-const neuroSyncImages = [nsImg1, nsImg2];
+const neuroSyncImages = [nsImg1, nsImg2, nsImg3, nsImg4, nsImg5];
+
+// NeuroSync Products Data
+const neuroSyncProducts = [
+  {
+    id: 1,
+    title: "NEURA Smart Interview",
+    description: "Realistic, voice-driven mock interviews powered by advanced LLMs. Get instant feedback on tone, sentiment, and technical accuracy.",
+    image: nsImgCarousel1,
+  },
+  {
+    id: 2,
+    title: "Multi-Language IDE",
+    description: "Enterprise-grade cloud editor for Python, Java, and C++. Real-time execution with automated test-suite validation and complexity scoring.",
+    image: nsImgCarousel2,
+  },
+  {
+    id: 3,
+    title: "Placement Officer Hub",
+    description: "Dedicated command center to track cohort readiness, manage recruiter drives, and export stakeholder-ready placement reports.",
+    image: nsImg1,
+  },
+  {
+    id: 4,
+    title: "Smart Assessments",
+    description: "Deploy high-stakes exams with smart proctoring, custom question banks, and automated grading mapped to corporate standards.",
+    image: nsImg2,
+  },
+  {
+    id: 5,
+    title: "Skill Certification",
+    description: "Generate verifiable micro-credentials as students master specific tech stacks, instantly shareable to professional networks.",
+    image: nsImg3,
+  },
+  {
+    id: 6,
+    title: "Batch Admin Controls",
+    description: "Granular access management to segment students by year, branch, or performance tier for targeted training interventions.",
+    image: nsImg5,
+  },
+];
 
 const customEase = [0.19, 1.0, 0.22, 1.0];
 
@@ -77,22 +123,25 @@ const ProductsSection = () => {
           className="text-center mb-12 sm:mb-16 md:mb-20 lg:mb-24 max-w-4xl mx-auto"
         >
           <motion.h2 variants={fadeUpVariants} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-slate-900 mb-4 sm:mb-6 tracking-tight leading-[1.1]">
-            Enterprise-Grade <br className="hidden sm:block"/>
+            Enterprise-Grade <br className="hidden sm:block" />
             <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500">Platforms</span>
           </motion.h2>
           <motion.p variants={fadeUpVariants} className="text-slate-600 text-sm sm:text-base md:text-lg lg:text-xl font-light leading-relaxed max-w-3xl mx-auto px-4">
             Designed for scalability, performance, and institutional transformation. Empower your campus with platforms built for reliability and impact.
           </motion.p>
+          <motion.div variants={fadeUpVariants} className="mt-4 text-sm text-slate-500">
+            For product enquiries: <a href="mailto:sales@stalight.in" className="text-slate-800 font-medium">sales@stalight.in</a> • <a href="tel:+917349551102" className="text-slate-800 font-medium">73495 51102</a>
+          </motion.div>
         </motion.div>
 
         {/* ===================== NEURO CAMPUS CARD ===================== */}
-        <div onClick={() => { scrollToTop(); navigate('/neuro-campus'); }} className="block group mb-8 sm:mb-12 lg:mb-16 xl:mb-20 cursor-pointer">
+        <div onClick={() => { scrollToTop(); navigate('/stalight-campus'); }} className="block group mb-8 sm:mb-12 lg:mb-16 xl:mb-20 cursor-pointer">
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={containerVariants}
-            className="relative bg-white rounded-2xl sm:rounded-3xl lg:rounded-[3rem] border border-slate-200/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_30px_60px_-15px_rgba(168,85,247,0.2)] hover:border-purple-200 transition-all duration-700 overflow-hidden flex flex-col lg:flex-row"
+            className="relative bg-white rounded-2xl sm:rounded-3xl lg:rounded-[3rem] border border-purple-200 shadow-[0_30px_60px_-15px_rgba(168,85,247,0.2)] transition-all duration-700 overflow-hidden flex flex-col lg:flex-row"
           >
             {/* Hover Gradient Aura */}
-            <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-purple-500/5 opacity-100 transition-opacity duration-700 pointer-events-none"></div>
 
             {/* Content Side */}
             <div className="w-full lg:w-[45%] p-6 sm:p-8 md:p-10 lg:p-12 xl:p-16 flex flex-col justify-center relative z-10">
@@ -109,12 +158,11 @@ const ProductsSection = () => {
 
                 {/* Buttons */}
                 <div className="flex flex-col items-start gap-3">
-                  <div className="relative inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-6 lg:px-8 py-3 sm:py-3.5 lg:py-4 bg-slate-900 text-white rounded-full overflow-hidden shadow-md">
-                    <span className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+                  <Link to="/stalight-campus" onClick={() => scrollToTop()} className="relative inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-6 lg:px-8 py-3 sm:py-3.5 lg:py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white rounded-full overflow-hidden shadow-lg">
                     <span className="relative z-10 flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs lg:text-sm font-bold tracking-[0.15em] uppercase">
-                      Explore Platform <ArrowRight size={12} className="sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 group-hover:translate-x-1 transition-transform" />
+                      Explore Platform <ArrowRight size={12} className="sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 translate-x-1 transition-transform" />
                     </span>
-                  </div>
+                  </Link>
 
                   {/* Campus Login (external) */}
                   <a
@@ -134,9 +182,9 @@ const ProductsSection = () => {
             {/* Image Side (Sleek UI Window) */}
             <div className="w-full lg:w-[55%] bg-slate-50/50 border-t lg:border-t-0 lg:border-l border-slate-100 relative p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 flex items-center justify-center overflow-hidden">
               {/* Decorative background shape */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] sm:w-[75%] lg:w-[80%] h-[70%] sm:h-[75%] lg:h-[80%] bg-purple-200/40 rounded-full blur-[40px] sm:blur-[60px] lg:blur-[80px] group-hover:bg-purple-300/50 transition-colors duration-700 transform-gpu"></div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] sm:w-[75%] lg:w-[80%] h-[70%] sm:h-[75%] lg:h-[80%] bg-purple-300/50 rounded-full blur-[40px] sm:blur-[60px] lg:blur-[80px] transition-colors duration-700 transform-gpu"></div>
 
-              <motion.div variants={fadeUpVariants} className="relative w-full max-w-[500px] sm:max-w-[550px] lg:max-w-[600px] aspect-[4/3] bg-white rounded-xl sm:rounded-2xl shadow-xl border border-slate-200 overflow-hidden group-hover:-translate-y-1 sm:group-hover:-translate-y-2 group-hover:scale-[1.01] sm:group-hover:scale-[1.02] transition-all duration-700">
+              <motion.div variants={fadeUpVariants} className="relative w-full max-w-[500px] sm:max-w-[550px] lg:max-w-[600px] aspect-[4/3] bg-white rounded-xl sm:rounded-2xl shadow-xl border border-slate-200 overflow-hidden -translate-y-1 sm:-translate-y-2 scale-[1.01] sm:scale-[1.02] transition-all duration-700">
                 {/* Mac-style header */}
                 <div className="h-6 sm:h-7 lg:h-8 bg-slate-100 border-b border-slate-200 flex items-center px-3 sm:px-4 gap-1 sm:gap-1.5 z-20 relative">
                   <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-slate-300 group-hover:bg-red-400 transition-colors"></div>
@@ -147,6 +195,7 @@ const ProductsSection = () => {
                 <div className="relative w-full h-[calc(100%-1.5rem)] sm:h-[calc(100%-1.75rem)] lg:h-[calc(100%-2rem)]">
                   <AnimatePresence mode="wait">
                     <motion.img loading="lazy" decoding="async"
+                      alt="Stalight Technologies - Leading Software Development Company in Bengaluru"
                       key={`nc-${ncIndex}`}
                       src={neuroCampusImages[ncIndex]}
                       className="absolute inset-0 w-full h-full object-cover object-top"
@@ -163,20 +212,20 @@ const ProductsSection = () => {
         </div>
 
         {/* ===================== NEURO SYNC CARD ===================== */}
-        <div onClick={() => { scrollToTop(); navigate('/neurosync'); }} className="block group cursor-pointer">
+        <div onClick={() => { scrollToTop(); navigate('/Stalight-Sync'); }} className="block group cursor-pointer">
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={containerVariants}
-            className="relative bg-white rounded-2xl sm:rounded-3xl lg:rounded-[3rem] border border-slate-200/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_30px_60px_-15px_rgba(59,130,246,0.2)] hover:border-blue-200 transition-all duration-700 overflow-hidden flex flex-col-reverse lg:flex-row"
+            className="relative bg-white rounded-2xl sm:rounded-3xl lg:rounded-[3rem] border border-blue-200 shadow-[0_30px_60px_-15px_rgba(59,130,246,0.2)] transition-all duration-700 overflow-hidden flex flex-col-reverse lg:flex-row"
           >
             {/* Hover Gradient Aura */}
-            <div className="absolute inset-0 bg-gradient-to-bl from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-bl from-blue-500/5 to-purple-500/5 opacity-100 transition-opacity duration-700 pointer-events-none"></div>
 
             {/* Image Side (Sleek UI Window) */}
             <div className="w-full lg:w-[55%] bg-slate-50/50 border-b lg:border-b-0 lg:border-r border-slate-100 relative p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 flex items-center justify-center overflow-hidden">
               {/* Decorative background shape */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] sm:w-[75%] lg:w-[80%] h-[70%] sm:h-[75%] lg:h-[80%] bg-blue-200/40 rounded-full blur-[40px] sm:blur-[60px] lg:blur-[80px] group-hover:bg-blue-300/50 transition-colors duration-700 transform-gpu"></div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] sm:w-[75%] lg:w-[80%] h-[70%] sm:h-[75%] lg:h-[80%] bg-blue-300/50 rounded-full blur-[40px] sm:blur-[60px] lg:blur-[80px] transition-colors duration-700 transform-gpu"></div>
 
-              <motion.div variants={fadeUpVariants} className="relative w-full max-w-[500px] sm:max-w-[550px] lg:max-w-[600px] aspect-[4/3] bg-white rounded-xl sm:rounded-2xl shadow-xl border border-slate-200 overflow-hidden group-hover:-translate-y-1 sm:group-hover:-translate-y-2 group-hover:scale-[1.01] sm:group-hover:scale-[1.02] transition-all duration-700">
+              <motion.div variants={fadeUpVariants} className="relative w-full max-w-[500px] sm:max-w-[550px] lg:max-w-[600px] aspect-[4/3] bg-white rounded-xl sm:rounded-2xl shadow-xl border border-slate-200 overflow-hidden -translate-y-1 sm:-translate-y-2 scale-[1.01] sm:scale-[1.02] transition-all duration-700">
                 {/* Mac-style header */}
                 <div className="h-6 sm:h-7 lg:h-8 bg-slate-100 border-b border-slate-200 flex items-center px-3 sm:px-4 gap-1 sm:gap-1.5 z-20 relative">
                   <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-slate-300 group-hover:bg-red-400 transition-colors"></div>
@@ -187,6 +236,7 @@ const ProductsSection = () => {
                 <div className="relative w-full h-[calc(100%-1.5rem)] sm:h-[calc(100%-1.75rem)] lg:h-[calc(100%-2rem)]">
                   <AnimatePresence mode="wait">
                     <motion.img loading="lazy" decoding="async"
+                      alt="Stalight Technologies - Leading Software Development Company in Bengaluru"
                       key={`ns-${nsIndex}`}
                       src={neuroSyncImages[nsIndex]}
                       className="absolute inset-0 w-full h-full object-cover object-top"
@@ -210,27 +260,26 @@ const ProductsSection = () => {
                 </h3>
 
                 <p className="text-slate-600 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-6 sm:mb-8 lg:mb-10">
-                  An assessment and upskilling platform with cloud-based execution, performance benchmarking, and hands-on practice.
+                  Empower placements with smart interviews, live coding challenges, proctored assessments, and real-time performance analytics for institutions.
                 </p>
 
                 {/* Buttons */}
                 <div className="flex flex-col items-start gap-3">
-                  <div className="relative inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-6 lg:px-8 py-3 sm:py-3.5 lg:py-4 bg-slate-900 text-white rounded-full overflow-hidden shadow-md">
-                    <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+                  <Link to="/Stalight-Sync" onClick={() => scrollToTop()} className="relative inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-6 lg:px-8 py-3 sm:py-3.5 lg:py-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white rounded-full overflow-hidden shadow-lg">
                     <span className="relative z-10 flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs lg:text-sm font-bold tracking-[0.15em] uppercase">
-                      Explore Platform <ArrowRight size={12} className="sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 group-hover:translate-x-1 transition-transform" />
+                      Explore Platform <ArrowRight size={12} className="sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 translate-x-1 transition-transform" />
                     </span>
-                  </div>
+                  </Link>
 
-                  {/* NeuroSync Login (internal page) */}
-                  <Link
-                    to="/neurosync"
-                    onClick={(e) => { e.stopPropagation(); scrollToTop(); }}
+                  {/* NeuroSync Login */}
+                  <a
+                    href="https://sync.stalight.in/login"
+                    onClick={(e) => { e.stopPropagation(); }}
                     className="inline-flex items-center justify-center px-4 py-2 border border-slate-200 rounded-full text-slate-900 bg-white hover:bg-slate-50 transition-colors duration-150 text-sm"
                   >
                     <span className="text-xs text-slate-500 mr-2">Already have Sync?</span>
                     <span className="underline font-semibold">Login</span>
-                  </Link>
+                  </a>
                 </div>
               </motion.div>
             </div>

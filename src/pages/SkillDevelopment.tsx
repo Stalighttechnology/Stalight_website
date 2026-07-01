@@ -100,13 +100,14 @@ const SkillDevelopment = () => {
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900 overflow-hidden">
-      <SEO 
-        title="Professional IT Skill Development | Stalight Technologies"
-        description="Intensive, architectural-scale training designed by industry veterans. We provide placement support and hands-on labs to help you transition into top-tier enterprises upon successful completion."
+      <SEO
+        title="IT Skill Development & Training in Bengaluru | Stalight Technologies"
+        description="Stalight Technologies offers intensive IT skill development and training programs in Machine Learning, Full-Stack Development, and Cloud Computing with placement support and hands-on labs for students and professionals in Bengaluru, India."
+        keywords="IT skill development Bengaluru, software training institute Bengaluru, machine learning course India, full stack development training, cloud computing course Bengaluru, placement training program, IT training with placement, coding bootcamp Bengaluru, tech training for freshers, Stalight Technologies training"
         jsonLd={[
           generateWebPageSchema(
-            "Skill Development & Training",
-            "Elite engineering tracks in Machine Learning, Full-Stack, and Cloud with placement support and hands-on labs.",
+            "IT Skill Development & Training — Stalight Technologies",
+            "Intensive training programs in Machine Learning, Full-Stack Development, and Cloud Computing with placement support and hands-on labs for students and professionals in Bengaluru, India.",
             "/skill-development"
           ),
           generateBreadcrumbSchema([
@@ -189,7 +190,7 @@ const SkillDevelopment = () => {
                     <span className="text-xs font-bold text-slate-700">Real Projects</span>
                   </div>
                 </div>
-                <p className="text-sm text-slate-600 mt-4">Enrolled students receive complimentary access to NeuroSync labs for hands-on experimentation and extended learning.</p>
+                <p className="text-sm text-slate-600 mt-4">Enrolled students receive complimentary access to Stalight Sync labs for hands-on experimentation and extended learning.</p>
               </div>
             </div>
           </motion.div>

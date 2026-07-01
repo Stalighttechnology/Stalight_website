@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShieldCheck, Layers, Smartphone, LayoutDashboard, ArrowRight, GraduationCap, BookOpen, Calendar, FileCheck, BarChart, Target, Wallet, Bus, Library, Home, Users, Lock, Globe, Bell, X, Loader2, Send } from "lucide-react";
 import { supabase } from "@/lib/supabaseClient";
@@ -49,6 +49,7 @@ const ProductLaunchHero = () => {
   const [formData, setFormData] = useState({ full_name: "", official_email: "", phone: "", organization: "", designation: "", interested_solution: "", preferred_date: "", preferred_time: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target as HTMLInputElement;
@@ -89,9 +90,15 @@ const ProductLaunchHero = () => {
     setFormData({ full_name: "", official_email: "", phone: "", organization: "", designation: "", interested_solution: "", preferred_date: "", preferred_time: "", message: "" });
   };
 
+  useEffect(() => {
+    const t = setTimeout(() => setVisible(false), 5000);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
-    // FIX: Removed justify-center so content flows naturally and doesn't get clipped on short screens
-    <section className="relative isolate flex flex-col w-full min-h-[100dvh] overflow-x-hidden bg-white font-sans border-b border-slate-200">
+    <AnimatePresence>
+      {visible && (
+        <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, height: 0, transition: { duration: 0.45 } }} className="relative isolate flex flex-col w-full min-h-[100dvh] overflow-x-hidden bg-white font-sans border-b border-slate-200">
 
       {/* Dynamic Background */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden h-full min-h-[1000px]">
@@ -351,7 +358,7 @@ const ProductLaunchHero = () => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="stalight_campus">Stalight Campus</SelectItem>
-                      <SelectItem value="neurosync">NeuroSync</SelectItem>
+                      <SelectItem value="neurosync">Stalight Sync</SelectItem>
                       <SelectItem value="both">Both / Integration</SelectItem>
                       <SelectItem value="custom">Custom / Other</SelectItem>
                     </SelectContent>
@@ -387,7 +394,9 @@ const ProductLaunchHero = () => {
           </div>
         </div>
       )}
-    </section>
+        </motion.section>
+      )}
+    </AnimatePresence>
   );
 };
 

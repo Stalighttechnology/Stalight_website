@@ -61,10 +61,10 @@ const Footer = () => {
               <div className="md:pl-4">
                 <h4 className="text-xs md:text-sm uppercase tracking-widest text-stone-800 font-bold mb-4 md:mb-5">Solutions</h4>
                 <ul className="space-y-3 md:space-y-4">
-                  <li><Link to="/neuro-campus" className="text-sm md:text-base text-stone-600 hover:text-stone-900 transition-colors font-medium">Stalight Campus</Link></li>
-                  <li><Link to="/neurosync" className="text-sm md:text-base text-stone-600 hover:text-stone-900 transition-colors font-medium">Stalight Sync</Link></li>
-                  <li><a href="mailto:info@stalight.in" className="text-sm md:text-base text-red-700 md:text-stone-600 hover:text-stone-900 transition-colors font-medium">info@stalight.in</a></li>
-                  <li><a href="tel:+918660144040" className="text-sm md:text-base text-stone-600 hover:text-stone-900 transition-colors font-medium">Mobile: 866 014 4040</a></li>
+                  <li><Link to="/stalight-campus" className="text-sm md:text-base text-stone-600 hover:text-stone-900 transition-colors font-medium">Stalight Campus</Link></li>
+                  <li><Link to="/stalight-sync" className="text-sm md:text-base text-stone-600 hover:text-stone-900 transition-colors font-medium">Stalight Sync</Link></li>
+                  <li><a href="mailto:support@stalight.in" className="text-sm md:text-base text-red-700 md:text-stone-600 hover:text-stone-900 transition-colors font-medium">support@stalight.in</a></li>
+                  <li><a href="tel:+917349551102" className="text-sm md:text-base text-stone-600 hover:text-stone-900 transition-colors font-medium">Mobile: 73495 51102</a></li>
                 </ul>
               </div>
             </div>
@@ -90,7 +90,7 @@ const Footer = () => {
                 </a>
 
                 {/* WhatsApp */}
-                <a href="https://wa.me/918660144040" target="_blank" rel="noreferrer" className="text-stone-400 hover:text-[#25d366] transition-transform duration-300 transform hover:scale-110" aria-label="WhatsApp">
+                <a href="https://wa.me/917349551102" target="_blank" rel="noreferrer" className="text-stone-400 hover:text-[#25d366] transition-transform duration-300 transform hover:scale-110" aria-label="WhatsApp">
                   <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.89 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.743-.981z"/></svg>
                 </a>
 
@@ -101,17 +101,17 @@ const Footer = () => {
               </div>
 
               {/* Address Component properly stacked */}
-                <div className="w-full text-sm text-stone-600 font-medium leading-relaxed max-w-[280px] lg:text-right">
-                  <a
-                    href="https://www.google.com/maps/place/13%C2%B000'03.1%22N+77%C2%B033'10.4%22E/@13.000873,77.552898,640m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d13.000873!4d77.552898?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Open Stalight address in Google Maps"
-                    className="hover:text-stone-900 underline"
-                  >
-                    No.129, 1st Block, Dr. Rajkumar Road Rajajinagar, Bengaluru-560010
-                  </a>
-                </div>
+              <div className="w-full text-sm text-stone-600 font-medium leading-relaxed max-w-[280px] lg:text-right">
+                <a
+                  href="https://www.google.com/maps/place/13%C2%B000'03.1%22N+77%C2%B033'10.4%22E/@13.000873,77.552898,640m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d13.000873!4d77.552898?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open Stalight address in Google Maps"
+                  className="hover:text-stone-900 underline"
+                >
+                  No.129, 1st Block, Dr. Rajkumar Road Rajajinagar, Bengaluru-560010
+                </a>
+              </div>
 
             </div>
           </div>

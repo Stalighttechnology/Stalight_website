@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import heroBg from "@/assets/backgrounds/hero-bg.jpg";
+import heroBg from "@/assets/backgrounds/background.png";
+import heroBgMobile from "@/assets/backgrounds/phoneback.png";
+import heroBgTablet from "@/assets/backgrounds/backtab.png";
 
 const easeOutExpo = [0.16, 1, 0.3, 1];
 
@@ -8,18 +10,18 @@ const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.15,
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 25 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.85, ease: easeOutExpo },
+    transition: { duration: 0.8, ease: easeOutExpo },
   },
 };
 
@@ -28,135 +30,156 @@ const lineVariants = {
   visible: {
     scaleX: 1,
     opacity: 1,
-    transition: { duration: 0.7, ease: easeOutExpo, delay: 0.3 },
-  },
-};
-
-const backgroundVariants = {
-  hidden: { opacity: 0, scale: 1.08 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 1.8, ease: easeOutExpo },
+    transition: { duration: 0.8, ease: easeOutExpo, delay: 0.2 },
   },
 };
 
 const HeroSection = () => {
   const reduceMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
+  const [deviceType, setDeviceType] = useState<"mobile" | "tablet" | "desktop">("desktop");
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
+    const check = () => {
+      const width = window.innerWidth;
+      if (width < 768) {
+        setDeviceType("mobile");
+      } else if (width < 1024) {
+        setDeviceType("tablet");
+      } else {
+        setDeviceType("desktop");
+      }
+    };
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  const floatY = reduceMotion ? 0 : isMobile ? 10 : 22;
-  const floatDuration = isMobile ? 8 : 10;
+  const handleScroll = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      window.location.hash = `#${id}`;
+    }
+  };
+
+  const getBgImage = () => {
+    switch (deviceType) {
+      case "mobile":
+        return heroBgMobile;
+      case "tablet":
+        return heroBgTablet;
+      case "desktop":
+      default:
+        return heroBg;
+    }
+  };
 
   return (
     <section
       id="home"
-      className="relative isolate flex min-h-[100dvh] w-full items-center justify-center overflow-hidden bg-[#F8F7F3] font-sans border-b border-slate-200"
+      className="relative isolate flex min-h-[100dvh] w-full items-center justify-center overflow-hidden bg-white font-sans border-b border-slate-100"
     >
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <motion.div
-          variants={backgroundVariants}
-          initial="hidden"
-          animate="visible"
-          className="absolute inset-y-0 right-0 w-full md:w-[72%]"
+      {/* ──── BACKGROUND SYSTEM ──── */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-white">
+        {/* Dynamic responsive background image */}
+        <div
+          className="absolute inset-0 w-full h-full bg-cover"
           style={{
-            clipPath: "polygon(24% 0, 100% 0, 100% 100%, 0 100%)",
-            background: `url(${heroBg}) center/cover no-repeat`,
+            backgroundImage: `url(${getBgImage()})`,
+            backgroundPosition: deviceType === "desktop" ? "left center" : "center center",
+            backgroundRepeat: "no-repeat",
           }}
         />
-
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(248,247,243,0.52),rgba(248,247,243,0.86)_58%,rgba(248,247,243,1)_100%)] md:bg-[linear-gradient(90deg,rgba(248,247,243,0.98)_0%,rgba(248,247,243,0.82)_36%,rgba(248,247,243,0.18)_100%)]" />
-
-        <div className="absolute top-[14%] left-[7%] h-36 w-36 rounded-full bg-[#D32027]/10 blur-3xl md:h-56 md:w-56 md:bg-[#D32027]/12 transform-gpu" />
-
-        <div className="absolute bottom-[12%] right-[8%] h-40 w-40 rounded-full bg-slate-900/8 blur-3xl md:h-64 md:w-64 md:bg-slate-900/10 transform-gpu" />
-
-        <div className="absolute left-1/2 top-1/2 h-[70%] w-[120%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/35 blur-[80px] md:w-[58%] transform-gpu" />
-
-        <div className="absolute inset-0 opacity-[0.05] [background-image:linear-gradient(rgba(15,23,42,0.35)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.35)_1px,transparent_1px)] [background-size:72px_72px]" />
       </div>
 
-      <motion.div
-        className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center px-5 py-24 text-center sm:px-6 lg:px-8"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        
+      {/* ──── CONTENT GRID ──── */}
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-20 lg:px-12 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 min-h-[100dvh]">
 
-        <motion.h1 className="flex flex-col gap-3 md:gap-4">
-          <motion.span
-            variants={itemVariants}
-            className="text-sm font-medium uppercase tracking-[0.32em] text-slate-500 sm:text-base"
-          >
-            The Standard for
-          </motion.span>
-
-          <motion.span
-            variants={itemVariants}
-            className="mx-auto max-w-5xl text-[3rem] font-black leading-[0.92] tracking-[-0.05em] text-[#0B101E] sm:text-6xl md:text-7xl lg:text-8xl"
-          >
-            Enterprise{" "}
-            <br className="block md:hidden" />
-            Intelligence
-          </motion.span>
-        </motion.h1>
-
+        {/* LEFT COLUMN: Typography & Copy */}
         <motion.div
-          variants={lineVariants}
-          className="mt-7 mb-8 h-1.5 w-14 origin-center rounded-full bg-[#D32027] md:w-16"
-        />
-
-        <motion.p
-          variants={itemVariants}
-          className="max-w-2xl text-[15px] font-medium leading-7 text-slate-600 sm:text-base md:text-lg"
+          className="flex-1 max-w-2xl text-left flex flex-col justify-center pt-16 lg:pt-0"
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
         >
-          Bridging academic rigor and enterprise-grade technology with secure, scalable
-          platforms designed for institutional trust and measurable impact.
-        </motion.p>
+          {/* Label */}
+          <div className="flex items-center mb-6">
+            <motion.span
+              variants={itemVariants}
+              className="text-xs font-semibold uppercase tracking-[0.32em] text-slate-500"
+            >
+              The Standard For
+            </motion.span>
+          </div>
 
-        <motion.div
-          variants={itemVariants}
-          className="mt-10 flex w-full max-w-md flex-col items-center justify-center gap-3 sm:max-w-none sm:flex-row sm:gap-4"
-        >
-          <a
-            href="#services"
-            onClick={(e) => {
-              e.preventDefault();
-              const el = document.getElementById("services");
-              if (el) {
-                el.scrollIntoView({ behavior: "smooth", block: "start" });
-              } else {
-                // fallback: change hash
-                window.location.hash = "#services";
-              }
-            }}
-            className="group relative flex w-full min-w-[220px] items-center justify-center overflow-hidden rounded-xl bg-[#0B101E] px-6 py-4 text-[11px] font-bold uppercase tracking-[0.22em] text-white shadow-[0_18px_40px_rgba(11,16,30,0.18)] transition-transform duration-300 hover:-translate-y-0.5 sm:w-auto"
+          {/* Heading with pink-purple-blue color grading on 'Intelligence' */}
+          <motion.h1
+            variants={itemVariants}
+            className="text-[3.25rem] sm:text-[4rem] md:text-[5.25rem] font-bold leading-[1.04] tracking-[-0.04em] text-[#0F172A] font-sans"
           >
-            <span className="absolute inset-0 -translate-x-full bg-[#D32027] transition-transform duration-500 group-hover:translate-x-0" />
-            <span className="relative z-10 flex items-center gap-2">
-              Explore services
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
+            Enterprise
+            <br />
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#EC4899] via-[#8B5CF6] to-[#3B82F6] inline-block pb-3 -mb-3">
+              Intelligence
             </span>
-          </a>
+          </motion.h1>
 
-          <a
-            href="#products"
-            className="flex w-full min-w-[220px] items-center justify-center rounded-xl border border-slate-200 bg-white/70 px-6 py-4 text-[11px] font-bold uppercase tracking-[0.22em] text-[#0B101E] backdrop-blur-md transition-all duration-300 hover:bg-white hover:shadow-[0_12px_30px_rgba(15,23,42,0.08)] sm:w-auto"
+          {/* Horizontal Red Line - Placed directly below heading */}
+          <motion.div
+            variants={lineVariants}
+            className="mt-6 mb-8 h-[3.5px] w-14 rounded-full bg-[#D32027]"
+          />
+
+          {/* Description */}
+          <motion.p
+            variants={itemVariants}
+            className="max-w-xl text-[15px] sm:text-base md:text-[17px] font-normal leading-8 text-slate-500"
           >
-            View Solutions
-          </a>
+            Bridging academic rigor and enterprise-grade technology with secure, scalable platforms designed for institutional trust and measurable impact.
+          </motion.p>
+
+          {/* Action Buttons */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+          >
+            {/* Primary button: Solid Dark Navy */}
+            <a
+              href="#services"
+              onClick={(e) => {
+                e.preventDefault();
+                handleScroll("services");
+              }}
+              className="group relative flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-[#0B101E] px-7 py-4 text-[11px] font-bold uppercase tracking-[0.22em] text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-orange-500/25 active:translate-y-0"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-orange-500 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></span>
+              <span className="relative z-10 flex items-center gap-2">
+                <span>Explore Services</span>
+                <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </span>
+            </a>
+
+            {/* Secondary button: Outlined white */}
+            <a
+              href="#products"
+              onClick={(e) => {
+                e.preventDefault();
+                handleScroll("products");
+              }}
+              className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white/70 px-7 py-4 text-[11px] font-bold uppercase tracking-[0.22em] text-[#0B101E] backdrop-blur-md transition-all duration-300 hover:bg-white hover:border-slate-300 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
+            >
+              <span>View Solutions</span>
+            </a>
+          </motion.div>
         </motion.div>
-      </motion.div>
+
+        {/* RIGHT COLUMN: Spacer to allow background image's crystal shards to show */}
+        <div className="flex-1 w-full min-h-[300px] md:min-h-[450px] lg:min-h-[580px] pointer-events-none" />
+
+      </div>
     </section>
   );
 };
