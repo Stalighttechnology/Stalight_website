@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-export const TARGET_LAUNCH_DATE = "2026-07-02T10:15:00+05:30"; // Thursday, 2 July 2026, 10:15 AM IST
-export const TARGET_LAUNCH_DISPLAY = "Launching Jul 2, 2026 • 10:15 AM IST";
+export const TARGET_LAUNCH_DATE = "2026-07-02T10:30:00+05:30"; // Thursday, 2 July 2026, 10:30 AM IST
+export const TARGET_LAUNCH_DISPLAY = "Launching Jul 2, 2026 • 10:30 AM IST";
 
 export const useLaunchCountdown = () => {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
