@@ -16,7 +16,7 @@ const capabilities = [
   },
   {
     icon: GraduationCap,
-    title: "Skill Development Training",
+    title: "Career Training",
     desc: "Empowering workforces and academic institutions with industry-leading technical training and advanced capability building.",
     image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80"
   },
