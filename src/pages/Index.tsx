@@ -36,8 +36,8 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEO 
-        title="Stalight Technologies | Software Development, Skill Training & Website Making Bengaluru"
-        description="Stalight Technologies is a premier Bengaluru firm offering custom software development, website design, skill training, and college placement programs."
+        title="Stalight Technologies | Software Development, Career Training & Website Making Bengaluru"
+        description="Stalight Technologies is a premier Bengaluru firm offering custom software development, website design, Career training, and college placement programs."
         jsonLd={[
           generateOrganizationSchema(),
           generateLocalBusinessSchema()
