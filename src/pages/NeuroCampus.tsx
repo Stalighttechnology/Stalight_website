@@ -619,7 +619,7 @@ const NeuroCampus = () => {
 
                   {/* App Store Button with Icon */}
                   <a
-                    href="https://apps.apple.com/app/stalight-campus/id6502458957"
+                    href="https://apps.apple.com/in/app/stalight-campus/id6781234587"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group relative w-full sm:w-auto overflow-hidden rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 px-6 sm:px-8 py-3 sm:py-4 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-3"
@@ -675,7 +675,7 @@ const NeuroCampus = () => {
 
                 {/* App Store Button with Icon */}
                 <a
-                  href="https://apps.apple.com/app/stalight-campus/id6502458957"
+                  href="https://apps.apple.com/in/app/stalight-campus/id6781234587"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-3"
