@@ -128,35 +128,35 @@ const VerifyCertificate = () => {
                 )}
               </div>
 
-              {/* RIGHT META INFO (Devtown Typography style) */}
-              <div className="lg:col-span-4 flex flex-col space-y-8 pl-0 lg:pl-6 text-center lg:text-left">
+              {/* RIGHT META INFO (Clean Devtown style alignment) */}
+              <div className="lg:col-span-4 flex flex-col justify-center space-y-8 pl-0 lg:pl-8 text-left">
                 <div>
-                  <h1 className="text-3xl lg:text-4xl font-extrabold text-[#007aff] tracking-tight mb-2">
+                  <span className="text-xl lg:text-2xl font-semibold text-[#007aff] block">
                     Certificate recipient
-                  </h1>
-                  <h2 className="text-2xl lg:text-3xl font-bold text-slate-900">
+                  </span>
+                  <h1 className="text-3xl lg:text-4xl font-extrabold text-slate-900 mt-1 tracking-tight">
                     {cert.student_name}
-                  </h2>
+                  </h1>
                 </div>
 
-                <div className="space-y-3">
-                  <span className="text-xs text-slate-400 uppercase tracking-widest font-bold block">
+                <div className="space-y-2">
+                  <span className="text-xs uppercase tracking-wider font-bold text-slate-400 block">
                     Issued By
                   </span>
-                  <div className="flex flex-col items-center lg:items-start gap-2">
+                  <div className="flex flex-col items-start gap-1">
                     <img 
                       src={stalightLogo} 
                       alt="Stalight logo" 
-                      className="h-12 w-auto object-contain"
+                      className="h-10 w-auto object-contain"
                     />
-                    <span className="text-sm font-semibold text-slate-500">
+                    <span className="text-sm font-medium text-slate-500">
                       {cert.company_name}
                     </span>
                   </div>
                 </div>
 
                 {cert.status === "Revoked" && (
-                  <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 flex items-start gap-3 text-left">
+                  <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 flex items-start gap-3">
                     <ShieldAlert className="w-5 h-5 text-rose-600 flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-bold text-rose-950 text-xs mb-0.5">Revoked Certificate</h3>
@@ -167,8 +167,8 @@ const VerifyCertificate = () => {
                   </div>
                 )}
 
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Button asChild className="w-full bg-[#007aff] hover:bg-[#0066cc] flex items-center justify-center gap-2">
+                <div className="pt-2">
+                  <Button asChild className="w-full sm:w-auto bg-[#007aff] hover:bg-[#0066cc] px-6 py-2 h-auto text-sm font-semibold rounded-lg flex items-center justify-center gap-2 shadow-sm transition-all duration-200">
                     <a href={getDownloadUrl(cert.certificate_id)} download>
                       <Download className="w-4 h-4" /> Download Certificate
                     </a>
