@@ -111,7 +111,7 @@ const VerifyCertificate = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
               
               {/* LEFT IMAGE PREVIEW - CLEAN AND BORDERLESS */}
-              <div className="lg:col-span-8 w-full bg-white rounded-xl shadow-[0_15px_45px_rgba(0,0,0,0.1)] border border-slate-100 overflow-hidden relative">
+              <div className="lg:col-span-8 w-full bg-white rounded-xl shadow-[0_15px_45px_rgba(0,0,0,0.1)] border border-slate-100 overflow-hidden relative min-h-[420px] flex items-center justify-center">
                 {cert.image_url && cert.status === "Verified" ? (
                   <img
                     src={cert.image_url}
@@ -119,16 +119,14 @@ const VerifyCertificate = () => {
                     className="w-full h-auto object-contain bg-white"
                   />
                 ) : (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center space-y-4">
-                    <div className="w-16 h-16 rounded-full bg-slate-50 flex items-center justify-center">
-                      <ShieldAlert className="w-8 h-8 text-slate-400" />
+                  <div className="flex flex-col items-center justify-center p-8 text-center space-y-4">
+                    <div className="w-20 h-20 rounded-full bg-rose-50 flex items-center justify-center border-2 border-rose-100 shadow-sm animate-pulse">
+                      <ShieldAlert className="w-10 h-10 text-rose-500" />
                     </div>
-                    <div>
-                      <h3 className="font-bold text-lg text-slate-700">Preview Unavailable</h3>
-                      <p className="text-sm text-slate-500 mt-1 max-w-sm">
-                        {cert.status === "Revoked"
-                          ? "Preview is disabled for revoked credentials."
-                          : "No PDF document is generated for this entry."}
+                    <div className="space-y-2">
+                      <h3 className="font-black text-2xl text-slate-850 tracking-tight">Credential Revoked</h3>
+                      <p className="text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
+                        This certificate has been revoked by the issuing authority and is no longer valid for verification.
                       </p>
                     </div>
                   </div>
@@ -175,11 +173,17 @@ const VerifyCertificate = () => {
                 )}
 
                 <div className="pt-2">
-                  <Button asChild className="w-full sm:w-auto bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 text-white rounded-xl px-8 py-3.5 h-auto text-[12px] font-bold uppercase tracking-widest shadow-lg shadow-purple-500/10 hover:shadow-purple-500/20 transition-all hover:-translate-y-0.5 overflow-hidden">
-                    <a href={getDownloadUrl(cert.certificate_id)} download>
-                      <Download className="w-4 h-4 mr-2 inline-block" /> Download Certificate
-                    </a>
-                  </Button>
+                  {cert.status === "Revoked" ? (
+                    <Button disabled className="w-full sm:w-auto bg-slate-200 text-slate-400 rounded-xl px-8 py-3.5 h-auto text-[12px] font-bold uppercase tracking-widest cursor-not-allowed">
+                      <Download className="w-4 h-4 mr-2 inline-block" /> Download Disabled
+                    </Button>
+                  ) : (
+                    <Button asChild className="w-full sm:w-auto bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 text-white rounded-xl px-8 py-3.5 h-auto text-[12px] font-bold uppercase tracking-widest shadow-lg shadow-purple-500/10 hover:shadow-purple-500/20 transition-all hover:-translate-y-0.5 overflow-hidden">
+                      <a href={getDownloadUrl(cert.certificate_id)} download>
+                        <Download className="w-4 h-4 mr-2 inline-block" /> Download Certificate
+                      </a>
+                    </Button>
+                  )}
                 </div>
 
                 {/* LOWER ASSURANCE TEXT SECTION */}
