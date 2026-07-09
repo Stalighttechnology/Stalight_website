@@ -68,11 +68,18 @@ const VerifyCertificate = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-800 flex flex-col justify-center py-10 md:py-16">
-      <main className="flex-grow px-6 max-w-7xl mx-auto w-full flex flex-col justify-center">
+    <div className="min-h-screen bg-slate-50 text-slate-800 relative overflow-hidden flex flex-col justify-center py-10 md:py-16">
+      {/* Background Grids */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a0f_1px,transparent_1px),linear-gradient(to_bottom,#0f172a0f_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+      
+      {/* Glowing blur auras */}
+      <div className="absolute top-[-10%] right-[-10%] h-[300px] w-[300px] sm:h-[500px] sm:w-[500px] rounded-full bg-gradient-to-br from-purple-500/5 to-pink-500/5 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-[-10%] left-[-10%] h-[300px] w-[300px] sm:h-[500px] sm:w-[500px] rounded-full bg-gradient-to-tr from-blue-500/5 to-purple-500/5 blur-3xl pointer-events-none" />
+
+      <main className="flex-grow px-6 max-w-7xl mx-auto w-full flex flex-col justify-center relative z-10">
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 space-y-4">
-            <Loader2 className="w-12 h-12 text-[#007aff] animate-spin" />
+            <Loader2 className="w-12 h-12 text-purple-600 animate-spin" />
             <p className="text-slate-500 font-medium">Verifying certificate authenticity...</p>
           </div>
         ) : error ? (
@@ -93,7 +100,7 @@ const VerifyCertificate = () => {
                     ? "If you believe this is a mistake, please double-check the ID or contact support at support@stalight.in."
                     : error}
                 </p>
-                <Button asChild className="w-full bg-[#007aff] hover:bg-[#0066cc]">
+                <Button asChild className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 text-white font-bold rounded-xl shadow-md hover:shadow-lg hover:shadow-purple-500/25 transition-all hover:-translate-y-0.5">
                   <Link to="/">Back to Home</Link>
                 </Button>
               </CardContent>
@@ -101,10 +108,10 @@ const VerifyCertificate = () => {
           </div>
         ) : cert ? (
           <div className="space-y-12">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
               
               {/* LEFT IMAGE PREVIEW - CLEAN AND BORDERLESS */}
-              <div className="lg:col-span-8 w-full bg-white rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-100 overflow-hidden relative">
+              <div className="lg:col-span-8 w-full bg-white rounded-xl shadow-[0_15px_45px_rgba(0,0,0,0.1)] border border-slate-100 overflow-hidden relative">
                 {cert.image_url && cert.status === "Verified" ? (
                   <img
                     src={cert.image_url}
@@ -128,13 +135,13 @@ const VerifyCertificate = () => {
                 )}
               </div>
 
-              {/* RIGHT META INFO (Clean Devtown style alignment) */}
+              {/* RIGHT META INFO (Clean Devtown style alignment with Stalight gradients) */}
               <div className="lg:col-span-4 flex flex-col justify-center space-y-8 pl-0 lg:pl-8 text-left">
                 <div>
-                  <span className="text-xl lg:text-2xl font-semibold text-[#007aff] block">
+                  <span className="text-sm lg:text-base font-black uppercase tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 block">
                     Certificate recipient
                   </span>
-                  <h1 className="text-3xl lg:text-4xl font-extrabold text-slate-900 mt-1 tracking-tight">
+                  <h1 className="text-3xl lg:text-4xl font-extrabold text-slate-900 mt-2 tracking-tight">
                     {cert.student_name}
                   </h1>
                 </div>
@@ -143,13 +150,13 @@ const VerifyCertificate = () => {
                   <span className="text-xs uppercase tracking-wider font-bold text-slate-400 block">
                     Issued By
                   </span>
-                  <div className="flex flex-col items-start gap-1">
+                  <div className="flex flex-row items-center gap-3">
                     <img 
                       src={stalightLogo} 
                       alt="Stalight logo" 
                       className="h-10 w-auto object-contain"
                     />
-                    <span className="text-sm font-medium text-slate-500">
+                    <span className="text-sm font-semibold text-slate-700">
                       {cert.company_name}
                     </span>
                   </div>
@@ -168,26 +175,26 @@ const VerifyCertificate = () => {
                 )}
 
                 <div className="pt-2">
-                  <Button asChild className="w-full sm:w-auto bg-[#007aff] hover:bg-[#0066cc] px-6 py-2 h-auto text-sm font-semibold rounded-lg flex items-center justify-center gap-2 shadow-sm transition-all duration-200">
+                  <Button asChild className="w-full sm:w-auto bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 text-white rounded-xl px-8 py-3.5 h-auto text-[12px] font-bold uppercase tracking-widest shadow-lg shadow-purple-500/10 hover:shadow-purple-500/20 transition-all hover:-translate-y-0.5 overflow-hidden">
                     <a href={getDownloadUrl(cert.certificate_id)} download>
-                      <Download className="w-4 h-4" /> Download Certificate
+                      <Download className="w-4 h-4 mr-2 inline-block" /> Download Certificate
                     </a>
                   </Button>
                 </div>
-              </div>
-            </div>
 
-            {/* LOWER ASSURANCE TEXT SECTION */}
-            <div className="border-t border-slate-100 pt-8 max-w-4xl text-slate-500 leading-relaxed text-sm">
-              <p>
-                The certificate affirms that <strong className="text-slate-800 font-semibold">{cert.student_name}</strong> has satisfactorily fulfilled the requirements outlined. This validation ensures its authenticity, having been duly verified and granted by <strong className="text-slate-800 font-semibold">{cert.company_name}</strong>.
-              </p>
-              <div className="flex items-center gap-6 mt-4 text-xs font-semibold text-slate-400">
-                <span>Certificate ID: {cert.certificate_id}</span>
-                <span>•</span>
-                <span>Type: {cert.certificate_type.replace('_', ' ')}</span>
-                <span>•</span>
-                <span>Status: {cert.status}</span>
+                {/* LOWER ASSURANCE TEXT SECTION */}
+                <div className="border-t border-slate-200/80 pt-6 text-slate-500 leading-relaxed text-sm">
+                  <p>
+                    The certificate affirms that <strong className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 font-extrabold">{cert.student_name}</strong> has satisfactorily fulfilled the requirements outlined. This validation ensures its authenticity, having been duly verified and granted by <strong className="font-semibold text-slate-800">{cert.company_name}</strong>.
+                  </p>
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mt-4 text-xs font-semibold text-slate-400">
+                    <span>Certificate ID: {cert.certificate_id}</span>
+                    <span>•</span>
+                    <span>Type: {cert.certificate_type.replace('_', ' ')}</span>
+                    <span>•</span>
+                    <span>Status: {cert.status}</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
