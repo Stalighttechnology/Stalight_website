@@ -25,6 +25,7 @@ interface CertificateData {
   status: 'Verified' | 'Revoked' | 'Expired';
   verification_url: string;
   pdf_url?: string;
+  image_url?: string;
 }
 
 const VerifyCertificate = () => {
@@ -102,13 +103,13 @@ const VerifyCertificate = () => {
           <div className="space-y-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               
-              {/* LEFT PDF PREVIEW - CLEAN AND BORDERLESS */}
-              <div className="lg:col-span-8 w-full bg-white rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-100 overflow-hidden aspect-[1.414] relative">
-                {cert.pdf_url && cert.status === "Verified" ? (
-                  <iframe
-                    src={`${cert.pdf_url}#toolbar=0&navpanes=0&scrollbar=0`}
-                    title="Certificate PDF Preview"
-                    className="w-full h-full border-0 bg-white"
+              {/* LEFT IMAGE PREVIEW - CLEAN AND BORDERLESS */}
+              <div className="lg:col-span-8 w-full bg-white rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-100 overflow-hidden relative">
+                {cert.image_url && cert.status === "Verified" ? (
+                  <img
+                    src={cert.image_url}
+                    alt="Certificate Preview"
+                    className="w-full h-auto object-contain bg-white"
                   />
                 ) : (
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center space-y-4">
