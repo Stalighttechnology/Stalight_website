@@ -90,10 +90,8 @@ const VerifyCertificate = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 text-slate-800 dark:text-slate-100 flex flex-col">
-      <Navbar />
-
-      <main className="flex-grow pt-28 pb-16 px-4 max-w-7xl mx-auto w-full flex flex-col justify-center">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 text-slate-800 dark:text-slate-100 flex flex-col justify-center py-8 md:py-12">
+      <main className="flex-grow px-4 max-w-7xl mx-auto w-full flex flex-col justify-center">
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 space-y-4">
             <Loader2 className="w-12 h-12 text-primary animate-spin" />
@@ -126,12 +124,37 @@ const VerifyCertificate = () => {
             </Card>
           </div>
         ) : cert ? (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
             
-            {/* LEFT DETAILS COLUMN */}
-            <div className="lg:col-span-5 space-y-6">
-              <Card className="shadow-xl border-slate-200/60 dark:border-slate-700/60 overflow-hidden">
-                <CardHeader className="bg-slate-900 text-white relative py-8">
+            {/* LEFT PREVIEW COLUMN (1st in layout) */}
+            <div className="lg:col-span-7 min-h-[500px] lg:h-[650px] w-full bg-slate-200 dark:bg-slate-950 rounded-2xl overflow-hidden shadow-xl border border-slate-200/50 dark:border-slate-800 relative">
+              {cert.pdf_url && cert.status === "Verified" ? (
+                <iframe
+                  src={`${cert.pdf_url}#toolbar=0&navpanes=0`}
+                  title="Certificate PDF Preview"
+                  className="w-full h-full border-0"
+                />
+              ) : (
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-900 flex items-center justify-center">
+                    <ShieldAlert className="w-8 h-8 text-slate-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg text-slate-700 dark:text-slate-300">Preview Unavailable</h3>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-sm">
+                      {cert.status === "Revoked"
+                        ? "Preview is disabled for revoked credentials."
+                        : "No PDF document is generated for this entry."}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* RIGHT DETAILS COLUMN (2nd in layout) */}
+            <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
+              <Card className="shadow-xl border-slate-200/60 dark:border-slate-700/60 overflow-hidden h-full flex flex-col justify-between">
+                <CardHeader className="bg-slate-900 text-white relative py-8 flex-shrink-0">
                   <div className="absolute top-4 right-4">
                     {getStatusBadge(cert.status)}
                   </div>
@@ -144,7 +167,7 @@ const VerifyCertificate = () => {
                   </div>
                 </CardHeader>
 
-                <CardContent className="pt-6 space-y-5">
+                <CardContent className="pt-6 space-y-5 flex-grow">
                   <div>
                     <span className="text-xs text-slate-400 dark:text-slate-500 uppercase tracking-wider font-semibold block mb-1">Recipient Name</span>
                     <p className="text-xl font-bold text-slate-900 dark:text-slate-100">{cert.student_name}</p>
@@ -217,7 +240,7 @@ const VerifyCertificate = () => {
                   )}
                 </CardContent>
 
-                <CardFooter className="bg-slate-50 dark:bg-slate-900/30 border-t border-slate-100 dark:border-slate-800/80 p-6 flex flex-col sm:flex-row gap-3">
+                <CardFooter className="bg-slate-50 dark:bg-slate-900/30 border-t border-slate-100 dark:border-slate-800/80 p-6 flex flex-col sm:flex-row gap-3 flex-shrink-0">
                   <Button asChild className="w-full flex items-center justify-center gap-2">
                     <a href={getDownloadUrl(cert.certificate_id)} download>
                       <Download className="w-4 h-4" /> Download PDF
@@ -246,36 +269,9 @@ const VerifyCertificate = () => {
               )}
             </div>
 
-            {/* RIGHT PREVIEW COLUMN */}
-            <div className="lg:col-span-7 h-[650px] w-full bg-slate-200 dark:bg-slate-950 rounded-2xl overflow-hidden shadow-xl border border-slate-200/50 dark:border-slate-800 relative">
-              {cert.pdf_url && cert.status === "Verified" ? (
-                <iframe
-                  src={`${cert.pdf_url}#toolbar=0&navpanes=0`}
-                  title="Certificate PDF Preview"
-                  className="w-full h-full border-0"
-                />
-              ) : (
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-900 flex items-center justify-center">
-                    <ShieldAlert className="w-8 h-8 text-slate-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-slate-700 dark:text-slate-300">Preview Unavailable</h3>
-                    <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-sm">
-                      {cert.status === "Revoked"
-                        ? "Preview is disabled for revoked credentials."
-                        : "No PDF document is generated for this entry."}
-                    </p>
-                  </div>
-                </div>
-              )}
-            </div>
-
           </div>
         ) : null}
       </main>
-
-      <Footer />
     </div>
   );
 };
