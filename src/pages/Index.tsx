@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import HeroCarousel from "@/components/HeroCarousel";
+import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import ProductsSection from "@/components/ProductsSection";
 import ServicesSection from "@/components/ServicesSection";
@@ -44,7 +44,7 @@ const Index = () => {
         ]}
       />
       <Navbar />
-      <HeroCarousel />
+      <HeroSection />
       <AboutSection />
       <ProductsSection />
       <ServicesSection />
