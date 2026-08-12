@@ -33,6 +33,8 @@ import amcLogo from "@/assets/logos/amclogo.png";
 import cityEngineeringLogo from "@/assets/logos/cityenginerring.jpg";
 import gleamatorLogo from "@/assets/logos/gleamatorlogo.jpg";
 import eduforcarrierLogo from "@/assets/logos/eduforcarrier.png";
+import nbaLogo from "@/assets/logos/images (2).jpg";
+import naacLogo from "@/assets/logos/NAAC_LOGO.png";
 
 // --- Custom Animated Number Component ---
 const AnimatedNumber = ({ value, duration = 2.5 }: { value: number; duration?: number }) => {
@@ -926,6 +928,154 @@ const NeuroCampus = () => {
               </motion.div>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+      {/* --- ACCREDITATION SECTION --- */}
+      <section className="py-20 sm:py-28 bg-[#FAFAFC] relative overflow-hidden z-10 border-b border-slate-100">
+        {/* Decorative Grid and Accent Glows */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.04]" style={{ backgroundImage: 'linear-gradient(to right, rgba(15, 23, 42, 0.4) 1px, transparent 1px), linear-gradient(rgba(15, 23, 42, 0.4) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        <div className="absolute top-1/2 left-[-10%] w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none transform-gpu"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[120px] pointer-events-none transform-gpu"></div>
+
+        <div className="container mx-auto px-6 relative z-10 max-w-7xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            {/* Left Content Column */}
+            <motion.div 
+              initial="hidden" 
+              whileInView="visible" 
+              viewport={{ once: true, margin: "-100px" }}
+              variants={containerVariants}
+              className="lg:col-span-7 flex flex-col justify-center text-left"
+            >
+              <motion.div variants={fadeUpVariants} className="mb-4">
+                <span className="text-[10px] font-extrabold tracking-[0.25em] text-purple-600 uppercase bg-purple-50 border border-purple-100 px-3 py-1 rounded-full">
+                  Accreditation Readiness
+                </span>
+              </motion.div>
+
+              <motion.h2 
+                variants={fadeUpVariants} 
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-slate-900 tracking-tight leading-[1.1] mb-6"
+              >
+                Fully Aligned with <br />
+                <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500">
+                  NAAC & NBA Standards
+                </span>
+              </motion.h2>
+
+              <motion.p 
+                variants={fadeUpVariants} 
+                className="text-slate-600 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-8 max-w-2xl"
+              >
+                Stalight Campus is engineered to satisfy institutional audit demands. Automate outcome-based education workflows, student profiling, and reports compliance required by national accreditation boards.
+              </motion.p>
+
+              {/* Feature Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {[
+                  {
+                    title: "CO-PO Attainment",
+                    desc: "Calculate course outcomes and program outcomes attainment scores automatically from assessments."
+                  },
+                  {
+                    title: "SSR & SAR Export",
+                    desc: "Generate ready-to-submit data forms and documentation frameworks for self-study submissions."
+                  },
+                  {
+                    title: "Outcome-Based Education",
+                    desc: "Directly map curriculums, question papers, and grading criteria to institutional quality metrics."
+                  },
+                  {
+                    title: "Digital Audit Trails",
+                    desc: "Log all educational operations, student records, and faculty approvals for secure external audit verification."
+                  }
+                ].map((item, idx) => (
+                  <motion.div 
+                    key={idx}
+                    variants={fadeUpVariants}
+                    className="flex gap-3 items-start"
+                  >
+                    <div className="w-5 h-5 rounded-full bg-purple-50 flex items-center justify-center shrink-0 mt-1">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-purple-600" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-900 tracking-tight">{item.title}</h4>
+                      <p className="text-slate-500 text-xs mt-1 leading-relaxed">{item.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Right Media Column (Accreditation Logos) */}
+            <div className="lg:col-span-5 flex flex-col sm:flex-row gap-6 justify-center items-center">
+              {[
+                { name: "NAAC", logo: naacLogo, label: "NAAC Alignment", desc: "Criteria 1-7 Mapping" },
+                { name: "NBA", logo: nbaLogo, label: "NBA Alignment", desc: "Outcome-Based Education Support" }
+              ].map((board) => (
+                <motion.div
+                  key={board.name}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                  whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                  className="w-full sm:w-[220px] bg-white border border-slate-200/80 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_-15px_rgba(168,85,247,0.12)] hover:border-purple-200 rounded-[2.5rem] p-8 flex flex-col items-center justify-center gap-6 transition-all duration-500 overflow-hidden"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-purple-50/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                  <div className="w-28 h-28 flex items-center justify-center relative z-10 transition-all duration-500">
+                    <OptimizedImage
+                      src={board.logo}
+                      alt={`${board.name} Accreditation Logo - Fully Aligned`}
+                      className="max-w-full max-h-full object-contain transform hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="text-center relative z-10">
+                    <h3 className="text-[10px] font-extrabold tracking-[0.2em] text-purple-600 uppercase">
+                      {board.label}
+                    </h3>
+                    <p className="text-xs text-slate-500 mt-1 font-medium">{board.desc}</p>
+                    
+                    {/* Animated 5-Star Quality Rating */}
+                    <div className="flex gap-1.5 justify-center mt-3.5">
+                      {[...Array(5)].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, scale: 0 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          animate={{
+                            scale: [1, 1.12, 1],
+                            rotate: [0, 6, -6, 0],
+                            filter: [
+                              "drop-shadow(0 0 1px rgba(245,158,11,0.1))", 
+                              "drop-shadow(0 0 8px rgba(245,158,11,0.5))", 
+                              "drop-shadow(0 0 1px rgba(245,158,11,0.1))"
+                            ]
+                          }}
+                          transition={{
+                            scale: { repeat: Infinity, duration: 2.5, ease: "easeInOut", delay: 0.15 * i },
+                            rotate: { repeat: Infinity, duration: 2.5, ease: "easeInOut", delay: 0.15 * i },
+                            filter: { repeat: Infinity, duration: 2.5, ease: "easeInOut", delay: 0.15 * i },
+                            opacity: { delay: 0.1 * i + 0.3, duration: 0.5 }
+                          }}
+                          style={{ originX: "50%", originY: "50%" }}
+                        >
+                          <Star 
+                            size={14} 
+                            className="text-amber-400 fill-amber-400 drop-shadow-[0_2px_4px_rgba(245,158,11,0.3)]" 
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+          </div>
         </div>
       </section>
 
