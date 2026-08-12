@@ -215,83 +215,249 @@ const NeuroCampusAccessPlan = () => {
       </section>
 
       {/* Comparison Section */}
-      <section className="py-24 px-4 md:px-8 lg:px-16 bg-slate-50">
-        <div className="max-w-7xl mx-auto border border-slate-200 bg-white rounded-3xl p-8 md:p-12 shadow-sm">
+      <section className="py-16 md:py-24 px-2 md:px-8 lg:px-16 bg-slate-50">
+        <div className="max-w-7xl mx-auto border border-slate-200 bg-white rounded-3xl p-4 md:p-12 shadow-sm">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 text-center mb-4">
             Detailed Feature Comparison
           </h2>
-          <p className="text-center text-slate-600 mb-12 max-w-2xl mx-auto">
+          <p className="text-center text-slate-600 mb-8 md:mb-12 max-w-2xl mx-auto">
             See exactly what each plan includes and find the perfect fit for your institution's specific requirements.
           </p>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b-2 border-slate-100">
-                  <th className="text-left py-5 px-4 font-bold text-slate-900 uppercase tracking-wider text-xs">
-                    Features & Capabilities
-                  </th>
-                  <th className="text-center py-5 px-4 font-bold text-blue-500 uppercase tracking-wider text-xs">
-                    Basic
-                  </th>
-                  <th className="text-center py-5 px-4 font-bold text-purple-600 uppercase tracking-wider text-xs">
-                    Pro
-                  </th>
-                  <th className="text-center py-5 px-4 font-bold text-indigo-700 uppercase tracking-wider text-xs">
-                    Advance
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
+          {/* Mobile View: Stacked Cards */}
+          <div className="block md:hidden space-y-8">
+            {/* Basic Plan Card */}
+            <div className="border border-slate-200 bg-white rounded-3xl overflow-hidden shadow-sm">
+              <div className="bg-sky-50/60 py-5 text-center border-b border-slate-100">
+                <h3 className="font-bold text-slate-800 text-lg">Basic</h3>
+              </div>
+              <div className="divide-y divide-slate-100 px-5">
                 {[
-                  "Real-time Attendance Tracking",
-                  "Digital Classrooms",
-                  "Advanced Analytics Dashboard",
-                  "Mobile App Access",
-                  "Smart Assistance",
-                  "Automated Grading Engine",
-                  "Multi-Factor Authentication",
-                  "Cloud Infrastructure",
-                  "Career Intelligence",
-                  "Enterprise RBAC",
+                  { name: "Dashboards, Timetables & Profiles", included: true },
+                  { name: "Attendance (Student, Faculty, HOD)", included: true },
+                  { name: "Organization, Staff & Branch Setup", included: true },
+                  { name: "Internal Marks & Assignments", included: false },
+                  { name: "Class Scheduling & Materials", included: false },
                 ].map((feature, idx) => (
-                  <tr
-                    key={idx}
-                    className="border-b border-slate-100 hover:bg-slate-50/50 transition-colors"
-                  >
-                    <td className="py-4 px-4 text-slate-700 font-medium">
-                      {feature}
-                    </td>
-                    <td className="text-center py-4 px-4">
-                      {![
-                        "Mobile App Access",
-                        "Smart Assistance",
-                        "Automated Grading Engine",
-                        "Career Intelligence",
-                        "Enterprise RBAC",
-                      ].includes(feature) ? (
-                        <Check size={20} className="text-blue-500 mx-auto" />
-                      ) : (
-                        <span className="text-slate-300 font-bold">—</span>
-                      )}
-                    </td>
-                    <td className="text-center py-4 px-4 bg-purple-50/30">
-                      {![
-                        "Career Intelligence",
-                        "Enterprise RBAC",
-                      ].includes(feature) ? (
-                        <Check size={20} className="text-purple-600 mx-auto" />
-                      ) : (
-                        <span className="text-slate-300 font-bold">—</span>
-                      )}
-                    </td>
-                    <td className="text-center py-4 px-4">
-                      <Check size={20} className="text-indigo-700 mx-auto" />
+                  <div key={idx} className="py-4 flex justify-between items-center">
+                    <span className={`text-sm font-medium ${feature.included ? "text-slate-700" : "text-slate-300"}`}>
+                      {feature.name}
+                    </span>
+                    {feature.included ? (
+                      <Check size={16} className="text-slate-600 flex-shrink-0" />
+                    ) : (
+                      <span className="text-slate-300 font-bold text-sm flex-shrink-0">—</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <div className="bg-slate-50/50 text-center py-4 border-t border-slate-100">
+                <span className="text-[10px] tracking-wider text-slate-400 font-bold uppercase">
+                  Core Features Only
+                </span>
+              </div>
+            </div>
+
+            {/* Pro Plan Card */}
+            <div className="border border-slate-200 bg-white rounded-3xl overflow-hidden shadow-sm">
+              <div className="bg-[#94A89A] py-5 text-center border-b border-slate-100">
+                <h3 className="font-bold text-white text-lg">Pro</h3>
+              </div>
+              <div className="divide-y divide-slate-100 px-5">
+                {[
+                  { name: "Dashboards, Timetables & Profiles", included: true },
+                  { name: "Attendance & Staff Setup", included: true },
+                  { name: "Internal Marks & Assignments", included: true },
+                  { name: "Class Scheduling & Materials", included: true },
+                  { name: "Comprehensive Exam Suite", included: true },
+                  { name: "Fee Management & Payments", included: true },
+                ].map((feature, idx) => (
+                  <div key={idx} className="py-4 flex justify-between items-center">
+                    <span className="text-sm font-medium text-slate-700">
+                      {feature.name}
+                    </span>
+                    <Check size={16} className="text-slate-600 flex-shrink-0" />
+                  </div>
+                ))}
+              </div>
+              <div className="bg-slate-50/50 text-center py-4 border-t border-slate-100">
+                <span className="text-[10px] tracking-wider text-slate-400 font-bold uppercase">
+                  Most Popular
+                </span>
+              </div>
+            </div>
+
+            {/* Advance Plan Card */}
+            <div className="border border-slate-200 bg-white rounded-3xl overflow-hidden shadow-sm">
+              <div className="bg-[#E7E1D7] py-5 text-center border-b border-slate-100">
+                <h3 className="font-bold text-slate-800 text-lg">Advance</h3>
+              </div>
+              <div className="divide-y divide-slate-100 px-5">
+                {[
+                  { name: "Everything in Pro", included: true },
+                  { name: "Hostel Management (HMS)", included: true },
+                  { name: "Transportation & Fleet", included: true },
+                  { name: "Library Catalog & Circulation", included: true },
+                  { name: "Admissions & Seat Matrix", included: true },
+                  { name: "Outcome Based Education (OBE)", included: true },
+                ].map((feature, idx) => (
+                  <div key={idx} className="py-4 flex justify-between items-center">
+                    <span className="text-sm font-medium text-slate-700">
+                      {feature.name}
+                    </span>
+                    <Check size={16} className="text-slate-600 flex-shrink-0" />
+                  </div>
+                ))}
+              </div>
+              <div className="bg-slate-50/50 text-center py-4 border-t border-slate-100">
+                <span className="text-[10px] tracking-wider text-slate-400 font-bold uppercase">
+                  Full Enterprise Suite
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop View: Full Comparison Table */}
+          <div className="hidden md:block relative">
+            <div className="overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-slate-200">
+              <table className="w-full text-xs md:text-sm min-w-[560px] md:min-w-full">
+                <thead>
+                  <tr className="border-b-2 border-slate-100">
+                    <th className="sticky left-0 bg-white z-20 text-left py-4 md:py-5 px-3 md:px-4 font-bold text-slate-900 uppercase tracking-wider text-[10px] md:text-xs w-[40%] shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)]">
+                      Features & Capabilities
+                    </th>
+                    <th className="text-center py-4 md:py-5 px-3 md:px-4 font-bold text-blue-500 uppercase tracking-wider text-[10px] md:text-xs w-[20%]">
+                      Basic
+                    </th>
+                    <th className="text-center py-4 md:py-5 px-3 md:px-4 font-bold text-purple-600 uppercase tracking-wider text-[10px] md:text-xs w-[20%]">
+                      Pro
+                    </th>
+                    <th className="text-center py-4 md:py-5 px-3 md:px-4 font-bold text-indigo-700 uppercase tracking-wider text-[10px] md:text-xs w-[20%]">
+                      Advance
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* Category Header */}
+                  <tr className="bg-slate-50/80 border-b border-slate-100">
+                    <td colSpan={4} className="sticky left-0 bg-slate-50/80 py-2.5 px-3 md:px-4 text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)]">
+                      Core Capabilities
                     </td>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+
+                  {[
+                    {
+                      name: "Dashboards, Timetables & Profiles",
+                      basic: true,
+                      pro: true,
+                      advance: true,
+                    },
+                    {
+                      name: "Attendance (Student, Faculty, HOD)",
+                      basic: true,
+                      pro: true,
+                      advance: true,
+                    },
+                    {
+                      name: "Organization, Staff & Branch Setup",
+                      basic: true,
+                      pro: true,
+                      advance: true,
+                    },
+                    {
+                      name: "Internal Marks & Assignments",
+                      basic: true,
+                      pro: true,
+                      advance: true,
+                    },
+                    {
+                      name: "Class Scheduling & Study Materials",
+                      basic: false,
+                      pro: true,
+                      advance: true,
+                    },
+                    {
+                      name: "Comprehensive Exam & Results Suite",
+                      basic: false,
+                      pro: true,
+                      advance: true,
+                    },
+                    {
+                      name: "Fee Management, Invoices & Payments",
+                      basic: false,
+                      pro: true,
+                      advance: true,
+                    },
+                    {
+                      name: "Leave Management & Bulk Uploads",
+                      basic: false,
+                      pro: true,
+                      advance: true,
+                    },
+                    {
+                      name: "Hostel Management System (HMS)",
+                      basic: false,
+                      pro: false,
+                      advance: true,
+                    },
+                    {
+                      name: "Transportation & Fleet Tracking",
+                      basic: false,
+                      pro: false,
+                      advance: true,
+                    },
+                    {
+                      name: "Library Catalog & Circulation",
+                      basic: false,
+                      pro: false,
+                      advance: true,
+                    },
+                    {
+                      name: "Admissions & Seat Matrix Management",
+                      basic: false,
+                      pro: false,
+                      advance: true,
+                    },
+                    {
+                      name: "Outcome Based Education (CO Attainment)",
+                      basic: false,
+                      pro: false,
+                      advance: true,
+                    },
+                  ].map((feature, idx) => (
+                    <tr
+                      key={idx}
+                      className="group border-b border-slate-100 hover:bg-slate-50/50 transition-colors"
+                    >
+                      <td className="sticky left-0 bg-white group-hover:bg-slate-50/50 transition-colors py-3.5 md:py-4 px-3 md:px-4 text-slate-700 font-medium text-[11px] md:text-sm leading-tight shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)]">
+                        {feature.name}
+                      </td>
+                      <td className="text-center py-3.5 md:py-4 px-3 md:px-4">
+                        {feature.basic ? (
+                          <Check size={16} className="text-blue-500 mx-auto md:w-5 md:h-5" />
+                        ) : (
+                          <span className="text-slate-300 font-bold text-xs md:text-sm">—</span>
+                        )}
+                      </td>
+                      <td className="text-center py-3.5 md:py-4 px-3 md:px-4 bg-purple-50/10">
+                        {feature.pro ? (
+                          <Check size={16} className="text-purple-600 mx-auto md:w-5 md:h-5" />
+                        ) : (
+                          <span className="text-slate-300 font-bold text-xs md:text-sm">—</span>
+                        )}
+                      </td>
+                      <td className="text-center py-3.5 md:py-4 px-3 md:px-4">
+                        {feature.advance ? (
+                          <Check size={16} className="text-indigo-700 mx-auto md:w-5 md:h-5" />
+                        ) : (
+                          <span className="text-slate-300 font-bold text-xs md:text-sm">—</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>

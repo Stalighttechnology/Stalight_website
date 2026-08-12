@@ -44,6 +44,65 @@ const AboutSection = () => {
       ref={sectionRef}
       className="relative min-h-screen flex items-center bg-[#FAFAFC] py-20 lg:py-28 overflow-hidden z-0"
     >
+      {/* Curved Divider between Hero and About */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] -translate-y-[1px] pointer-events-none z-10">
+        <svg 
+          viewBox="0 0 1440 120" 
+          className="relative block w-full h-[60px] md:h-[100px] lg:h-[140px]" 
+          preserveAspectRatio="none"
+        >
+          {/* Animated Wave 1 (Back wave, slightly translucent lavender) */}
+          <motion.path 
+            animate={{
+              d: [
+                "M0,32 C240,70 480,10 720,50 C960,90 1200,30 1440,64 L1440,120 L0,120 Z",
+                "M0,50 C240,20 480,80 720,40 C960,0 1200,60 1440,50 L1440,120 L0,120 Z",
+                "M0,32 C240,70 480,10 720,50 C960,90 1200,30 1440,64 L1440,120 L0,120 Z"
+              ]
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            fill="#E9E3FF" 
+            opacity="0.5"
+          />
+          {/* Animated Wave 2 (Middle wave, deeper tone) */}
+          <motion.path 
+            animate={{
+              d: [
+                "M0,60 C360,100 720,20 1080,70 C1200,85 1320,110 1440,90 L1440,120 L0,120 Z",
+                "M0,40 C360,60 720,80 1080,45 C1200,30 1320,80 1440,70 L1440,120 L0,120 Z",
+                "M0,60 C360,100 720,20 1080,70 C1200,85 1320,110 1440,90 L1440,120 L0,120 Z"
+              ]
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            fill="#DCD2FF" 
+            opacity="0.3"
+          />
+          {/* Animated Wave 3 (Front main wave, matching the About Section background) */}
+          <motion.path 
+            animate={{
+              d: [
+                "M0,80 C360,40 720,90 1080,50 C1200,35 1320,70 1440,60 L1440,120 L0,120 Z",
+                "M0,70 C360,90 720,40 1080,75 C1200,90 1320,50 1440,55 L1440,120 L0,120 Z",
+                "M0,80 C360,40 720,90 1080,50 C1200,35 1320,70 1440,60 L1440,120 L0,120 Z"
+              ]
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            fill="#FAFAFC" 
+          />
+        </svg>
+      </div>
       
       {/* Animated Ambient Background */}
       <div className="absolute inset-0 pointer-events-none -z-10 overflow-hidden">
