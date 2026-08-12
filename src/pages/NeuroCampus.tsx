@@ -29,6 +29,10 @@ import resultsImg from "@/assets/screenshots/results.png";
 import mobileAppMockupImg from "@/assets/products/image.png";
 import playstoreImg from "@/assets/logos/playstore.png";
 import applestoreImg from "@/assets/logos/apple-store-icon.png";
+import amcLogo from "@/assets/logos/amclogo.png";
+import cityEngineeringLogo from "@/assets/logos/cityenginerring.jpg";
+import gleamatorLogo from "@/assets/logos/gleamatorlogo.jpg";
+import eduforcarrierLogo from "@/assets/logos/eduforcarrier.png";
 
 // --- Custom Animated Number Component ---
 const AnimatedNumber = ({ value, duration = 2.5 }: { value: number; duration?: number }) => {
@@ -207,6 +211,13 @@ const MaskedText = ({ children, className }: { children: React.ReactNode; classN
     <motion.div variants={textRevealVariants} className={className}>{children}</motion.div>
   </div>
 );
+
+const karnatakaPartners = [
+  { name: "AMC Institution", logo: amcLogo, url: "https://www.amcgroup.edu.in/" },
+  { name: "City Engineering College", logo: cityEngineeringLogo, url: "https://cityengineeringcollege.ac.in/" },
+  { name: "Gleamator Technologies", logo: gleamatorLogo, url: "https://gleamator.in/" },
+  { name: "Eduforcarriers", logo: eduforcarrierLogo, url: "https://eduforcareer.com/" },
+];
 
 const NeuroCampus = () => {
   const containerRef = useRef(null);
@@ -780,6 +791,141 @@ const NeuroCampus = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+
+        {/* Animated Curve Divider at the bottom */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] translate-y-[1px] pointer-events-none z-10">
+          <svg 
+            viewBox="0 0 1440 120" 
+            className="relative block w-full h-[60px] md:h-[100px] lg:h-[140px]" 
+            preserveAspectRatio="none"
+          >
+            {/* Animated Wave 1 (Back wave, translucent fuchsia) */}
+            <motion.path 
+              animate={{
+                d: [
+                  "M0,32 C240,70 480,10 720,50 C960,90 1200,30 1440,64 L1440,120 L0,120 Z",
+                  "M0,50 C240,20 480,80 720,40 C960,0 1200,60 1440,50 L1440,120 L0,120 Z",
+                  "M0,32 C240,70 480,10 720,50 C960,90 1200,30 1440,64 L1440,120 L0,120 Z"
+                ]
+              }}
+              transition={{
+                duration: 16,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              fill="#F5F3FF" 
+              opacity="0.6"
+            />
+            {/* Animated Wave 2 (Middle wave, translucent light purple) */}
+            <motion.path 
+              animate={{
+                d: [
+                  "M0,60 C360,100 720,20 1080,70 C1200,85 1320,110 1440,90 L1440,120 L0,120 Z",
+                  "M0,40 C360,60 720,80 1080,45 C1200,30 1320,80 1440,70 L1440,120 L0,120 Z",
+                  "M0,60 C360,100 720,20 1080,70 C1200,85 1320,110 1440,90 L1440,120 L0,120 Z"
+                ]
+              }}
+              transition={{
+                duration: 18,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              fill="#FAE8FF" 
+              opacity="0.4"
+            />
+            {/* Animated Wave 3 (Front main wave, matching CTA background white) */}
+            <motion.path 
+              animate={{
+                d: [
+                  "M0,80 C360,40 720,90 1080,50 C1200,35 1320,70 1440,60 L1440,120 L0,120 Z",
+                  "M0,70 C360,90 720,40 1080,75 C1200,90 1320,50 1440,55 L1440,120 L0,120 Z",
+                  "M0,80 C360,40 720,90 1080,50 C1200,35 1320,70 1440,60 L1440,120 L0,120 Z"
+                ]
+              }}
+              transition={{
+                duration: 13,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              fill="#FFFFFF" 
+            />
+          </svg>
+        </div>
+      </section>
+
+      {/* --- PARTNERS SECTION --- */}
+      <section className="py-16 md:py-24 bg-white relative overflow-hidden z-10 border-b border-slate-100">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[800px] h-[600px] md:h-[800px] bg-purple-50/40 rounded-full blur-[100px] z-0 transform-gpu"></div>
+
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div 
+            initial="hidden" 
+            whileInView="visible" 
+            viewport={{ once: true, margin: "-100px" }} 
+            variants={containerVariants} 
+            className="text-center mb-16 flex flex-col items-center"
+          >
+            <h2 className="text-3xl md:text-5xl font-light text-slate-900 tracking-tight relative inline-block pb-4">
+              Trusted by <span className="font-bold relative z-10 text-slate-900">Leading Institutions</span>
+              <motion.svg
+                className="absolute bottom-0 left-0 w-full h-4 -z-10"
+                viewBox="0 0 200 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <motion.path
+                  d="M5 15 Q 100 -5, 195 10"
+                  stroke="#a855f7"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                  variants={{
+                    hidden: { pathLength: 0, opacity: 0 },
+                    visible: { pathLength: 1, opacity: 1, transition: { duration: 1.5, ease: customEase, delay: 0.5 } }
+                  }}
+                />
+              </motion.svg>
+            </h2>
+            <p className="text-slate-500 text-sm md:text-base font-light max-w-2xl mx-auto mt-4 leading-relaxed">
+              Stalight Campus is deployed and trusted by top-tier academic systems, leading colleges, and technical education hubs.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden" 
+            whileInView="visible" 
+            viewport={{ once: true, margin: "-50px" }} 
+            variants={containerVariants}
+            className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto"
+          >
+            {karnatakaPartners.map((partner) => (
+              <motion.div
+                key={partner.name}
+                variants={fadeUpVariants}
+                whileHover={{ y: -8, transition: { duration: 0.4, ease: "easeOut" } }}
+                className="relative group"
+              >
+                <a href={partner.url ?? "#"} target="_blank" rel="noopener noreferrer" aria-label={`${partner.name} - Official Partner`} className="block">
+                  <div className="h-full bg-white border border-slate-200 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.03)] group-hover:shadow-[0_20px_50px_-15px_rgba(168,85,247,0.15)] group-hover:border-purple-100 rounded-[2rem] p-8 flex flex-col items-center justify-center gap-6 transition-all duration-500 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-purple-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                    <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center relative z-10 transition-all duration-500">
+                      <OptimizedImage
+                        src={partner.logo}
+                        alt={`${partner.name} Logo - Official Partner of Stalight Technologies`}
+                        className="max-w-full max-h-full object-contain transform group-hover:scale-110 transition-transform duration-500 drop-shadow-sm"
+                      />
+                    </div>
+                    <div className="text-center relative z-10 mt-2">
+                      <h3 className="text-[9px] md:text-[10px] font-bold tracking-[0.2em] text-slate-400 group-hover:text-purple-600 uppercase transition-colors duration-300">
+                        Official Partner
+                      </h3>
+                      <p className="text-[13px] md:text-sm font-bold text-slate-900 mt-1 tracking-tight leading-tight">{partner.name}</p>
+                    </div>
+                  </div>
+                </a>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
