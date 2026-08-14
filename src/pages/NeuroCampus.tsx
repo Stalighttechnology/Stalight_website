@@ -33,6 +33,7 @@ import amcLogo from "@/assets/logos/amclogo.png";
 import cityEngineeringLogo from "@/assets/logos/cityenginerring.jpg";
 import gleamatorLogo from "@/assets/logos/gleamatorlogo.jpg";
 import eduforcarrierLogo from "@/assets/logos/eduforcarrier.png";
+import tontadaryaLogo from "@/assets/logos/tontadarya.gif";
 import nbaLogo from "@/assets/logos/images (2).jpg";
 import naacLogo from "@/assets/logos/NAAC_LOGO.png";
 
@@ -217,6 +218,7 @@ const MaskedText = ({ children, className }: { children: React.ReactNode; classN
 const karnatakaPartners = [
   { name: "AMC Institution", logo: amcLogo, url: "https://www.amcgroup.edu.in/" },
   { name: "City Engineering College", logo: cityEngineeringLogo, url: "https://cityengineeringcollege.ac.in/" },
+  { name: "TONTADARYA COLLEGE OF ENGINEERING", logo: tontadaryaLogo, url: "http://www.tce.ac.in" },
   { name: "Gleamator Technologies", logo: gleamatorLogo, url: "https://gleamator.in/" },
   { name: "Eduforcarriers", logo: eduforcarrierLogo, url: "https://eduforcareer.com/" },
 ];
@@ -569,7 +571,7 @@ const NeuroCampus = () => {
                   ))}
                 </div>
                 <span className="font-semibold text-slate-900 text-sm">4.9/5 Rating</span>
-                <span className="text-slate-600 text-sm">✓ 50K+ Downloads</span>
+                <span className="text-slate-600 text-sm"></span>
               </div>
               
               <h2 className="text-4xl sm:text-5xl font-light text-slate-900 tracking-tight mb-4 leading-tight">
@@ -604,7 +606,7 @@ const NeuroCampus = () => {
                     ))}
                   </div>
                   <span className="font-semibold text-slate-900 text-sm">4.9/5 Rating</span>
-                  <span className="text-slate-600 text-sm">✓ 50K+ Downloads</span>
+                  <span className="text-slate-600 text-sm">✓ </span>
                 </div>
                 
                 <h2 className="text-4xl sm:text-5xl md:text-6xl font-light text-slate-900 tracking-tight mb-4 leading-tight">
@@ -893,41 +895,44 @@ const NeuroCampus = () => {
             </p>
           </motion.div>
 
-          <motion.div
-            initial="hidden" 
-            whileInView="visible" 
-            viewport={{ once: true, margin: "-50px" }} 
-            variants={containerVariants}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto"
-          >
-            {karnatakaPartners.map((partner) => (
-              <motion.div
-                key={partner.name}
-                variants={fadeUpVariants}
-                whileHover={{ y: -8, transition: { duration: 0.4, ease: "easeOut" } }}
-                className="relative group"
-              >
-                <a href={partner.url ?? "#"} target="_blank" rel="noopener noreferrer" aria-label={`${partner.name} - Official Partner`} className="block">
-                  <div className="h-full bg-white border border-slate-200 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.03)] group-hover:shadow-[0_20px_50px_-15px_rgba(168,85,247,0.15)] group-hover:border-purple-100 rounded-[2rem] p-8 flex flex-col items-center justify-center gap-6 transition-all duration-500 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-purple-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
-                    <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center relative z-10 transition-all duration-500">
-                      <OptimizedImage
-                        src={partner.logo}
-                        alt={`${partner.name} Logo - Official Partner of Stalight Technologies`}
-                        className="max-w-full max-h-full object-contain transform group-hover:scale-110 transition-transform duration-500 drop-shadow-sm"
-                      />
+          <div className="w-full overflow-hidden relative py-4 max-w-6xl mx-auto mt-8">
+            {/* Gradient overlays for premium fade effect */}
+            <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+
+            <motion.div
+              className="flex gap-6 w-max items-center"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ ease: "linear", duration: 30, repeat: Infinity }}
+            >
+              {[...karnatakaPartners, ...karnatakaPartners, ...karnatakaPartners, ...karnatakaPartners].map((partner, idx) => (
+                <motion.div
+                  key={`${partner.name}-${idx}`}
+                  whileHover={{ y: -8, transition: { duration: 0.4, ease: "easeOut" } }}
+                  className="relative group flex-shrink-0 w-64"
+                >
+                  <a href={partner.url ?? "#"} target="_blank" rel="noopener noreferrer" aria-label={`${partner.name} - Official Partner`} className="block h-full">
+                    <div className="h-full bg-white border border-slate-200 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.03)] group-hover:shadow-[0_20px_50px_-15px_rgba(168,85,247,0.15)] group-hover:border-purple-100 rounded-[2rem] p-8 flex flex-col items-center justify-center gap-6 transition-all duration-500 overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-purple-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                      <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center relative z-10 transition-all duration-500">
+                        <OptimizedImage
+                          src={partner.logo}
+                          alt={`${partner.name} Logo - Official Partner of Stalight Technologies`}
+                          className="max-w-full max-h-full object-contain transform group-hover:scale-110 transition-transform duration-500 drop-shadow-sm"
+                        />
+                      </div>
+                      <div className="text-center relative z-10 mt-2">
+                        <h3 className="text-[9px] md:text-[10px] font-bold tracking-[0.2em] text-slate-400 group-hover:text-purple-600 uppercase transition-colors duration-300">
+                          Official Partner
+                        </h3>
+                        <p className="text-[13px] md:text-sm font-bold text-slate-900 mt-1 tracking-tight leading-tight">{partner.name}</p>
+                      </div>
                     </div>
-                    <div className="text-center relative z-10 mt-2">
-                      <h3 className="text-[9px] md:text-[10px] font-bold tracking-[0.2em] text-slate-400 group-hover:text-purple-600 uppercase transition-colors duration-300">
-                        Official Partner
-                      </h3>
-                      <p className="text-[13px] md:text-sm font-bold text-slate-900 mt-1 tracking-tight leading-tight">{partner.name}</p>
-                    </div>
-                  </div>
-                </a>
-              </motion.div>
-            ))}
-          </motion.div>
+                  </a>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </section>
 
