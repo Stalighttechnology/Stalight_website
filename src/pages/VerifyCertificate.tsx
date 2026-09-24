@@ -3,7 +3,22 @@ import { useParams, Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { verifyCertificate, getDownloadUrl } from "@/services/certificateApi";
-import { CheckCircle2, AlertTriangle, XCircle, Download, ExternalLink, Calendar, Award, Building, Mail, ShieldAlert, Loader2 } from "lucide-react";
+import { 
+  CheckCircle2, 
+  AlertTriangle, 
+  XCircle, 
+  Download, 
+  ExternalLink, 
+  Calendar, 
+  Award, 
+  Building, 
+  Mail, 
+  ShieldAlert, 
+  ShieldCheck,
+  Briefcase,
+  MapPin,
+  Loader2 
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -26,6 +41,8 @@ interface CertificateData {
   verification_url: string;
   pdf_url?: string;
   image_url?: string;
+  is_offer?: boolean;
+  work_location?: string;
 }
 
 const VerifyCertificate = () => {
@@ -36,7 +53,7 @@ const VerifyCertificate = () => {
 
   useEffect(() => {
     if (!certificateId) {
-      setError("No certificate ID provided.");
+      setError("No certificate or offer ID provided.");
       setLoading(false);
       return;
     }
@@ -67,6 +84,8 @@ const VerifyCertificate = () => {
     });
   };
 
+  const isOffer = cert?.is_offer || cert?.certificate_id.startsWith("STL-OFF-");
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 relative overflow-hidden flex flex-col justify-center py-10 md:py-16">
       {/* Background Grids */}
@@ -80,7 +99,7 @@ const VerifyCertificate = () => {
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 space-y-4">
             <Loader2 className="w-12 h-12 text-purple-600 animate-spin" />
-            <p className="text-slate-500 font-medium">Verifying certificate authenticity...</p>
+            <p className="text-slate-500 font-medium">Verifying credential authenticity...</p>
           </div>
         ) : error ? (
           <div className="max-w-md mx-auto w-full">
@@ -91,7 +110,7 @@ const VerifyCertificate = () => {
                 </div>
                 <CardTitle className="text-rose-800 text-xl font-bold">Verification Failed</CardTitle>
                 <CardDescription>
-                  {error.includes("Not Found") ? "The provided certificate credentials do not match our database." : "An error occurred during verification."}
+                  {error.includes("Not Found") ? "The provided credential reference does not match our database." : "An error occurred during verification."}
                 </CardDescription>
               </CardHeader>
               <CardContent className="pb-6">
@@ -110,14 +129,74 @@ const VerifyCertificate = () => {
           <div className="space-y-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
               
-              {/* LEFT IMAGE PREVIEW - CLEAN AND BORDERLESS */}
-              <div className="lg:col-span-8 w-full bg-white rounded-xl shadow-[0_15px_45px_rgba(0,0,0,0.1)] border border-slate-100 overflow-hidden relative min-h-[420px] flex items-center justify-center">
+              {/* LEFT PREVIEW / DOSSIER CARD */}
+              <div className="lg:col-span-8 w-full bg-white rounded-xl shadow-[0_15px_45px_rgba(0,0,0,0.06)] border border-slate-100 overflow-hidden relative min-h-[400px] flex items-center justify-center">
                 {cert.image_url && cert.status === "Verified" ? (
                   <img
                     src={cert.image_url}
                     alt="Certificate Preview"
                     className="w-full h-auto object-contain bg-white"
                   />
+                ) : cert.status === "Verified" ? (
+                  /* Official Light Themed Dossier Card */
+                  <div className="w-full p-6 sm:p-10 space-y-6 text-left">
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-5">
+                      <div className="flex items-center gap-3">
+                        <img src={stalightLogo} alt="Stalight" className="h-9 w-auto object-contain" />
+                        <div>
+                          <h2 className="text-xs sm:text-sm font-black tracking-wider text-slate-900 uppercase">
+                            STALIGHT TECHNOLOGIES
+                          </h2>
+                          <p className="text-[10px] sm:text-[11px] text-slate-500">Official Credential Registry</p>
+                        </div>
+                      </div>
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                        Verified Record
+                      </span>
+                    </div>
+
+                    <div>
+                      <span className="text-xs font-extrabold uppercase tracking-widest text-pink-600 block mb-1">
+                        {isOffer ? "OFFER OF APPOINTMENT" : "ACADEMIC & PROFESSIONAL CREDENTIAL"}
+                      </span>
+                      <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+                        {cert.student_name}
+                      </h2>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-slate-50/70 border border-slate-200/80">
+                      <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                        {isOffer ? (
+                          <>
+                            This official record affirms that <strong className="text-slate-900 font-bold">{cert.student_name}</strong> has been officially offered appointment for the position of <strong className="text-indigo-600 font-bold">{cert.internship_role}</strong> at <strong className="text-purple-600 font-bold">Stalight Technologies Pvt Ltd</strong>. All terms and appointment details are authentic and recorded in the central platform registry.
+                          </>
+                        ) : (
+                          <>
+                            This official record affirms that <strong className="text-slate-900 font-bold">{cert.student_name}</strong> has satisfactorily completed the program requirements for <strong className="text-indigo-600 font-bold">{cert.internship_role || cert.course_name}</strong> with <strong className="text-purple-600 font-bold">Stalight Technologies Pvt Ltd</strong>.
+                          </>
+                        )}
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                      <div className="p-3.5 rounded-lg border border-slate-100 bg-slate-50/50">
+                        <span className="text-[10px] uppercase tracking-wider font-bold text-slate-400 block mb-0.5">Reference ID</span>
+                        <span className="text-xs font-mono font-bold text-slate-900">{cert.certificate_id}</span>
+                      </div>
+                      <div className="p-3.5 rounded-lg border border-slate-100 bg-slate-50/50">
+                        <span className="text-[10px] uppercase tracking-wider font-bold text-slate-400 block mb-0.5">Date of Issue</span>
+                        <span className="text-xs font-bold text-slate-900">{formatDate(cert.issue_date)}</span>
+                      </div>
+                    </div>
+
+                    <div className="pt-2 flex items-center justify-between text-[11px] text-slate-400 border-t border-slate-100">
+                      <span className="flex items-center gap-1.5">
+                        <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" /> Digitally Validated via Stalight Platform
+                      </span>
+                      <span>Ref: {cert.certificate_id}</span>
+                    </div>
+                  </div>
                 ) : (
                   <div className="flex flex-col items-center justify-center p-8 text-center space-y-4">
                     <div className="w-20 h-20 rounded-full bg-rose-50 flex items-center justify-center border-2 border-rose-100 shadow-sm animate-pulse">
@@ -126,18 +205,18 @@ const VerifyCertificate = () => {
                     <div className="space-y-2">
                       <h3 className="font-black text-2xl text-slate-850 tracking-tight">Credential Revoked</h3>
                       <p className="text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
-                        This certificate has been revoked by the issuing authority and is no longer valid for verification.
+                        This credential has been revoked by the issuing authority and is no longer valid for verification.
                       </p>
                     </div>
                   </div>
                 )}
               </div>
 
-              {/* RIGHT META INFO (Clean Devtown style alignment with Stalight gradients) */}
+              {/* RIGHT META INFO */}
               <div className="lg:col-span-4 flex flex-col justify-center space-y-8 pl-0 lg:pl-8 text-left">
                 <div>
                   <span className="text-sm lg:text-base font-black uppercase tracking-widest bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 block">
-                    Certificate recipient
+                    {isOffer ? "Offer Letter Recipient" : "Certificate recipient"}
                   </span>
                   <h1 className="text-3xl lg:text-4xl font-extrabold text-slate-900 mt-2 tracking-tight">
                     {cert.student_name}
@@ -164,7 +243,7 @@ const VerifyCertificate = () => {
                   <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 flex items-start gap-3">
                     <ShieldAlert className="w-5 h-5 text-rose-600 flex-shrink-0 mt-0.5" />
                     <div>
-                      <h3 className="font-bold text-rose-950 text-xs mb-0.5">Revoked Certificate</h3>
+                      <h3 className="font-bold text-rose-950 text-xs mb-0.5">Revoked Credential</h3>
                       <p className="text-[11px] text-rose-700 leading-relaxed">
                         This credential has been marked revoked by the issuing authority and is no longer valid.
                       </p>
@@ -180,7 +259,7 @@ const VerifyCertificate = () => {
                   ) : (
                     <Button asChild className="w-full sm:w-auto bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 text-white rounded-xl px-8 py-3.5 h-auto text-[12px] font-bold uppercase tracking-widest shadow-lg shadow-purple-500/10 hover:shadow-purple-500/20 transition-all hover:-translate-y-0.5 overflow-hidden">
                       <a href={getDownloadUrl(cert.certificate_id)} download>
-                        <Download className="w-4 h-4 mr-2 inline-block" /> Download Certificate
+                        <Download className="w-4 h-4 mr-2 inline-block" /> {isOffer ? "Download Offer Letter" : "Download Certificate"}
                       </a>
                     </Button>
                   )}
@@ -189,10 +268,18 @@ const VerifyCertificate = () => {
                 {/* LOWER ASSURANCE TEXT SECTION */}
                 <div className="border-t border-slate-200/80 pt-6 text-slate-500 leading-relaxed text-sm">
                   <p>
-                    The certificate affirms that <strong className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 font-extrabold">{cert.student_name}</strong> has satisfactorily fulfilled the requirements outlined. This validation ensures its authenticity, having been duly verified and granted by <strong className="font-semibold text-slate-800">{cert.company_name}</strong>.
+                    {isOffer ? (
+                      <>
+                        The offer letter affirms that <strong className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 font-extrabold">{cert.student_name}</strong> has been officially appointed for the position of <strong className="text-slate-800 font-semibold">{cert.internship_role}</strong>. This validation ensures its authenticity, having been duly verified and granted by <strong className="font-semibold text-slate-800">{cert.company_name}</strong>.
+                      </>
+                    ) : (
+                      <>
+                        The certificate affirms that <strong className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 font-extrabold">{cert.student_name}</strong> has satisfactorily fulfilled the requirements outlined. This validation ensures its authenticity, having been duly verified and granted by <strong className="font-semibold text-slate-800">{cert.company_name}</strong>.
+                      </>
+                    )}
                   </p>
                   <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mt-4 text-xs font-semibold text-slate-400">
-                    <span>Certificate ID: {cert.certificate_id}</span>
+                    <span>{isOffer ? "Offer ID" : "Certificate ID"}: {cert.certificate_id}</span>
                     <span>•</span>
                     <span>Type: {cert.certificate_type.replace('_', ' ')}</span>
                     <span>•</span>
@@ -209,3 +296,4 @@ const VerifyCertificate = () => {
 };
 
 export default VerifyCertificate;
+
