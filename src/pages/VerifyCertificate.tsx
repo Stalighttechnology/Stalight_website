@@ -84,6 +84,7 @@ const VerifyCertificate = () => {
     });
   };
 
+  const isRevoked = cert?.status === "Revoked" || cert?.status === "REVOKED";
   const isOffer = cert?.is_offer || cert?.certificate_id.startsWith("STL-OFF-");
 
   return (
@@ -131,13 +132,25 @@ const VerifyCertificate = () => {
               
               {/* LEFT PREVIEW / DOSSIER CARD */}
               <div className="lg:col-span-8 w-full bg-white rounded-xl shadow-[0_15px_45px_rgba(0,0,0,0.06)] border border-slate-100 overflow-hidden relative min-h-[400px] flex items-center justify-center">
-                {cert.image_url && cert.status === "Verified" ? (
+                {isRevoked ? (
+                  <div className="flex flex-col items-center justify-center p-8 text-center space-y-4">
+                    <div className="w-20 h-20 rounded-full bg-rose-50 flex items-center justify-center border-2 border-rose-100 shadow-sm animate-pulse">
+                      <ShieldAlert className="w-10 h-10 text-rose-500" />
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="font-black text-2xl text-slate-850 tracking-tight">Credential Revoked</h3>
+                      <p className="text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
+                        This credential has been revoked by the issuing authority and is no longer valid for verification.
+                      </p>
+                    </div>
+                  </div>
+                ) : cert.image_url ? (
                   <img
                     src={cert.image_url}
                     alt="Certificate Preview"
                     className="w-full h-auto object-contain bg-white"
                   />
-                ) : cert.status === "Verified" ? (
+                ) : (
                   /* Official Light Themed Dossier Card */
                   <div className="w-full p-6 sm:p-10 space-y-6 text-left">
                     <div className="flex items-center justify-between border-b border-slate-100 pb-5">
@@ -197,18 +210,6 @@ const VerifyCertificate = () => {
                       <span>Ref: {cert.certificate_id}</span>
                     </div>
                   </div>
-                ) : (
-                  <div className="flex flex-col items-center justify-center p-8 text-center space-y-4">
-                    <div className="w-20 h-20 rounded-full bg-rose-50 flex items-center justify-center border-2 border-rose-100 shadow-sm animate-pulse">
-                      <ShieldAlert className="w-10 h-10 text-rose-500" />
-                    </div>
-                    <div className="space-y-2">
-                      <h3 className="font-black text-2xl text-slate-850 tracking-tight">Credential Revoked</h3>
-                      <p className="text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
-                        This credential has been revoked by the issuing authority and is no longer valid for verification.
-                      </p>
-                    </div>
-                  </div>
                 )}
               </div>
 
@@ -239,7 +240,7 @@ const VerifyCertificate = () => {
                   </div>
                 </div>
 
-                {cert.status === "Revoked" && (
+                {isRevoked && (
                   <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 flex items-start gap-3">
                     <ShieldAlert className="w-5 h-5 text-rose-600 flex-shrink-0 mt-0.5" />
                     <div>
@@ -252,7 +253,7 @@ const VerifyCertificate = () => {
                 )}
 
                 <div className="pt-2">
-                  {cert.status === "Revoked" ? (
+                  {isRevoked ? (
                     <Button disabled className="w-full sm:w-auto bg-slate-200 text-slate-400 rounded-xl px-8 py-3.5 h-auto text-[12px] font-bold uppercase tracking-widest cursor-not-allowed">
                       <Download className="w-4 h-4 mr-2 inline-block" /> Download Disabled
                     </Button>
