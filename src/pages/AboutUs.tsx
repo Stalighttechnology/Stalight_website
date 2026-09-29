@@ -12,6 +12,8 @@ import cityEngineeringLogo from "@/assets/logos/cityenginerring.jpg";
 import gleamatorLogo from "@/assets/logos/gleamatorlogo.jpg";
 import eduforcarrierLogo from "@/assets/logos/eduforcarrier.png";
 import tontadaryaLogo from "@/assets/logos/tontadarya.gif";
+import vyomaaLogo from "@/assets/logos/vyomaa.png";
+import suryaLogo from "@/assets/logos/surya.png";
 import { generateWebPageSchema, generateBreadcrumbSchema } from "@/utils/seoUtils";
 import { OptimizedImage } from "@/components/OptimizedImage";
 
@@ -58,6 +60,8 @@ const karnatakaPartners = [
   { name: "City Engineering College", logo: cityEngineeringLogo, url: "https://cityengineeringcollege.ac.in/" },
   { name: "TONTADARYA COLLEGE OF ENGINEERING", logo: tontadaryaLogo, url: "http://www.tce.ac.in" },
   { name: "Gleamator Technologies", logo: gleamatorLogo, url: "https://gleamator.in/" },
+  { name: "Vyomaa", logo: vyomaaLogo, url: "https://vyomaa.co.in/" },
+  { name: "Surya", logo: suryaLogo, url: "#" },
   { name: "Eduforcarriers", logo: eduforcarrierLogo, url: "https://eduforcareer.com/" },
 ];
 
@@ -423,11 +427,11 @@ const AboutUs = () => {
                   <a href={partner.url ?? "#"} target="_blank" rel="noopener noreferrer" aria-label={`${partner.name} - Official Partner`} className="block h-full">
                     <div className="h-full bg-white border border-slate-200 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.04)] group-hover:shadow-[0_20px_50px_-15px_rgba(211,32,39,0.12)] group-hover:border-red-100 rounded-[2rem] p-8 flex flex-col items-center justify-center gap-6 transition-all duration-500 overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-red-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
-                      <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center relative z-10 transition-all duration-500">
+                      <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center relative z-10 transition-all duration-500 rounded-xl overflow-hidden p-1">
                         <OptimizedImage
                           src={partner.logo}
                           alt={`${partner.name} Logo - Official Partner of Stalight Technologies`}
-                          className="max-w-full max-h-full object-contain transform group-hover:scale-110 transition-transform duration-500 drop-shadow-sm"
+                          className="max-w-full max-h-full object-contain transform group-hover:scale-110 transition-transform duration-500 drop-shadow-sm rounded-lg"
                         />
                       </div>
                       <div className="text-center relative z-10 mt-2">
