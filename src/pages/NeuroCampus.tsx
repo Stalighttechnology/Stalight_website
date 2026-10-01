@@ -31,6 +31,7 @@ import playstoreImg from "@/assets/logos/playstore.png";
 import applestoreImg from "@/assets/logos/apple-store-icon.png";
 import amcLogo from "@/assets/logos/amclogo.png";
 import cityEngineeringLogo from "@/assets/logos/cityenginerring.jpg";
+import dwinethraLogo from "@/assets/logos/dwinethra.jpg";
 import gleamatorLogo from "@/assets/logos/gleamatorlogo.jpg";
 import eduforcarrierLogo from "@/assets/logos/eduforcarrier.png";
 import tontadaryaLogo from "@/assets/logos/tontadarya.gif";
@@ -220,6 +221,7 @@ const MaskedText = ({ children, className }: { children: React.ReactNode; classN
 const karnatakaPartners = [
   { name: "AMC Institution", logo: amcLogo, url: "https://www.amcgroup.edu.in/" },
   { name: "City Engineering College", logo: cityEngineeringLogo, url: "https://cityengineeringcollege.ac.in/" },
+  { name: "Dwi Nethra Educational Trust", logo: dwinethraLogo, url: "https://www.dwinethra.org/" },
   { name: "TONTADARYA COLLEGE OF ENGINEERING", logo: tontadaryaLogo, url: "http://www.tce.ac.in" },
   { name: "Gleamator Technologies", logo: gleamatorLogo, url: "https://gleamator.in/" },
   { name: "Vyomaa", logo: vyomaaLogo, url: "https://vyomaa.co.in/" },
