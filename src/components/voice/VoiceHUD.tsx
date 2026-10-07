@@ -4,6 +4,7 @@ import { useVoiceAssistant } from '@/hooks/useVoiceAssistant';
 import { VoiceWaveform } from './VoiceWaveform';
 import { TypewriterText } from './TypewriterText';
 import { normalizeStalightPhonetics } from '@/services/voice/voicePhonetics';
+import { VoiceBeam } from 'voice-glow';
 import {
   Mic,
   Send,
@@ -25,6 +26,7 @@ interface VoiceHUDProps {
 export const VoiceHUD: React.FC<VoiceHUDProps> = ({ frequencyData, onClose }) => {
   const {
     state,
+    micStream,
     currentTranscript,
     assistantResponseText,
     messages,
@@ -95,7 +97,7 @@ export const VoiceHUD: React.FC<VoiceHUDProps> = ({ frequencyData, onClose }) =>
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95, y: 15 }}
       transition={{ type: 'spring', stiffness: 320, damping: 28 }}
-      className="w-full max-w-[380px] sm:max-w-[420px] bg-white/95 backdrop-blur-2xl rounded-3xl shadow-2xl border border-slate-200/80 text-slate-900 overflow-hidden flex flex-col z-50 mb-3"
+      className="w-[calc(100vw-32px)] max-w-[380px] sm:max-w-[420px] bg-white/95 backdrop-blur-2xl rounded-3xl shadow-2xl border border-slate-200/80 text-slate-900 overflow-hidden flex flex-col z-50"
       style={{ maxHeight: 'min(580px, 80vh)' }}
     >
       {/* Header */}
@@ -264,54 +266,64 @@ export const VoiceHUD: React.FC<VoiceHUDProps> = ({ frequencyData, onClose }) =>
 
       {/* Footer Controls & Text Input */}
       <div className="p-3 border-t border-slate-100 bg-white">
-        <form onSubmit={handleSend} className="flex items-center gap-2">
-          {/* Active Mic / Stop Listening Button */}
-          {state === 'LISTENING' || state === 'TRANSCRIBING' ? (
-            <button
-              type="button"
-              onClick={stopListening}
-              className="p-2.5 rounded-xl bg-rose-500 text-white hover:bg-rose-600 transition-colors shadow-sm"
-              title="Stop listening"
-            >
-              <RotateCcw className="w-4 h-4" />
-            </button>
-          ) : state === 'SPEAKING' ? (
-            <button
-              type="button"
-              onClick={cancel}
-              className="p-2.5 rounded-xl bg-amber-500 text-white hover:bg-amber-600 transition-colors shadow-sm"
-              title="Stop speaking"
-            >
-              <VolumeX className="w-4 h-4" />
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={startListening}
-              className="p-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 transition-colors shadow-sm"
-              title="Speak to Stalight"
-            >
-              <Mic className="w-4 h-4" />
-            </button>
-          )}
+        <VoiceBeam
+          stream={micStream}
+          processing={state === 'THINKING'}
+          type="default"
+          colorVariant="colorful"
+          theme="light"
+          reach={1.4}
+          strength={1}
+        >
+          <form onSubmit={handleSend} className="flex items-center gap-2 p-1">
+            {/* Active Mic / Stop Listening Button */}
+            {state === 'LISTENING' || state === 'TRANSCRIBING' ? (
+              <button
+                type="button"
+                onClick={stopListening}
+                className="p-2.5 rounded-xl bg-rose-500 text-white hover:bg-rose-600 transition-colors shadow-sm"
+                title="Stop listening"
+              >
+                <RotateCcw className="w-4 h-4" />
+              </button>
+            ) : state === 'SPEAKING' ? (
+              <button
+                type="button"
+                onClick={cancel}
+                className="p-2.5 rounded-xl bg-amber-500 text-white hover:bg-amber-600 transition-colors shadow-sm"
+                title="Stop speaking"
+              >
+                <VolumeX className="w-4 h-4" />
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={startListening}
+                className="p-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 transition-colors shadow-sm"
+                title="Speak to Stalight"
+              >
+                <Mic className="w-4 h-4" />
+              </button>
+            )}
 
-          <input
-            type="text"
-            value={textInput}
-            onChange={(e) => setTextInput(e.target.value)}
-            placeholder='Ask or say "Hey Stalight"...'
-            className="flex-1 text-xs px-3.5 py-2.5 rounded-xl bg-slate-100/90 border border-slate-200/80 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:bg-white transition-all"
-          />
+            <input
+              type="text"
+              value={textInput}
+              onChange={(e) => setTextInput(e.target.value)}
+              placeholder='Ask or say "Hey Stalight"...'
+              className="flex-1 text-xs px-3.5 py-2.5 rounded-xl bg-slate-100/90 border border-slate-200/80 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:bg-white transition-all"
+            />
 
-          <button
-            type="submit"
-            disabled={!textInput.trim()}
-            className="p-2.5 rounded-xl bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shadow-sm"
-            aria-label="Send message"
-          >
-            <Send className="w-4 h-4" />
-          </button>
-        </form>
+            <button
+              type="submit"
+              disabled={!textInput.trim()}
+              className="p-2.5 rounded-xl bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shadow-sm"
+              aria-label="Send message"
+            >
+              <Send className="w-4 h-4" />
+            </button>
+          </form>
+        </VoiceBeam>
 
         <div className="flex items-center justify-between mt-2 px-1 text-[10px] text-slate-400">
           <span className="flex items-center gap-1">
