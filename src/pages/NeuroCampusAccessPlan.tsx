@@ -14,6 +14,8 @@ const NeuroCampusAccessPlan = () => {
   const plans = [
     {
       name: "Basic",
+      price: "₹150",
+      duration: "per student / year",
       description: "Core administrative and academic tools",
       subtitle: "Essential for daily campus operations",
       color: "from-sky-400 to-blue-500",
@@ -32,6 +34,8 @@ const NeuroCampusAccessPlan = () => {
     },
     {
       name: "Pro",
+      price: "₹200",
+      duration: "per student / year",
       description: "Enhanced workflows and deep analytics",
       subtitle: "For scaling institutions",
       color: "from-fuchsia-500 to-purple-600",
@@ -52,6 +56,8 @@ const NeuroCampusAccessPlan = () => {
     },
     {
       name: "Advance",
+      price: "₹250",
+      duration: "per student / year",
       description: "State-of-the-art intelligence and security",
       subtitle: "Enterprise-grade capabilities",
       color: "from-indigo-600 to-blue-800",
@@ -158,9 +164,13 @@ const NeuroCampusAccessPlan = () => {
                 >
                   {/* Gradient Header */}
                   <div className={`bg-gradient-to-br ${plan.color} p-8 text-white text-center`}>
-                    <h2 className="text-3xl font-bold mb-2 tracking-tight">{plan.name}</h2>
-                    <p className="text-sm font-medium text-white/90 mb-4">{plan.subtitle}</p>
-                    <p className="text-sm text-white/80 leading-relaxed">{plan.description}</p>
+                    <h2 className="text-3xl font-bold mb-1 tracking-tight">{plan.name}</h2>
+                    <div className="my-3 flex items-baseline justify-center gap-1.5">
+                      <span className="text-4xl font-extrabold tracking-tight text-white">{plan.price}</span>
+                      <span className="text-xs font-medium text-white/80">{plan.duration}</span>
+                    </div>
+                    <p className="text-xs font-medium text-white/90 mb-2">{plan.subtitle}</p>
+                    <p className="text-xs text-white/80 leading-relaxed">{plan.description}</p>
                   </div>
 
                   {/* Content */}
@@ -198,14 +208,17 @@ const NeuroCampusAccessPlan = () => {
                     </div>
 
                     {/* CTA Button */}
-                    <button
-                      className={`w-full py-3.5 px-6 rounded-full font-bold transition-all duration-300 uppercase text-xs tracking-widest ${plan.isPopular
+                    <a
+                      href="https://campus.stalight.in/stalightcampus"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`w-full py-3.5 px-6 rounded-full font-bold text-center transition-all duration-300 uppercase text-xs tracking-widest block ${plan.isPopular
                         ? "bg-gradient-to-r from-fuchsia-500 to-purple-600 text-white hover:shadow-lg hover:shadow-purple-500/30 hover:-translate-y-0.5"
                         : "bg-slate-100 text-slate-900 hover:bg-slate-200"
                         }`}
                     >
                       Get Started
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -475,9 +488,12 @@ const NeuroCampusAccessPlan = () => {
             <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto font-medium">
               Start with any plan and upgrade anytime. All plans include a 14-day free trial and full onboarding support from our expert team.
             </p>
-            <button className="bg-white text-slate-900 hover:bg-slate-100 hover:-translate-y-1 px-8 py-4 rounded-full font-bold uppercase tracking-widest transition-all duration-300 shadow-xl shadow-black/20">
+            <a
+              href="/#contact"
+              className="inline-block bg-white text-slate-900 hover:bg-slate-100 hover:-translate-y-1 px-8 py-4 rounded-full font-bold uppercase tracking-widest transition-all duration-300 shadow-xl shadow-black/20"
+            >
               Schedule a Demo Today
-            </button>
+            </a>
           </div>
         </div>
       </section>

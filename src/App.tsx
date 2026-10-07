@@ -23,6 +23,9 @@ const AccountDeletion = lazy(() => import("./pages/AccountDeletion.tsx"));
 const NDAOnboarding = lazy(() => import("./pages/NDAOnboarding.tsx"));
 const VerifyCertificate = lazy(() => import("./pages/VerifyCertificate.tsx"));
 
+import { VoiceAssistantProvider } from "@/context/VoiceAssistantContext";
+import { StalightVoiceAssistant } from "@/components/voice/StalightVoiceAssistant";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -31,36 +34,39 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <ScrollToTop />
-        <Suspense fallback={<LoadingScreen />}>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/services" element={<ITServices />} />
-            <Route path="/it-services" element={<ITServices />} />
-            <Route path="/products" element={<SoftwareDevelopment />} />
-            <Route path="/software-development" element={<SoftwareDevelopment />} />
-            <Route path="/skill-development" element={<SkillDevelopment />} />
-            <Route path="/Stalight-Sync" element={<NeuroSync />} />
-            <Route path="/Stalight-Campus" element={<NeuroCampus />} />
-            <Route path="/Stalight-Campus-Access" element={<NeuroCampusAccessPlan />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/terms" element={<TermsOfService />} />
-            <Route path="/account-deletion" element={<AccountDeletion />} />
-            <Route path="/verify/:certificateId" element={<VerifyCertificate />} />
-            <Route path="/verify-offer/:certificateId" element={<VerifyCertificate />} />
-            <Route path="/qX9mK7vNp4Rt8Yw2Lz5Bc1Hd6Fj3Ua9Pe7Tn4Mk8Rs2Vx6Qw1Zc9Lp5Dy3Hb8Ng4-onboarding-550e8400-e29b-41d4-a716-446655440000" element={<NDAOnboarding />} />
+        <VoiceAssistantProvider>
+          <ScrollToTop />
+          <Suspense fallback={<LoadingScreen />}>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/services" element={<ITServices />} />
+              <Route path="/it-services" element={<ITServices />} />
+              <Route path="/products" element={<SoftwareDevelopment />} />
+              <Route path="/software-development" element={<SoftwareDevelopment />} />
+              <Route path="/skill-development" element={<SkillDevelopment />} />
+              <Route path="/Stalight-Sync" element={<NeuroSync />} />
+              <Route path="/Stalight-Campus" element={<NeuroCampus />} />
+              <Route path="/Stalight-Campus-Access" element={<NeuroCampusAccessPlan />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<TermsOfService />} />
+              <Route path="/account-deletion" element={<AccountDeletion />} />
+              <Route path="/verify/:certificateId" element={<VerifyCertificate />} />
+              <Route path="/verify-offer/:certificateId" element={<VerifyCertificate />} />
+              <Route path="/qX9mK7vNp4Rt8Yw2Lz5Bc1Hd6Fj3Ua9Pe7Tn4Mk8Rs2Vx6Qw1Zc9Lp5Dy3Hb8Ng4-onboarding-550e8400-e29b-41d4-a716-446655440000" element={<NDAOnboarding />} />
 
-
-            {/* CATCH-ALL ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+              {/* CATCH-ALL ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+          <StalightVoiceAssistant />
+        </VoiceAssistantProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );
 
 export default App;
+
 
