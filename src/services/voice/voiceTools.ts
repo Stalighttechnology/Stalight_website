@@ -37,13 +37,20 @@ export class WebsiteActionRegistry {
 
       if (this.navigateFn) {
         if (hash) {
-          this.navigateFn(`${path}${hash.startsWith('#') ? hash : `#${hash}`}`);
+          const formattedHash = hash.startsWith('#') ? hash : `#${hash}`;
+          this.navigateFn(`${path}${formattedHash}`);
+          const cleanHash = formattedHash.replace(/^#/, '');
+          
+          // Execute smooth scroll to target element
+          setTimeout(() => {
+            const el = document.getElementById(cleanHash) || document.querySelector(`[data-section="${cleanHash}"]`);
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              this.highlightElement(el);
+            }
+          }, 150);
         } else {
           this.navigateFn(path);
-        }
-
-        // Also ensure scroll to top when changing full pages without hash
-        if (!hash) {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -80,9 +87,16 @@ export class WebsiteActionRegistry {
         };
       }
 
-      // If not on the current page, check if section belongs to home or another page
+      // If not on current page, navigate to home with the target hash and retry
       if (['about', 'products', 'services', 'careers', 'contact', 'home'].includes(cleanId)) {
         this.navigate('/', `#${cleanId}`);
+        setTimeout(() => {
+          const deferredEl = document.getElementById(cleanId) || document.querySelector(`[data-section="${cleanId}"]`);
+          if (deferredEl) {
+            deferredEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            this.highlightElement(deferredEl);
+          }
+        }, 400);
         return {
           success: true,
           message: `Navigating to home #${cleanId}`,
@@ -196,30 +210,38 @@ export class WebsiteActionRegistry {
    */
   public openContactForm(): ToolExecutionResult {
     try {
-      const scrollToForm = () => {
-        const contactSec =
+      const getPageForm = () => {
+        return (
           document.getElementById('contact') ||
           document.getElementById('demo-form') ||
-          document.querySelector('form');
-        if (contactSec) {
-          contactSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          this.highlightElement(contactSec);
-          const input = contactSec.querySelector('input');
-          if (input) input.focus();
-          return true;
-        }
-        return false;
+          document.getElementById('hero-demo-form') ||
+          document.querySelector('form:not([data-voice-assistant-form])')
+        );
       };
 
-      if (scrollToForm()) {
+      const currentForm = getPageForm();
+      if (currentForm) {
+        currentForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        this.highlightElement(currentForm);
+        const input = currentForm.querySelector('input:not([type="hidden"])');
+        if (input) (input as HTMLInputElement).focus();
         return { success: true, message: 'Focused contact section', actionPerformed: 'openContactForm' };
       }
 
-      // Navigate to Home contact section
+      // If no contact form on the active page, navigate to Home contact section
       this.navigate('/', '#contact');
-      setTimeout(scrollToForm, 200);
-      setTimeout(scrollToForm, 500);
-      setTimeout(scrollToForm, 900);
+      const tryFocus = () => {
+        const deferredForm = getPageForm();
+        if (deferredForm) {
+          deferredForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          this.highlightElement(deferredForm);
+          const input = deferredForm.querySelector('input:not([type="hidden"])');
+          if (input) (input as HTMLInputElement).focus();
+        }
+      };
+      setTimeout(tryFocus, 250);
+      setTimeout(tryFocus, 600);
+      setTimeout(tryFocus, 1000);
 
       return { success: true, message: 'Navigating to contact section', actionPerformed: 'openContactForm' };
     } catch (err) {
@@ -256,24 +278,29 @@ export class WebsiteActionRegistry {
         element.dispatchEvent(new Event('change', { bubbles: true }));
       };
 
-      // Search across contact section or any active form
-      const root = document.getElementById('contact') || document;
+      // Search across contact section or any active page form (excluding VoiceHUD)
+      const root =
+        document.getElementById('contact') ||
+        document.getElementById('demo-form') ||
+        document.getElementById('hero-demo-form') ||
+        document.querySelector('form:not([data-voice-assistant-form])') ||
+        document;
 
       if (fields.name) {
         const nameInput = (root.querySelector('input[name="name"], input[placeholder*="name" i]') ||
-          document.querySelector('input[name="name"]')) as HTMLInputElement;
+          document.querySelector('form:not([data-voice-assistant-form]) input[name="name"]')) as HTMLInputElement;
         if (nameInput) setReactValue(nameInput, fields.name);
       }
 
       if (fields.email) {
         const emailInput = (root.querySelector('input[name="email"], input[type="email"]') ||
-          document.querySelector('input[name="email"]')) as HTMLInputElement;
+          document.querySelector('form:not([data-voice-assistant-form]) input[name="email"]')) as HTMLInputElement;
         if (emailInput) setReactValue(emailInput, fields.email);
       }
 
       if (fields.message) {
         const messageInput = (root.querySelector('textarea[name="message"], textarea[placeholder*="requirements" i], textarea') ||
-          document.querySelector('textarea[name="message"]')) as HTMLTextAreaElement;
+          document.querySelector('form:not([data-voice-assistant-form]) textarea[name="message"]')) as HTMLTextAreaElement;
         if (messageInput) setReactValue(messageInput, fields.message);
       }
 
@@ -293,10 +320,14 @@ export class WebsiteActionRegistry {
    */
   public submitContactForm(): ToolExecutionResult {
     try {
-      const form = document.querySelector('form');
+      const form =
+        document.getElementById('contact')?.querySelector('form') ||
+        (document.getElementById('demo-form') as HTMLFormElement) ||
+        (document.getElementById('hero-demo-form') as HTMLFormElement) ||
+        document.querySelector('form:not([data-voice-assistant-form])');
       if (!form) return { success: false, message: 'Form not found' };
 
-      const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const submitBtn = (form.querySelector('button[type="submit"]') || form.querySelector('button')) as HTMLButtonElement;
       if (submitBtn) {
         submitBtn.click();
         return {

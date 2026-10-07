@@ -6,27 +6,27 @@ import { useLocation } from 'react-router-dom';
  * whenever the route (pathname) changes. Uses smooth scrolling with RAF for performance.
  */
 export function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    // Handle hash navigation on mount
+    // Handle hash navigation on mount or route/hash change
     const handleHashNavigation = () => {
-      const hash = window.location.hash;
-      if (hash) {
+      const currentHash = window.location.hash || hash;
+      if (currentHash) {
         // Delay to allow DOM to render
         setTimeout(() => {
-          const element = document.querySelector(hash);
+          const element = document.querySelector(currentHash);
           if (element) {
             smoothScrollToElement(element);
           }
-        }, 0);
+        }, 100);
       } else {
         smoothScrollToTop();
       }
     };
 
     handleHashNavigation();
-  }, [pathname]);
+  }, [pathname, hash]);
 
   return null;
 }

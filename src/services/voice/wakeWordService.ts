@@ -50,9 +50,9 @@ export class WakeWordService {
 
   // Regex patterns for high-sensitivity acoustic matching of "Stalight"
   private readonly wakeWordRegex =
-    /\b(hey|hi|hello|ok|a)?\s*(stalight|starlight|stahlight|stah\s*light|staylight|stallight|stay\s*light|star\s*light|start\s*light|stall\s*light|sta\w*light|daylight|satellite|the\s*light)\b/i;
+    /\b(hey|hi|hello|ok|a|yo|say)?\s*(stahlight\s*,?\s*stalight|stalight\s*,?\s*stahlight|stahlight\s*,?\s*stahlight|stalight\s*,?\s*stalight|stalight|starlight|stahlight|stah\s*light|stah\s*lite|stah\s*lit|staylight|stallight|stay\s*light|star\s*light|start\s*light|stall\s*light|sta\w*light|daylight|satellite|the\s*light|stalite|stlight|stlite|delight)\b/i;
   private readonly singleWordRegex =
-    /\b(stalight|starlight|stahlight|stah\s*light|staylight|stallight)\b/i;
+    /\b(stahlight\s*,?\s*stalight|stalight\s*,?\s*stahlight|stahlight\s*,?\s*stahlight|stalight\s*,?\s*stalight|stalight|starlight|stahlight|stah\s*light|stah\s*lite|stah\s*lit|staylight|stallight|stalite|stlight|stlite|delight)\b/i;
 
   constructor() {
     this.initRecognition();
@@ -72,7 +72,7 @@ export class WakeWordService {
         this.recognition.continuous = true;
         this.recognition.interimResults = true;
         this.recognition.lang = 'en-IN';
-        this.recognition.maxAlternatives = 5; // Sample more alternatives for maximum sensitivity
+        this.recognition.maxAlternatives = 10; // Max alternatives for low-voice / whisper detection sensitivity
 
         this.recognition.onresult = (event: IWakeWordRecognitionEvent) => {
           this.handleSpeechResult(event);

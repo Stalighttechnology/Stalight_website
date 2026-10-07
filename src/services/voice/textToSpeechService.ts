@@ -292,10 +292,26 @@ export class TextToSpeechService {
       return null;
     }
 
-    // Explicit female Siri voices across macOS, iOS, Windows, and Android
-    // 1. Apple Indian English Female voices (Veena, Lekha, Neerja)
-    const indianFemaleNames = ['Veena', 'Lekha', 'Neerja', 'Sangeeta', 'Kajal', 'Heera'];
-    for (const name of indianFemaleNames) {
+    // 1. Apple Siri & Enhanced/Premium Natural Voices (macOS & iOS)
+    const premiumAppleVoices = [
+      'Samantha (Enhanced)',
+      'Siri',
+      'Samantha',
+      'Veena',
+      'Lekha',
+      'Neerja',
+      'Karen',
+      'Victoria',
+      'Serena',
+      'Ava (Premium)',
+      'Ava',
+      'Zoe',
+      'Allison',
+      'Moira',
+      'Tessa',
+      'Fiona',
+    ];
+    for (const name of premiumAppleVoices) {
       const match = this.cachedVoices.find(
         (v) =>
           v.name.toLowerCase().includes(name.toLowerCase()) &&
@@ -304,33 +320,24 @@ export class TextToSpeechService {
       if (match) return match;
     }
 
-    // 2. Apple Classic Siri Female (Samantha - the definitive Apple US Siri Female voice)
-    const siriClassic = this.cachedVoices.find(
-      (v) =>
-        v.name.toLowerCase().includes('samantha') ||
-        (v.name.toLowerCase().includes('siri') && !v.name.toLowerCase().includes('male'))
-    );
-    if (siriClassic) return siriClassic;
-
-    // 3. Apple International Siri Female voices (Karen, Victoria, Serena, Moira, Tessa, Fiona)
-    const siriFemaleVoices = [
-      'Samantha',
-      'Karen',
-      'Victoria',
-      'Serena',
-      'Moira',
-      'Tessa',
-      'Fiona',
-      'Zira',
-      'Jenny',
-      'Ava',
+    // 2. Google Natural / Neural English Voices (Chromium)
+    const googleNaturalVoices = [
+      'Google US English',
+      'Google UK English Female',
+      'Google English (India)',
     ];
-
-    for (const name of siriFemaleVoices) {
+    for (const name of googleNaturalVoices) {
       const match = this.cachedVoices.find(
-        (v) =>
-          v.name.toLowerCase().includes(name.toLowerCase()) &&
-          v.lang.startsWith('en')
+        (v) => v.name.toLowerCase().includes(name.toLowerCase())
+      );
+      if (match) return match;
+    }
+
+    // 3. Microsoft Natural Voices (Edge & Windows)
+    const msNaturalVoices = ['JennyNeural', 'AriaNeural', 'Jenny', 'Aria', 'Zira'];
+    for (const name of msNaturalVoices) {
+      const match = this.cachedVoices.find(
+        (v) => v.name.toLowerCase().includes(name.toLowerCase()) && v.lang.startsWith('en')
       );
       if (match) return match;
     }
@@ -353,27 +360,72 @@ export class TextToSpeechService {
   }
 
   private splitIntoSentences(text: string): string[] {
+    // Break by punctuation while preserving conversational clauses
     const rawMatches = text.match(/[^.!?\n]+[.!?\n]+|[^.!?\n]+$/g);
     if (!rawMatches) return [text];
-    return rawMatches
+
+    const sentences = rawMatches
       .map((s) => s.trim())
       .filter((s) => s.length > 0);
+
+    // If an answer is too verbose for oral speaking (more than 3 sentences),
+    // speak only the first 2-3 most essential conversational sentences
+    if (sentences.length > 3) {
+      return sentences.slice(0, 3);
+    }
+    return sentences;
   }
 
-  private cleanMarkdownAndUrls(text: string): string {
-    return text
+  public cleanMarkdownAndUrls(text: string): string {
+    let clean = text
+      // Remove URLs
       .replace(/https?:\/\/\S+/g, '')
+      // Remove Markdown formatting & HTML
+      .replace(/<[^>]*>/g, '')
       .replace(/[*_#`~[\]()]/g, '')
+      // Remove bullet markers and list headers
+      .replace(/^[•\-\*]\s+/gm, '')
+      .replace(/^\d+\.\s+/gm, '')
+      // Remove emojis
+      .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '')
+      // Expand currencies to natural spoken words
+      .replace(/₹\s*150/g, '150 rupees')
+      .replace(/₹\s*200/g, '200 rupees')
+      .replace(/₹\s*250/g, '250 rupees')
+      .replace(/₹\s*(\d+)/g, '$1 rupees')
+      .replace(/\bRs\.?\s*(\d+)/gi, '$1 rupees')
+      .replace(/\bINR\s*(\d+)/gi, '$1 rupees')
+      .replace(/\/\s*student\s*\/\s*year/gi, 'per student per year')
+      // Expand common acronyms for natural conversational cadence
+      .replace(/\bERP\b/g, 'E R P')
+      .replace(/\bLMS\b/g, 'L M S')
+      .replace(/\bAI\/ML\b/gi, 'A I and machine learning')
+      .replace(/\bAI\b/g, 'A I')
+      .replace(/\bUI\/UX\b/gi, 'U I and user experience')
+      .replace(/\bCO\/PO\b/gi, 'course and program outcomes')
+      .replace(/\bHMS\b/g, 'hostel management system')
+      .replace(/\bNAAC\/NBA\b/gi, 'NAAC and NBA')
+      .replace(/\bNAAC\s*&\s*NBA\b/gi, 'NAAC and NBA')
+      .replace(/\b24\/7\b/g, 'twenty four seven')
+      .replace(/\biOS\b/g, 'eye O S')
+      .replace(/\bIT\b/g, 'I T')
+      // Expand phone numbers for natural digit grouping
+      .replace(/\+91\s*(\d{5})\s*(\d{5})/g, 'plus nine one, $1, $2')
+      .replace(/\bsupport@stalight\.in\b/gi, 'support at stalight dot in')
+      .replace(/\bbusiness@stalight\.in\b/gi, 'business at stalight dot in')
+      // Conversational audio corrections
       .replace(/\bmm\s*[-–]\s*hmm\b/gi, 'Mmhmm')
       .replace(/\buh\s*[-–]\s*huh\b/gi, 'Uh huh')
-      .replace(/\bNAAC\/NBA\b/gi, 'NAAC and NBA')
       .replace(/\bstarlight\b/gi, 'Staylight')
       .replace(/\bstar light\b/gi, 'Staylight')
       .replace(/\bstalight\b/gi, 'Staylight')
+      // Normalize spacing and natural punctuation pauses
       .replace(/([.!?])\s*/g, '$1 ')
       .replace(/,\s*/g, ', ')
       .replace(/\s+/g, ' ')
       .trim();
+
+    return clean;
   }
 }
 

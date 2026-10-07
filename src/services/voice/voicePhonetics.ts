@@ -24,19 +24,31 @@ export function normalizeStalightPhonetics(text: string): string {
       'Stalight $1'
     );
 
-  // 2. Direct acoustic misrecognitions of the brand name "Stalight"
+  // 2. Direct acoustic misrecognitions of the brand name "Stalight" (including whispers, low voice & repetitions)
   normalized = normalized.replace(
-    /\b(starlight|star\s*light|star\s*lite|stahlight|stah\s*light|stah\s*lite|staylight|stay\s*light|stay\s*lite|stallight|stall\s*light|startlight|start\s*light|sta\s*light|st\.\s*light|st\s*light|delight|daylight|day\s*light|skylight|sky\s*light|satellite|sat\s*light|sad\s*light|stelid|stalid|staled|stellite|straight\s*light|stalite|staight|starlite|starlet|starr\s*light)\b/gi,
+    /\b(stahlight\s*,?\s*stalight|stalight\s*,?\s*stahlight|stahlight\s*,?\s*stahlight|stalight\s*,?\s*stalight|starlight\s*,?\s*starlight)\b/gi,
+    'Stalight'
+  );
+
+  normalized = normalized.replace(
+    /\b(starlight|star\s*light|star\s*lite|stahlight|stah\s*light|stah\s*lite|stah\s*lit|stahlt|staylight|stay\s*light|stay\s*lite|stallight|stall\s*light|startlight|start\s*light|sta\s*light|st\.\s*light|st\s*light|delight|daylight|day\s*light|skylight|sky\s*light|satellite|sat\s*light|sad\s*light|stelid|stalid|staled|stellite|straight\s*light|stalite|staight|starlite|starlet|starr\s*light|stlight|stlite|stlit|stilite)\b/gi,
     'Stalight'
   );
 
   // 3. Standalone product-qualified "light" words
   normalized = normalized
-    .replace(/\blight\s+(campus|sync|erp|lms|fees|timetable|attendance|placement|training|developer|services)\b/gi, 'Stalight $1')
+    .replace(/\blight\s+(campus|sync|sink|synk|erp|lms|fees|timetable|attendance|placement|training|developer|services)\b/gi, 'Stalight $1')
     .replace(/\b(open|show|view|explore)\s+the\s+light\b/gi, '$1 Stalight')
     .replace(/\b(bouquet|bucket|booker|bookers|book a|book for|book the|book)\s+(a\s+)?demo\b/gi, 'book a demo')
     .replace(/\bbooker\s*demo\b/gi, 'book a demo')
-    .replace(/\bbouquet\b/gi, 'book a demo')
+    .replace(/\bbouquet\b/gi, 'book a demo');
+
+  // 4. Acoustic misrecognition of "Sync" as "Sink" / "Synk" / "NeuroSync"
+  normalized = normalized
+    .replace(/\b(stalight|starlight|neuro)\s+(sink|synk|zinck?|singh?)\b/gi, '$1 sync')
+    .replace(/\b(the|a|about|is|to|open|show|view|explore)\s+sink\b/gi, '$1 sync')
+    .replace(/\bneuro\s*sync\b/gi, 'Stalight sync')
+    .replace(/\bneuro\s*sink\b/gi, 'Stalight sync')
     .replace(/\s+/g, ' ')
     .trim();
 

@@ -162,18 +162,18 @@ export const StalightVoiceAssistant: React.FC = () => {
                   theme="light"
                   reach={1.1}
                 >
-                  <div className="relative px-3.5 py-1.5 bg-slate-900/90 text-white backdrop-blur-2xl rounded-full shadow-[0_12px_32px_rgba(0,0,0,0.25)] border border-white/20 whitespace-nowrap text-xs font-medium tracking-tight hover:border-cyan-400/40 transition-colors">
+                  <div className="relative px-3.5 py-1.5 bg-white/95 text-slate-800 backdrop-blur-2xl rounded-full shadow-[0_8px_25px_rgba(0,0,0,0.1)] border border-slate-200/80 whitespace-nowrap text-xs font-medium tracking-tight hover:border-blue-300 transition-colors">
                     {/* Refractive highlight edge */}
-                    <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent pointer-events-none" />
+                    <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-blue-400/40 to-transparent pointer-events-none" />
 
                     <span>
-                      Say <strong className="bg-gradient-to-r from-cyan-300 via-sky-200 to-indigo-200 bg-clip-text text-transparent font-semibold">"Hey Stalight"</strong>
+                      Say <strong className="text-blue-600 font-semibold">"Hey Stalight"</strong>
                     </span>
                   </div>
                 </VoiceBeam>
 
                 {/* Subtle Caret pointing down to the orb */}
-                <div className="w-2.5 h-2.5 -mt-1 bg-slate-900/90 border-r border-b border-white/20 rotate-45 backdrop-blur-2xl shadow-sm" />
+                <div className="w-2.5 h-2.5 -mt-1 bg-white/95 border-r border-b border-slate-200/80 rotate-45 backdrop-blur-2xl shadow-xs" />
               </motion.div>
             )}
           </AnimatePresence>

@@ -5,6 +5,7 @@
 
 import { AssistantResponse, AssistantToolCall, WebsiteContext, VoiceMessage } from '@/types/voice';
 import { STALIGHT_KNOWLEDGE_BASE, KnowledgeItem } from './voiceKnowledge';
+import { searchGeneralKnowledge } from './generalKnowledge';
 import { actionRegistry } from './voiceTools';
 import { parseSpokenEmail } from './voicePhonetics';
 
@@ -70,6 +71,12 @@ export class VoiceIntentEngine {
       'hey stah light',
       'stah light',
       'stahlight',
+      'stahlight stalight',
+      'stahlight, stalight',
+      'stalight stalight',
+      'stalight, stalight',
+      'stahlight stahlight',
+      'starlight starlight',
       'hi stalight',
       'hi starlight',
       'hi stahlight',
@@ -82,6 +89,8 @@ export class VoiceIntentEngine {
       'hey star light',
       'stalight',
       'starlight',
+      'stalite',
+      'stlight',
       'hey',
       'hello',
       'hi',
@@ -117,7 +126,7 @@ export class VoiceIntentEngine {
       };
     }
 
-    // --- SPECIFIC ACCESS PLANS (Basic, Pro, Advance) ---
+    // --- SPECIFIC ACCESS PLANS (Basic, Pro, Advance, Custom) ---
 
     // Basic Plan
     if (
@@ -127,11 +136,12 @@ export class VoiceIntentEngine {
       query.includes('tell me about basic') ||
       query.includes('what is basic plan')
     ) {
-      actionRegistry.navigate('https://campus.stalight.in/stalightcampus');
+      actionRegistry.navigate('/Stalight-Campus-Access');
       return {
-        spokenText: "The Basic Plan is 150 rupees per student per year. It covers core daily operations, personalized student and faculty portals, automated attendance, and core fee management.",
-        displayText: "Stalight Campus Basic Plan 📘 (₹150 / student / year)\n• Personalized Student & Faculty Portals\n• Automated Attendance Management\n• Timetables & Syllabus Tracking\n• Core Fee Management & Mobile App Access\n\n🌐 Live Pricing Page: https://campus.stalight.in/stalightcampus",
-        toolCalls: [{ name: 'navigate', args: { path: 'https://campus.stalight.in/stalightcampus' } }],
+        spokenText: "The Basic Plan is 150 rupees per student per year. It covers dashboards, timetables, real-time attendance, announcements, and core billing with a 14-day free trial.",
+        displayText: "Stalight Campus Basic Plan 📘 (₹150 / student / year — Start your journey)\nEssential for daily campus operations with core administrative and academic tools.\n\nWhat's Included:\n• Dashboards & Profiles\n• Timetables & Syllabus Tracking\n• Real-time Attendance (Student, Faculty, HOD)\n• Basic Announcements\n• Organization & Staff Enrollment\n• Core Billing & Plans\n\n✨ Includes 14-day free trial & onboarding support!",
+        toolCalls: [{ name: 'navigate', args: { path: '/Stalight-Campus-Access' } }],
+        followUpSuggestions: ["What is Pro plan?", "Compare plans", "Book a demo"],
       };
     }
 
@@ -143,11 +153,12 @@ export class VoiceIntentEngine {
       query.includes('tell me about pro') ||
       query.includes('what is pro plan')
     ) {
-      actionRegistry.navigate('https://campus.stalight.in/stalightcampus');
+      actionRegistry.navigate('/Stalight-Campus-Access');
       return {
-        spokenText: "The Pro Plan is 200 rupees per student per year. It is our most popular tier, featuring complete examination suites, student marks, full fee management, and multi-dimensional analytics.",
-        displayText: "Stalight Campus Pro Plan 🚀 (₹200 / student / year - Most Popular)\n• Complete Exam Suite & Results\n• Student Marks & Study Materials\n• Full Fee & Finance Management\n• Multi-Dimensional Analytics & Compliance\n\n🌐 Live Pricing Page: https://campus.stalight.in/stalightcampus",
-        toolCalls: [{ name: 'navigate', args: { path: 'https://campus.stalight.in/stalightcampus' } }],
+        spokenText: "The Pro Plan is 200 rupees per student per year. It is our most popular tier, featuring complete exam suites, student marks, full fee management, and leave workflows.",
+        displayText: "Stalight Campus Pro Plan 🚀 (₹200 / student / year — Most Popular)\nFor scaling institutions with enhanced workflows and deep analytics.\n\nWhat's Included:\n• Complete Exam Suite & Results\n• Student Marks & Study Materials\n• Full Fee & Finance Management\n• Class Scheduling & Assignments\n• Leave Management Workflows\n• Automated Faculty Bulk Uploads\n• Dedicated COE & Fees Roles\n• Everything in Basic included\n\n✨ Includes 14-day free trial & onboarding support!",
+        toolCalls: [{ name: 'navigate', args: { path: '/Stalight-Campus-Access' } }],
+        followUpSuggestions: ["What is Advance plan?", "Compare Basic vs Pro", "Book a demo"],
       };
     }
 
@@ -160,11 +171,12 @@ export class VoiceIntentEngine {
       query.includes('tell me about advance') ||
       query.includes('what is advance plan')
     ) {
-      actionRegistry.navigate('https://campus.stalight.in/stalightcampus');
+      actionRegistry.navigate('/Stalight-Campus-Access');
       return {
         spokenText: "The Advance Plan is 250 rupees per student per year. It delivers enterprise capabilities with Hostel Management, Transport fleet tracking, Library administration, and Outcome Based Education.",
-        displayText: "Stalight Campus Advance Plan ⚡ (₹250 / student / year - Enterprise)\n• Hostel Management System (HMS)\n• Transportation & Fleet Tracking\n• Full Library Administration\n• Outcome Based Education (CO Attainment)\n• Everything in Pro Included\n\n🌐 Live Pricing Page: https://campus.stalight.in/stalightcampus",
-        toolCalls: [{ name: 'navigate', args: { path: 'https://campus.stalight.in/stalightcampus' } }],
+        displayText: "Stalight Campus Advance Plan ⚡ (₹250 / student / year — Enterprise)\nEnterprise-grade capabilities with state-of-the-art intelligence and security.\n\nWhat's Included:\n• Hostel Management System (HMS)\n• Comprehensive Transport System & Fleet Tracking\n• Full Library Administration & Catalog\n• Admissions & Seat Matrix Management\n• Outcome Based Education (CO Attainment)\n• Department Admin Leaves\n• Everything in Pro included\n\n✨ Includes 14-day free trial & onboarding support!",
+        toolCalls: [{ name: 'navigate', args: { path: '/Stalight-Campus-Access' } }],
+        followUpSuggestions: ["Tell me about Custom plan", "Book an enterprise demo", "See all features"],
       };
     }
 
@@ -174,11 +186,83 @@ export class VoiceIntentEngine {
       query.includes('custom pricing') ||
       query.includes('tailored plan')
     ) {
-      actionRegistry.navigate('https://campus.stalight.in/stalightcampus');
+      actionRegistry.navigate('/Stalight-Campus-Access');
       return {
-        spokenText: "Our Custom Plan provides tailored pricing for institutions requiring specialized workflows, bespoke ERP modules, dedicated database hosting, and 24/7 priority support.",
-        displayText: "Stalight Campus Custom Plan 🏛️ (Tailored Pricing)\n• Custom ERP Modules & Workflows\n• Dedicated Database & Hosting\n• Institution-Specific Features & Permissions\n• 24/7 Priority Support & SLA\n\n🌐 Live Pricing Page: https://campus.stalight.in/stalightcampus",
-        toolCalls: [{ name: 'navigate', args: { path: 'https://campus.stalight.in/stalightcampus' } }],
+        spokenText: "Our Custom Plan provides tailored pricing for institutions requiring specialized workflows, custom integrations, dedicated hosting, and 24/7 priority support.",
+        displayText: "Stalight Campus Custom Plan 🏛️ (Tailored Pricing — Build your perfect system)\nFor institutions requiring specialized workflows, custom integrations, and dedicated hosting.\n\nWhat's Included:\n• Custom ERP Modules & Workflows\n• Institution-Specific Features\n• Custom Roles & Permissions\n• Dedicated Database & Hosting\n• 24/7 Priority Support & SLA\n• Everything in Advance included\n\n✨ Full onboarding support from our expert team!",
+        toolCalls: [{ name: 'navigate', args: { path: '/Stalight-Campus-Access' } }],
+        followUpSuggestions: ["Book a demo", "Contact sales", "See Advance plan"],
+      };
+    }
+
+    // All Plans / Complete Plan Comparison / "All"
+    if (
+      query === 'all' ||
+      query === 'all plans' ||
+      query === 'all of them' ||
+      query === 'show all' ||
+      query === 'tell me all' ||
+      query === 'explain all' ||
+      query === 'all tiers' ||
+      query === 'everything' ||
+      query.includes('all plans') ||
+      query.includes('all of them') ||
+      query.includes('compare all') ||
+      query.includes('compare plans') ||
+      query.includes('all features') ||
+      query.includes('all tiers') ||
+      query.includes('show all plans') ||
+      query.includes('show all features')
+    ) {
+      actionRegistry.navigate('/Stalight-Campus-Access');
+      return {
+        spokenText: "Here are all four Stalight Campus plans. Basic is 150 rupees with attendance and timetables. Pro is 200 rupees with exams and fee management. Advance is 250 rupees with hostel, transport, and Outcome Based Education. We also offer Custom tailored plans. All plans include a 14-day free trial.",
+        displayText: "Stalight Campus — Complete Access Plans 📊\n\n1. Basic (₹150 / student / yr):\n• Attendance (Student/Faculty/HOD), Timetables, Profiles, Announcements, Core Billing.\n\n2. Pro (₹200 / student / yr — Most Popular):\n• Complete Exam Suite, Student Marks, Fee & Finance Management, Class Scheduling, Leave Workflows, COE & Fees Roles.\n\n3. Advance (₹250 / student / yr — Enterprise):\n• Hostel (HMS), Transport Fleet Tracking, Library Catalog, Admissions Matrix, Outcome Based Education (CO Attainment).\n\n4. Custom (Tailored Pricing):\n• Custom ERP Modules, Custom Roles, Dedicated Database/Cloud Hosting, 24/7 Priority SLA.\n\n✨ All plans include a 14-day free trial and full onboarding support!",
+        toolCalls: [{ name: 'navigate', args: { path: '/Stalight-Campus-Access' } }],
+        followUpSuggestions: ["Tell me about Pro plan", "Tell me about Advance plan", "Book a demo"],
+      };
+    }
+
+    // Conversational Active Listening & Clarification ("I said", "listen", "can you hear me", "did you hear me")
+    if (
+      query === 'i said' ||
+      query === 'what i said' ||
+      query === 'listen' ||
+      query === 'listen to me' ||
+      query === 'can you hear me' ||
+      query.includes('did you hear') ||
+      query.includes('can you hear') ||
+      query.includes('are you listening') ||
+      query.includes('i told you') ||
+      query.includes('i just said') ||
+      query.includes('i am saying')
+    ) {
+      return {
+        spokenText: "I am listening closely! How can I assist you? You can ask about our pricing plans, Stalight Campus features, Stalight Sync, or book a live demo.",
+        displayText: "I'm right here and listening! 👂🎙️\n\nWhat would you like to explore?\n• Pricing Plans (Basic ₹150, Pro ₹200, Advance ₹250)\n• Stalight Campus ERP Features\n• Stalight Sync Placement Training\n• Book a live walkthrough demo",
+        followUpSuggestions: ["Show all plans", "What is Stalight Campus?", "Book a demo"],
+      };
+    }
+
+    // Repeat / Say Again
+    if (
+      query === 'repeat' ||
+      query === 'repeat that' ||
+      query === 'say again' ||
+      query === 'what did you say' ||
+      query === 'pardon' ||
+      query.includes('say that again')
+    ) {
+      const lastMsg = history.filter((m) => m.sender === 'assistant').slice(-1)[0]?.text;
+      if (lastMsg) {
+        return {
+          spokenText: `Here is what I said: ${lastMsg}`,
+          displayText: `Previous response:\n\n${lastMsg}`,
+        };
+      }
+      return {
+        spokenText: "I'm here! What would you like to know about Stalight?",
+        displayText: "How can I help you today? 🎙️",
       };
     }
 
@@ -252,28 +336,123 @@ export class VoiceIntentEngine {
       }
     }
 
-    // Form Submission Confirmation
+    // --- DEMO / CONTACT FORM MULTI-TURN CONVERSATIONAL STATE MACHINE ---
+
+    const isAskingForName =
+      (lastAssistantMsg.includes('what is your full name') ||
+        lastAssistantMsg.includes('Full Name or Institution') ||
+        lastAssistantMsg.includes('Step 1') ||
+        lastAssistantMsg.includes('tell me your Full Name') ||
+        lastAssistantMsg.includes('Please provide your Full Name')) &&
+      !lastAssistantMsg.includes('Step 2') &&
+      !lastAssistantMsg.includes('Step 3') &&
+      !lastAssistantMsg.includes('Step 4');
+
+    const isAskingForEmail =
+      (lastAssistantMsg.includes('what is your email') ||
+        lastAssistantMsg.includes('What is your email') ||
+        lastAssistantMsg.includes('What is your Email Address') ||
+        lastAssistantMsg.includes('Step 2')) &&
+      !lastAssistantMsg.includes('Step 3') &&
+      !lastAssistantMsg.includes('Step 4');
+
+    const isAskingForMessage =
+      (lastAssistantMsg.includes('how can we help') ||
+        lastAssistantMsg.includes('How can we help') ||
+        lastAssistantMsg.includes('what are your requirements') ||
+        lastAssistantMsg.includes('Step 3')) &&
+      !lastAssistantMsg.includes('Step 4');
+
+    const isAskingForSubmit =
+      lastAssistantMsg.includes('submit it now') ||
+      lastAssistantMsg.includes('submit the demo') ||
+      lastAssistantMsg.includes('submit your demo') ||
+      lastAssistantMsg.includes('Ready to submit') ||
+      lastAssistantMsg.includes('Say \'Submit\'') ||
+      lastAssistantMsg.includes('Step 4');
+
+    // --- FORM CANCELLATION / EXIT HATCH ---
     if (
-      query === 'submit' ||
-      query === 'confirm' ||
-      query.includes('send request') ||
-      query.includes('submit form') ||
-      query.includes('submit the form') ||
-      query.includes('send the request') ||
-      query === 'send' ||
-      query === 'yes submit' ||
-      query === 'submit demo' ||
-      query.includes('confirm to send')
+      ['cancel', 'stop', 'dont want', "don't want", 'not now', 'never mind', 'nevermind', 'exit', 'close form', 'forget it', 'leave', 'close', 'no'].includes(query) ||
+      query.includes('dont want') ||
+      query.includes("don't want") ||
+      query.includes('cancel form') ||
+      query.includes('stop form') ||
+      query.includes('not interested')
     ) {
-      actionRegistry.submitContactForm();
       return {
-        spokenText: "Your demo request has been submitted! Our team will reach out to schedule your walkthrough.",
-        displayText: "Demo Request Submitted! 🎉\nOur team will get in touch with you shortly.",
-        toolCalls: [{ name: 'submitContactForm', args: {} }],
+        spokenText: "No problem, I've cancelled the demo booking form. What would you like to explore next?",
+        displayText: "Form Cancelled ❌\n\nWhat would you like to explore?\n• Stalight Campus (AI College ERP)\n• Stalight Sync (Placement & LMS)\n• Pricing & Access Plans",
+        followUpSuggestions: ["Show pricing plans", "What is Stalight Campus?", "Go to home page"],
       };
     }
 
-    // Demo Request / Booking (Always evaluated before generic slot filling)
+    // Check if user is issuing an explicit topic or navigation command (allows escaping form flow)
+    const isExplicitIntentOrCommand =
+      query.includes('pricing') ||
+      query.includes('pricings') ||
+      query.includes('price') ||
+      query.includes('cost') ||
+      query.includes('plans') ||
+      query.includes('subscription') ||
+      query.includes('stalightcampus') ||
+      query.includes('go to') ||
+      query.includes('take me') ||
+      query.includes('open') ||
+      query.includes('show') ||
+      query.includes('scroll') ||
+      query.includes('what is') ||
+      query.includes('tell me about') ||
+      query.includes('who is') ||
+      query.includes('why choose') ||
+      query.includes('campus') ||
+      query.includes('sync') ||
+      query.includes('about') ||
+      query.includes('careers') ||
+      query.includes('service') ||
+      query.includes('home');
+
+    // 1. Multi-Slot / Compound Utterance (e.g., "My name is Pannagaja, email is contact@stalight.in")
+    const phoneMatch = query.match(/(?:phone|mobile|number|contact)?\s*(\+?\d[\d\s-]{8,14}\d)/i);
+    const nameMatch = query.match(/(?:my name is|name is|i am|institution is|college is)\s+([a-zA-Z\s]+?)(?:[,.]|\s+(?:and|with|email|phone|mobile|message|requirement)|$)/i);
+    const messageMatch = query.match(/(?:message is|requirement is|requirements are|how can we help|we need|looking for)\s+(.+)/i);
+    const spokenEmailCandidate = parseSpokenEmail(rawQuery) || parseSpokenEmail(query);
+
+    const extractedPhone = phoneMatch ? phoneMatch[1].replace(/\s+/g, '') : undefined;
+    let extractedRawName = nameMatch ? nameMatch[1].trim() : undefined;
+    let extractedMessage = messageMatch ? messageMatch[1].trim() : undefined;
+
+    const reservedNameKeywords = ['demo', 'book', 'booking', 'schedule', 'pricing', 'price', 'plans', 'cost', 'stalight', 'campus', 'sync', 'help', 'contact', 'about', 'services', 'scroll', 'yes', 'no', 'hi', 'hello', 'what', 'tell', 'erp', 'lms', 'ok', 'okay', 'cancel', 'down', 'up', 'top', 'bottom'];
+    if (extractedRawName && reservedNameKeywords.some((k) => extractedRawName!.toLowerCase().includes(k))) {
+      extractedRawName = undefined;
+    }
+
+    const compoundName =
+      extractedRawName && extractedRawName.length > 1 && !['is', 'the', 'a', 'to', 'for', 'of', 'demo', 'email', 'phone'].includes(extractedRawName.toLowerCase())
+        ? extractedRawName.replace(/\b\w/g, (c) => c.toUpperCase())
+        : undefined;
+
+    if (compoundName && (spokenEmailCandidate || extractedMessage || extractedPhone)) {
+      actionRegistry.fillContactForm({ name: compoundName, email: spokenEmailCandidate, message: extractedMessage || (extractedPhone ? `Phone: ${extractedPhone}` : undefined) });
+
+      let spokenGuidance = '';
+      if (compoundName && spokenEmailCandidate && !extractedMessage) {
+        spokenGuidance = `I've entered your Name as ${compoundName} and Email as ${spokenEmailCandidate}. How can we help, or what are your requirements?`;
+      } else if (compoundName && !spokenEmailCandidate) {
+        spokenGuidance = `I've entered your Full Name as ${compoundName}. What is your Email Address?`;
+      } else {
+        spokenGuidance = `I have recorded your details for ${compoundName} with email ${spokenEmailCandidate}. Say 'Submit' or click Send Message when you are ready!`;
+      }
+
+      return {
+        spokenText: spokenGuidance,
+        displayText: `Form Updated ✅\n• Full Name: ${compoundName}\n${spokenEmailCandidate ? `• Email Address: ${spokenEmailCandidate}\n` : ''}${extractedMessage ? `• Requirements: ${extractedMessage}\n` : ''}${extractedPhone ? `• Phone: ${extractedPhone}\n` : ''}\n${spokenGuidance}`,
+        toolCalls: [{ name: 'fillContactForm', args: { name: compoundName, email: spokenEmailCandidate, message: extractedMessage || extractedPhone } }],
+        followUpSuggestions: ["Submit request", "Yes, submit", "Edit details"],
+      };
+    }
+
+    // 2. Trigger Demo Booking / Open Contact Form
     if (
       query.includes('demo') ||
       query.includes('book a demo') ||
@@ -282,124 +461,159 @@ export class VoiceIntentEngine {
       query.includes('i want a demo') ||
       query.includes('book for the demo') ||
       query.includes('booker demo') ||
-      query.includes('request demo')
+      query.includes('request demo') ||
+      query.includes('how to book a demo') ||
+      query.includes('how to book a live demo') ||
+      query === 'demo'
     ) {
       actionRegistry.openContactForm();
       return {
-        spokenText: "I've opened the demo booking form for you. Please share your name or institution, email address, and your message or phone number, and I will help fill it out, or confirm when you're ready to send the request!",
-        displayText: "Demo Booking Form 📝\nPlease provide:\n1. Full Name / Institution\n2. Email Address\n3. Message or Phone Number\nSay 'Submit' or click Send when you are ready.",
+        spokenText: "I've opened the demo booking form for you! To get started, what is your full name or institution name?",
+        displayText: "Demo Booking Form 📝\nStep 1 of 3: What is your Full Name or Institution Name?\n\n(e.g., 'Pannaga', 'Dr. Ramesh', 'AMC Engineering College')",
         toolCalls: [{ name: 'openContactForm', args: {} }],
+        followUpSuggestions: ["My name is Pannaga", "AMC Engineering College", "Dr. Ramesh"],
       };
     }
 
-    // General Pricing / Access Plans (Always evaluated before generic slot filling)
+    // 3. Submission Confirmation (when explicitly confirmed or when at submit step)
     if (
-      query.includes('pricing') ||
-      query.includes('pricings') ||
-      query.includes('price') ||
-      query.includes('cost') ||
-      query.includes('plans') ||
-      query.includes('subscription') ||
-      query.includes('stalightcampus') ||
-      query.includes('rate') ||
-      query.includes('rates') ||
-      query.includes('how much')
+      query === 'submit' ||
+      query === 'confirm' ||
+      query === 'send' ||
+      query === 'send message' ||
+      query === 'yes submit' ||
+      query === 'okay submit' ||
+      query === 'submit demo' ||
+      query.includes('send request') ||
+      query.includes('submit form') ||
+      query.includes('submit the form') ||
+      query.includes('send the request') ||
+      query.includes('confirm to send') ||
+      (isAskingForSubmit && ['yes', 'yeah', 'sure', 'yep', 'ok', 'okay', 'proceed', 'send it', 'please'].includes(query))
     ) {
-      actionRegistry.navigate('https://campus.stalight.in/stalightcampus');
+      actionRegistry.submitContactForm();
       return {
-        spokenText: "Stalight Campus pricing is 150 rupees per student per year for Basic, 200 rupees per student per year for Pro, and 250 rupees per student per year for the Advance Enterprise plan. I have redirected you to the live pricing page at campus.stalight.in/stalightcampus.",
-        displayText: "Stalight Campus Pricing & Plans 🏷️\n• Basic: ₹150 / student / year (Core Attendance, Portals & Timetables)\n• Pro: ₹200 / student / year (Exam Suite, Fees & Multi-dimensional Analytics - Most Popular)\n• Advance: ₹250 / student / year (HMS, Transport, Library & OBE)\n• Custom: Tailored pricing for enterprise workflows\n\n🌐 Live Pricing Page: https://campus.stalight.in/stalightcampus",
-        toolCalls: [{ name: 'navigate', args: { path: 'https://campus.stalight.in/stalightcampus' } }],
+        spokenText: "Your demo request has been submitted successfully! The Stalight team will reach out to schedule your walkthrough.",
+        displayText: "Demo Request Submitted! 🎉\nOur team will get in touch with you shortly to schedule your personalized live demo.",
+        toolCalls: [{ name: 'submitContactForm', args: {} }],
+        followUpSuggestions: ["Explore Stalight Campus", "See pricing plans", "Go to home page"],
       };
     }
 
-    // Voice Form Data Extraction (Full Name, Email Address, How Can We Help?)
-    const isFormPromptActive =
-      lastAssistantMsg.includes('Demo Booking Form') ||
-      lastAssistantMsg.includes('Send Us a Message') ||
-      lastAssistantMsg.includes('Email Address') ||
-      lastAssistantMsg.includes('Full Name') ||
-      lastAssistantMsg.includes('requirements') ||
-      lastAssistantMsg.includes('How can we help');
+    // 4. Step-by-Step Flow: When Asked For Name (Step 1)
+    if (isAskingForName && (!isExplicitIntentOrCommand || nameMatch)) {
+      if (['ok', 'okay', 'sure', 'yes', 'yeah', 'alright', 'fine', 'yep'].includes(query)) {
+        return {
+          spokenText: "Great! What is your full name or institution name?",
+          displayText: "Demo Booking Form 📝\nStep 1 of 3: Please provide your Full Name or Institution Name.",
+          toolCalls: [{ name: 'openContactForm', args: {} }],
+          followUpSuggestions: ["My name is...", "AMC Engineering College"],
+        };
+      }
 
-    const spokenEmailCandidate = parseSpokenEmail(rawQuery) || parseSpokenEmail(query);
+      const cleanNameCandidate = query
+        .replace(/^(?:my\s+name\s+is|i\s+am|this\s+is|name\s+is|institution\s+is|college\s+is|we\s+are|it\s+is)\s+/i, '')
+        .trim();
 
+      if (cleanNameCandidate && !reservedNameKeywords.includes(cleanNameCandidate.toLowerCase()) && cleanNameCandidate.length >= 2) {
+        const name = cleanNameCandidate.replace(/\b\w/g, (c) => c.toUpperCase());
+        actionRegistry.fillContactForm({ name });
+        return {
+          spokenText: `Got it, ${name}! What is your email address?`,
+          displayText: `Demo Booking Form 📝\n• Full Name: ${name} ✅\n\nStep 2 of 3: What is your Email Address?\n(e.g., 'name@institution.edu' or 'name at gmail dot com')`,
+          toolCalls: [{ name: 'fillContactForm', args: { name } }],
+          followUpSuggestions: ["name@institution.edu", "name at gmail dot com"],
+        };
+      }
+    }
+
+    // 5. Step-by-Step Flow: When Asked For Email (Step 2) or Email Input
     if (
+      isAskingForEmail ||
       spokenEmailCandidate ||
       query.includes('@') ||
-      query.includes('email') ||
-      query.includes('at the rate') ||
-      query.includes('at the right') ||
-      query.includes('at the red') ||
       query.includes('gmail') ||
       query.includes('yahoo') ||
       query.includes('outlook') ||
-      query.includes('name') ||
-      query.includes('requirement') ||
-      query.includes('message') ||
-      query.includes('college') ||
-      query.includes('institution') ||
-      (query.includes('phone') && !query.includes('what')) ||
-      (query.includes('number') && !query.includes('what') && !query.includes('contact')) ||
-      (isFormPromptActive && query.length > 2 && !query.includes('scroll') && !query.includes('go to') && !query.includes('what is') && !query.includes('connect'))
+      query.includes('at the rate') ||
+      query.includes('at the right') ||
+      query.includes('at the red')
     ) {
-      let email = spokenEmailCandidate;
-      const phoneMatch = query.match(/(?:phone|mobile|number|contact)?\s*(\+?\d[\d\s-]{8,14}\d)/i);
-      const nameMatch = query.match(/(?:my name is|name is|name|i am|institution is|college is)\s+([a-zA-Z\s]+?)(?:[,.]|\s+(?:and|with|email|phone|mobile|message|requirement)|$)/i);
-      const messageMatch = query.match(/(?:message is|requirement is|requirements are|how can we help|we need|looking for)\s+(.+)/i);
+      let email = spokenEmailCandidate || (query.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/i)?.[0]);
 
-      const phone = phoneMatch ? phoneMatch[1].replace(/\s+/g, '') : undefined;
-      let rawName = nameMatch ? nameMatch[1].trim() : undefined;
-      let message = messageMatch ? messageMatch[1].trim() : undefined;
-
-      // Reserved keywords that can NEVER be a person's name
-      const reservedNameKeywords = ['demo', 'book', 'booking', 'schedule', 'pricing', 'price', 'plans', 'cost', 'stalight', 'campus', 'sync', 'help', 'contact', 'about', 'services', 'scroll', 'yes', 'no', 'hi', 'hello', 'what', 'tell', 'erp', 'lms', 'ok', 'okay', 'cancel'];
-
-      // Conversational slot filling when user answers in context:
-      if (isFormPromptActive) {
-        if (!email && (lastAssistantMsg.includes('Email Address') || lastAssistantMsg.includes('email'))) {
-          email = parseSpokenEmail(query);
-        }
-        if (!email && !phone && !rawName && !message) {
-          if (lastAssistantMsg.includes('How can we help') || lastAssistantMsg.includes('requirements') || lastAssistantMsg.includes('message')) {
-            message = rawQuery;
-          } else if (lastAssistantMsg.includes('Full Name') || lastAssistantMsg.includes('name')) {
-            if (query.split(' ').length <= 4 && !reservedNameKeywords.some((k) => query.toLowerCase().includes(k))) {
-              rawName = query;
-            }
+      // Smart domain autocomplete if user just says "Gmail.com" or "yahoo.com"
+      if (!email && isAskingForEmail) {
+        const cleanDomain = query.toLowerCase().replace(/^(?:my\s+email\s+is|email\s+is|it\s+is|at\s+)?/i, '').trim();
+        if (['gmail.com', 'gmail', 'yahoo.com', 'outlook.com', 'stalight.in', 'hotmail.com'].includes(cleanDomain)) {
+          const lastWithFullName = history.find((m) => m.text.includes('Full Name:'));
+          const matchedName = lastWithFullName?.text.match(/Full Name:\s*([a-zA-Z0-9_]+)/i)?.[1];
+          if (matchedName) {
+            const domainSuffix = cleanDomain.includes('.') ? cleanDomain : `${cleanDomain}.com`;
+            email = `${matchedName.toLowerCase()}@${domainSuffix}`;
           }
         }
       }
 
-      if (rawName && reservedNameKeywords.some((k) => rawName!.toLowerCase().includes(k))) {
-        rawName = undefined;
-      }
-
-      const name =
-        rawName && rawName.length > 1 && !['is', 'the', 'a', 'to', 'for', 'of', 'demo', 'email', 'phone'].includes(rawName.toLowerCase())
-          ? rawName.replace(/\b\w/g, (c) => c.toUpperCase())
-          : undefined;
-
-      if (email || name || message || phone) {
-        actionRegistry.fillContactForm({ name, email, message: message || (phone ? `Phone: ${phone}` : undefined) });
-
-        let spokenGuidance = '';
-        if (name && !email) {
-          spokenGuidance = `I've entered your Full Name as ${name}. What is your Email Address?`;
-        } else if (email && !message && !name) {
-          spokenGuidance = `Got your Email Address as ${email}. What are your requirements, or how can we help?`;
-        } else if (name && email && !message) {
-          spokenGuidance = `I've filled your Name as ${name} and Email as ${email}. How can we help, or what are your requirements?`;
-        } else {
-          spokenGuidance = `I have updated your details. Say 'Submit' or click Send Message when you are ready!`;
-        }
-
+      if (email) {
+        actionRegistry.fillContactForm({ email });
         return {
-          spokenText: spokenGuidance,
-          displayText: `Form Updated ✅\n${name ? `• Full Name: ${name}\n` : ''}${email ? `• Email Address: ${email}\n` : ''}${message ? `• Requirements: ${message}\n` : ''}${phone ? `• Phone: ${phone}\n` : ''}\n${spokenGuidance}`,
-          toolCalls: [{ name: 'fillContactForm', args: { name, email, message: message || phone } }],
+          spokenText: "Thank you! How can we help you, or what are your campus requirements?",
+          displayText: `Demo Booking Form 📝\n• Email Address: ${email} ✅\n\nStep 3 of 3: How can we help you, or what are your requirements?\n(e.g., 'We need ERP for 5000 students with AI attendance and exam suite')`,
+          toolCalls: [{ name: 'fillContactForm', args: { email } }],
+          followUpSuggestions: ["We need Campus ERP for our college", "Interested in AI attendance and exam suite", "Tell us about Sync LMS"],
+        };
+      } else if (isAskingForEmail && !isExplicitIntentOrCommand) {
+        return {
+          spokenText: "Could you please share your full email address (for example, name at gmail dot com)?",
+          displayText: "Demo Booking Form 📝\nStep 2 of 3: Please provide your Email Address (e.g., 'name@gmail.com' or 'name at gmail dot com').",
+          followUpSuggestions: ["name@institution.edu", "name at gmail dot com"],
         };
       }
+    }
+
+    // 6. Step-by-Step Flow: When Asked For Requirements / Message (Step 3)
+    if (isAskingForMessage && !isExplicitIntentOrCommand && query.length >= 2) {
+      const cleanMessage = rawQuery
+        .replace(/^(?:my\s+requirement\s+is|requirements\s+are|we\s+need|looking\s+for|we\s+want|how\s+can\s+we\s+help|message\s+is)\s+/i, '')
+        .trim();
+
+      if (cleanMessage) {
+        actionRegistry.fillContactForm({ message: cleanMessage });
+        return {
+          spokenText: "I've recorded your requirements! Would you like me to submit your demo request now? You can say 'Submit' or 'Yes'.",
+          displayText: `Demo Booking Form 📝\n• Requirements: ${cleanMessage} ✅\n\nStep 4: Ready to submit! Say 'Submit', 'Yes', or click Send Message.`,
+          toolCalls: [{ name: 'fillContactForm', args: { message: cleanMessage } }],
+          followUpSuggestions: ["Submit request", "Yes, submit", "Edit details"],
+        };
+      }
+    }
+
+    // General Pricing / Access Plans (Evaluated only if not in form fill flow)
+    const isPricingQuery =
+      (query.includes('pricing') ||
+        query.includes('pricings') ||
+        query.includes('price') ||
+        query.includes('cost') ||
+        query.includes('plans') ||
+        query.includes('subscription') ||
+        query.includes('stalightcampus') ||
+        query.includes('how much') ||
+        /\b(rates?)\b/i.test(query)) &&
+      !query.includes('at the rate') &&
+      !query.includes('at the right') &&
+      !query.includes('@') &&
+      !query.includes('gmail') &&
+      !query.includes('yahoo') &&
+      !query.includes('email');
+
+    if (isPricingQuery) {
+      actionRegistry.navigate('/Stalight-Campus-Access');
+      return {
+        spokenText: "Stalight Campus offers three core plans: Basic at 150 rupees per student per year, Pro at 200 rupees per student per year, and Advance Enterprise at 250 rupees per student per year. We also offer tailored Custom plans, and all plans include a 14-day free trial. I've taken you to our access plans page.",
+        displayText: "Stalight Campus Pricing & Plans 🏷️\n• Basic: ₹150 / student / year (Core Attendance, Portals & Timetables)\n• Pro: ₹200 / student / year (Exam Suite, Fees & Multi-dimensional Analytics - Most Popular)\n• Advance: ₹250 / student / year (HMS, Transport, Library & OBE)\n• Custom: Tailored pricing for enterprise workflows\n\n✨ All plans include a 14-day free trial and full onboarding support!",
+        toolCalls: [{ name: 'navigate', args: { path: '/Stalight-Campus-Access' } }],
+        followUpSuggestions: ["Tell me about Pro plan", "Tell me about Advance plan", "Book a demo"],
+      };
     }
 
     // Direct Connect, Contact Info & Location
@@ -456,24 +670,36 @@ export class VoiceIntentEngine {
 
     // Products Directory / Products Section
     if (
-      query === 'products' ||
-      query === 'show products' ||
+      query.includes('product') ||
+      query.includes('products') ||
+      query.includes('what do you offer') ||
+      query.includes('what do they offer') ||
+      query.includes('what do they have') ||
+      query.includes('what are the products') ||
       query.includes('what products') ||
-      query.includes('all products')
+      query.includes('show products') ||
+      query.includes('all products') ||
+      query.includes('what solutions') ||
+      query.includes('offerings')
     ) {
       actionRegistry.navigate('/', '#products');
       return {
-        spokenText: "Stalight offers two flagship products: Stalight Campus for college ERP, and Stalight Sync for career placement training.",
-        displayText: "Stalight offers two flagship products: Stalight Campus (AI-powered college ERP) and Stalight Sync (LMS & Career Placement platform).",
+        spokenText: "Stalight offers two flagship platforms: Stalight Campus for college ERP, and Stalight Sync for career placement training.",
+        displayText: "Stalight Flagship Products 🚀\n\n1. Stalight Campus (AI College ERP)\n• Facial Attendance & Anti-Proxy Security\n• Fee Management, Exams, Smart Timetables & NAAC/NBA Accreditation\n\n2. Stalight Sync (LMS & Placement Preparation)\n• AI Voice & Coding Mock Interviews\n• Placement Readiness Index (PRI) & Live Coding Lab\n\nWhich product would you like to explore?",
         toolCalls: [{ name: 'navigate', args: { path: '/', hash: '#products' } }],
+        followUpSuggestions: ["Tell me about Stalight Campus", "Tell me about Stalight Sync", "Show pricing"],
       };
     }
 
     // Stalight Campus (Product)
     if (
-      query.includes('campus') ||
-      query.includes('college erp') ||
-      query.includes('college management')
+      (query.includes('campus') ||
+        query.includes('college erp') ||
+        query.includes('college management')) &&
+      !query.includes('difference') &&
+      !query.includes('vs') &&
+      !query.includes('compare') &&
+      !query.includes('lms')
     ) {
       actionRegistry.navigate('/Stalight-Campus');
       return {
@@ -485,16 +711,25 @@ export class VoiceIntentEngine {
 
     // Stalight Sync (Product)
     if (
-      query.includes('sync') ||
-      query.includes('lms') ||
-      query.includes('mock interview') ||
-      query.includes('placement platform')
+      (query.includes('sync') ||
+        query.includes('sink') ||
+        query.includes('synk') ||
+        query.includes('neurosync') ||
+        query.includes('neuro sync') ||
+        query.includes('lms') ||
+        query.includes('mock interview') ||
+        query.includes('placement platform')) &&
+      !query.includes('difference') &&
+      !query.includes('vs') &&
+      !query.includes('compare') &&
+      !query.includes('erp')
     ) {
       actionRegistry.navigate('/Stalight-Sync');
       return {
-        spokenText: "Stalight Sync is an intelligent LMS providing AI mock interviews, coding labs, and placement readiness analytics.",
+        spokenText: "Stalight Sync is our intelligent LMS providing AI mock interviews, coding labs, and placement readiness analytics.",
         displayText: "Stalight Sync is an intelligent LMS and career platform featuring AI mock interviews, live coding practice labs, automated assessment scoring, and placement readiness tracking.",
         toolCalls: [{ name: 'navigate', args: { path: '/Stalight-Sync' } }],
+        followUpSuggestions: ["Tell me about AI mock interviews", "What is Stalight Campus?", "Show pricing"],
       };
     }
 
@@ -518,18 +753,75 @@ export class VoiceIntentEngine {
     }
 
 
-    // Career Training / Skill Development
+    // Careers / Life at Stalight / Openings / Jobs / Opportunities
     if (
-      query.includes('career training') ||
-      query.includes('skill development') ||
-      query.includes('bootcamp') ||
-      query.includes('courses')
+      query === 'career' ||
+      query === 'careers' ||
+      query === 'job' ||
+      query === 'jobs' ||
+      query === 'hiring' ||
+      query === 'opportunity' ||
+      query === 'opportunities' ||
+      query.includes('career') ||
+      query.includes('careers') ||
+      query.includes('job') ||
+      query.includes('opportunity') ||
+      query.includes('opportunities') ||
+      query.includes('vacancy') ||
+      query.includes('vacancies') ||
+      query.includes('roles') ||
+      query.includes('positions') ||
+      query.includes('join stalight') ||
+      query.includes('join us') ||
+      query.includes('work with us') ||
+      query.includes('work at stalight') ||
+      query.includes('hiring') ||
+      query.includes('openings')
     ) {
-      actionRegistry.navigate('/skill-development');
+      if (query.includes('training') || query.includes('bootcamp') || query.includes('courses') || query.includes('skill')) {
+        actionRegistry.navigate('/skill-development');
+        return {
+          spokenText: "We offer career bootcamps in Full Stack, Data Science, and AI/ML with real-world project mentoring.",
+          displayText: "Opening Career Training 🚀\n• Full Stack Web Development\n• Data Science & AI/ML\n• Capstone Projects & Placement Mentorship",
+          toolCalls: [{ name: 'navigate', args: { path: '/skill-development' } }],
+          followUpSuggestions: ["Full stack bootcamp", "AI and ML courses", "Explore Stalight Sync"],
+        };
+      } else {
+        actionRegistry.scrollToSection('careers');
+        return {
+          spokenText: "At Stalight, you get opportunities in Full Stack Development, AI and Machine Learning engineering, Cloud architecture, and student technical internships. You can send your resume to business at stalight dot in or explore our open roles in the careers section.",
+          displayText: "Career Opportunities at Stalight 💼\n• Software Engineering: Full Stack (React/Node), Backend & Cloud (AWS/GCP)\n• AI & Data Science: Machine Learning Engineering & Intelligent Agents\n• Student & Graduate Programs: Hands-on Technical Internships & Placement Bootcamps\n• High-Impact Culture: Ownership on scalable enterprise and campus products\n\n📩 How to apply: Email your resume & portfolio to business@stalight.in!",
+          toolCalls: [{ name: 'scrollToSection', args: { section: 'careers' } }],
+          followUpSuggestions: ["Career training bootcamps", "Explore IT Services", "Contact our team"],
+        };
+      }
+    }
+
+    // Services Overview / All Services / IT Services
+    if (
+      !query.includes('terms') &&
+      !query.includes('privacy') &&
+      !query.includes('policy') &&
+      !query.includes('delete') &&
+      (
+        query === 'services' ||
+        query === 'service' ||
+        query === 'it services' ||
+        query.includes('services') ||
+        query.includes('what services') ||
+        query.includes('all services') ||
+        query.includes('it services') ||
+        query.includes('cloud') ||
+        query.includes('devops') ||
+        query.includes('infrastructure')
+      )
+    ) {
+      actionRegistry.navigate('/services');
       return {
-        spokenText: "We offer career bootcamps in Full Stack, Data Science, and AI/ML with real-world project mentoring.",
-        displayText: "Opening Career Training 🚀",
-        toolCalls: [{ name: 'navigate', args: { path: '/skill-development' } }],
+        spokenText: "Stalight provides enterprise software engineering, IT & cloud infrastructure services, and career training programs. I've opened our services page for you.",
+        displayText: "Stalight Enterprise Services 🛠️\n• Software Development: Custom Web, Mobile & Cloud Systems\n• IT Services & Cloud: DevOps, Infrastructure & Modernization\n• Career Training: Skill Bootcamps in AI, Data Science & Full-Stack",
+        toolCalls: [{ name: 'navigate', args: { path: '/services' } }],
+        followUpSuggestions: ["Custom software development", "Cloud & IT services", "Career training bootcamps"],
       };
     }
 
@@ -545,21 +837,6 @@ export class VoiceIntentEngine {
         spokenText: "Stalight builds enterprise-grade web, mobile, and cloud software engineered for scale.",
         displayText: "Opening Software Development 💻",
         toolCalls: [{ name: 'navigate', args: { path: '/software-development' } }],
-      };
-    }
-
-    // IT Services / Cloud
-    if (
-      query.includes('it services') ||
-      query.includes('cloud') ||
-      query.includes('devops') ||
-      query.includes('infrastructure')
-    ) {
-      actionRegistry.navigate('/it-services');
-      return {
-        spokenText: "Our IT services encompass cloud architecture, DevOps, technical assessments, and digital modernization.",
-        displayText: "Opening IT Services ☁️",
-        toolCalls: [{ name: 'navigate', args: { path: '/it-services' } }],
       };
     }
 
@@ -592,36 +869,151 @@ export class VoiceIntentEngine {
       };
     }
 
-    // Partners / Clients
-    if (query.includes('partner') || query.includes('client') || query.includes('colleges using')) {
-      actionRegistry.navigate('/about');
+    // Certificate / Offer Verification
+    if (
+      query.includes('verify') ||
+      query.includes('certificate') ||
+      query.includes('offer letter') ||
+      query.includes('verification') ||
+      query.includes('validate')
+    ) {
+      actionRegistry.navigate('/verify/sample');
       return {
-        spokenText: "We partner with AMC Institution, City Engineering College, Dwi Nethra Educational Trust, TONTADARYA College of Engineering, and more.",
-        displayText: "Stalight Institutional Partners 🤝",
-        toolCalls: [{ name: 'navigate', args: { path: '/about' } }],
+        spokenText: "I've opened the verification portal where you can authenticate official Stalight internship certificates and offer letters.",
+        displayText: "Certificate & Offer Verification 🎓\nAuthenticate official credentials issued by Stalight Technologies.\nEnter your Certificate ID to verify status.",
+        toolCalls: [{ name: 'navigate', args: { path: '/verify/sample' } }],
+        followUpSuggestions: ["Book a demo", "Explore Stalight Campus", "Contact support"],
       };
     }
 
-    // Search Knowledge Base for most relevant match
-    const matched = this.searchKnowledgeBase(query);
-    if (matched) {
-      if (matched.route && matched.route !== context.pathname) {
-        actionRegistry.navigate(matched.route, matched.sectionId ? `#${matched.sectionId}` : undefined);
-      } else if (matched.sectionId) {
-        actionRegistry.scrollToSection(matched.sectionId);
+    // Privacy Policy
+    if (
+      query.includes('privacy') ||
+      query.includes('privacy policy') ||
+      query.includes('data protection')
+    ) {
+      actionRegistry.navigate('/privacy');
+      return {
+        spokenText: "I've navigated to our Privacy Policy page. Stalight adheres to strict enterprise encryption to protect student and institutional data.",
+        displayText: "Privacy Policy 🔒\nStalight Technologies strictly safeguards all institutional and student data with end-to-end encryption.",
+        toolCalls: [{ name: 'navigate', args: { path: '/privacy' } }],
+      };
+    }
+
+    // Terms of Service
+    if (
+      query.includes('terms') ||
+      query.includes('terms of service') ||
+      query.includes('terms and conditions') ||
+      query.includes('agreement')
+    ) {
+      actionRegistry.navigate('/terms');
+      return {
+        spokenText: "I've opened the Terms of Service page outlining platform usage, licensing, and service commitments.",
+        displayText: "Terms of Service 📜\nGoverns software licensing, uptime commitments, and usage guidelines for Stalight platforms.",
+        toolCalls: [{ name: 'navigate', args: { path: '/terms' } }],
+      };
+    }
+
+    // Account Deletion
+    if (
+      query.includes('delete account') ||
+      query.includes('account deletion') ||
+      query.includes('erase my data')
+    ) {
+      actionRegistry.navigate('/account-deletion');
+      return {
+        spokenText: "I've opened the Account Deletion page with instructions to request permanent removal of your account and personal records.",
+        displayText: "Account Deletion 🗑️\nSubmit a request for permanent erasure of your account credentials and personal data.",
+        toolCalls: [{ name: 'navigate', args: { path: '/account-deletion' } }],
+      };
+    }
+
+    // Dynamic Time & Date Queries
+    if (
+      query.includes('what is the time') ||
+      query.includes("what's the time") ||
+      query === 'time' ||
+      query.includes('current time')
+    ) {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      return {
+        spokenText: `It's currently ${timeStr}.`,
+        displayText: `Current Time ⏰\n${timeStr}`,
+        followUpSuggestions: ["Show products", "What is Stalight Campus?"],
+      };
+    }
+
+    if (
+      query.includes("what's today's date") ||
+      query.includes('what is the date') ||
+      query.includes("today's date") ||
+      query === 'date'
+    ) {
+      const now = new Date();
+      const dateStr = now.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+      return {
+        spokenText: `Today is ${dateStr}.`,
+        displayText: `Today's Date 📅\n${dateStr}`,
+        followUpSuggestions: ["Show products", "Book a demo"],
+      };
+    }
+
+    // 1. Search General Human Interaction & Conversational Knowledge Base
+    const generalMatch = searchGeneralKnowledge(query);
+    if (generalMatch) {
+      const toolCalls: AssistantToolCall[] = [];
+      if (generalMatch.targetRoute && generalMatch.targetRoute !== context.pathname) {
+        actionRegistry.navigate(
+          generalMatch.targetRoute,
+          generalMatch.targetSection ? `#${generalMatch.targetSection}` : undefined
+        );
+        toolCalls.push({
+          name: 'navigate',
+          args: { path: generalMatch.targetRoute, hash: generalMatch.targetSection ? `#${generalMatch.targetSection}` : undefined },
+        });
+      } else if (generalMatch.targetSection) {
+        actionRegistry.scrollToSection(generalMatch.targetSection);
+        toolCalls.push({ name: 'scrollToSection', args: { section: generalMatch.targetSection } });
       }
 
       return {
-        spokenText: matched.summary,
-        displayText: `${matched.title}: ${matched.summary}`,
+        spokenText: generalMatch.spokenResponse,
+        displayText: generalMatch.displayResponse,
+        toolCalls: toolCalls.length > 0 ? toolCalls : undefined,
+        followUpSuggestions: generalMatch.followUpSuggestions,
       };
     }
 
-    // Friendly fallback without hallucination
+    // 2. Search Verified Website Knowledge Base for Domain Match
+    const matched = this.searchKnowledgeBase(query);
+    if (matched) {
+      const toolCalls: AssistantToolCall[] = [];
+      if (matched.route && matched.route !== context.pathname) {
+        actionRegistry.navigate(matched.route, matched.sectionId ? `#${matched.sectionId}` : undefined);
+        toolCalls.push({
+          name: 'navigate',
+          args: { path: matched.route, hash: matched.sectionId ? `#${matched.sectionId}` : undefined },
+        });
+      } else if (matched.sectionId) {
+        actionRegistry.scrollToSection(matched.sectionId);
+        toolCalls.push({ name: 'scrollToSection', args: { section: matched.sectionId } });
+      }
+
+      return {
+        spokenText: matched.spokenSummary || matched.summary,
+        displayText: `${matched.title}\n\n${matched.details || matched.summary}`,
+        toolCalls: toolCalls.length > 0 ? toolCalls : undefined,
+        followUpSuggestions: matched.relatedQuestions,
+      };
+    }
+
+    // Friendly fallback with helpful suggestions
     return {
-      spokenText: "I don't have that specific information right now. Would you like me to connect you with our team?",
-      displayText: "I can connect you with the Stalight team for more details.",
-      followUpSuggestions: ["Book a demo", "View Stalight Campus", "See pricing"],
+      spokenText: "I'm here to help you navigate Stalight. You can ask about our pricing plans, Stalight Campus, Stalight Sync, or book a live walkthrough demo. What would you like to explore?",
+      displayText: "How can I help you today? 🎙️\n\nTry asking:\n• \"Show all plans\" or \"What is Pro plan?\"\n• \"What is Stalight Campus?\"\n• \"Tell me about Stalight Sync\"\n• \"Book a demo\"\n• \"Contact support\"",
+      followUpSuggestions: ["Show all plans", "What is Stalight Campus?", "Book a demo"],
     };
   }
 
@@ -669,23 +1061,44 @@ export class VoiceIntentEngine {
   }
 
   /**
-   * Keyword similarity matching on the verified knowledge base
+   * Keyword similarity matching on the verified knowledge base with strict word boundaries
    */
   private searchKnowledgeBase(query: string): KnowledgeItem | null {
-    const words = query.split(/\s+/).filter((w) => w.length > 2);
+    const cleanQuery = query.toLowerCase().trim();
+    const words = cleanQuery.split(/\s+/).filter((w) => w.length > 2);
     let bestMatch: KnowledgeItem | null = null;
     let highestScore = 0;
 
     for (const item of STALIGHT_KNOWLEDGE_BASE) {
       let score = 0;
       for (const kw of item.keywords) {
-        if (query.includes(kw)) score += 4;
+        const cleanKw = kw.toLowerCase().trim();
+        if (cleanKw.length <= 2) continue;
+
+        // 1. Exact full query match
+        if (cleanQuery === cleanKw) {
+          score += 15;
+        } else if (cleanKw.includes(' ') && cleanQuery.includes(cleanKw)) {
+          // 2. Multi-word exact phrase match (e.g. "what is stalight campus")
+          score += 10;
+        } else {
+          // 3. Strict word-boundary matching (prevents 'pro' from matching 'products')
+          const escaped = cleanKw.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+          const regex = new RegExp(`(^|\\b|\\s)${escaped}($|\\b|\\s)`, 'i');
+          if (regex.test(cleanQuery)) {
+            score += 5;
+          }
+        }
+
+        // 4. Word-by-word exact token match
         for (const w of words) {
-          if (kw.includes(w)) score += 1;
+          if (w === cleanKw) {
+            score += 2;
+          }
         }
       }
 
-      if (score > highestScore && score >= 2) {
+      if (score > highestScore && score >= 4) {
         highestScore = score;
         bestMatch = item;
       }
