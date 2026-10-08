@@ -364,8 +364,8 @@ export const VoiceAssistantProvider: React.FC<{ children: React.ReactNode }> = (
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: {
           echoCancellation: true,
-          noiseSuppression: false,
-          autoGainControl: true,
+          noiseSuppression: false, // Keep false so distant/far-field voices are not muted as background noise
+          autoGainControl: true,   // Amplify low-volume / distant voices
         },
       });
 

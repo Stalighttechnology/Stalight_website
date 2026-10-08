@@ -65,12 +65,16 @@ export class WakeWordService {
   private isRecognitionRunning: boolean = false;
   private restartDelayMs: number = 150;
 
-  // Regex patterns for high-sensitivity acoustic matching of "Stalight" / "Stahlight" / "Starlight" across all accents & speech engines
+  // Regex patterns for high-sensitivity acoustic matching of "Stalight" / "Stahlight" / "Starlight" across all speakers, accents & pitch variations
   private readonly wakeWordRegex =
-    /\b(hey|hi|hello|ok|okay|a|yo|say|tell|please)?\s*(stahlight\s+stalight|stalight\s+stahlight|stahlight\s+stahlight|stalight\s+stalight|starlight\s+starlight|stahlight|stalight|starlight|stah\s*light|star\s*light|sta\s*light|stay\s*light|staylight|stallight|stall\s*light|start\s*light|startlight|star\s*lite|starlite|stah\s*lite|stah\s*lit|star\s*lit|starlet|starlette|sterlite|stilite|straight\s*light|daylight|day\s*light|delight|satellite|the\s*light|stlight|stlite|stlit|st\s*light|sky\s*light|skylight|spot\s*light|spotlight|stop\s*light|stoplight|star\s*like|star\s*life|star\s*line|star\s*night|star\s*late|stalid|staled|stelid)\b/i;
+    /\b(hey|hi|hello|ok|okay|a|yo|say|tell|please|listen)?\s*(st[a-z]{0,6}(?:l|r)[a-z]{0,4}(?:ight|ite|lit|yt|et|ette|ide|ight)|st[a-z]{0,6}\s*(?:light|lite|lit|like|line|life|night|late|ight|guide|fight|right|tight)|(?:hey|hi|hello|ok|okay)\s*(?:star|stah|sta|stay|stall|start|stalight|starlight)|stahlight|stalight|starlight|stah\s*light|star\s*light|sta\s*light|stay\s*light|staylight|stallight|stall\s*light|start\s*light|startlight|star\s*lite|starlite|stah\s*lite|stah\s*lit|star\s*lit|starlet|starlette|sterlite|stilite|straight\s*light|daylight|day\s*light|delight|satellite|the\s*light|highlight|heylight|headlight|stlight|stlite|stlit|st\s*light|sky\s*light|skylight|spot\s*light|spotlight|stop\s*light|stoplight|star\s*like|star\s*life|star\s*line|star\s*night|star\s*late|stalid|staled|stelid)\b/i;
 
   private readonly singleWordRegex =
-    /\b(stahlight|stalight|starlight|stah\s*light|star\s*light|sta\s*light|stay\s*light|staylight|stallight|stall\s*light|start\s*light|startlight|star\s*lite|starlite|stah\s*lite|stah\s*lit|star\s*lit|starlet|starlette|sterlite|stilite|straight\s*light|daylight|day\s*light|delight|satellite|the\s*light|stlight|stlite|stlit|st\s*light|sky\s*light|skylight|spot\s*light|spotlight|stop\s*light|stoplight|star\s*like|star\s*life|star\s*line|star\s*night|star\s*late|stalid|staled|stelid)\b/i;
+    /\b(st[a-z]{0,6}(?:l|r)[a-z]{0,4}(?:ight|ite|lit|yt|et|ette|ide|ight)|st[a-z]{0,6}\s*(?:light|lite|lit|like|line|life|night|late|ight|guide|fight|right|tight)|(?:hey|hi|hello|ok|okay)\s*(?:star|stah|sta|stay|stall|start|stalight|starlight)|stahlight|stalight|starlight|stah\s*light|star\s*light|sta\s*light|stay\s*light|staylight|stallight|stall\s*light|start\s*light|startlight|star\s*lite|starlite|stah\s*lite|stah\s*lit|star\s*lit|starlet|starlette|sterlite|stilite|straight\s*light|daylight|day\s*light|delight|satellite|the\s*light|highlight|heylight|headlight|stlight|stlite|stlit|st\s*light|sky\s*light|skylight|spot\s*light|spotlight|stop\s*light|stoplight|star\s*like|star\s*life|star\s*line|star\s*night|star\s*late|stalid|staled|stelid)\b/i;
+
+  // Rapid/Speedy Speech pattern: matches concatenated & blended rapid speech without word boundaries
+  private readonly fastSpeechRegex =
+    /(?:hey|hi|hello|ok|okay|yo)?(?:stahlight|stalight|starlight|staylight|stallight|startlight|stlite|stalite|sterlite|starlet|starlette|stahli|starl|stali|highlight|heylight|headlight|daylight|delight|satellite)/i;
 
   constructor() {
     this.initRecognition();
@@ -268,6 +272,114 @@ export class WakeWordService {
     }
   }
 
+  private checkWakeWordMatch(
+    rawTranscript: string,
+    cleanTranscript: string,
+    cleanNoSpace: string
+  ): { matched: boolean; matchedPhrase: string } {
+    // 1. Direct explicit phrases (Guaranteed instant trigger for "stah light", "stahlight", "stalight", etc.)
+    const directPhrases = [
+      'stah light',
+      'stahlight',
+      'stalight',
+      'sta light',
+      'starlight',
+      'star light',
+      'star lite',
+      'stah lite',
+      'stah lit',
+      'star lit',
+      'stay light',
+      'staylight',
+      'stall light',
+      'stallight',
+      'start light',
+      'startlight',
+      'stop light',
+      'spot light',
+      'star like',
+      'star line',
+      'star life',
+      'star night',
+      'star late',
+      'starlet',
+      'starlette',
+      'sterlite',
+      'stilite',
+      'straight light',
+      'daylight',
+      'day light',
+      'delight',
+      'satellite',
+      'the light',
+      'highlight',
+      'heylight',
+      'headlight',
+      'st light',
+      'stlite',
+      'stalite',
+      'skylight',
+      'sky light',
+      'spotlight',
+      'stoplight',
+      'a light',
+      'to light',
+      'all light',
+      'star right',
+      'star guide',
+      'stay lit',
+      'star sight',
+    ];
+
+    for (const phrase of directPhrases) {
+      if (cleanTranscript.includes(phrase)) {
+        return { matched: true, matchedPhrase: phrase };
+      }
+      const phraseNoSpace = phrase.replace(/\s+/g, '');
+      if (cleanNoSpace.includes(phraseNoSpace)) {
+        return { matched: true, matchedPhrase: phraseNoSpace };
+      }
+    }
+
+    // 2. Token-pair adjacency check (e.g. "stah" + "light", "star" + "light", "sta" + "light")
+    const words = cleanTranscript.split(/\s+/);
+    for (let w = 0; w < words.length; w++) {
+      const current = words[w];
+      const next = words[w + 1];
+
+      if (
+        ['stah', 'star', 'sta', 'stay', 'stall', 'start', 'st', 'say', 'the', 'hey', 'hi'].includes(current) &&
+        next &&
+        ['light', 'lite', 'lit', 'like', 'line', 'night', 'late', 'site', 'sight', 'flight', 'right', 'fight', 'tight'].includes(next)
+      ) {
+        return { matched: true, matchedPhrase: `${current} ${next}` };
+      }
+
+      if (
+        (current.startsWith('stah') || current.startsWith('stal') || current.startsWith('star') || current.startsWith('stay')) &&
+        (current.endsWith('light') || current.endsWith('lite') || current.endsWith('lit') || current.endsWith('ight'))
+      ) {
+        return { matched: true, matchedPhrase: current };
+      }
+    }
+
+    // 3. Broad Regex pattern matches
+    const match =
+      cleanTranscript.match(this.wakeWordRegex) ||
+      cleanTranscript.match(this.singleWordRegex) ||
+      cleanTranscript.match(this.fastSpeechRegex) ||
+      cleanNoSpace.match(this.fastSpeechRegex) ||
+      rawTranscript.match(this.wakeWordRegex) ||
+      rawTranscript.match(this.singleWordRegex) ||
+      rawTranscript.match(this.fastSpeechRegex);
+
+    if (match) {
+      return { matched: true, matchedPhrase: match[0] };
+    }
+
+    return { matched: false, matchedPhrase: '' };
+  }
+
   private handleSpeechResult(event: IWakeWordRecognitionEvent) {
     if (this.isPaused) return;
 
@@ -281,7 +393,7 @@ export class WakeWordService {
         if (!raw) continue;
         const rawTranscript = raw.trim().toLowerCase();
 
-        console.debug('[WakeWord] Listening stream:', rawTranscript);
+        console.log('[WakeWord] Hearing audio stream:', rawTranscript);
 
         // Normalize punctuation, hyphens, and whitespace
         const cleanTranscript = rawTranscript
@@ -290,25 +402,31 @@ export class WakeWordService {
           .replace(/\s+/g, ' ')
           .trim();
 
-        // High-sensitivity regex match for "Hey Stalight" or "Stalight"
-        const match =
-          cleanTranscript.match(this.wakeWordRegex) ||
-          cleanTranscript.match(this.singleWordRegex) ||
-          rawTranscript.match(this.wakeWordRegex) ||
-          rawTranscript.match(this.singleWordRegex);
+        const cleanNoSpace = cleanTranscript.replace(/\s+/g, '');
 
-        if (match) {
+        const { matched, matchedPhrase } = this.checkWakeWordMatch(
+          rawTranscript,
+          cleanTranscript,
+          cleanNoSpace
+        );
+
+        if (matched) {
           this.lastTriggerTime = now;
           this.isPaused = true; // Prevent duplicate interim triggers for the same phrase
-          console.log('[WakeWord] WAKE MATCH:', match[0]);
+          console.log('[WakeWord] WAKE MATCH:', matchedPhrase);
 
           // Extract any query spoken in the same breath
-          const matchedPhrase = match[0];
           const phraseIndex = cleanTranscript.indexOf(matchedPhrase);
-          const rawRemaining =
-            phraseIndex >= 0
-              ? cleanTranscript.substring(phraseIndex + matchedPhrase.length).trim()
-              : '';
+          let rawRemaining = '';
+          if (phraseIndex >= 0) {
+            rawRemaining = cleanTranscript.substring(phraseIndex + matchedPhrase.length).trim();
+          } else {
+            // Check no-space phrase offset for rapid speech
+            const noSpaceIndex = cleanNoSpace.indexOf(matchedPhrase);
+            if (noSpaceIndex >= 0) {
+              rawRemaining = cleanNoSpace.substring(noSpaceIndex + matchedPhrase.length).trim();
+            }
+          }
 
           // Clean up and normalize "Stalight" in the query
           const remainingQuery = normalizeStalightPhonetics(rawRemaining);
