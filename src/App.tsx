@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { LoadingScreen } from "@/components/LoadingScreen";
+import { StalightChatbot } from "@/components/chatbot/StalightChatbot";
 
 // Lazy-loaded pages
 const Index = lazy(() => import("./pages/Index.tsx"));
@@ -57,6 +58,8 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
+        {/* Stalight AI Assistant Embeddable Widget */}
+        <StalightChatbot />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

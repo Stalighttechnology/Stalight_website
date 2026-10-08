@@ -76,7 +76,7 @@ const TermsOfService = () => {
           <p>
             STALIGHT TECHNOLOGIES LIMITED<br />
             Email: <a href="mailto:legal@stalight.in">legal@stalight.in</a><br />
-            Phone: +91 73495 51102<br />
+            Mobile: +91 73495 51102 / +91 73495 51101<br />
             Registered office: Bengaluru, India
           </p>
         </section>

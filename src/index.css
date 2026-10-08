@@ -345,3 +345,67 @@ html.smooth-scroll {
   animation: shine 0.8s ease-in-out forwards;
 }
 
+/* ── Google Gemini Aurora & Chromatic Glow Animations ── */
+@keyframes gemini-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gemini-pulse-glow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+}
+
+@keyframes gemini-float-star {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.08) rotate(3deg);
+  }
+}
+
+@keyframes gemini-gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gemini-spin {
+  animation: gemini-spin 6s linear infinite;
+}
+
+.animate-gemini-spin-fast {
+  animation: gemini-spin 3s linear infinite;
+}
+
+.animate-gemini-pulse {
+  animation: gemini-pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-gemini-star {
+  animation: gemini-float-star 3.5s ease-in-out infinite;
+}
+
+.animate-gemini-flow {
+  background-size: 200% 200%;
+  animation: gemini-gradient-flow 4s ease infinite;
+}
+
+

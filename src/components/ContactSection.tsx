@@ -161,7 +161,7 @@ const ContactSection = () => {
               {/* Contact Items Array Mapping */}
               {[
                 { icon: Mail, title: "Email", text: "contact@stalight.in", link: "mailto:contact@stalight.in" },
-                { icon: Phone, title: "Phone", text: "+91 73495 51102", link: "tel:+917349551102" },
+                { icon: Phone, title: "Mobile", text: "+91 73495 51102 / +91 73495 51101", link: "tel:+917349551102" },
                 { icon: MapPin, title: "Headquarters", text: "Rajajinagar, Bengaluru, Karnataka", link: null },
                 { icon: Clock, title: "Business Hours", text: "Monday – Saturday, 9:00 AM – 7:00 PM IST", link: null },
               ].map((item, idx) => (
