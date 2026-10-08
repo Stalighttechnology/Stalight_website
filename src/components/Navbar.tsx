@@ -3,7 +3,9 @@ import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 // Ensure your path is correct
-import stalightLogo from "@/assets/logos/stalightlogo.png";
+import stalightLogo from "@/assets/logos/stalightlogo.webp";
+
+import { OptimizedImage } from "./OptimizedImage";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -114,7 +116,7 @@ const Navbar = () => {
             
             {/* --- LOGO --- */}
             <Link to="/" className="flex items-center gap-2.5 shrink-0 group" aria-label="Home">
-              <img loading="lazy" decoding="async" src={stalightLogo} alt="Logo" className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105" />
+              <OptimizedImage priority src={stalightLogo} alt="Logo" className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105" />
               <div className="hidden sm:flex flex-col leading-none">
                 <span className="text-sm md:text-[16px] font-black text-slate-900 tracking-tight">Stalight</span>
                 <span className="text-[9px] md:text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">Technologies</span>

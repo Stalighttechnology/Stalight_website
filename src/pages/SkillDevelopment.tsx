@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import trainImg from "@/assets/products/jobfix.jpg";
+import trainImg from "@/assets/products/jobfix.webp";
 import { 
   GraduationCap, 
   Award, 

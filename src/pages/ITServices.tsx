@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import itImg from "@/assets/backgrounds/campus.jpg";
+import itImg from "@/assets/backgrounds/campus.webp";
 import { 
   Server, 
   Cloud, 

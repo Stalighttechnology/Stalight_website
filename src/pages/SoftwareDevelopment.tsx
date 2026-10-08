@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import devImg from "@/assets/products/it services.jpg";
+import devImg from "@/assets/products/it services.webp";
 import {
   Code2,
   MonitorSmartphone,

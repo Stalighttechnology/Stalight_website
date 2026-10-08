@@ -18,7 +18,7 @@ export const StalightLogoAvatar: React.FC<{ size?: number; className?: string }>
     />
     <div className="absolute inset-[1px] rounded-[14px] bg-white" />
     <img
-      src="/stalight-ai-logo.png"
+      src="/stalight-ai-logo.webp"
       alt="Stalight Intelligence"
       className="relative z-10 w-full h-full object-contain filter drop-shadow-[0_1px_3px_rgba(37,99,235,0.25)]"
       loading="eager"
@@ -51,7 +51,7 @@ export const SiriOrbGlow: React.FC<{ size?: number; active?: boolean }> = ({
     {/* Crisp Centered Star Logo with Subtle Hover Sparkle */}
     <div className="relative w-full h-full rounded-full p-2.5 flex items-center justify-center z-10">
       <img
-        src="/stalight-ai-logo.png"
+        src="/stalight-ai-logo.webp"
         alt="Stalight AI"
         className="w-full h-full object-contain filter drop-shadow-[0_2px_5px_rgba(37,99,235,0.25)] group-hover:scale-110 transition-transform duration-300"
       />

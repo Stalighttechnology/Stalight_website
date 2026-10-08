@@ -23,7 +23,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-import stalightLogo from "@/assets/logos/stalightlogo.png";
+import stalightLogo from "@/assets/logos/stalightlogo.webp";
 
 interface CertificateData {
   certificate_id: string;

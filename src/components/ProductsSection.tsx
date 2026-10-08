@@ -4,17 +4,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 // --- Images ---
-import ncImg1 from "@/assets/screenshots/leavereqimage.png";
-import ncImg2 from "@/assets/products/princydah.png";
+import ncImg1 from "@/assets/screenshots/leavereqimage.webp";
+import ncImg2 from "@/assets/products/princydah.webp";
 
-import nsImg1 from "@/assets/products/admindahhh.png";
-import nsImg2 from "@/assets/products/adminreult.png";
-import nsImg3 from "@/assets/products/learn and practie.png";
-import nsImg4 from "@/assets/products/reult.png";
-import nsImg5 from "@/assets/products/tudentdahboard.png";
-import nsImgCarousel1 from "@/assets/products/neurosync1.jpg";
-import nsImgCarousel2 from "@/assets/products/neurosync22.jpg";
-import nsImgCarousel3 from "@/assets/products/neurosync33.jpg";
+import nsImg1 from "@/assets/products/admindahhh.webp";
+import nsImg2 from "@/assets/products/adminreult.webp";
+import nsImg3 from "@/assets/products/learn and practie.webp";
+import nsImg4 from "@/assets/products/reult.webp";
+import nsImg5 from "@/assets/products/tudentdahboard.webp";
+import nsImgCarousel1 from "@/assets/products/neurosync1.webp";
+import nsImgCarousel2 from "@/assets/products/neurosync22.webp";
+import nsImgCarousel3 from "@/assets/products/neurosync33.webp";
 
 const neuroCampusImages = [ncImg1, ncImg2];
 const neuroSyncImages = [nsImg1, nsImg2, nsImg3, nsImg4, nsImg5];

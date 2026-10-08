@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import heroBg from "@/assets/backgrounds/background.png";
-import heroBgMobile from "@/assets/backgrounds/phoneback.png";
-import heroBgTablet from "@/assets/backgrounds/backtab.png";
+import heroBg from "@/assets/backgrounds/background.webp";
+import heroBgMobile from "@/assets/backgrounds/phoneback.webp";
+import heroBgTablet from "@/assets/backgrounds/backtab.webp";
 
 const easeOutExpo = [0.16, 1, 0.3, 1];
 

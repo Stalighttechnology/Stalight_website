@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useInView, Variants } from "framer-motion";
-import carrier1Img from "@/assets/backgrounds/carrier1.jpg";
-import carrier2Img from "@/assets/backgrounds/carrier2.jpg";
-import campusImg from "@/assets/backgrounds/campus.jpg";
+import carrier1Img from "@/assets/backgrounds/carrier1.webp";
+import carrier2Img from "@/assets/backgrounds/carrier2.webp";
+import campusImg from "@/assets/backgrounds/campus.webp";
+import { OptimizedImage } from "./OptimizedImage";
 
 // --- Enterprise-Grade Easing & Variants ---
 const premiumEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -187,11 +188,11 @@ const CareersPage = () => {
             {/* IMAGE LAYER (Pinned Right, Absolute) */}
             {/* On mobile, it spans the full width but fades heavily. On desktop, it takes the right 60% */}
             <div className="absolute top-0 right-0 w-full md:w-[60%] h-full z-0">
-              <img loading="lazy" decoding="async"
+              <OptimizedImage
                 src={campusImg}
                 alt="Corporate Campus"
                 onError={(e: any) => { e.currentTarget.src = carrier2Img; e.currentTarget.style.filter = 'none'; }}
-                className="w-full h-full object-cover object-right filter brightness-[0.85] transition-all duration-1000 ease-out hover:scale-105 origin-center"
+                className="w-full h-full object-cover object-right filter brightness-[0.85] hover:scale-105 origin-center"
               />
               {/* The Magic Gradient: Forces the left side of the image to fade perfectly into the #0A111F background */}
               <div className="absolute inset-0 bg-gradient-to-r from-[#0A111F] via-[#0A111F]/90 md:via-[#0A111F]/50 to-transparent pointer-events-none"></div>

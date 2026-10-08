@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import stalightLogo from "@/assets/logos/stalightlogo.png";
+import stalightLogo from "@/assets/logos/stalightlogo.webp";
 import { SEO } from "@/components/SEO";
 
 const TermsOfService = () => {

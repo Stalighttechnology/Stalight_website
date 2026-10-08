@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Code, GraduationCap, ServerCog, ArrowRight } from "lucide-react";
 
 // Import IT Services image
-import itServicesImg from "@/assets/products/it services.jpg";
+import itServicesImg from "@/assets/products/it services.webp";
 
 // --- Updated Content Array (Only 3 Cards Remaining) ---
 const capabilities = [

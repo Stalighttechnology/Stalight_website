@@ -18,27 +18,27 @@ import { OptimizedImage } from "@/components/OptimizedImage";
 import { useLaunchCountdown, TARGET_LAUNCH_DISPLAY } from "@/hooks/useLaunchCountdown";
 
 // --- Image Imports ---
-import campusImg from "@/assets/products/image.png";
-import loginpageImg from "@/assets/products/loginpagedesktop.png";
-import leavereqImg from "@/assets/screenshots/leavereqimage.png";
-import timetableImg from "@/assets/screenshots/timetable dash.png";
-import neurocampus11Img from "@/assets/products/princydah.png";
-import nebulaaiImg from "@/assets/products/nebulaai.png";
-import facerecognImg from "@/assets/products/scanforstudent.png";
-import resultsImg from "@/assets/screenshots/results.png";
-import mobileAppMockupImg from "@/assets/products/image.png";
-import playstoreImg from "@/assets/logos/playstore.png";
-import applestoreImg from "@/assets/logos/apple-store-icon.png";
-import amcLogo from "@/assets/logos/amclogo.png";
-import cityEngineeringLogo from "@/assets/logos/cityenginerring.jpg";
-import dwinethraLogo from "@/assets/logos/dwinethra.jpg";
-import gleamatorLogo from "@/assets/logos/gleamatorlogo.jpg";
-import eduforcarrierLogo from "@/assets/logos/eduforcarrier.png";
+import campusImg from "@/assets/products/image.webp";
+import loginpageImg from "@/assets/products/loginpagedesktop.webp";
+import leavereqImg from "@/assets/screenshots/leavereqimage.webp";
+import timetableImg from "@/assets/screenshots/timetable dash.webp";
+import neurocampus11Img from "@/assets/products/princydah.webp";
+import nebulaaiImg from "@/assets/products/nebulaai.webp";
+import facerecognImg from "@/assets/products/scanforstudent.webp";
+import resultsImg from "@/assets/screenshots/results.webp";
+import mobileAppMockupImg from "@/assets/products/image.webp";
+import playstoreImg from "@/assets/logos/playstore.webp";
+import applestoreImg from "@/assets/logos/apple-store-icon.webp";
+import amcLogo from "@/assets/logos/amclogo.webp";
+import cityEngineeringLogo from "@/assets/logos/cityenginerring.webp";
+import dwinethraLogo from "@/assets/logos/dwinethra.webp";
+import gleamatorLogo from "@/assets/logos/gleamatorlogo.webp";
+import eduforcarrierLogo from "@/assets/logos/eduforcarrier.webp";
 import tontadaryaLogo from "@/assets/logos/tontadarya.gif";
-import vyomaaLogo from "@/assets/logos/vyomaa.png";
-import suryaLogo from "@/assets/logos/surya.png";
-import nbaLogo from "@/assets/logos/images (2).jpg";
-import naacLogo from "@/assets/logos/NAAC_LOGO.png";
+import vyomaaLogo from "@/assets/logos/vyomaa.webp";
+import suryaLogo from "@/assets/logos/surya.webp";
+import nbaLogo from "@/assets/logos/images (2).webp";
+import naacLogo from "@/assets/logos/NAAC_LOGO.webp";
 
 // --- Custom Animated Number Component ---
 const AnimatedNumber = ({ value, duration = 2.5 }: { value: number; duration?: number }) => {

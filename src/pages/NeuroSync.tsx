@@ -15,19 +15,19 @@ import { OptimizedImage } from "@/components/OptimizedImage";
 import { useLaunchCountdown, TARGET_LAUNCH_DISPLAY } from "@/hooks/useLaunchCountdown";
 
 // Import NeuroSync images
-import neurosync1Img from "@/assets/products/neurosync1.jpg";
-import neurosync11Img from "@/assets/products/neurosync11.jpg";
-import neurosync22Img from "@/assets/products/neurosync22.jpg";
-import neurosync33Img from "@/assets/products/neurosync33.jpg";
-import leadboardneurosyncImg from "@/assets/screenshots/leadboardneurosync.jpg";
-import neurosynchandsetImg from "@/assets/products/neurosynchandset.jpg";
-import adminDahhImg from "@/assets/products/admindahhh.png";
-import adminResultImg from "@/assets/products/adminreult.png";
-import learnPracticeImg from "@/assets/products/learn and practie.png";
-import resultImg from "@/assets/products/reult.png";
-import studentDashboardImg from "@/assets/products/tudentdahboard.png";
-import adminDashboardImg from "@/assets/products/adminnnn.png";
-import profileImg from "@/assets/products/profile.png";
+import neurosync1Img from "@/assets/products/neurosync1.webp";
+import neurosync11Img from "@/assets/products/neurosync11.webp";
+import neurosync22Img from "@/assets/products/neurosync22.webp";
+import neurosync33Img from "@/assets/products/neurosync33.webp";
+import leadboardneurosyncImg from "@/assets/screenshots/leadboardneurosync.webp";
+import neurosynchandsetImg from "@/assets/products/neurosynchandset.webp";
+import adminDahhImg from "@/assets/products/admindahhh.webp";
+import adminResultImg from "@/assets/products/adminreult.webp";
+import learnPracticeImg from "@/assets/products/learn and practie.webp";
+import resultImg from "@/assets/products/reult.webp";
+import studentDashboardImg from "@/assets/products/tudentdahboard.webp";
+import adminDashboardImg from "@/assets/products/adminnnn.webp";
+import profileImg from "@/assets/products/profile.webp";
 
 // --- Custom Animated Number Component ---
 const AnimatedNumber = ({ value, duration = 2.5 }: { value: number; duration?: number }) => {
