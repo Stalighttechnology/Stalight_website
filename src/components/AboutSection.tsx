@@ -53,6 +53,8 @@ const AboutSection = () => {
         >
           {/* Animated Wave 1 (Back wave, slightly translucent lavender) */}
           <motion.path 
+            d="M0,32 C240,70 480,10 720,50 C960,90 1200,30 1440,64 L1440,120 L0,120 Z"
+            initial={{ d: "M0,32 C240,70 480,10 720,50 C960,90 1200,30 1440,64 L1440,120 L0,120 Z" }}
             animate={{
               d: [
                 "M0,32 C240,70 480,10 720,50 C960,90 1200,30 1440,64 L1440,120 L0,120 Z",
@@ -70,6 +72,8 @@ const AboutSection = () => {
           />
           {/* Animated Wave 2 (Middle wave, deeper tone) */}
           <motion.path 
+            d="M0,60 C360,100 720,20 1080,70 C1200,85 1320,110 1440,90 L1440,120 L0,120 Z"
+            initial={{ d: "M0,60 C360,100 720,20 1080,70 C1200,85 1320,110 1440,90 L1440,120 L0,120 Z" }}
             animate={{
               d: [
                 "M0,60 C360,100 720,20 1080,70 C1200,85 1320,110 1440,90 L1440,120 L0,120 Z",
@@ -87,6 +91,8 @@ const AboutSection = () => {
           />
           {/* Animated Wave 3 (Front main wave, matching the About Section background) */}
           <motion.path 
+            d="M0,80 C360,40 720,90 1080,50 C1200,35 1320,70 1440,60 L1440,120 L0,120 Z"
+            initial={{ d: "M0,80 C360,40 720,90 1080,50 C1200,35 1320,70 1440,60 L1440,120 L0,120 Z" }}
             animate={{
               d: [
                 "M0,80 C360,40 720,90 1080,50 C1200,35 1320,70 1440,60 L1440,120 L0,120 Z",

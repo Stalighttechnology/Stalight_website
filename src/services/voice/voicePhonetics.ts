@@ -31,7 +31,7 @@ export function normalizeStalightPhonetics(text: string): string {
   );
 
   normalized = normalized.replace(
-    /\b(starlight|star\s*light|star\s*lite|stahlight|stah\s*light|stah\s*lite|stah\s*lit|stahlt|staylight|stay\s*light|stay\s*lite|stallight|stall\s*light|startlight|start\s*light|sta\s*light|st\.\s*light|st\s*light|delight|daylight|day\s*light|skylight|sky\s*light|satellite|sat\s*light|sad\s*light|stelid|stalid|staled|stellite|straight\s*light|stalite|staight|starlite|starlet|starr\s*light|stlight|stlite|stlit|stilite)\b/gi,
+    /\b(starlight|star\s*light|star\s*lite|stahlight|stah\s*light|stah\s*lite|stah\s*lit|stahlt|staylight|stay\s*light|stay\s*lite|stallight|stall\s*light|startlight|start\s*light|sta\s*light|st\.\s*light|st\s*light|delight|daylight|day\s*light|skylight|sky\s*light|satellite|sat\s*light|sad\s*light|stelid|stalid|staled|stellite|straight\s*light|stalite|staight|starlite|starlet|starlette|sterlite|starr\s*light|stlight|stlite|stlit|stilite|spotlight|stoplight|star\s*like|star\s*life|star\s*line|star\s*night|star\s*late)\b/gi,
     'Stalight'
   );
 

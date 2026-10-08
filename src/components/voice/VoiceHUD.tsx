@@ -4,6 +4,7 @@ import { useVoiceAssistant } from '@/hooks/useVoiceAssistant';
 import { VoiceWaveform } from './VoiceWaveform';
 import { TypewriterText } from './TypewriterText';
 import { normalizeStalightPhonetics } from '@/services/voice/voicePhonetics';
+import { isBraveBrowser } from '@/services/voice/wakeWordService';
 import { VoiceBeam } from 'voice-glow';
 import stalightLogo from '@/assets/logos/stalightlogo.png';
 import {
@@ -48,7 +49,12 @@ export const VoiceHUD: React.FC<VoiceHUDProps> = ({ frequencyData, onClose }) =>
 
   const [textInput, setTextInput] = useState('');
   const [showSettings, setShowSettings] = useState(false);
+  const [isBrave, setIsBrave] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    isBraveBrowser().then((brave) => setIsBrave(brave));
+  }, []);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -215,6 +221,15 @@ export const VoiceHUD: React.FC<VoiceHUDProps> = ({ frequencyData, onClose }) =>
                 className="w-4 h-4 accent-blue-600 rounded cursor-pointer"
               />
             </div>
+
+            {isBrave && (
+              <div className="mt-2 pt-2 border-t border-slate-200/60 text-[10px] text-amber-700 flex items-start gap-1.5">
+                <span className="shrink-0 text-xs">🦁</span>
+                <span>
+                  <strong>Brave Browser:</strong> Enable <em>&ldquo;Google services for voice recognition&rdquo;</em> in <code>brave://settings/extensions</code> for hands-free wake word.
+                </span>
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

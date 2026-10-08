@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mic, ShieldCheck, Sparkles, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { isBraveBrowser } from '@/services/voice/wakeWordService';
 
 interface VoicePermissionModalProps {
   isOpen: boolean;
@@ -14,6 +15,11 @@ export const VoicePermissionModal: React.FC<VoicePermissionModalProps> = ({
   onAllow,
   onDismiss,
 }) => {
+  const [isBrave, setIsBrave] = useState(false);
+
+  useEffect(() => {
+    isBraveBrowser().then((brave) => setIsBrave(brave));
+  }, []);
   return (
     <AnimatePresence>
       {isOpen && (
@@ -77,13 +83,22 @@ export const VoicePermissionModal: React.FC<VoicePermissionModalProps> = ({
                 </li>
               </ul>
 
-              {/* Privacy Notice */}
+              {/* Privacy Notice & Brave Tip */}
               <div className="flex items-start gap-2 p-3 bg-slate-50 rounded-2xl border border-slate-100 text-[11px] text-slate-500">
                 <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span>
                   <strong>Privacy First:</strong> Wake-word detection runs locally in your browser. No raw microphone audio is ever permanently stored.
                 </span>
               </div>
+
+              {isBrave && (
+                <div className="flex items-start gap-2 p-2.5 bg-amber-50/80 rounded-2xl border border-amber-200/70 text-[11px] text-amber-800">
+                  <span className="shrink-0 text-xs">🦁</span>
+                  <span>
+                    <strong>Brave Browser Tip:</strong> If hands-free wake doesn&apos;t trigger, enable <em>&ldquo;Google services for voice recognition&rdquo;</em> in <code>brave://settings/extensions</code>.
+                  </span>
+                </div>
+              )}
             </div>
 
             {/* Actions */}

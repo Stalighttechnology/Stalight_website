@@ -373,6 +373,11 @@ export const VoiceAssistantProvider: React.FC<{ children: React.ReactNode }> = (
       setMicStream(stream);
       setPermissionState('granted');
       setState('READY');
+      try {
+        localStorage.setItem('stalight_mic_authorized', 'true');
+      } catch {
+        // ignore
+      }
       voiceAnalytics.track('microphone_permission_granted');
 
       // Start continuous wake-word detector
@@ -384,6 +389,11 @@ export const VoiceAssistantProvider: React.FC<{ children: React.ReactNode }> = (
     } catch (err) {
       const errorName = err instanceof Error ? err.name : 'UnknownError';
       console.warn('[VoiceAssistant] Mic permission denied or unavailable:', err);
+      try {
+        localStorage.removeItem('stalight_mic_authorized');
+      } catch {
+        // ignore
+      }
       setPermissionState('denied');
       setState('DISABLED');
       voiceAnalytics.track('microphone_permission_denied', { error: errorName });
@@ -417,6 +427,11 @@ export const VoiceAssistantProvider: React.FC<{ children: React.ReactNode }> = (
         micStreamRef.current = null;
         setMicStream(null);
       }
+      try {
+        localStorage.removeItem('stalight_mic_authorized');
+      } catch {
+        // ignore
+      }
       setPermissionState('prompt');
       setState('DISABLED');
     }
@@ -428,12 +443,16 @@ export const VoiceAssistantProvider: React.FC<{ children: React.ReactNode }> = (
     const supported = wakeWordService.checkSupport() && speechRecognitionService.isAvailable();
     setIsWakeWordSupported(supported);
 
+    const isPreviouslyAuthorized =
+      typeof localStorage !== 'undefined' &&
+      localStorage.getItem('stalight_mic_authorized') === 'true';
+
     // Check if permission was already granted previously
     if (navigator.permissions && navigator.permissions.query) {
       navigator.permissions
         .query({ name: 'microphone' as PermissionName })
         .then((permissionStatus) => {
-          if (permissionStatus.state === 'granted') {
+          if (permissionStatus.state === 'granted' || isPreviouslyAuthorized) {
             requestPermission();
           } else if (permissionStatus.state === 'denied') {
             setPermissionState('denied');
@@ -453,10 +472,18 @@ export const VoiceAssistantProvider: React.FC<{ children: React.ReactNode }> = (
           };
         })
         .catch(() => {
-          setState('IDLE');
+          if (isPreviouslyAuthorized) {
+            requestPermission();
+          } else {
+            setState('IDLE');
+          }
         });
     } else {
-      setState('IDLE');
+      if (isPreviouslyAuthorized) {
+        requestPermission();
+      } else {
+        setState('IDLE');
+      }
     }
 
     return () => {

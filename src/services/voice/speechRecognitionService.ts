@@ -55,7 +55,22 @@ export class SpeechRecognitionService {
   private readonly postSpeechSilenceTimeoutMs = 1300; // 1.3s natural pause after speaking
   private readonly initialSpeechTimeoutMs = 8000; // 8s patience while waiting for user to start speaking
 
+  private getPreferredLanguage(): string {
+    if (typeof navigator !== 'undefined' && navigator.language) {
+      if (navigator.language.toLowerCase().startsWith('en')) {
+        return navigator.language;
+      }
+    }
+    return 'en-US';
+  }
+
   constructor() {
+    this.initRecognition();
+  }
+
+  private initRecognition() {
+    if (typeof window === 'undefined') return;
+
     const SpeechRecognitionClass =
       (window as unknown as { SpeechRecognition?: new () => ISpeechRecognition }).SpeechRecognition ||
       (window as unknown as { webkitSpeechRecognition?: new () => ISpeechRecognition }).webkitSpeechRecognition;
@@ -64,7 +79,7 @@ export class SpeechRecognitionService {
       this.recognition = new SpeechRecognitionClass();
       this.recognition.continuous = true;
       this.recognition.interimResults = true;
-      this.recognition.lang = 'en-IN';
+      this.recognition.lang = this.getPreferredLanguage();
       this.recognition.maxAlternatives = 1;
     }
   }
@@ -75,8 +90,18 @@ export class SpeechRecognitionService {
 
   public startListening(options: STTOptions) {
     if (!this.recognition) {
+      this.initRecognition();
+    }
+
+    if (!this.recognition) {
       options.onError?.('Speech recognition is not supported in this browser.');
       return;
+    }
+
+    if (options.lang) {
+      this.recognition.lang = options.lang;
+    } else {
+      this.recognition.lang = this.getPreferredLanguage();
     }
 
     // Abort any existing STT session cleanly
@@ -131,7 +156,10 @@ export class SpeechRecognitionService {
 
     this.recognition.onerror = (event: ISpeechRecognitionErrorEvent) => {
       this.clearAllTimers();
-      if (event.error !== 'no-speech' && event.error !== 'aborted') {
+      if (event.error === 'network') {
+        console.debug('[SpeechRecognition] Network error in speech recognition (common in Brave if Google Speech Services are disabled in brave://settings/extensions).');
+        options.onError?.('Speech service unreachable. On Brave, please enable "Google services for voice recognition" in settings or type your question.');
+      } else if (event.error !== 'no-speech' && event.error !== 'aborted') {
         console.debug('[SpeechRecognition] Event error:', event.error);
         options.onError?.(event.error);
       }

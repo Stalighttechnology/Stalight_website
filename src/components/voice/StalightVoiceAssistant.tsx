@@ -156,7 +156,7 @@ export const StalightVoiceAssistant: React.FC = () => {
               >
                 <VoiceBeam
                   stream={micStream}
-                  processing={state === 'THINKING'}
+                  processing={state === 'THINKING' ? true : undefined}
                   type="pill"
                   colorVariant="ocean"
                   theme="light"
