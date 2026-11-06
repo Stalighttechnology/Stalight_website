@@ -24,7 +24,7 @@ const servicesDropdownItems = [
   { label: "Career Training", href: "/skill-development" },
   { label: "Software Development", href: "/software-development" },
   { label: "IT Services", href: "/it-services" },
-  
+  { label: "Growth & Marketing", href: "/growth-marketing" },
 ];
 
 const Navbar = () => {

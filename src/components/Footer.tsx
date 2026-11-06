@@ -53,6 +53,7 @@ const Footer = () => {
                 <ul className="space-y-3 md:space-y-4">
                   <li><Link to="/about-us" className="text-sm md:text-base text-stone-600 hover:text-stone-900 transition-colors font-medium">Our Brand</Link></li>
                   <li><a href="/#services" className="text-sm md:text-base text-stone-600 hover:text-stone-900 transition-colors font-medium">Services</a></li>
+                  <li><Link to="/growth-marketing" className="text-sm md:text-base text-stone-600 hover:text-stone-900 transition-colors font-medium">Growth & Marketing</Link></li>
                   <li><a href="/#careers" className="text-sm md:text-base text-stone-600 hover:text-stone-900 transition-colors font-medium">Careers</a></li>
                 </ul>
               </div>

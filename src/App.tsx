@@ -17,6 +17,7 @@ const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 const SoftwareDevelopment = lazy(() => import("./pages/SoftwareDevelopment.tsx"));
 const SkillDevelopment = lazy(() => import("./pages/SkillDevelopment.tsx"));
 const ITServices = lazy(() => import("./pages/ITServices.tsx"));
+const GrowthMarketing = lazy(() => import("./pages/GrowthMarketing.tsx"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.tsx"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService.tsx"));
 const AccountDeletion = lazy(() => import("./pages/AccountDeletion.tsx"));
@@ -39,6 +40,8 @@ const App = () => (
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/services" element={<ITServices />} />
             <Route path="/it-services" element={<ITServices />} />
+            <Route path="/growth-marketing" element={<GrowthMarketing />} />
+            <Route path="/growth-and-marketing" element={<GrowthMarketing />} />
             <Route path="/products" element={<SoftwareDevelopment />} />
             <Route path="/software-development" element={<SoftwareDevelopment />} />
             <Route path="/skill-development" element={<SkillDevelopment />} />
