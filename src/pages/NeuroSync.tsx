@@ -451,11 +451,11 @@ const NeuroSync = () => {
                 variants={fadeUpVariants}
                 className="group bg-white border border-slate-200/80 rounded-2xl sm:rounded-3xl overflow-hidden hover:shadow-[0_25px_50px_-12px_rgba(103,58,183,0.2)] hover:border-blue-300/60 hover:-translate-y-2 transition-all duration-500 flex flex-col h-full"
               >
-                <div className="h-48 sm:h-56 md:h-64 overflow-hidden relative bg-gradient-to-br from-slate-50 to-slate-100 border-b border-slate-200/60">
+                <div className="h-48 sm:h-56 md:h-64 overflow-hidden relative bg-white border-b border-slate-200/60 flex items-center justify-center p-3">
                   <OptimizedImage 
                     src={f.imgSrc} 
                     alt={`${f.title} - Stalight Sync AI Placement Platform by Stalight Technologies`} 
-                    className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out filter brightness-100 contrast-105" 
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 ease-out" 
                   />
 
                   <div className="absolute bottom-4 sm:bottom-5 left-5 sm:left-6 w-11 sm:w-13 h-11 sm:h-13 bg-white/95 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-xl border border-white/40 group-hover:bg-gradient-to-br group-hover:from-blue-500 group-hover:to-purple-500 group-hover:shadow-2xl group-hover:border-white/60 transition-all duration-500">

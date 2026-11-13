@@ -198,7 +198,7 @@ const ProductsSection = () => {
                       alt="Stalight Technologies - Leading Software Development Company in Bengaluru"
                       key={`nc-${ncIndex}`}
                       src={neuroCampusImages[ncIndex]}
-                      className="absolute inset-0 w-full h-full object-cover object-top"
+                      className="absolute inset-0 w-full h-full object-contain object-top p-2 bg-white"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0, transition: { duration: 0.3 } }}
@@ -239,7 +239,7 @@ const ProductsSection = () => {
                       alt="Stalight Technologies - Leading Software Development Company in Bengaluru"
                       key={`ns-${nsIndex}`}
                       src={neuroSyncImages[nsIndex]}
-                      className="absolute inset-0 w-full h-full object-cover object-top"
+                      className="absolute inset-0 w-full h-full object-contain object-top p-2 bg-white"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0, transition: { duration: 0.3 } }}
