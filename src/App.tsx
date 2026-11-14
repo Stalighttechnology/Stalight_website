@@ -23,6 +23,7 @@ const TermsOfService = lazy(() => import("./pages/TermsOfService.tsx"));
 const AccountDeletion = lazy(() => import("./pages/AccountDeletion.tsx"));
 const NDAOnboarding = lazy(() => import("./pages/NDAOnboarding.tsx"));
 const VerifyCertificate = lazy(() => import("./pages/VerifyCertificate.tsx"));
+const CompanyProfile = lazy(() => import("./pages/CompanyProfile.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -53,6 +54,8 @@ const App = () => (
             <Route path="/account-deletion" element={<AccountDeletion />} />
             <Route path="/verify/:certificateId" element={<VerifyCertificate />} />
             <Route path="/verify-offer/:certificateId" element={<VerifyCertificate />} />
+            <Route path="/company-profile" element={<CompanyProfile />} />
+            <Route path="/company-profile.html" element={<CompanyProfile />} />
             <Route path="/qX9mK7vNp4Rt8Yw2Lz5Bc1Hd6Fj3Ua9Pe7Tn4Mk8Rs2Vx6Qw1Zc9Lp5Dy3Hb8Ng4-onboarding-550e8400-e29b-41d4-a716-446655440000" element={<NDAOnboarding />} />
 
 

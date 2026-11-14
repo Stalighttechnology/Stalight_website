@@ -1,0 +1,1807 @@
+import subprocess
+import re
+import json
+
+# Read git original base
+orig = subprocess.check_output(['git', '-C', 'Stalight_website', 'show', 'HEAD:public/company-profile.html']).decode('utf-8')
+
+style = re.search(r'<style>(.*?)</style>', orig, re.DOTALL).group(1)
+body_sheets = re.search(r'<main class="deck-container">(.*?)</main>', orig, re.DOTALL).group(1)
+
+# Clean emojis from KPI pills
+body_sheets = body_sheets.replace('⚡ Sub-Second API Response (<120ms)', '<span style="font-weight:700;">Sub-Second API Response</span> (&lt;120ms)')
+body_sheets = body_sheets.replace('🎯 88% Verified Placement Rate', '<span style="font-weight:700;">88%</span> Verified Placement Rate')
+body_sheets = body_sheets.replace('🛡️ 99.98% SLA & Zero Breaches', '<span style="font-weight:700;">99.98% SLA</span> &amp; Zero Breaches')
+body_sheets = body_sheets.replace('🛡 99.98% SLA & Zero Breaches', '<span style="font-weight:700;">99.98% SLA</span> &amp; Zero Breaches')
+body_sheets = body_sheets.replace('📈 3.8x Qualified Pipeline Multiplier', '<span style="font-weight:700;">3.8x</span> Qualified Pipeline Multiplier')
+
+# Clean Cover badge heading
+body_sheets = re.sub(r'<div class="cover-badge">.*?Official Corporate Profile.*?</div>', '', body_sheets, flags=re.DOTALL)
+
+# Clean ® symbol
+body_sheets = body_sheets.replace('&reg;', '').replace('®', '')
+
+# Helper to extract sheet
+def get_sheet(n):
+    m = re.search(r'(<article class="sheet[^\"]*" id="slide-' + str(n) + '".*?</article>)', body_sheets, re.DOTALL)
+    return m.group(1) if m else ""
+
+sheet_2 = get_sheet(2) # About Stalight
+sheet_5 = get_sheet(5) # Stalight Sync AI Platform
+sheet_10 = get_sheet(10) # Strategic Alliances
+
+# Update Slide 2 (About)
+sheet_2 = re.sub(r'<span class="slide-number-badge">.*?</span>', '<span class="slide-number-badge">02 / 10</span>', sheet_2)
+sheet_2 = sheet_2.replace('<div class="about-item-icon">M</div>', '<div class="about-item-icon">01</div>')
+sheet_2 = sheet_2.replace('<div class="about-item-icon">V</div>', '<div class="about-item-icon">02</div>')
+sheet_2 = sheet_2.replace('<div class="about-item-icon">&hearts;</div>', '<div class="about-item-icon">03</div>')
+sheet_2 = sheet_2.replace('<div class="about-item-icon">&Delta;</div>', '<div class="about-item-icon">04</div>')
+sheet_2 = sheet_2.replace('<div class="about-item-icon">&infin;</div>', '<div class="about-item-icon">05</div>')
+sheet_2 = sheet_2.replace('<div class="about-item-icon">&sect;</div>', '<div class="about-item-icon">06</div>')
+
+# =========================================================================
+# SLIDE 1: HERO PAGE DESIGN (MATCHING WEBSITE HERO)
+# =========================================================================
+slide_1_hero = '''
+<article class="sheet cover-sheet" id="slide-1" data-page="1">
+  <div class="hero-cover-container">
+    <div class="hero-top-nav">
+      <div class="hero-brand">
+        <img src="profile_assets/stalightlogo.png" alt="Stalight Technologies" class="hero-brand-logo">
+        <div class="hero-brand-text">
+          <span class="hero-brand-title">STALIGHT</span>
+          <span class="hero-brand-sub">TECHNOLOGIES</span>
+        </div>
+      </div>
+      <div class="hero-pill-badge">
+        CORPORATE PROFILE &amp; CAPABILITY DECK &bull; 2026-2027
+      </div>
+    </div>
+
+    <div class="hero-main-body">
+      <div class="hero-left-col">
+        <div class="hero-pre-title">THE STANDARD FOR</div>
+        <h1 class="hero-main-heading">
+          Enterprise<br>
+          <span class="hero-grad-heading">Intelligence</span>
+        </h1>
+        <div class="hero-red-accent-bar"></div>
+        <p class="hero-description">
+          Bridging academic rigor and enterprise-grade technology with secure, scalable platforms designed for institutional trust and measurable impact.
+        </p>
+
+        <div class="hero-practices-grid">
+          <div class="hero-practice-card">
+            <div class="practice-card-header">
+              <span class="practice-indicator" style="background: #EC4899;"></span>
+              <span class="practice-title">Enterprise Platforms</span>
+            </div>
+            <p class="practice-desc">Scalable multi-tenant ERP &amp; governance architectures.</p>
+          </div>
+
+          <div class="hero-practice-card">
+            <div class="practice-card-header">
+              <span class="practice-indicator" style="background: #8B5CF6;"></span>
+              <span class="practice-title">Software Development</span>
+            </div>
+            <p class="practice-desc">Cloud-native microservices &amp; high-throughput APIs.</p>
+          </div>
+
+          <div class="hero-practice-card">
+            <div class="practice-card-header">
+              <span class="practice-indicator" style="background: #3B82F6;"></span>
+              <span class="practice-title">IT Services &amp; Cloud</span>
+            </div>
+            <p class="practice-desc">24/7 reliability operations, DevOps &amp; SOC-2 security.</p>
+          </div>
+
+          <div class="hero-practice-card">
+            <div class="practice-card-header">
+              <span class="practice-indicator" style="background: #10B981;"></span>
+              <span class="practice-title">Cognitive AI &amp; Training</span>
+            </div>
+            <p class="practice-desc">Voice AI evaluations &amp; workforce technical bootcamps.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right-col">
+        <!-- Visual space allowing the right-side 3D crystal graphic to shine cleanly -->
+      </div>
+    </div>
+
+    <div class="hero-bottom-strip">
+      <div class="hero-meta-left">
+        <span><strong>Headquarters:</strong> Bengaluru, Karnataka, India</span>
+        <span class="hero-sep">&bull;</span>
+        <span><strong>Portal:</strong> www.stalight.in</span>
+        <span class="hero-sep">&bull;</span>
+        <span><strong>Inquiries:</strong> contact@stalight.in</span>
+      </div>
+      <div class="hero-meta-right">
+        <span>PRIVILEGED &amp; CONFIDENTIAL</span>
+        <span class="slide-number-badge">01 / 10</span>
+      </div>
+    </div>
+  </div>
+</article>
+'''
+
+# =========================================================================
+# 4 BALANCED, RICH SERVICE PAGES (SLIDES 3, 4, 5, 6)
+# =========================================================================
+# SERVICE 1: SOFTWARE DEVELOPMENT
+slide_3_service_1 = '''
+<article class="sheet service-pro-sheet" id="slide-3" data-page="3">
+  <header class="sheet-header">
+    <div class="header-left">
+      <div class="accent-bars">
+        <div class="accent-bar"></div>
+        <div class="accent-bar short"></div>
+      </div>
+      <h2 class="header-title">CORE SERVICES: <span class="grad">SOFTWARE DEVELOPMENT &amp; CLOUD ARCHITECTURE</span></h2>
+    </div>
+    <div class="header-logo">
+      <img src="profile_assets/stalightlogo.png" alt="Stalight Logo">
+      <div class="header-logo-text">
+        <div class="header-logo-name">STALIGHT</div>
+        <div class="header-logo-sub">CUSTOM SOFTWARE</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="sheet-content">
+    <div class="services-lead-box">
+      <strong>Enterprise-Grade Custom Engineering.</strong> We architect resilient, hyper-scaled custom applications and mission-critical digital systems engineered for high-growth enterprises and modern institutions.
+    </div>
+
+    <div class="service-pro-layout">
+      <!-- LEFT COLUMN -->
+      <div class="service-left-panel">
+        <div class="service-hero-card">
+          <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80" onerror="this.src='profile_assets/carrier1.jpg'" alt="Software Engineering" class="service-hero-img">
+          <div class="service-hero-overlay">
+            <div class="service-kpi-badge">
+              <span class="kpi-metric">&lt;120ms</span>
+              <span class="kpi-label">Sub-Second Microservice Response</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-matrix-box">
+          <div class="matrix-box-title">ENGINEERING STACK &amp; SPECIFICATIONS</div>
+          <div class="matrix-chip-cloud">
+            <span class="mat-chip">TypeScript</span>
+            <span class="mat-chip">React 19</span>
+            <span class="mat-chip">Next.js App Router</span>
+            <span class="mat-chip">Node.js</span>
+            <span class="mat-chip">PostgreSQL</span>
+            <span class="mat-chip">Redis</span>
+            <span class="mat-chip">GraphQL</span>
+            <span class="mat-chip">Docker</span>
+            <span class="mat-chip">AWS Lambda</span>
+            <span class="mat-chip">Kubernetes</span>
+          </div>
+        </div>
+
+        <div class="service-methodology-box">
+          <div class="methodology-title">PRODUCTION METHODOLOGY</div>
+          <div class="methodology-list">
+            <div class="method-item">&bull; 2-Week Agile sprints with continuous sprint demo reviews</div>
+            <div class="method-item">&bull; Automated CI/CD test gates with &gt;90% unit &amp; E2E coverage</div>
+            <div class="method-item">&bull; Zero-downtime blue/green &amp; canary deployment pipelines</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="service-right-panel">
+        <div class="service-deliverable-card">
+          <div class="deliv-card-head">
+            <span class="deliv-num">01</span>
+            <span class="deliv-title">Cloud-Native Microservices &amp; Multi-Tenant SaaS</span>
+          </div>
+          <p class="deliv-desc">Engineered with isolated tenant schemas, automated horizontal pod autoscaling, zero data contamination, and automated disaster failover across AWS and GCP regions.</p>
+          <div class="deliv-bullets">
+            <div class="deliv-bullet">&bull; Multi-region database replication with sub-second failover recovery</div>
+            <div class="deliv-bullet">&bull; Event-driven message streaming using Apache Kafka and Redis pub/sub</div>
+            <div class="deliv-bullet">&bull; SOC-2 compliant tenant isolation with granular audit trail logging</div>
+          </div>
+        </div>
+
+        <div class="service-deliverable-card">
+          <div class="deliv-card-head">
+            <span class="deliv-num">02</span>
+            <span class="deliv-title">High-Throughput Web Applications &amp; Modern APIs</span>
+          </div>
+          <p class="deliv-desc">Sub-second client rendering using React 19 concurrent features, edge routing, low-latency REST/GraphQL gateway architectures, and cryptographically verified payloads.</p>
+          <div class="deliv-bullets">
+            <div class="deliv-bullet">&bull; Edge-cached dynamic routes minimizing server round-trip latency</div>
+            <div class="deliv-bullet">&bull; High-concurrency REST &amp; GraphQL APIs capable of 100,000+ RPM</div>
+            <div class="deliv-bullet">&bull; Cryptographic HMAC validation and rate-limiting perimeter defense</div>
+          </div>
+        </div>
+
+        <div class="service-deliverable-card">
+          <div class="deliv-card-head">
+            <span class="deliv-num">03</span>
+            <span class="deliv-title">Legacy System Modernization &amp; Enterprise Integration</span>
+          </div>
+          <p class="deliv-desc">Zero-downtime refactoring of legacy monolithic codebases into modular, event-driven distributed systems with backward-compatible API orchestration.</p>
+          <div class="deliv-bullets">
+            <div class="deliv-bullet">&bull; Strangler-fig refactoring pattern preserving continuous production availability</div>
+            <div class="deliv-bullet">&bull; Automated bi-directional database synchronization during transition phases</div>
+            <div class="deliv-bullet">&bull; Integration with legacy SAP, Oracle, and enterprise LDAP/SSO directories</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="services-footer-banner">
+      <div class="footer-banner-left">
+        <span class="banner-tag">DELIVERY COMMITMENT</span>
+        <span>Dedicated Enterprise Solution Architect &bull; Two-Week Sprint Cycles &bull; Continuous CI/CD Automated Testing</span>
+      </div>
+      <div class="footer-banner-right">100% INTELLECTUAL PROPERTY TRANSFERRED</div>
+    </div>
+  </div>
+
+  <footer class="sheet-footer">
+    <div class="footer-left">
+      <span style="font-weight: 600; color: #334155;">STALIGHT TECHNOLOGIES PVT. LTD.</span>
+      <span class="sep">&bull;</span>
+      <span>Enterprise Software Engineering</span>
+    </div>
+    <div class="footer-center">contact@stalight.in &bull; www.stalight.in</div>
+    <div class="footer-right">
+      <span>PAGE 03</span>
+      <span class="slide-number-badge">03 / 10</span>
+    </div>
+  </footer>
+</article>
+'''
+
+# SERVICE 2: CAREER TRAINING
+slide_4_service_2 = '''
+<article class="sheet service-pro-sheet" id="slide-4" data-page="4">
+  <header class="sheet-header">
+    <div class="header-left">
+      <div class="accent-bars">
+        <div class="accent-bar"></div>
+        <div class="accent-bar short"></div>
+      </div>
+      <h2 class="header-title">CORE SERVICES: <span class="grad">CAREER &amp; TECHNICAL SKILL DEVELOPMENT</span></h2>
+    </div>
+    <div class="header-logo">
+      <img src="profile_assets/stalightlogo.png" alt="Stalight Logo">
+      <div class="header-logo-text">
+        <div class="header-logo-name">STALIGHT</div>
+        <div class="header-logo-sub">TALENT ACCELERATION</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="sheet-content">
+    <div class="services-lead-box">
+      <strong>Workforce Capability Building.</strong> Empowering university engineering students, academic faculties, and corporate tech workforces with industry-standard technical training, real-world deployment labs, and verified hiring pathways.
+    </div>
+
+    <div class="service-pro-layout">
+      <!-- LEFT COLUMN -->
+      <div class="service-left-panel">
+        <div class="service-hero-card">
+          <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80" onerror="this.src='profile_assets/carrier2.jpg'" alt="Technical Training" class="service-hero-img">
+          <div class="service-hero-overlay">
+            <div class="service-kpi-badge">
+              <span class="kpi-metric">88%</span>
+              <span class="kpi-label">Verified Placement Acceleration</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-matrix-box">
+          <div class="matrix-box-title">CURRICULUM DISCIPLINES &amp; CERTIFICATIONS</div>
+          <div class="matrix-chip-cloud">
+            <span class="mat-chip">Full-Stack Bootcamp</span>
+            <span class="mat-chip">DSA Masterclass</span>
+            <span class="mat-chip">System Design</span>
+            <span class="mat-chip">DevOps &amp; Cloud</span>
+            <span class="mat-chip">Mock Interviews</span>
+            <span class="mat-chip">AI Inference</span>
+            <span class="mat-chip">Clean Architecture</span>
+            <span class="mat-chip">Live Projects</span>
+          </div>
+        </div>
+
+        <div class="service-methodology-box">
+          <div class="methodology-title">PEDAGOGY &amp; ASSESSMENT GATES</div>
+          <div class="methodology-list">
+            <div class="method-item">&bull; 100% Hands-on coding in cloud sandbox with automated test evaluations</div>
+            <div class="method-item">&bull; Weekly 1-on-1 code reviews with Senior FAANG / Tier-1 Tech Architects</div>
+            <div class="method-item">&bull; Final capstone deployment: multi-tier production SaaS on AWS</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="service-right-panel">
+        <div class="service-deliverable-card">
+          <div class="deliv-card-head">
+            <span class="deliv-num">01</span>
+            <span class="deliv-title">16-Week Intensive Full-Stack Engineering Bootcamps</span>
+          </div>
+          <p class="deliv-desc">Rigorous daily software engineering immersion covering modern TypeScript, React 19, Node.js backends, database indexing, and automated production deployments.</p>
+          <div class="deliv-bullets">
+            <div class="deliv-bullet">&bull; Progressive curriculum from modern JavaScript/TypeScript to distributed microservices</div>
+            <div class="deliv-bullet">&bull; Relational SQL query optimization, Redis caching patterns &amp; NoSQL scaling</div>
+            <div class="deliv-bullet">&bull; Production deployment to AWS ECS/Fargate with custom domain SSL</div>
+          </div>
+        </div>
+
+        <div class="service-deliverable-card">
+          <div class="deliv-card-head">
+            <span class="deliv-num">02</span>
+            <span class="deliv-title">Curated Data Structures, Algorithms &amp; System Design</span>
+          </div>
+          <p class="deliv-desc">Comprehensive preparation for Tier-1 technology recruitment drives with high-frequency algorithmic problem solving, time-complexity optimization, and distributed systems logic.</p>
+          <div class="deliv-bullets">
+            <div class="deliv-bullet">&bull; 500+ curated algorithmic coding challenges categorized by patterns &amp; Big-O</div>
+            <div class="deliv-bullet">&bull; High-level &amp; low-level system design simulations (Rate limiters, TinyURL, WhatsApp)</div>
+            <div class="deliv-bullet">&bull; Mock technical interviews evaluated by AI speech &amp; logic scoring engines</div>
+          </div>
+        </div>
+
+        <div class="service-deliverable-card">
+          <div class="deliv-card-head">
+            <span class="deliv-num">03</span>
+            <span class="deliv-title">Cheat-Proof Cloud IDE &amp; Live Recruiter Evaluation</span>
+          </div>
+          <p class="deliv-desc">Hands-on student evaluation via Stalight Sync sandbox, generating verified code execution heatmaps, technical rankings, and direct interview shortlists for corporate partners.</p>
+          <div class="deliv-bullets">
+            <div class="deliv-bullet">&bull; Browser-based zero-setup cloud coding environment for 15+ programming languages</div>
+            <div class="deliv-bullet">&bull; Verifiable technical scorecard shared directly with 40+ corporate hiring partners</div>
+            <div class="deliv-bullet">&bull; Automated placement drives with structured interview slotting &amp; offer generation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="services-footer-banner">
+      <div class="footer-banner-left">
+        <span class="banner-tag">ACADEMIC EXCELLENCE</span>
+        <span>Outcome-Based Education Framework &bull; UGC &amp; AICTE Credit Compatible &bull; Direct Placement Drives</span>
+      </div>
+      <div class="footer-banner-right">10,000+ ENGINEERS TRAINED</div>
+    </div>
+  </div>
+
+  <footer class="sheet-footer">
+    <div class="footer-left">
+      <span style="font-weight: 600; color: #334155;">STALIGHT TECHNOLOGIES PVT. LTD.</span>
+      <span class="sep">&bull;</span>
+      <span>Career &amp; Skill Development</span>
+    </div>
+    <div class="footer-center">contact@stalight.in &bull; www.stalight.in</div>
+    <div class="footer-right">
+      <span>PAGE 04</span>
+      <span class="slide-number-badge">04 / 10</span>
+    </div>
+  </footer>
+</article>
+'''
+
+# SERVICE 3: IT SERVICES
+slide_5_service_3 = '''
+<article class="sheet service-pro-sheet" id="slide-5" data-page="5">
+  <header class="sheet-header">
+    <div class="header-left">
+      <div class="accent-bars">
+        <div class="accent-bar"></div>
+        <div class="accent-bar short"></div>
+      </div>
+      <h2 class="header-title">CORE SERVICES: <span class="grad">MANAGED IT OPERATIONS &amp; CLOUD INFRASTRUCTURE</span></h2>
+    </div>
+    <div class="header-logo">
+      <img src="profile_assets/stalightlogo.png" alt="Stalight Logo">
+      <div class="header-logo-text">
+        <div class="header-logo-name">STALIGHT</div>
+        <div class="header-logo-sub">MANAGED CLOUD</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="sheet-content">
+    <div class="services-lead-box">
+      <strong>High-Availability Cloud Services.</strong> Delivering comprehensive managed IT operations, mission-critical cloud hosting, automated multi-cluster security, and 24/7 reliability operations for zero unplanned downtime.
+    </div>
+
+    <div class="service-pro-layout">
+      <!-- LEFT COLUMN -->
+      <div class="service-left-panel">
+        <div class="service-hero-card">
+          <img src="profile_assets/it services.jpg" alt="Managed IT Services" class="service-hero-img">
+          <div class="service-hero-overlay">
+            <div class="service-kpi-badge">
+              <span class="kpi-metric">99.98%</span>
+              <span class="kpi-label">Guaranteed Production Uptime SLA</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-matrix-box">
+          <div class="matrix-box-title">INFRASTRUCTURE &amp; COMPLIANCE MATRIX</div>
+          <div class="matrix-chip-cloud">
+            <span class="mat-chip">AWS Cloud</span>
+            <span class="mat-chip">Google Cloud</span>
+            <span class="mat-chip">Microsoft Azure</span>
+            <span class="mat-chip">Kubernetes</span>
+            <span class="mat-chip">Docker</span>
+            <span class="mat-chip">Terraform</span>
+            <span class="mat-chip">SOC-2 Type II</span>
+            <span class="mat-chip">ISO 27001</span>
+            <span class="mat-chip">Datadog</span>
+            <span class="mat-chip">Prometheus</span>
+          </div>
+        </div>
+
+        <div class="service-methodology-box">
+          <div class="methodology-title">SECURITY &amp; AUDIT SAFEGUARDS</div>
+          <div class="methodology-list">
+            <div class="method-item">&bull; 24/7/365 Automated uptime monitoring with &lt;60s incident alerting</div>
+            <div class="method-item">&bull; End-to-end AES-256 data encryption at rest and TLS 1.3 in transit</div>
+            <div class="method-item">&bull; Automated daily incremental backups with geo-redundant storage</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="service-right-panel">
+        <div class="service-deliverable-card">
+          <div class="deliv-card-head">
+            <span class="deliv-num">01</span>
+            <span class="deliv-title">Multi-Cloud Hosting &amp; Infrastructure as Code</span>
+          </div>
+          <p class="deliv-desc">Automated provisioning and disaster-recovery replication using Terraform on AWS, Azure, and GCP with automated cost optimization and load distribution.</p>
+          <div class="deliv-bullets">
+            <div class="deliv-bullet">&bull; Terraform-managed declarative infrastructure with GitOps approval workflows</div>
+            <div class="deliv-bullet">&bull; Automated cloud cost governance and continuous resource right-sizing</div>
+            <div class="deliv-bullet">&bull; Cross-region disaster recovery standby configurations with automated RPO/RTO</div>
+          </div>
+        </div>
+
+        <div class="service-deliverable-card">
+          <div class="deliv-card-head">
+            <span class="deliv-num">02</span>
+            <span class="deliv-title">Kubernetes Cluster Orchestration &amp; CI/CD Pipelines</span>
+          </div>
+          <p class="deliv-desc">Production container orchestration with zero-downtime rolling updates, automated canary deployments, isolated ingress gateways, and automated secret management.</p>
+          <div class="deliv-bullets">
+            <div class="deliv-bullet">&bull; Hardened Kubernetes (EKS / GKE) clusters with strict network security policies</div>
+            <div class="deliv-bullet">&bull; Automated GitHub Actions pipelines with container vulnerability scanning</div>
+            <div class="deliv-bullet">&bull; HashiCorp Vault integration for centralized cryptographic secrets storage</div>
+          </div>
+        </div>
+
+        <div class="service-deliverable-card">
+          <div class="deliv-card-head">
+            <span class="deliv-num">03</span>
+            <span class="deliv-title">24/7 Security Operations, Monitoring &amp; Compliance</span>
+          </div>
+          <p class="deliv-desc">Real-time telemetric alerting, continuous SOC-2 &amp; ISO 27001 audit tracking, end-to-end data encryption at rest and in transit, and dedicated Tier-3 incident response.</p>
+          <div class="deliv-bullets">
+            <div class="deliv-bullet">&bull; Continuous compliance mapping for SOC-2, ISO 27001, and Indian Data Sovereignty</div>
+            <div class="deliv-bullet">&bull; Distributed Denial of Service (DDoS) mitigation and WAF perimeter controls</div>
+            <div class="deliv-bullet">&bull; Dedicated escalation engineering pod on standby 24/7 for zero downtime</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="services-footer-banner">
+      <div class="footer-banner-left">
+        <span class="banner-tag">INFRASTRUCTURE GUARANTEE</span>
+        <span>Sub-Minute Incident Triage &bull; Automated Daily Cloud Backups &bull; Full Data Sovereignty in India</span>
+      </div>
+      <div class="footer-banner-right">ZERO SECURITY BREACHES</div>
+    </div>
+  </div>
+
+  <footer class="sheet-footer">
+    <div class="footer-left">
+      <span style="font-weight: 600; color: #334155;">STALIGHT TECHNOLOGIES PVT. LTD.</span>
+      <span class="sep">&bull;</span>
+      <span>Managed IT Services</span>
+    </div>
+    <div class="footer-center">contact@stalight.in &bull; www.stalight.in</div>
+    <div class="footer-right">
+      <span>PAGE 05</span>
+      <span class="slide-number-badge">05 / 10</span>
+    </div>
+  </footer>
+</article>
+'''
+
+# SERVICE 4: GROWTH MARKETING
+slide_6_service_4 = '''
+<article class="sheet service-pro-sheet" id="slide-6" data-page="6">
+  <header class="sheet-header">
+    <div class="header-left">
+      <div class="accent-bars">
+        <div class="accent-bar"></div>
+        <div class="accent-bar short"></div>
+      </div>
+      <h2 class="header-title">CORE SERVICES: <span class="grad">B2B GROWTH &amp; DEMAND MARKETING OPERATIONS</span></h2>
+    </div>
+    <div class="header-logo">
+      <img src="profile_assets/stalightlogo.png" alt="Stalight Logo">
+      <div class="header-logo-text">
+        <div class="header-logo-name">STALIGHT</div>
+        <div class="header-logo-sub">GROWTH ARCHITECTURE</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="sheet-content">
+    <div class="services-lead-box">
+      <strong>High-Intent B2B Revenue Architecture.</strong> Delivering scalable outbound pipeline engineering, Account-Based Marketing (ABM) stakeholder penetration, and verified executive contact discovery for institutional and corporate growth.
+    </div>
+
+    <div class="service-pro-layout">
+      <!-- LEFT COLUMN -->
+      <div class="service-left-panel">
+        <div class="service-hero-card">
+          <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80" onerror="this.src='profile_assets/office.jpeg'" alt="Growth Marketing" class="service-hero-img">
+          <div class="service-hero-overlay">
+            <div class="service-kpi-badge">
+              <span class="kpi-metric">3.8x</span>
+              <span class="kpi-label">Qualified Pipeline Multiplier</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-matrix-box">
+          <div class="matrix-box-title">REVENUE CHANNELS &amp; MARTECH SUITE</div>
+          <div class="matrix-chip-cloud">
+            <span class="mat-chip">Account-Based Marketing</span>
+            <span class="mat-chip">C-Suite Lead Gen</span>
+            <span class="mat-chip">HubSpot CRM</span>
+            <span class="mat-chip">Cold Email Automation</span>
+            <span class="mat-chip">LinkedIn Inbound</span>
+            <span class="mat-chip">Sales Pipelines</span>
+            <span class="mat-chip">Attribution Engine</span>
+            <span class="mat-chip">Content Syndication</span>
+          </div>
+        </div>
+
+        <div class="service-methodology-box">
+          <div class="methodology-title">OUTBOUND METHODOLOGY</div>
+          <div class="methodology-list">
+            <div class="method-item">&bull; 100% Hand-verified executive contact discovery across target accounts</div>
+            <div class="method-item">&bull; Multi-inbox email warmup protocols ensuring &gt;98% inbox deliverability</div>
+            <div class="method-item">&bull; Automated CRM synchronization with real-time lead score qualification</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="service-right-panel">
+        <div class="service-deliverable-card">
+          <div class="deliv-card-head">
+            <span class="deliv-num">01</span>
+            <span class="deliv-title">Verified C-Suite Executive Discovery &amp; Intent Sourcing</span>
+          </div>
+          <p class="deliv-desc">Direct penetration of university leadership (Deans, Principals, Trustees) and corporate CXOs using proprietary enrichment engines and multi-touch verification.</p>
+          <div class="deliv-bullets">
+            <div class="deliv-bullet">&bull; Custom B2B contact lists built with verified phone numbers &amp; direct emails</div>
+            <div class="deliv-bullet">&bull; Intent-data surveillance detecting institutional buying cycles &amp; tech adoption</div>
+            <div class="deliv-bullet">&bull; Tier-1 database enrichment cross-referencing LinkedIn, ZoomInfo &amp; public filings</div>
+          </div>
+        </div>
+
+        <div class="service-deliverable-card">
+          <div class="deliv-card-head">
+            <span class="deliv-num">02</span>
+            <span class="deliv-title">Account-Based Marketing (ABM) &amp; Outbound Cadences</span>
+          </div>
+          <p class="deliv-desc">Highly personalized stakeholder nurturing across LinkedIn, email infrastructure, and digital channels delivering consistent, high-ticket deal opportunities.</p>
+          <div class="deliv-bullets">
+            <div class="deliv-bullet">&bull; Account tiering (Tier-1, 2, 3) with customized messaging collateral</div>
+            <div class="deliv-bullet">&bull; High-deliverability secondary domains with automated SPF, DKIM, and DMARC</div>
+            <div class="deliv-bullet">&bull; Multi-touch follow-up sequences delivering verified response rates &gt;18%</div>
+          </div>
+        </div>
+
+        <div class="service-deliverable-card">
+          <div class="deliv-card-head">
+            <span class="deliv-num">03</span>
+            <span class="deliv-title">CRM Workflow Automation &amp; Multi-Touch Pipeline Attribution</span>
+          </div>
+          <p class="deliv-desc">End-to-end integration with HubSpot, Salesforce, and Zoho CRM to track deal velocity, inbound attribution, sales qualified leads (SQLs), and lifecycle revenue.</p>
+          <div class="deliv-bullets">
+            <div class="deliv-bullet">&bull; Seamless bi-directional CRM syncing eliminating manual rep data entry</div>
+            <div class="deliv-bullet">&bull; Multi-touch pipeline attribution reporting showing exact ROI per campaign</div>
+            <div class="deliv-bullet">&bull; Executive pipeline dashboard with predictive sales forecasting analytics</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="services-footer-banner">
+      <div class="footer-banner-left">
+        <span class="banner-tag">PIPELINE COMMITMENT</span>
+        <span>Guaranteed Verified Contacts &bull; Deliverability Safeguards &bull; Full Pipeline Attribution Analytics</span>
+      </div>
+      <div class="footer-banner-right">HIGH CONVERSION RATE</div>
+    </div>
+  </div>
+
+  <footer class="sheet-footer">
+    <div class="footer-left">
+      <span style="font-weight: 600; color: #334155;">STALIGHT TECHNOLOGIES PVT. LTD.</span>
+      <span class="sep">&bull;</span>
+      <span>Growth &amp; Marketing Operations</span>
+    </div>
+    <div class="footer-center">contact@stalight.in &bull; www.stalight.in</div>
+    <div class="footer-right">
+      <span>PAGE 06</span>
+      <span class="slide-number-badge">06 / 10</span>
+    </div>
+  </footer>
+</article>
+'''
+
+# =========================================================================
+# SLIDE 7: ACADEMIC EXCELLENCE: STALIGHT CAMPUS ERP
+# (REDESIGNED TO LOOK IDENTICAL TO STALIGHT SYNC AI PLATFORM - TOP 6 FEATURES)
+# =========================================================================
+slide_7_campus = '''
+<article class="sheet" id="slide-7" data-page="7">
+  <header class="sheet-header">
+    <div class="header-left">
+      <div class="accent-bars">
+        <div class="accent-bar"></div>
+        <div class="accent-bar short"></div>
+      </div>
+      <h2 class="header-title">ACADEMIC EXCELLENCE: <span class="grad">STALIGHT CAMPUS ERP</span></h2>
+    </div>
+    <div class="header-logo">
+      <img src="profile_assets/stalightlogo.png" alt="Stalight Logo">
+      <div class="header-logo-text">
+        <div class="header-logo-name">STALIGHT</div>
+        <div class="header-logo-sub">TECHNOLOGIES</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="sheet-content">
+    <div class="sync-grid">
+      <!-- Feature 1: Assignments Dashboard -->
+      <div class="sync-card">
+        <div class="sync-card-media">
+          <img src="profile_assets/nebulaai.png" alt="Assignments Dashboard">
+        </div>
+        <div class="sync-card-title">Assignments &amp; Grading Console</div>
+        <p class="sync-card-desc">Real-time digital assignment tracking, overdue alerts, multi-file grading console with automated rubric feedback, and seamless faculty-student submission workflows.</p>
+      </div>
+
+      <!-- Feature 2: Fee Management -->
+      <div class="sync-card">
+        <div class="sync-card-media">
+          <img src="profile_assets/Screenshot 2026-05-23 at 10.39.36 AM.png" alt="Fee Management">
+        </div>
+        <div class="sync-card-title">Fee Management &amp; Billing</div>
+        <p class="sync-card-desc">Customizable installment breakdowns, automated fine logic, integrated multi-bank payment gateway auto-reconciliation, and defalcation elimination with verifiable receipts.</p>
+      </div>
+
+      <!-- Feature 3: Attendance System -->
+      <div class="sync-card">
+        <div class="sync-card-media">
+          <img src="profile_assets/facerecogn.jpg" alt="Facial Recognition Attendance">
+        </div>
+        <div class="sync-card-title">AI Facial Recognition Attendance</div>
+        <p class="sync-card-desc">Sub-second multi-student facial scanning (<450ms), anti-proxy GPS-geofenced mobile check-ins, and instant automated WhatsApp/SMS parent notifications on absences.</p>
+      </div>
+
+      <!-- Feature 4: Leave Workflows -->
+      <div class="sync-card">
+        <div class="sync-card-media">
+          <img src="profile_assets/leavereqimage.png" alt="Leave Workflows">
+        </div>
+        <div class="sync-card-title">Multi-Level Leave Approvals</div>
+        <p class="sync-card-desc">Hierarchical approval pipelines (Mentor &rarr; HOD &rarr; Principal), medical certificate attachment verification, and real-time push notifications on status change.</p>
+      </div>
+
+      <!-- Feature 5: Academic Results -->
+      <div class="sync-card">
+        <div class="sync-card-media">
+          <img src="profile_assets/results.png" alt="Academic Results">
+        </div>
+        <div class="sync-card-title">Gradebook Analytics &amp; Outcomes</div>
+        <p class="sync-card-desc">Automated SGPA &amp; CGPA calculation algorithms, tamper-proof verifiable digital marksheets, and at-risk student diagnostic charts for NAAC CO/PO compliance.</p>
+      </div>
+
+      <!-- Feature 6: Institutional Analytics -->
+      <div class="sync-card">
+        <div class="sync-card-media">
+          <img src="profile_assets/princydah.png" alt="Admin Dashboard">
+        </div>
+        <div class="sync-card-title">Master Command Center Dashboard</div>
+        <p class="sync-card-desc">High-level executive reporting, faculty workload balancing, timetable clash-prevention automation, and one-click documentation export for NAAC A++ and NBA audits.</p>
+      </div>
+    </div>
+
+    <!-- COMPLIANCE & APP STORE BAR -->
+    <div class="campus-compliance-bar">
+      <div class="compliance-badge">
+        <img src="profile_assets/NAAC_LOGO.png" alt="NAAC Accreditation">
+        <div class="compliance-text">
+          <strong>NAAC A++ Alignment</strong>
+          <span>CO/PO Outcome Framework</span>
+        </div>
+      </div>
+      <div class="compliance-badge">
+        <img src="profile_assets/images (2).jpg" alt="NBA Quality Framework">
+        <div class="compliance-text">
+          <strong>NBA Quality Ready</strong>
+          <span>Criteria Mapping &amp; Audits</span>
+        </div>
+      </div>
+      <div class="compliance-badge">
+        <img src="profile_assets/playstore.png" alt="Google Play Store">
+        <div class="compliance-text">
+          <strong>Google Play Store</strong>
+          <span>Verified Android App (4.8★)</span>
+        </div>
+      </div>
+      <div class="compliance-badge">
+        <img src="profile_assets/apple-store-icon.png" alt="Apple App Store">
+        <div class="compliance-text">
+          <strong>Apple App Store</strong>
+          <span>Certified iOS Native App</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="sheet-footer">
+    <div class="footer-left">
+      <span style="font-weight: 600; color: #334155;">STALIGHT TECHNOLOGIES PVT. LTD.</span>
+      <span class="sep">&bull;</span>
+      <span>Proprietary Product: Stalight Campus ERP</span>
+    </div>
+    <div class="footer-center">contact@stalight.in &bull; www.stalight.in</div>
+    <div class="footer-right">
+      <span>PAGE 07</span>
+      <span class="slide-number-badge">07 / 10</span>
+    </div>
+  </footer>
+</article>
+'''
+
+# Update Slide 8: Stalight Sync AI Platform
+slide_8_sync = re.sub(r'id="slide-5"', 'id="slide-8"', sheet_5)
+slide_8_sync = re.sub(r'data-page="5"', 'data-page="8"', slide_8_sync)
+slide_8_sync = re.sub(r'<span>PAGE 05</span>', '<span>PAGE 08</span>', slide_8_sync)
+slide_8_sync = re.sub(r'<span class="slide-number-badge">.*?</span>', '<span class="slide-number-badge">08 / 10</span>', slide_8_sync)
+slide_8_sync = re.sub(r'<span class="footer-page-pill">.*?</span>', '<span class="slide-number-badge">08 / 10</span>', slide_8_sync)
+
+# =========================================================================
+# SLIDE 9: CAPACITY BUILDING: STALIGHT ACADEMY
+# (FIXED ALL EMPTY SPACES - TIGHT, BALANCED, HIGH-DENSITY ENTERPRISE LAYOUT)
+# =========================================================================
+slide_9_academy = '''
+<article class="sheet" id="slide-9" data-page="9">
+  <header class="sheet-header">
+    <div class="header-left">
+      <div class="accent-bars">
+        <div class="accent-bar"></div>
+        <div class="accent-bar short"></div>
+      </div>
+      <h2 class="header-title">CAPACITY BUILDING: <span class="grad">STALIGHT ACADEMY</span></h2>
+    </div>
+    <div class="header-logo">
+      <img src="profile_assets/stalightlogo.png" alt="Stalight Logo">
+      <div class="header-logo-text">
+        <div class="header-logo-name">STALIGHT</div>
+        <div class="header-logo-sub">TECHNOLOGIES</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="sheet-content">
+    <div class="services-lead-box" style="margin-bottom: 8px;">
+      <strong>Workforce Technical Enablement.</strong> Empowering university engineering talent and technical workforces with industry-standard curriculum tracks, hands-on production microservices labs, and verified corporate recruitment pipelines.
+    </div>
+
+    <div class="academy-pro-layout">
+      <!-- LEFT COLUMN: ELITE DIPLOMA TRACKS (3 RICH CARDS) -->
+      <div class="academy-left-panel">
+        <div class="academy-col-header-pill">ACCREDITED DIPLOMA TRACKS</div>
+
+        <div class="academy-track-box">
+          <div class="track-header-line">
+            <span class="track-title-bold">Full Stack Enterprise Dev</span>
+            <span class="track-badge-pill">16 WEEKS</span>
+          </div>
+          <p class="track-text">Mastery of TypeScript, React 19, Node.js, and cloud database architecture with hands-on production microservices and live deployment.</p>
+          <div class="track-deliverable-items">
+            <div>&bull; React 19 concurrent features &amp; Next.js 15 App Router</div>
+            <div>&bull; High-throughput PostgreSQL with Prisma &amp; Drizzle ORM</div>
+            <div>&bull; Dockerized microservice architecture &amp; CI/CD automation</div>
+          </div>
+          <div class="track-tag-cloud">
+            <span class="t-badge">React 19</span>
+            <span class="t-badge">Next.js</span>
+            <span class="t-badge">Node.js</span>
+            <span class="t-badge">PostgreSQL</span>
+          </div>
+        </div>
+
+        <div class="academy-track-box">
+          <div class="track-header-line">
+            <span class="track-title-bold">Cloud Architecture &amp; DevOps</span>
+            <span class="track-badge-pill">14 WEEKS</span>
+          </div>
+          <p class="track-text">Docker containerization, Kubernetes cluster orchestration, Terraform infrastructure as code, automated CI/CD pipelines, and multi-cloud reliability management.</p>
+          <div class="track-deliverable-items">
+            <div>&bull; AWS Solutions Architect &amp; Cloud Practitioner alignment</div>
+            <div>&bull; Kubernetes pod scaling, ingress controllers &amp; Helm charts</div>
+            <div>&bull; Automated infrastructure provisioning via Terraform HCL</div>
+          </div>
+          <div class="track-tag-cloud">
+            <span class="t-badge">AWS</span>
+            <span class="t-badge">Docker</span>
+            <span class="t-badge">Kubernetes</span>
+            <span class="t-badge">Terraform</span>
+          </div>
+        </div>
+
+        <div class="academy-cohort-strip">
+          <div class="cohort-strip-tag">TRAINING COHORTS &bull; FOUNDATION TO SCALE</div>
+          <div class="cohort-strip-text">Foundation (DSA &amp; System Design) &bull; Advanced (Enterprise Scale Microservices) &bull; Corporate Finishing School with Guaranteed Placement Acceleration</div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: 4 COMPREHENSIVE ADVANCED MODULES (ZERO EMPTY GAPS) -->
+      <div class="academy-right-panel">
+        <div class="academy-col-header-pill">SPECIALISED ADVANCED INDUSTRY MODULES</div>
+
+        <div class="academy-modules-grid">
+          <!-- Module 1 -->
+          <div class="module-rich-box">
+            <div class="mod-head">
+              <span class="mod-code">AI</span>
+              <span class="mod-name">Generative AI &amp; LLM Systems</span>
+            </div>
+            <p class="mod-desc">Prompt engineering, LangChain, vector databases (Pinecone/pgvector), and RAG pipelines for autonomous enterprise agents.</p>
+            <div class="mod-features">
+              <div>&bull; Conversational LLM fine-tuning &amp; evaluation</div>
+              <div>&bull; Semantic search &amp; vector embedding indices</div>
+              <div>&bull; Production AI API integration with latency tuning</div>
+            </div>
+            <div class="mod-tags">
+              <span class="m-chip">LangChain</span>
+              <span class="m-chip">RAG</span>
+              <span class="m-chip">Vector DB</span>
+              <span class="m-chip">OpenAI</span>
+            </div>
+          </div>
+
+          <!-- Module 2 -->
+          <div class="module-rich-box">
+            <div class="mod-head">
+              <span class="mod-code">CY</span>
+              <span class="mod-name">Cybersecurity &amp; PenTesting</span>
+            </div>
+            <p class="mod-desc">OWASP Top 10 mitigation, vulnerability scanning, network packet analysis, and ethical penetration testing protocols.</p>
+            <div class="mod-features">
+              <div>&bull; Secure code auditing &amp; cryptographic validation</div>
+              <div>&bull; Automated network vulnerability assessment</div>
+              <div>&bull; Zero-trust perimeter defense &amp; TLS 1.3 encryption</div>
+            </div>
+            <div class="mod-tags">
+              <span class="m-chip">OWASP</span>
+              <span class="m-chip">Kali</span>
+              <span class="m-chip">TLS 1.3</span>
+              <span class="m-chip">BurpSuite</span>
+            </div>
+          </div>
+
+          <!-- Module 3 -->
+          <div class="module-rich-box">
+            <div class="mod-head">
+              <span class="mod-code">DE</span>
+              <span class="mod-name">Data Engineering &amp; Analytics</span>
+            </div>
+            <p class="mod-desc">Apache Kafka streaming, real-time ETL pipelines, Snowflake data warehousing, and automated BI reporting dashboards.</p>
+            <div class="mod-features">
+              <div>&bull; Stream ingestion &amp; batch data processing</div>
+              <div>&bull; Dimensional data modeling &amp; OLAP cubes</div>
+              <div>&bull; High-throughput analytics with Apache Spark</div>
+            </div>
+            <div class="mod-tags">
+              <span class="m-chip">Kafka</span>
+              <span class="m-chip">Spark</span>
+              <span class="m-chip">Snowflake</span>
+              <span class="m-chip">Airflow</span>
+            </div>
+          </div>
+
+          <!-- Module 4 -->
+          <div class="module-rich-box">
+            <div class="mod-head">
+              <span class="mod-code">MB</span>
+              <span class="mod-name">Enterprise Mobile Engineering</span>
+            </div>
+            <p class="mod-desc">React Native and Flutter architecture, native device API bridging, offline-first syncing, and biometric authentication.</p>
+            <div class="mod-features">
+              <div>&bull; Cross-platform iOS &amp; Android native modules</div>
+              <div>&bull; Biometric security &amp; local SQLite encryption</div>
+              <div>&bull; Push notifications &amp; background sync workers</div>
+            </div>
+            <div class="mod-tags">
+              <span class="m-chip">React Native</span>
+              <span class="m-chip">Flutter</span>
+              <span class="m-chip">iOS</span>
+              <span class="m-chip">Android</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="academy-impact-footer-bar">
+      <div><strong>ACADEMY IMPACT:</strong> 1,200+ Engineers Trained &bull; 88% Corporate Placement Rate &bull; 40+ Hiring Partners</div>
+      <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: #1D4ED8;">NBA &amp; NAAC ACCREDITED SKILL DEVELOPMENT OUTCOMES</div>
+    </div>
+  </div>
+
+  <footer class="sheet-footer">
+    <div class="footer-left">
+      <span style="font-weight: 600; color: #334155;">STALIGHT TECHNOLOGIES PVT. LTD.</span>
+      <span class="sep">&bull;</span>
+      <span>Technical Workforce Capacity Building</span>
+    </div>
+    <div class="footer-center">contact@stalight.in &bull; www.stalight.in</div>
+    <div class="footer-right">
+      <span>PAGE 09</span>
+      <span class="slide-number-badge">09 / 10</span>
+    </div>
+  </footer>
+</article>
+'''
+
+# Update Slide 10: Strategic Alliances
+slide_10_alliances = re.sub(r'id="slide-10"', 'id="slide-10"', sheet_10)
+slide_10_alliances = re.sub(r'data-page="10"', 'data-page="10"', slide_10_alliances)
+slide_10_alliances = re.sub(r'<span>PAGE 10</span>', '<span>PAGE 10</span>', slide_10_alliances)
+slide_10_alliances = re.sub(r'<span class="slide-number-badge">.*?</span>', '<span class="slide-number-badge">10 / 10</span>', slide_10_alliances)
+slide_10_alliances = re.sub(r'<span class="footer-page-pill">.*?</span>', '<span class="slide-number-badge">10 / 10</span>', slide_10_alliances)
+
+# Clean client card styling
+slide_10_alliances = slide_10_alliances.replace('class="client-card"', 'class="client-card-refined"')
+
+# Combine all 10 slides
+all_10_final_slides = "\n".join([
+  slide_1_hero,
+  sheet_2,
+  slide_3_service_1,
+  slide_4_service_2,
+  slide_5_service_3,
+  slide_6_service_4,
+  slide_7_campus,
+  slide_8_sync,
+  slide_9_academy,
+  slide_10_alliances
+])
+
+# Complete stylesheet with absolute removal of grid lines and high visual polish
+clean_modern_css = """
+    /* -------------------------------------------------------------
+       CLEAN LIGHT THEME - ZERO GRID LINES ANYWHERE
+    ------------------------------------------------------------- */
+    .sheet {
+      width: var(--page-width);
+      height: var(--page-height);
+      background-color: #FFFFFF !important;
+      background-image: none !important;
+      border: 1px solid #E2E8F0;
+      border-radius: 6px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      page-break-after: always;
+      padding: 0;
+      margin: 0 auto;
+    }
+
+    /* -------------------------------------------------------------
+       HERO COVER SLIDE (EXACT WEBSITE HERO DESIGN)
+    ------------------------------------------------------------- */
+    .cover-sheet {
+      background-color: #FFFFFF !important;
+      background-image: url('profile_assets/background.png') !important;
+      background-position: right center !important;
+      background-repeat: no-repeat !important;
+      background-size: cover !important;
+      position: relative;
+    }
+    .hero-cover-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 40px 48px;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 10;
+    }
+    .hero-top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #F1F5F9;
+      padding-bottom: 20px;
+    }
+    .hero-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .hero-brand-logo {
+      height: 42px;
+      width: auto;
+      object-fit: contain;
+    }
+    .hero-brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-brand-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      color: #0F172A;
+    }
+    .hero-brand-sub {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      color: #BE123C;
+      text-transform: uppercase;
+    }
+    .hero-pill-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #475569;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      padding: 6px 16px;
+      border-radius: 9999px;
+    }
+    .hero-main-body {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex: 1;
+      padding: 20px 0;
+    }
+    .hero-left-col {
+      max-width: 680px;
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-pre-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3.5px;
+      color: #64748B;
+      margin-bottom: 8px;
+    }
+    .hero-main-heading {
+      font-family: var(--font-heading);
+      font-size: 64px;
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      color: #0F172A;
+      margin-bottom: 16px;
+    }
+    .hero-grad-heading {
+      background: linear-gradient(135deg, #EC4899 0%, #8B5CF6 52%, #2563EB 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+    .hero-red-accent-bar {
+      height: 4px;
+      width: 60px;
+      background: #D32027;
+      border-radius: 9999px;
+      margin-bottom: 20px;
+    }
+    .hero-description {
+      font-size: 17px;
+      line-height: 1.6;
+      color: #475569;
+      margin-bottom: 28px;
+      max-width: 600px;
+    }
+    .hero-practices-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      max-width: 620px;
+    }
+    .hero-practice-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+    }
+    .practice-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .practice-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .practice-title {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #0F172A;
+    }
+    .practice-desc {
+      font-size: 11.5px;
+      color: #64748B;
+      line-height: 1.4;
+      margin: 0;
+    }
+    .hero-right-col {
+      flex: 1;
+      height: 100%;
+    }
+    .hero-bottom-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid #F1F5F9;
+      padding-top: 16px;
+      font-size: 12px;
+      color: #64748B;
+    }
+    .hero-meta-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-sep {
+      color: #CBD5E1;
+    }
+    .hero-meta-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    /* -------------------------------------------------------------
+       SERVICE DEDICATED SLIDES (TIGHT, BALANCED, ZERO EMPTY SPACE)
+    ------------------------------------------------------------- */
+    .service-pro-layout {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 24px;
+      flex: 1;
+      margin: 10px 0;
+      align-items: stretch;
+      overflow: hidden;
+    }
+    .service-left-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 100%;
+    }
+    .service-hero-card {
+      position: relative;
+      height: 220px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #E2E8F0;
+      background: #F8FAFC;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+      flex-shrink: 0;
+    }
+    .service-hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .service-hero-overlay {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+    }
+    .service-kpi-badge {
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(8px);
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .kpi-metric {
+      font-size: 16px;
+      font-weight: 800;
+      color: #60A5FA;
+      font-family: var(--font-heading);
+    }
+    .kpi-label {
+      font-size: 10.5px;
+      color: #E2E8F0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+    .service-matrix-box {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 12px 14px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.02);
+      flex-shrink: 0;
+    }
+    .matrix-box-title {
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #0F172A;
+      margin-bottom: 6px;
+    }
+    .matrix-chip-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .mat-chip {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      color: #334155;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      padding: 3px 7px;
+      border-radius: 4px;
+    }
+    .service-methodology-box {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      flex: 1;
+    }
+    .methodology-title {
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #0F172A;
+      margin-bottom: 3px;
+    }
+    .methodology-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .method-item {
+      font-size: 11px;
+      color: #475569;
+      line-height: 1.4;
+    }
+    .service-right-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 100%;
+      justify-content: space-between;
+    }
+    .service-deliverable-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 14px 18px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+    .deliv-card-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .deliv-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 5px;
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      color: #1D4ED8;
+      font-weight: 800;
+      font-size: 11.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .deliv-title {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 800;
+      color: #0F172A;
+    }
+    .deliv-desc {
+      font-size: 12px;
+      color: #475569;
+      line-height: 1.45;
+      margin: 0;
+    }
+    .deliv-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 2px;
+      padding-top: 4px;
+      border-top: 1px solid #F1F5F9;
+    }
+    .deliv-bullet {
+      font-size: 11px;
+      color: #334155;
+      line-height: 1.35;
+      font-weight: 500;
+    }
+
+    /* -------------------------------------------------------------
+       SLIDE 8 & SLIDE 7: SYNC-GRID (3x2 HIGH IMPACT FORMAT)
+    ------------------------------------------------------------- */
+    .sync-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 14px;
+      flex: 1;
+      margin: 8px 0;
+    }
+    .sync-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+    }
+    .sync-card-media {
+      height: 140px;
+      width: 100%;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 4px;
+    }
+    .sync-card-media img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+    .sync-card-title {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 4px;
+      letter-spacing: -0.2px;
+    }
+    .sync-card-desc {
+      font-size: 11.5px;
+      line-height: 1.45;
+      color: #475569;
+      margin: 0;
+    }
+
+    /* -------------------------------------------------------------
+       SLIDE 9: ACADEMY RESTRUCTURED (TIGHT 2-PANEL, ZERO BLANK SPACE)
+    ------------------------------------------------------------- */
+    .academy-pro-layout {
+      display: grid;
+      grid-template-columns: 500px 1fr;
+      gap: 20px;
+      flex: 1;
+      margin: 8px 0;
+      align-items: stretch;
+      overflow: hidden;
+    }
+    .academy-left-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 100%;
+    }
+    .academy-right-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 100%;
+    }
+    .academy-col-header-pill {
+      font-family: var(--font-heading);
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #0F172A;
+      margin-bottom: 2px;
+    }
+    .academy-track-box {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 14px 16px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+    .track-header-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .track-title-bold {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 800;
+      color: #0F172A;
+    }
+    .track-badge-pill {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: #1D4ED8;
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .track-text {
+      font-size: 11.5px;
+      color: #475569;
+      line-height: 1.45;
+      margin: 0;
+    }
+    .track-deliverable-items {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      font-size: 11px;
+      color: #334155;
+      padding-top: 2px;
+      border-top: 1px solid #F1F5F9;
+    }
+    .track-tag-cloud {
+      display: flex;
+      gap: 5px;
+      margin-top: 2px;
+    }
+    .t-badge {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      background: #F1F5F9;
+      color: #475569;
+      padding: 2px 6px;
+      border-radius: 3px;
+      border: 1px solid #E2E8F0;
+    }
+    .academy-cohort-strip {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 6px;
+      padding: 10px 14px;
+      flex-shrink: 0;
+    }
+    .cohort-strip-tag {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #BE123C;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .cohort-strip-text {
+      font-size: 11px;
+      color: #334155;
+      line-height: 1.35;
+    }
+    .academy-modules-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 10px;
+      flex: 1;
+    }
+    .module-rich-box {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 12px 14px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 5px;
+    }
+    .mod-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .mod-code {
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      background: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 10px;
+      color: #0F172A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .mod-name {
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 800;
+      color: #0F172A;
+    }
+    .mod-desc {
+      font-size: 11px;
+      color: #475569;
+      line-height: 1.35;
+      margin: 0;
+    }
+    .mod-features {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 10.5px;
+      color: #334155;
+      padding-top: 2px;
+      border-top: 1px solid #F1F5F9;
+    }
+    .mod-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 2px;
+    }
+    .m-chip {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      padding: 1px 5px;
+      border-radius: 3px;
+      color: #475569;
+    }
+    .academy-impact-footer-bar {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 6px;
+      padding: 9px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #334155;
+      flex-shrink: 0;
+    }
+
+    /* -------------------------------------------------------------
+       SLIDE 10: CLIENTS REFINED
+    ------------------------------------------------------------- */
+    .client-card-refined {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+    }
+
+    /* About-item-icon numbered clean styling */
+    .about-item-icon {
+      width: 32px !important;
+      height: 32px !important;
+      border-radius: 6px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-shrink: 0 !important;
+      font-weight: 800 !important;
+      font-size: 12px !important;
+      color: #1D4ED8 !important;
+      background: #EFF6FF !important;
+      border: 1px solid #BFDBFE !important;
+    }
+"""
+
+style_final = style + "\n" + clean_modern_css
+
+# Construct React component
+react_file_parts = [
+    'import React, { useState, useEffect, useRef } from "react";\n',
+    'import { Link } from "react-router-dom";\n',
+    'import {\n',
+    '  ChevronLeft,\n',
+    '  ChevronRight,\n',
+    '  Printer,\n',
+    '  Grid,\n',
+    '  Monitor,\n',
+    '  ArrowLeft,\n',
+    '} from "lucide-react";\n\n',
+    'export default function CompanyProfile() {\n',
+    '  const [currentSlide, setCurrentSlide] = useState(1);\n',
+    '  const [viewAll, setViewAll] = useState(false);\n',
+    '  const totalSlides = 10;\n',
+    '  const containerRef = useRef<HTMLDivElement>(null);\n\n',
+    '  useEffect(() => {\n',
+    '    const handleKeyDown = (e: KeyboardEvent) => {\n',
+    '      if (viewAll) return;\n',
+    '      if (e.key === "ArrowRight" || e.key === "PageDown") {\n',
+    '        setCurrentSlide((prev) => Math.min(prev + 1, totalSlides));\n',
+    '      } else if (e.key === "ArrowLeft" || e.key === "PageUp") {\n',
+    '        setCurrentSlide((prev) => Math.max(prev - 1, 1));\n',
+    '      } else if (e.key === "Home") {\n',
+    '        setCurrentSlide(1);\n',
+    '      } else if (e.key === "End") {\n',
+    '        setCurrentSlide(totalSlides);\n',
+    '      }\n',
+    '    };\n',
+    '    window.addEventListener("keydown", handleKeyDown);\n',
+    '    return () => window.removeEventListener("keydown", handleKeyDown);\n',
+    '  }, [viewAll]);\n\n',
+    '  useEffect(() => {\n',
+    '    if (!containerRef.current) return;\n',
+    '    const sheets = containerRef.current.querySelectorAll<HTMLElement>(".sheet");\n',
+    '    sheets.forEach((sheet, index) => {\n',
+    '      if (viewAll) {\n',
+    '        sheet.style.display = "flex";\n',
+    '      } else {\n',
+    '        if (index + 1 === currentSlide) {\n',
+    '          sheet.style.display = "flex";\n',
+    '        } else {\n',
+    '          sheet.style.display = "none";\n',
+    '        }\n',
+    '      }\n',
+    '    });\n',
+    '  }, [currentSlide, viewAll]);\n\n',
+    '  const handlePrint = () => {\n',
+    '    window.print();\n',
+    '  };\n\n',
+    '  return (\n',
+    '    <div className="min-h-screen bg-slate-200 text-slate-900 font-sans antialiased selection:bg-slate-900 selection:text-white print:bg-white print:p-0">\n',
+    '      <style dangerouslySetInnerHTML={{ __html: ' + json.dumps(style_final) + ' }} />\n\n',
+    '      {/* Floating Presentation Controls */}\n',
+    '      <nav\n',
+    '        aria-label="Deck controls"\n',
+    '        className="no-print fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 sm:gap-3 bg-slate-900/95 backdrop-blur-md text-white px-4 py-2.5 rounded-full shadow-2xl border border-slate-700 text-xs sm:text-sm font-medium"\n',
+    '      >\n',
+    '        <Link\n',
+    '          to="/"\n',
+    '          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"\n',
+    '          title="Return to Website"\n',
+    '        >\n',
+    '          <ArrowLeft className="w-4 h-4" />\n',
+    '          <span className="hidden md:inline">Website</span>\n',
+    '        </Link>\n\n',
+    '        <div className="h-4 w-px bg-slate-700 mx-1" />\n\n',
+    '        <button\n',
+    '          type="button"\n',
+    '          onClick={() => setCurrentSlide((prev) => Math.max(prev - 1, 1))}\n',
+    '          disabled={currentSlide === 1 || viewAll}\n',
+    '          className="p-1.5 rounded-full hover:bg-slate-800 disabled:opacity-40 disabled:hover:bg-transparent transition-colors"\n',
+    '          title="Previous Slide"\n',
+    '        >\n',
+    '          <ChevronLeft className="w-4 h-4" />\n',
+    '        </button>\n\n',
+    '        <div className="px-2 font-mono text-slate-300 min-w-[80px] text-center">\n',
+    '          {viewAll ? "All Slides" : `Page ${currentSlide} of ${totalSlides}`}\n',
+    '        </div>\n\n',
+    '        <button\n',
+    '          type="button"\n',
+    '          onClick={() => setCurrentSlide((prev) => Math.min(prev + 1, totalSlides))}\n',
+    '          disabled={currentSlide === totalSlides || viewAll}\n',
+    '          className="p-1.5 rounded-full hover:bg-slate-800 disabled:opacity-40 disabled:hover:bg-transparent transition-colors"\n',
+    '          title="Next Slide"\n',
+    '        >\n',
+    '          <ChevronRight className="w-4 h-4" />\n',
+    '        </button>\n\n',
+    '        <div className="h-4 w-px bg-slate-700 mx-1" />\n\n',
+    '        <button\n',
+    '          type="button"\n',
+    '          onClick={() => setViewAll(!viewAll)}\n',
+    '          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-colors ${\n',
+    '            viewAll ? "bg-blue-600 text-white" : "bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white"\n',
+    '          }`}\n',
+    '          title={viewAll ? "Switch to Single Slide View" : "View All Slides"}\n',
+    '        >\n',
+    '          {viewAll ? <Monitor className="w-4 h-4" /> : <Grid className="w-4 h-4" />}\n',
+    '          <span className="hidden sm:inline">{viewAll ? "Slide View" : "All Slides"}</span>\n',
+    '        </button>\n\n',
+    '        <button\n',
+    '          type="button"\n',
+    '          onClick={handlePrint}\n',
+    '          className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold shadow-sm transition-colors"\n',
+    '          title="Print or Save as PDF"\n',
+    '        >\n',
+    '          <Printer className="w-4 h-4" />\n',
+    '          <span>Save PDF</span>\n',
+    '        </button>\n',
+    '      </nav>\n\n',
+    '      {/* Main Slides Deck */}\n',
+    '      <main\n',
+    '        ref={containerRef}\n',
+    '        className="deck-container"\n',
+    '        dangerouslySetInnerHTML={{ __html: ' + json.dumps(all_10_final_slides) + ' }}\n',
+    '      />\n',
+    '    </div>\n',
+    '  );\n',
+    '}\n'
+]
+
+with open('Stalight_website/src/pages/CompanyProfile.tsx', 'w', encoding='utf-8') as f:
+    f.write(''.join(react_file_parts))
+
+print("Successfully written CompanyProfile.tsx with 6-card Campus ERP (Sync AI format) and tight Academy layout!")
