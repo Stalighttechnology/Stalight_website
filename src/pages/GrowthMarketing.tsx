@@ -9,7 +9,7 @@ import {
   Users,
   MailCheck,
   FileText,
-  TrendingUp,
+  Handshake,
   ArrowRight,
   CheckCircle2,
   Sparkles,
@@ -425,7 +425,7 @@ const growthServices = [
     desc: "Equip your sales team with the right processes, content, automation, and insights to improve engagement and convert more opportunities into customers.",
     image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80",
     badge: "Close Rate Boost",
-    icon: TrendingUp,
+    icon: Handshake,
     keyMetrics: "+32% Win Rate Enhancement",
     deliverables: [
       "Competitive battlecards, pricing defense decks, and objection matrices",

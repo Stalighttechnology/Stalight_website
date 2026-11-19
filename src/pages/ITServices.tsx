@@ -392,7 +392,7 @@ const ITServices = () => {
                             </button>
                           </DialogTrigger>
 
-                          <DialogContent className="sm:rounded-xl p-6 bg-white border border-slate-200 shadow-xl">
+                          <DialogContent className="w-[92vw] sm:w-full max-w-xl max-h-[85vh] sm:max-h-[88vh] overflow-y-auto p-5 sm:p-7 bg-white rounded-xl sm:rounded-2xl border border-slate-200 shadow-2xl">
                             <DialogHeader className="flex flex-col items-start gap-2">
                               <DialogTitle className="text-lg sm:text-xl font-bold">
                                 {(() => {
@@ -414,14 +414,14 @@ const ITServices = () => {
 
                             <div className="mt-2 text-slate-700">
                               <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Enterprise Scope of Work</h4>
-                              <ul className="list-disc pl-5 space-y-3 text-sm">
+                              <ul className="list-disc pl-5 space-y-2.5 text-xs sm:text-sm">
                                 {service.details?.map((d, i) => (
                                   <li key={i} className="leading-relaxed">{d}</li>
                                 ))}
                               </ul>
                             </div>
 
-                            <DialogFooter className="mt-6 flex flex-col sm:flex-row sm:justify-end gap-3">
+                            <DialogFooter className="mt-6 pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:justify-end gap-3 sticky bottom-0 bg-white/95 backdrop-blur-sm -mx-5 sm:-mx-7 -mb-5 sm:-mb-7 p-4 sm:p-5 rounded-b-xl sm:rounded-b-2xl">
                               <DialogClose asChild>
                                 <button
                                   onClick={scrollToAssessment}
@@ -431,7 +431,7 @@ const ITServices = () => {
                                   <span className="relative z-10 text-sm font-semibold">Get IT Assessment</span>
                                 </button>
                               </DialogClose>
-                              <DialogClose className="inline-flex items-center px-4 py-2 bg-slate-100 text-slate-900 rounded-lg hover:bg-slate-200 transition">Close</DialogClose>
+                              <DialogClose className="inline-flex items-center justify-center px-4 py-2 bg-slate-100 text-slate-900 rounded-lg hover:bg-slate-200 transition text-sm font-medium">Close</DialogClose>
                             </DialogFooter>
                           </DialogContent>
                         </Dialog>

@@ -100,6 +100,7 @@ const SoftwareDevelopment = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [openDialogIndex, setOpenDialogIndex] = useState<number | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -149,13 +150,15 @@ const SoftwareDevelopment = () => {
     }, 4000);
   };
 
-  const scrollToEstimate = (e) => {
-    e.preventDefault();
-    const el = document.getElementById('estimate');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      setIsFormOpen(true);
-    }
+  const scrollToEstimate = () => {
+    setOpenDialogIndex(null);
+    setIsFormOpen(true);
+    setTimeout(() => {
+      const el = document.getElementById('estimate');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 120);
   };
 
   return (
@@ -254,20 +257,23 @@ const SoftwareDevelopment = () => {
                   <p className="text-slate-600 leading-relaxed">{service.desc}</p>
 
                   <div className="mt-4">
-                    <Dialog>
+                    <Dialog
+                      open={openDialogIndex === index}
+                      onOpenChange={(open) => setOpenDialogIndex(open ? index : null)}
+                    >
                       <DialogTrigger asChild>
                         <button className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-md text-sm font-medium hover:bg-purple-700 transition">
                           Learn More
                         </button>
                       </DialogTrigger>
 
-                      <DialogContent className="sm:rounded-2xl p-6 bg-white">
+                      <DialogContent className="w-[92vw] sm:w-full max-w-xl max-h-[85vh] sm:max-h-[88vh] overflow-y-auto p-5 sm:p-7 bg-white rounded-xl sm:rounded-2xl border border-slate-200 shadow-2xl">
                         <DialogHeader className="flex flex-col items-start gap-2">
                           <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 rounded-lg bg-purple-50 flex items-center justify-center">
+                            <div className="w-12 h-12 rounded-lg bg-purple-50 flex items-center justify-center shrink-0">
                               {service.icon}
                             </div>
-                            <DialogTitle className="text-lg sm:text-xl">
+                            <DialogTitle className="text-lg sm:text-xl font-bold">
                               {(() => {
                                 const parts = service.title.split(" ");
                                 if (parts.length === 1) return <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500">{service.title}</span>;
@@ -286,25 +292,25 @@ const SoftwareDevelopment = () => {
 
                         <hr className="my-4 border-slate-100" />
 
-                        <div className="mt-2 text-slate-700">
-                          <ul className="list-disc pl-5 space-y-3">
+                        <div className="mt-1 text-slate-700">
+                          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Enterprise Scope of Work</h4>
+                          <ul className="list-disc pl-5 space-y-2.5 text-xs sm:text-sm">
                             {service.details?.map((d, i) => (
                               <li key={i} className="leading-relaxed">{d}</li>
                             ))}
                           </ul>
                         </div>
 
-                        <DialogFooter className="mt-6 flex flex-col sm:flex-row sm:justify-end gap-3">
-                          <DialogClose asChild>
-                            <button
-                              onClick={scrollToEstimate}
-                              className="group relative inline-flex items-center justify-center px-4 py-2 bg-slate-950 text-white rounded-md overflow-hidden shadow-[0_10px_30px_-10px_rgba(168,85,247,0.12)] hover:-translate-y-0.5 transition-all duration-200"
-                            >
-                              <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                              <span className="relative z-10 text-sm font-semibold">Request Estimate</span>
-                            </button>
-                          </DialogClose>
-                          <DialogClose className="inline-flex items-center px-4 py-2 bg-slate-100 text-slate-900 rounded-md hover:bg-slate-200 transition">Close</DialogClose>
+                        <DialogFooter className="mt-6 pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:justify-end gap-3 sticky bottom-0 bg-white/95 backdrop-blur-sm -mx-5 sm:-mx-7 -mb-5 sm:-mb-7 p-4 sm:p-5 rounded-b-xl sm:rounded-b-2xl">
+                          <button
+                            type="button"
+                            onClick={scrollToEstimate}
+                            className="group relative inline-flex items-center justify-center px-4 py-2 bg-slate-950 text-white rounded-md overflow-hidden shadow-[0_10px_30px_-10px_rgba(168,85,247,0.12)] hover:-translate-y-0.5 transition-all duration-200"
+                          >
+                            <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <span className="relative z-10 text-sm font-semibold">Request Estimate</span>
+                          </button>
+                          <DialogClose className="inline-flex items-center justify-center px-4 py-2 bg-slate-100 text-slate-900 rounded-md hover:bg-slate-200 transition text-sm font-medium">Close</DialogClose>
                         </DialogFooter>
                       </DialogContent>
                     </Dialog>
