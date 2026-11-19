@@ -60,7 +60,7 @@ const AnimatedNumber = ({ value, duration = 2.5 }: { value: number; duration?: n
 const tourFeatures = [
   {
     title: "Assignments Dashboard",
-    icon: Brain,
+    icon: LayoutDashboard,
     desc: "Manage academic assignments with real-time submission tracking, overdue alerts, grading status, and seamless student-teacher interactio",
     img: nebulaaiImg,
     caption: "Smart Assignment Tracking & Submission System"
@@ -109,7 +109,7 @@ const tourFeatures = [
   },
   {
     title: "Secure Portal Gateway",
-    icon: ShieldCheck,
+    icon: null,
     desc: "Enterprise-grade authentication with role filtering.",
     img: loginpageImg,
     caption: "Role-Based Secure Portal Login Gateway"
@@ -124,9 +124,9 @@ const institutionalPillars = [
     borderHover: "group-hover:border-pink-300",
     iconColor: "text-pink-600",
     iconBg: "bg-pink-50",
-    icon: Zap,
+    icon: null,
     features: [
-      { key: "stalight-ai", icon: Brain, title: "Stalight Smart Systems", desc: "Smart insights and personalised recommendations for students and faculty." },
+      { key: "stalight-ai", icon: CheckCircle2, title: "Stalight Smart Systems", desc: "Smart insights and personalised recommendations for students and faculty." },
       { key: "mobile-attendance", icon: ScanFace, title: "Mobile Attendance System", desc: "Automated attendance management available on iOS and Android apps." },
       { key: "student-info-mobile", icon: User, title: "Mobile Student Profiles", desc: "Instantly access student profile and academic info through mobile applications." },
       { key: "location-based-attendance", icon: MapPin, title: "Location Based Attendance", desc: "Geo-fenced attendance options for off-campus activities and fieldwork." }
@@ -139,7 +139,7 @@ const institutionalPillars = [
     borderHover: "group-hover:border-purple-300",
     iconColor: "text-purple-600",
     iconBg: "bg-purple-50",
-    icon: GraduationCap,
+    icon: null,
     features: [
       { key: "timetable-scheduling", icon: Calendar, title: "Timetable & Scheduling", desc: "Automated timetable management with conflict detection and real-time updates." },
       { key: "exam-scheduling", icon: Bell, title: "Exam Scheduling", desc: "Schedule exams, publish timetables and send notifications to stakeholders." },
@@ -156,7 +156,7 @@ const institutionalPillars = [
     borderHover: "group-hover:border-blue-300",
     iconColor: "text-blue-600",
     iconBg: "bg-blue-50",
-    icon: ShieldCheck,
+    icon: null,
     features: [
       { key: "leave-approvals", icon: ClipboardCheck, title: "Leave & Approvals", desc: "Structured leave requests with multi-level approvals, tracking, and notifications." },
       { key: "role-based-dashboards", icon: LayoutDashboard, title: "Role-Based Dashboards", desc: "Personalised interfaces for students, faculty, and administrators with relevant data at-a-glance." },
@@ -172,11 +172,11 @@ const institutionalPillars = [
     borderHover: "group-hover:border-amber-300",
     iconColor: "text-amber-600",
     iconBg: "bg-amber-50",
-    icon: Activity,
+    icon: null,
     features: [
       { key: "copo-attainment", icon: BarChart3, title: "CO/PO Attainment", desc: "Monitor and report course and program outcomes with analytics and visualisations." },
       { key: "hostel-management", icon: Home, title: "Hostel Management", desc: "Manage hostel allocations, requests, and student housing workflows." },
-      { key: "fees-collections", icon: Activity, title: "Fees Collections", desc: "Track fee payments, receipts, and automated reminders for outstanding dues." },
+      { key: "fees-collections", icon: null, title: "Fees Collections", desc: "Track fee payments, receipts, and automated reminders for outstanding dues." },
       { key: "performance-analytics", icon: BarChart, title: "Performance Analytics", desc: "Data-driven academic insights" },
       { key: "transport-management", icon: Bus, title: "Transport Management", desc: "Live tracking, fleet routes" },
       { key: "library-management", icon: Library, title: "Library Management", desc: "Digital catalog, issue tracking" },
@@ -522,7 +522,6 @@ const NeuroCampus = () => {
                     </div>
 
                     <div className="flex items-center gap-1.5 px-3 py-0.5 bg-slate-100/80 border border-slate-200/40 rounded-full text-[9px] sm:text-[10px] text-slate-500 font-mono tracking-tight select-none">
-                      <Icon className="w-2.5 h-2.5 text-purple-600 shrink-0" />
                       <span>{feat.title.toLowerCase().replace(/\s+/g, '-')}.stalight.in</span>
                     </div>
                     <div className="w-8"></div>
@@ -612,7 +611,7 @@ const NeuroCampus = () => {
                     ))}
                   </div>
                   <span className="font-semibold text-slate-900 text-sm">4.9/5 Rating</span>
-                  <span className="text-slate-600 text-sm">✓ </span>
+                  <span className="text-purple-600 font-bold mr-1.5">&bull;</span>
                 </div>
                 
                 <h2 className="text-4xl sm:text-5xl md:text-6xl font-light text-slate-900 tracking-tight mb-4 leading-tight">
@@ -760,9 +759,11 @@ const NeuroCampus = () => {
                 <div className={`absolute inset-0 bg-gradient-to-b ${pillar.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}></div>
 
                 <div className="relative z-10 mb-6 flex flex-col items-start">
-                  <div className={`w-12 h-12 rounded-2xl ${pillar.iconBg} ${pillar.iconColor} flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform duration-300`}>
-                    {React.createElement(pillar.icon, { className: "w-6 h-6" })}
-                  </div>
+                  {pillar.icon && (
+                    <div className={`w-12 h-12 rounded-2xl ${pillar.iconBg} ${pillar.iconColor} flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform duration-300`}>
+                      {React.createElement(pillar.icon, { className: "w-6 h-6" })}
+                    </div>
+                  )}
                   <h3 className="text-lg font-bold text-slate-900 tracking-tight group-hover:text-purple-900 transition-colors">
                     {pillar.title}
                   </h3>

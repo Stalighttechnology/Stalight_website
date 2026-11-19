@@ -209,20 +209,48 @@ const SkillDevelopment = () => {
             className="grid md:grid-cols-3 gap-8"
           >
             {[
-              { icon: <Target />, color: "text-pink-600", bg: "bg-pink-50", title: "Placement Support", desc: "Dedicated placement assistance and employer connections to support your transition into MNC roles upon completing our elite tracks." },
-              { icon: <Briefcase />, color: "text-purple-600", bg: "bg-purple-50", title: "Industry-Vetted Curriculum", desc: "Syllabuses strictly aligned with current enterprise requirements, bypassing outdated academics." },
-              { icon: <Star />, color: "text-blue-600", bg: "bg-blue-50", title: "Architectural Projects", desc: "Build live, large-scale systems for your portfolio, not just theoretical textbook examples." }
+              { 
+                tag: "CAREER MENTORSHIP", 
+                title: "Placement Support", 
+                desc: "Dedicated placement assistance and employer connections to support your transition into MNC roles upon completing our elite tracks.",
+                bullets: ["1-on-1 portfolio & resume reviews", "Mock interviews with staff architects", "Direct referral network to enterprise partners"]
+              },
+              { 
+                tag: "ENTERPRISE CURRICULUM", 
+                title: "Industry-Vetted Curriculum", 
+                desc: "Syllabuses strictly aligned with current enterprise requirements, bypassing outdated academics.",
+                bullets: ["Production microservices architecture", "Real-world scalability & failure recovery", "Modern CI/CD, Docker & cloud deployment"]
+              },
+              { 
+                tag: "HANDS-ON PRODUCTION", 
+                title: "Architectural Projects", 
+                desc: "Build live, large-scale systems for your portfolio, not just theoretical textbook examples.",
+                bullets: ["Distributed high-throughput backends", "Multi-tenant database schema designs", "End-to-end monitored cloud infrastructure"]
+              }
             ].map((item, index) => (
               <motion.div 
                 key={index} 
                 variants={fadeUp} 
-                className="bg-white p-8 rounded-3xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-slate-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-300"
+                className="bg-white p-7 sm:p-8 rounded-2xl shadow-[0_4px_20px_rgba(15,23,42,0.03)] hover:shadow-[0_16px_36px_rgba(15,23,42,0.08)] border border-slate-200/90 hover:border-purple-300 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
               >
-                <div className={`w-14 h-14 ${item.bg} ${item.color} rounded-2xl flex items-center justify-center mb-6 shadow-sm`}>
-                  {item.icon}
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-purple-700 bg-purple-50 border border-purple-100/80 px-2.5 py-0.5 rounded-full">
+                      {item.tag}
+                    </span>
+                    <span className="text-xs font-mono font-bold text-slate-400">0{index + 1}</span>
+                  </div>
+                  <h3 className="text-xl font-bold mb-3 text-slate-900 group-hover:text-purple-600 transition-colors">{item.title}</h3>
+                  <p className="text-slate-600 leading-relaxed text-sm mb-5">{item.desc}</p>
+                  <ul className="space-y-2 pt-4 border-t border-slate-100">
+                    {item.bullets.map((b, i) => (
+                      <li key={i} className="flex items-center gap-2 text-xs text-slate-600">
+                        <span className="w-1.5 h-1.5 rounded-full bg-purple-600 shrink-0"></span>
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-slate-900">{item.title}</h3>
-                <p className="text-slate-600 leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </motion.div>

@@ -1,0 +1,2875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STALIGHT TECHNOLOGIES PVT. LTD. - Corporate Company Profile</title>
+  <link rel="icon" type="image/png" href="profile_assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* -------------------------------------------------------------
+       A4 LANDSCAPE SPECIFICATION (297mm x 210mm | Ratio 1.414)
+       STALIGHT CORPORATE LIGHT THEME WITH EXECUTIVE POLISH
+       Identity: Navy (#0F172A), Magenta (#EC4899), Purple (#8B5CF6), Blue (#2563EB)
+    ------------------------------------------------------------- */
+    :root {
+      --bg-canvas: #E2E8F0;
+      --page-bg: #FFFFFF;
+      --page-card-bg: #F8FAFC;
+      --page-border: #E2E8F0;
+      
+      --navy-950: #070B14;
+      --navy-900: #0F172A;
+      --navy-800: #1E293B;
+      --navy-700: #334155;
+      
+      --magenta-700: #BE123C;
+      --magenta-600: #D91656;
+      --magenta-500: #EC4899;
+      --magenta-100: #FCE7F3;
+      --magenta-50:  #FDF2F8;
+      
+      --purple-700: #6D28D9;
+      --purple-600: #7C3AED;
+      --purple-500: #8B5CF6;
+      --purple-100: #EDE9FE;
+      --purple-50:  #F5F3FF;
+      
+      --blue-700: #1D4ED8;
+      --blue-600: #2563EB;
+      --blue-500: #3B82F6;
+      --blue-100: #DBEAFE;
+      --blue-50:  #EFF6FF;
+
+      --grad-primary: linear-gradient(135deg, #EC4899 0%, #8B5CF6 52%, #2563EB 100%);
+      --grad-navy: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+      
+      --text-main: #0F172A;
+      --text-body: #1E293B;
+      --text-muted: #64748B;
+      --text-light: #F8FAFC;
+
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'Space Grotesk', monospace;
+
+      --page-width: 1414px;
+      --page-height: 1000px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: var(--bg-canvas);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* -------------------------------------------------------------
+       SLIDE PRESENTATION TOOLBAR (PLACED AT BOTTOM - NEVER COVERS HEADER)
+    ------------------------------------------------------------- */
+    .deck-toolbar {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 22px;
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(236, 72, 153, 0.4);
+      border-radius: 999px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+      color: #FFFFFF;
+      transition: opacity 0.3s ease;
+    }
+
+    .deck-toolbar:hover {
+      opacity: 1;
+    }
+
+    .deck-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 15px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      font-family: var(--font-body);
+    }
+
+    .deck-btn svg {
+      width: 15px;
+      height: 15px;
+      stroke-width: 2.5;
+    }
+
+    .deck-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .deck-btn.primary {
+      background: var(--grad-primary);
+      border: none;
+      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+    }
+
+    .deck-btn.primary:hover {
+      box-shadow: 0 6px 20px rgba(236, 72, 153, 0.6);
+    }
+
+    .page-counter {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: #F8FAFC;
+      padding: 0 10px;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    /* -------------------------------------------------------------
+       SLIDE SHEETS & A4 LANDSCAPE DIMENSIONS
+    ------------------------------------------------------------- */
+    .deck-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      padding: 32px 0 120px 0;
+    }
+
+    .sheet {
+      width: var(--page-width);
+      height: var(--page-height);
+      background: var(--page-bg);
+      border: 1px solid var(--page-border);
+      border-radius: 4px;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      page-break-after: always;
+      padding: 0;
+    }
+
+    /* -------------------------------------------------------------
+       UNIVERSAL HEADER & FOOTER
+    ------------------------------------------------------------- */
+    .sheet-header {
+      height: 85px;
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #F1F5F9;
+      background: #FFFFFF;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .accent-bars {
+      display: flex;
+      gap: 4px;
+      align-items: stretch;
+      height: 32px;
+    }
+
+    .accent-bar {
+      width: 7px;
+      border-radius: 4px;
+      background: var(--grad-primary);
+    }
+
+    .accent-bar.short {
+      width: 7px;
+      border-radius: 4px;
+      background: #EC4899;
+    }
+
+    .header-title {
+      font-family: var(--font-heading);
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      text-transform: uppercase;
+      color: var(--navy-900);
+      margin: 0;
+    }
+
+    .header-title span.grad {
+      background: var(--grad-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-logo img {
+      height: 36px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .header-logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-logo-name {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--navy-900);
+      letter-spacing: 0.5px;
+    }
+
+    .header-logo-sub {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--magenta-600);
+      text-transform: uppercase;
+    }
+
+    /* Main Page Content Body */
+    .sheet-content {
+      flex: 1;
+      padding: 24px 48px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Universal Footer */
+    .sheet-footer {
+      height: 52px;
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid #F1F5F9;
+      background: #FFFFFF;
+      font-size: 12px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-confidential {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      color: var(--navy-700);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-center {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--navy-900);
+    }
+
+    .footer-page-pill {
+      background: var(--navy-900);
+      color: #FFFFFF;
+      padding: 3px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    /* -------------------------------------------------------------
+       PAGE 1: COVER SLIDE (HERO PRESENTATION DECK)
+    ------------------------------------------------------------- */
+    .cover-sheet {
+      background: #FFFFFF;
+      background-image: 
+        radial-gradient(circle at 95% 5%, rgba(147, 51, 234, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 5% 95%, rgba(37, 99, 235, 0.04) 0%, transparent 40%),
+        linear-gradient(to right, rgba(226, 232, 240, 0.35) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(226, 232, 240, 0.35) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+      color: var(--text-main);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+    }
+
+    .cover-deck-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 48px 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cover-badge {
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      padding: 8px 24px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #7c3aed;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cover-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e11d48 0%, #9333ea 50%, #2563eb 100%);
+      display: inline-block;
+    }
+
+    .cover-logo-wrap {
+      margin-bottom: 20px;
+    }
+
+    .cover-logo-wrap img {
+      height: 110px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .cover-title {
+      font-family: var(--font-heading);
+      font-size: 50px;
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -1.5px;
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+
+    .cover-title .grad-text {
+      background: linear-gradient(135deg, #e11d48 0%, #9333ea 50%, #2563eb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .cover-sub {
+      font-size: 21px;
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 6px;
+      letter-spacing: -0.3px;
+    }
+
+    .cover-quote {
+      font-size: 15px;
+      color: #64748b;
+      font-style: italic;
+      margin-bottom: 34px;
+    }
+
+    .cover-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      max-width: 980px;
+      margin-bottom: 34px;
+    }
+
+    .cover-pill {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 30px;
+      padding: 10px 22px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e293b;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .cover-pill:hover {
+      border-color: #cbd5e1;
+      transform: translateY(-1px);
+    }
+
+    .cover-contact-row {
+      display: flex;
+      gap: 24px;
+      font-size: 12.5px;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .cover-footer {
+      margin-top: auto;
+      padding: 18px 54px;
+      border-top: 1px solid rgba(226, 232, 240, 0.8);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 500;
+      background: #FFFFFF;
+    }
+
+    .cover-footer .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .cover-footer .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .cover-footer .slide-number-badge {
+      background: #f1f5f9;
+      color: #475569;
+      padding: 3px 9px;
+      border-radius: 12px;
+      font-size: 10.5px;
+    }
+
+    .cover-footer .sep {
+      color: #cbd5e1;
+    }
+
+    /* -------------------------------------------------------------
+       SLIDE 2: ABOUT STALIGHT (ZERO BLANK SPACE)
+    ------------------------------------------------------------- */
+    .about-lead-box {
+      background: linear-gradient(135deg, rgba(236,72,153,0.06) 0%, rgba(139,92,246,0.06) 100%);
+      border: 1px solid rgba(236,72,153,0.2);
+      border-left: 5px solid #EC4899;
+      border-radius: 10px;
+      padding: 18px 24px;
+      font-size: 15.5px;
+      line-height: 1.65;
+      color: var(--navy-800);
+      margin-bottom: 22px;
+    }
+
+    .about-lead-box strong {
+      color: var(--navy-900);
+      font-weight: 700;
+    }
+
+    .about-main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      flex: 1;
+    }
+
+    .about-col-card {
+      background: #FFFFFF;
+      border: 1px solid var(--page-border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03);
+    }
+
+    .about-col-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-heading);
+      font-size: 16.5px;
+      font-weight: 800;
+      color: var(--navy-900);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #F1F5F9;
+    }
+
+    .about-item-card {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 14px 18px;
+      display: flex;
+      gap: 14px;
+    }
+
+    .about-item-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-weight: 800;
+      font-size: 17px;
+      color: #FFFFFF;
+      background: var(--grad-primary);
+    }
+
+    .about-item-content h4 {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy-900);
+      margin-bottom: 4px;
+    }
+
+    .about-item-content p {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--navy-800);
+    }
+
+    .about-bottom-stats {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .about-stat-box {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      text-align: center;
+    }
+
+    .about-stat-num {
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--magenta-600);
+      line-height: 1.1;
+    }
+
+    .about-stat-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--navy-800);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    /* -------------------------------------------------------------
+       SLIDE 3: OUR CORE SERVICES (FULL-HEIGHT 4 PREMIER CARDS - ZERO BLANK SPACE)
+    ------------------------------------------------------------- */
+    .services-lead-box {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-left: 5px solid #2563EB;
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: var(--navy-800);
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+
+    .services-lead-box strong {
+      color: var(--navy-900);
+    }
+
+    .services-premier-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      flex: 1;
+      align-items: stretch;
+    }
+
+    .service-premier-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+      overflow: hidden;
+      justify-content: space-between;
+    }
+
+    .service-premier-media {
+      height: 220px;
+      width: 100%;
+      position: relative;
+      background: #0F172A;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .service-premier-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .service-floating-icon {
+      position: relative;
+      margin-top: -24px;
+      margin-left: 16px;
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      background: #FFFFFF;
+      border: 2px solid #E2E8F0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #EC4899;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    .service-premier-body {
+      padding: 10px 18px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .service-premier-title {
+      font-family: var(--font-heading);
+      font-size: 18.5px;
+      font-weight: 800;
+      color: var(--navy-900);
+      margin-bottom: 6px;
+    }
+
+    .service-premier-desc {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--text-body);
+      margin-bottom: 12px;
+    }
+
+    .service-premier-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+      padding-top: 10px;
+      border-top: 1px solid #F1F5F9;
+    }
+
+    .service-premier-bullets li {
+      font-size: 12.8px;
+      color: var(--navy-900);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .service-premier-bullets li::before {
+      content: '\2713';
+      color: #10B981;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .service-kpi-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FDF2F8;
+      border: 1px solid #FCE7F3;
+      color: var(--magenta-700);
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      margin-bottom: 12px;
+    }
+
+    .service-tech-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .tech-pill {
+      background: #F1F5F9;
+      color: var(--navy-800);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+    }
+
+    .services-bottom-ribbon {
+      margin-top: 14px;
+      background: #0F172A;
+      color: #FFFFFF;
+      border-radius: 8px;
+      padding: 11px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12.5px;
+      flex-shrink: 0;
+    }
+
+    /* -------------------------------------------------------------
+       SLIDE 4: STALIGHT CAMPUS ERP (TIGHT SNUG CARDS - ZERO BLANK SPACE)
+    ------------------------------------------------------------- */
+    .campus-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 14px;
+      flex: 1;
+    }
+
+    .campus-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .campus-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+      flex-shrink: 0;
+    }
+
+    .campus-icon-wrap {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: var(--grad-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .campus-card-title-group {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .campus-card-title {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--navy-900);
+      text-transform: uppercase;
+      letter-spacing: 0.2px;
+      line-height: 1.15;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .campus-card-caption {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--magenta-600);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .campus-image-container {
+      height: 170px;
+      width: 100%;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 6px;
+      margin: 4px 0;
+      flex-shrink: 0;
+    }
+
+    .campus-image-container img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .campus-card-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .campus-card-bullets li {
+      font-size: 12.5px;
+      line-height: 1.35;
+      color: var(--navy-900);
+      font-weight: 600;
+      position: relative;
+      padding-left: 13px;
+    }
+
+    .campus-card-bullets li::before {
+      content: '\2022';
+      color: var(--magenta-600);
+      position: absolute;
+      left: 0;
+      font-weight: 900;
+      font-size: 15px;
+      line-height: 1.1;
+    }
+
+    .campus-compliance-bar {
+      margin-top: 12px;
+      background: #F8FAFC;
+      border: 1px solid #CBD5E1;
+      border-radius: 10px;
+      padding: 9px 24px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .compliance-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .compliance-badge img {
+      height: 38px;
+      width: 38px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .compliance-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .compliance-text strong {
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--navy-900);
+    }
+
+    .compliance-text span {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* -------------------------------------------------------------
+       SLIDE 5: STALIGHT SYNC AI PLATFORM (LARGE CRISP CARDS)
+    ------------------------------------------------------------- */
+    .sync-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      flex: 1;
+    }
+
+    .sync-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+    }
+
+    .sync-card-media {
+      height: 155px;
+      width: 100%;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 6px;
+    }
+
+    .sync-card-media img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .sync-card-title {
+      font-family: var(--font-heading);
+      font-size: 15.5px;
+      font-weight: 800;
+      color: var(--navy-900);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .sync-card-desc {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--text-body);
+      flex: 1;
+    }
+
+    /* -------------------------------------------------------------
+       SLIDE 6: CAPACITY BUILDING: STALIGHT ACADEMY (ZERO BLANK SPACE)
+    ------------------------------------------------------------- */
+    .academy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 24px;
+      flex: 1;
+    }
+
+    .academy-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .academy-col-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--navy-900);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #F1F5F9;
+    }
+
+    .track-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-left: 5px solid #EC4899;
+      border-radius: 10px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+    }
+
+    .track-card.alt {
+      border-left-color: #2563EB;
+    }
+
+    .track-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .track-title {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--navy-900);
+      text-transform: uppercase;
+    }
+
+    .track-badge {
+      background: #0F172A;
+      color: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+
+    .track-desc {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--navy-800);
+    }
+
+    .modules-2x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .module-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+    }
+
+    .module-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .module-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      background: var(--purple-100);
+      color: var(--purple-700);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+
+    .module-name {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--navy-900);
+      line-height: 1.2;
+    }
+
+    .module-desc {
+      font-size: 12.8px;
+      line-height: 1.45;
+      color: var(--text-body);
+      margin-bottom: 8px;
+      flex: 1;
+    }
+
+    .module-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .module-tag {
+      font-size: 10.5px;
+      background: #F1F5F9;
+      color: var(--navy-800);
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .academy-bottom-bar {
+      margin-top: 16px;
+      background: linear-gradient(135deg, rgba(236,72,153,0.08) 0%, rgba(37,99,235,0.08) 100%);
+      border: 1px solid rgba(236,72,153,0.25);
+      border-radius: 8px;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy-900);
+    }
+
+    /* -------------------------------------------------------------
+       SLIDE 7: DOMAIN & INDUSTRY VERTICALS (DEDICATED SLIDE)
+    ------------------------------------------------------------- */
+    .verticals-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      flex: 1;
+    }
+
+    .vertical-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);
+      position: relative;
+    }
+
+    .vertical-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--navy-900);
+      margin-bottom: 10px;
+    }
+
+    .vertical-desc {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--text-body);
+      margin-bottom: 12px;
+      flex: 1;
+    }
+
+    .vertical-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .vertical-features li {
+      font-size: 12.8px;
+      color: var(--navy-800);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .vertical-features li::before {
+      content: '\25B8';
+      color: var(--magenta-600);
+      font-size: 13px;
+    }
+
+    .vertical-bottom-ribbon {
+      margin-top: 16px;
+      background: #0F172A;
+      color: #FFFFFF;
+      border-radius: 8px;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+
+    /* -------------------------------------------------------------
+       SLIDE 8: REGIONAL & GLOBAL PRESENCE
+    ------------------------------------------------------------- */
+    .presence-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 24px;
+      flex: 1;
+    }
+
+    .presence-map-col {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);
+    }
+
+    .hubs-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .hub-badge {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 6px;
+      padding: 9px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy-900);
+    }
+
+    .hub-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #EC4899;
+      flex-shrink: 0;
+    }
+
+    .hub-dot.blue {
+      background: #2563EB;
+    }
+
+    .presence-right-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .presence-hub-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-left: 5px solid #8B5CF6;
+      border-radius: 10px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+    }
+
+    .presence-hub-title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--navy-900);
+      margin-bottom: 6px;
+    }
+
+    .presence-hub-desc {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--navy-800);
+    }
+
+    /* -------------------------------------------------------------
+       SLIDE 9: SCALE METRICS & ACHIEVEMENTS
+    ------------------------------------------------------------- */
+    .metrics-top-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .metric-big-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);
+    }
+
+    .metric-big-num {
+      font-family: var(--font-mono);
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 6px;
+      background: var(--grad-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .metric-big-title {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--navy-900);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .metric-big-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      flex: 1;
+    }
+
+    .achievement-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);
+    }
+
+    .achievement-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .achievement-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      background: var(--magenta-100);
+      color: var(--magenta-600);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+    }
+
+    .achievement-title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--navy-900);
+    }
+
+    .achievement-desc {
+      font-size: 13.8px;
+      line-height: 1.55;
+      color: var(--text-body);
+      flex: 1;
+    }
+
+    /* -------------------------------------------------------------
+       SLIDE 10: STRATEGIC ALLIANCES & CLIENT TRUST (8 REAL CLIENTS ONLY)
+    ------------------------------------------------------------- */
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 20px;
+      flex: 1;
+    }
+
+    .client-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+      transition: transform 0.2s;
+    }
+
+    .client-logo-box {
+      height: 80px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .client-logo-box img {
+      max-height: 72px;
+      max-width: 85%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .client-name {
+      font-family: var(--font-heading);
+      font-size: 15.5px;
+      font-weight: 800;
+      color: var(--navy-900);
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+
+    .client-type {
+      font-size: 11px;
+      color: var(--magenta-600);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .client-desc {
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--navy-700);
+    }
+
+    .clients-bottom-bar {
+      margin-top: 16px;
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+      color: #FFFFFF;
+      border-radius: 8px;
+      padding: 13px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .clients-metric-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+    }
+
+    .clients-metric-item span.num {
+      font-family: var(--font-mono);
+      font-weight: 800;
+      color: #EC4899;
+    }
+
+    /* -------------------------------------------------------------
+       PRINT MEDIA QUERY (EXACT A4 LANDSCAPE)
+    ------------------------------------------------------------- */
+    @media print {
+      body {
+        background: #FFFFFF !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .deck-toolbar {
+        display: none !important;
+      }
+      .deck-container {
+        padding: 0 !important;
+        gap: 0 !important;
+      }
+      .sheet {
+        width: 297mm !important;
+        height: 210mm !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+      }
+      @page {
+        size: 297mm 210mm landscape;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =============================================================
+       BOTTOM PRESENTATION TOOLBAR (NEVER OBSCORES HEADERS)
+  ============================================================= -->
+  <aside class="deck-toolbar" id="deckToolbar" aria-label="Deck controls">
+    <button type="button" class="deck-btn" id="btnPrev" title="Previous Slide (Left Arrow)">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      Prev
+    </button>
+    <div class="page-counter" id="pageCounter">Page 1 of 10</div>
+    <button type="button" class="deck-btn" id="btnNext" title="Next Slide (Right Arrow)">
+      Next
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </button>
+    <button type="button" class="deck-btn primary" id="btnPrint" title="Print to A4 PDF">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4H7v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+      Save as PDF
+    </button>
+    <button type="button" class="deck-btn" id="btnOverview" title="View All Pages">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      View All
+    </button>
+  </aside>
+
+  <!-- =============================================================
+       DECK CONTAINER: 10 A4 LANDSCAPE SLIDES
+  ============================================================= -->
+  <main class="deck-container">
+
+    <!-- SLIDE 1: COVER SLIDE (HERO PRESENTATION DECK) -->
+    <article class="sheet cover-sheet" id="slide-1" data-page="1">
+      <div class="cover-deck-body">
+        <div class="cover-badge">
+          <span class="dot"></span>
+          Official Corporate Profile &amp; Presentation Deck
+        </div>
+        
+        <div class="cover-logo-wrap">
+          <img src="profile_assets/stalight_presentation_logo.png" alt="Stalight Technologies">
+        </div>
+        
+        <h1 class="cover-title">
+          STALIGHT <span class="grad-text">TECHNOLOGIES</span>
+        </h1>
+        
+        <div class="cover-sub">
+          Enterprise Intelligence Software Solutions
+        </div>
+        
+        <div class="cover-quote">
+          &ldquo;Where Innovation Meets Enterprise Software&rdquo;
+        </div>
+        
+        <!-- Business Areas Pill Matrix -->
+        <div class="cover-pills-row">
+          <div class="cover-pill">
+            <span style="color: #ec4899; font-size: 14px;">●</span> Enterprise Platforms
+          </div>
+          <div class="cover-pill">
+            <span style="color: #8b5cf6; font-size: 14px;">●</span> Software Development
+          </div>
+          <div class="cover-pill">
+            <span style="color: #3b82f6; font-size: 14px;">●</span> IT Services &amp; Operations
+          </div>
+          <div class="cover-pill">
+            <span style="color: #06b6d4; font-size: 14px;">●</span> Technical Training &amp; Mentorship
+          </div>
+          <div class="cover-pill">
+            <span style="color: #10b981; font-size: 14px;">●</span> Growth &amp; Marketing
+          </div>
+        </div>
+        
+        <div class="cover-contact-row">
+          <span><strong>Headquarters:</strong> Bengaluru, Karnataka, India</span>
+          <span style="color: #cbd5e1;">•</span>
+          <span><strong>Official Portal:</strong> www.stalight.in</span>
+          <span style="color: #cbd5e1;">•</span>
+          <span><strong>Inquiries:</strong> support@stalight.in</span>
+        </div>
+      </div>
+      
+      <footer class="cover-footer">
+        <div class="footer-left">
+          <span style="font-weight: 600; color: #334155;">Stalight Technologies Private Limited</span>
+          <span class="sep">•</span>
+          <span>www.stalight.in</span>
+          <span class="sep">•</span>
+          <span>support@stalight.in</span>
+        </div>
+        <div class="footer-right">
+          <span>CONFIDENTIAL &amp; PROPRIETARY</span>
+          <span class="slide-number-badge">SLIDE 01 / 10</span>
+        </div>
+      </footer>
+    </article>
+
+    <!-- SLIDE 2: ABOUT STALIGHT (ZERO BLANK SPACE) -->
+    <article class="sheet" id="slide-2" data-page="2">
+      <header class="sheet-header">
+        <div class="header-left">
+          <div class="accent-bars">
+            <div class="accent-bar"></div>
+            <div class="accent-bar short"></div>
+          </div>
+          <h2 class="header-title">ABOUT STALIGHT: <span class="grad">INDIA&rsquo;S TECH REVOLUTION</span></h2>
+        </div>
+        <div class="header-logo">
+          <img src="profile_assets/stalightlogo.png" alt="Stalight Logo">
+          <div class="header-logo-text">
+            <div class="header-logo-name">STALIGHT&reg;</div>
+            <div class="header-logo-sub">TECHNOLOGIES</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="sheet-content">
+        <div class="about-lead-box">
+          Founded in <strong>2021</strong>, <strong>Stalight Technologies Pvt. Ltd.</strong> is a high-velocity enterprise software and cognitive intelligence corporation headquartered in <strong>Bengaluru, Karnataka</strong>. As India&rsquo;s higher education institutions and modern enterprise sectors undergo unprecedented cloud migration, Stalight serves as the foundational technology backbone&mdash;delivering fault-tolerant ERP architectures, cognitive AI interview suites, and mission-critical cloud development to over 50,000 active daily users.
+        </div>
+
+        <div class="about-main-grid">
+          <!-- Col 1: Purpose & Tenets -->
+          <div class="about-col-card">
+            <div class="about-col-title">Foundational Mission &amp; Vision</div>
+            <div class="about-item-card">
+              <div class="about-item-icon">M</div>
+              <div class="about-item-content">
+                <h4>Our Enterprise Mission</h4>
+                <p>To eliminate institutional software fragmentation across India by engineering world-class, cloud-native ERPs, automated AI code evaluation platforms, and modern enterprise applications with zero barrier to adoption.</p>
+              </div>
+            </div>
+            <div class="about-item-card">
+              <div class="about-item-icon">V</div>
+              <div class="about-item-content">
+                <h4>Our 2030 Vision</h4>
+                <p>To power 1,000,000+ daily engineers and learners across Pan-India, standing as the standard operating system for outcome-based technical education, compliance governance, and corporate recruitment.</p>
+              </div>
+            </div>
+            <div class="about-item-card">
+              <div class="about-item-icon">&hearts;</div>
+              <div class="about-item-content">
+                <h4>Core Philosophy: Speed &amp; Integrity</h4>
+                <p>Architecting sub-second microservices, strict data sovereignty, SOC-2 alignment, and intuitive user experiences engineered for students, university deans, and enterprise CXOs alike.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Col 2: Engineering Tenets -->
+          <div class="about-col-card">
+            <div class="about-col-title">Core Engineering Tenets</div>
+            <div class="about-item-card">
+              <div class="about-item-icon">&Delta;</div>
+              <div class="about-item-content">
+                <h4>High-Velocity Cloud Architecture</h4>
+                <p>Automated multi-region failover, Kubernetes container clusters, and distributed Redis caching ensuring 99.98% SLA even during peak university fee-submission deadlines.</p>
+              </div>
+            </div>
+            <div class="about-item-card">
+              <div class="about-item-icon">&infin;</div>
+              <div class="about-item-content">
+                <h4>Cognitive AI &amp; Autonomous Systems</h4>
+                <p>Bespoke deep-learning models for sub-second facial recognition attendance (<450ms), speech sentiment interview scoring, and automated code complexity (Big-O) analysis.</p>
+              </div>
+            </div>
+            <div class="about-item-card">
+              <div class="about-item-icon">&sect;</div>
+              <div class="about-item-content">
+                <h4>Institutional Compliance &amp; Audit Ready</h4>
+                <p>Native compliance engines built specifically for NAAC A++ accreditation, NBA criteria mapping, AICTE regulatory guidelines, and ISO 27001 data encryption standards.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-bottom-stats">
+          <div class="about-stat-box">
+            <div class="about-stat-num">50,000+</div>
+            <div class="about-stat-label">Daily Active Users</div>
+          </div>
+          <div class="about-stat-box">
+            <div class="about-stat-num">15+</div>
+            <div class="about-stat-label">University Campuses</div>
+          </div>
+          <div class="about-stat-box">
+            <div class="about-stat-num">99.98%</div>
+            <div class="about-stat-label">Production Uptime</div>
+          </div>
+          <div class="about-stat-box">
+            <div class="about-stat-num">100%</div>
+            <div class="about-stat-label">Data Sovereignty in India</div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="sheet-footer">
+        <div class="footer-left">
+          <span class="footer-confidential">&bull; STALIGHT TECHNOLOGIES PVT. LTD.</span>
+          <span>Corporate Capability Statement</span>
+        </div>
+        <div class="footer-center">contact@stalight.in &bull; www.stalight.in</div>
+        <div class="footer-right">
+          <span>PAGE 02</span>
+          <span class="footer-page-pill">02 / 10</span>
+        </div>
+      </footer>
+    </article>
+
+    <!-- SLIDE 3: OUR CORE SERVICES (FULL-HEIGHT, NO BLANK SPACE, BALANCED CARDS) -->
+    <article class="sheet" id="slide-3" data-page="3">
+      <header class="sheet-header">
+        <div class="header-left">
+          <div class="accent-bars">
+            <div class="accent-bar"></div>
+            <div class="accent-bar short"></div>
+          </div>
+          <h2 class="header-title">OUR CORE SERVICES: <span class="grad">ENTERPRISE-GRADE TECH SOLUTIONS</span></h2>
+        </div>
+        <div class="header-logo">
+          <img src="profile_assets/stalightlogo.png" alt="Stalight Logo">
+          <div class="header-logo-text">
+            <div class="header-logo-name">STALIGHT&reg;</div>
+            <div class="header-logo-sub">TECHNOLOGIES</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="sheet-content">
+        <div class="services-lead-box">
+          <strong>Enterprise-Grade Tech Services.</strong> We deliver scalable software solutions engineered for the demands of the modern enterprise. Backed by deep industry expertise, we transform traditional workflows into intelligent digital experiences.
+        </div>
+
+        <div class="services-premier-grid">
+          <!-- Card 1: Software Development -->
+          <div class="service-premier-card">
+            <div class="service-premier-media">
+              <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80" onerror="this.src='profile_assets/carrier1.jpg'" alt="Software Development">
+            </div>
+            <div class="service-floating-icon">
+              &lt;/&gt;
+            </div>
+            <div class="service-premier-body">
+              <div>
+                <div class="service-premier-title">Software Development</div>
+                <p class="service-premier-desc">Architecting resilient, hyper-scaled custom applications that drive core business transformation and modernize legacy ecosystems.</p>
+                <ul class="service-premier-bullets">
+                  <li>Cloud-native microservices &amp; multi-tenant SaaS</li>
+                  <li>High-throughput React 19, Next.js &amp; Node.js backends</li>
+                  <li>Enterprise REST &amp; GraphQL API integrations</li>
+                </ul>
+              </div>
+              <div>
+                <div class="service-kpi-pill">Sub-Second API Response (<120ms)</div>
+                <div class="service-tech-badges">
+                  <span class="tech-pill">TypeScript</span>
+                  <span class="tech-pill">React 19</span>
+                  <span class="tech-pill">Next.js</span>
+                  <span class="tech-pill">PostgreSQL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Career Training -->
+          <div class="service-premier-card">
+            <div class="service-premier-media">
+              <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80" onerror="this.src='profile_assets/carrier2.jpg'" alt="Career Training">
+            </div>
+            <div class="service-floating-icon">
+              &#127891;
+            </div>
+            <div class="service-premier-body">
+              <div>
+                <div class="service-premier-title">Career Training</div>
+                <p class="service-premier-desc">Empowering workforces and academic institutions with industry-leading technical training and advanced capability building.</p>
+                <ul class="service-premier-bullets">
+                  <li>16-Week intensive Full-Stack engineering bootcamps</li>
+                  <li>Cloud Architecture, DevOps &amp; CI/CD pipelines</li>
+                  <li>Curated DSA &amp; system design masterclasses</li>
+                </ul>
+              </div>
+              <div>
+                <div class="service-kpi-pill">88% Verified Placement Rate</div>
+                <div class="service-tech-badges">
+                  <span class="tech-pill">Bootcamps</span>
+                  <span class="tech-pill">DevOps</span>
+                  <span class="tech-pill">DSA</span>
+                  <span class="tech-pill">Placement</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: IT Services -->
+          <div class="service-premier-card">
+            <div class="service-premier-media">
+              <img src="profile_assets/it services.jpg" alt="IT Services">
+            </div>
+            <div class="service-floating-icon">
+              &#9881;
+            </div>
+            <div class="service-premier-body">
+              <div>
+                <div class="service-premier-title">IT Services</div>
+                <p class="service-premier-desc">Delivering comprehensive managed IT operations, secure web services, and seamless infrastructure optimization.</p>
+                <ul class="service-premier-bullets">
+                  <li>Managed cloud hosting on AWS, GCP &amp; Azure</li>
+                  <li>Docker containerization &amp; Kubernetes cluster scaling</li>
+                  <li>24/7 reliability monitoring, SOC-2 &amp; ISO compliance</li>
+                </ul>
+              </div>
+              <div>
+                <div class="service-kpi-pill">99.98% SLA & Zero Breaches</div>
+                <div class="service-tech-badges">
+                  <span class="tech-pill">AWS</span>
+                  <span class="tech-pill">Kubernetes</span>
+                  <span class="tech-pill">Docker</span>
+                  <span class="tech-pill">Terraform</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Growth & Marketing -->
+          <div class="service-premier-card">
+            <div class="service-premier-media">
+              <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80" onerror="this.src='profile_assets/office.jpeg'" alt="Growth & Marketing">
+            </div>
+            <div class="service-floating-icon">
+              &#128640;
+            </div>
+            <div class="service-premier-body">
+              <div>
+                <div class="service-premier-title">Growth &amp; Marketing</div>
+                <p class="service-premier-desc">Delivering high-intent B2B lead generation, account-based marketing (ABM), and scalable outbound pipeline architecture.</p>
+                <ul class="service-premier-bullets">
+                  <li>B2B Lead Gen &amp; verified C-suite contact discovery</li>
+                  <li>Account-Based Marketing (ABM) stakeholder penetration</li>
+                  <li>CRM workflow sync, attribution &amp; pipeline analytics</li>
+                </ul>
+              </div>
+              <div>
+                <div class="service-kpi-pill">3.8x Qualified Pipeline Multiplier</div>
+                <div class="service-tech-badges">
+                  <span class="tech-pill">B2B Lead Gen</span>
+                  <span class="tech-pill">ABM</span>
+                  <span class="tech-pill">Pipeline</span>
+                  <span class="tech-pill">CRM Sync</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="services-bottom-ribbon">
+          <div><strong>ENTERPRISE DELIVERY GUARANTEE:</strong> Dedicated Solution Architects &bull; Two-Week Agile Sprints &bull; 99.98% Uptime SLA</div>
+          <div><strong>100% INTELLECTUAL PROPERTY TRANSFERRED</strong></div>
+        </div>
+      </div>
+
+      <footer class="sheet-footer">
+        <div class="footer-left">
+          <span class="footer-confidential">&bull; STALIGHT TECHNOLOGIES PVT. LTD.</span>
+          <span>Core IT Services &amp; Enterprise Offerings</span>
+        </div>
+        <div class="footer-center">contact@stalight.in &bull; www.stalight.in</div>
+        <div class="footer-right">
+          <span>PAGE 03</span>
+          <span class="footer-page-pill">03 / 10</span>
+        </div>
+      </footer>
+    </article>
+
+    <!-- SLIDE 4: ACADEMIC EXCELLENCE: STALIGHT CAMPUS ERP (TIGHT SNUG CARDS - ZERO BLANK SPACE) -->
+    <article class="sheet" id="slide-4" data-page="4">
+      <header class="sheet-header">
+        <div class="header-left">
+          <div class="accent-bars">
+            <div class="accent-bar"></div>
+            <div class="accent-bar short"></div>
+          </div>
+          <h2 class="header-title">ACADEMIC EXCELLENCE: <span class="grad">STALIGHT CAMPUS ERP</span></h2>
+        </div>
+        <div class="header-logo">
+          <img src="profile_assets/stalightlogo.png" alt="Stalight Logo">
+          <div class="header-logo-text">
+            <div class="header-logo-name">STALIGHT&reg;</div>
+            <div class="header-logo-sub">TECHNOLOGIES</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="sheet-content">
+        <div class="campus-grid">
+          <!-- Card 1: Assignments Dashboard -->
+          <div class="campus-card">
+            <div class="campus-card-header">
+              <div class="campus-icon-wrap">&#129504;</div>
+              <div class="campus-card-title-group">
+                <div class="campus-card-title">Assignments Dashboard</div>
+                <div class="campus-card-caption">Smart Assignment Tracking &amp; Submission</div>
+              </div>
+            </div>
+            <div class="campus-image-container">
+              <img src="profile_assets/nebulaai.png" alt="Smart Assignment Tracking &amp; Submission System">
+            </div>
+            <ul class="campus-card-bullets">
+              <li>Real-time digital assignment tracking &amp; overdue alerts</li>
+              <li>Multi-file grading console with automated rubric feedback</li>
+              <li>Seamless faculty-student submission workflows</li>
+            </ul>
+          </div>
+
+          <!-- Card 2: Fee Management -->
+          <div class="campus-card">
+            <div class="campus-card-header">
+              <div class="campus-icon-wrap">&#128179;</div>
+              <div class="campus-card-title-group">
+                <div class="campus-card-title">Fee Management</div>
+                <div class="campus-card-caption">Smart Student Fee &amp; Semester Billing</div>
+              </div>
+            </div>
+            <div class="campus-image-container">
+              <img src="profile_assets/Screenshot 2026-05-23 at 10.39.36 AM.png" alt="Smart Student Fee Management &amp; Billing">
+            </div>
+            <ul class="campus-card-bullets">
+              <li>Customizable installment breakdowns &amp; fine logic</li>
+              <li>Integrated payment gateway auto-reconciliation</li>
+              <li>Defalcation elimination with verifiable receipts</li>
+            </ul>
+          </div>
+
+          <!-- Card 3: Attendance System -->
+          <div class="campus-card">
+            <div class="campus-card-header">
+              <div class="campus-icon-wrap">&#128065;</div>
+              <div class="campus-card-title-group">
+                <div class="campus-card-title">Attendance System</div>
+                <div class="campus-card-caption">AI-Powered Facial Recognition Scanning</div>
+              </div>
+            </div>
+            <div class="campus-image-container">
+              <img src="profile_assets/facerecogn.jpg" alt="AI-Powered Facial Recognition">
+            </div>
+            <ul class="campus-card-bullets">
+              <li>Sub-second multi-student facial scanning (<450ms)</li>
+              <li>Anti-proxy GPS-geofenced mobile check-ins</li>
+              <li>Instant parent SMS notification on unexcused absence</li>
+            </ul>
+          </div>
+
+          <!-- Card 4: Leave Workflows -->
+          <div class="campus-card">
+            <div class="campus-card-header">
+              <div class="campus-icon-wrap">&#128100;</div>
+              <div class="campus-card-title-group">
+                <div class="campus-card-title">Leave Workflows</div>
+                <div class="campus-card-caption">Multi-Level Institutional Approvals</div>
+              </div>
+            </div>
+            <div class="campus-image-container">
+              <img src="profile_assets/leavereqimage.png" alt="Multi-Level Institutional Leave Approvals">
+            </div>
+            <ul class="campus-card-bullets">
+              <li>Hierarchical approvals (Mentor &rarr; HOD &rarr; Principal)</li>
+              <li>Medical &amp; duty-leave document attachment verification</li>
+              <li>Real-time push notifications on status change</li>
+            </ul>
+          </div>
+
+          <!-- Card 5: Academic Results -->
+          <div class="campus-card">
+            <div class="campus-card-header">
+              <div class="campus-icon-wrap">&#128202;</div>
+              <div class="campus-card-title-group">
+                <div class="campus-card-title">Academic Results</div>
+                <div class="campus-card-caption">Gradebook Analytics &amp; CO/PO Outcome</div>
+              </div>
+            </div>
+            <div class="campus-image-container">
+              <img src="profile_assets/results.png" alt="Detailed Gradebook Performance Analysis">
+            </div>
+            <ul class="campus-card-bullets">
+              <li>Automated SGPA &amp; CGPA calculation algorithms</li>
+              <li>Tamper-proof verifiable digital marksheets</li>
+              <li>At-risk student diagnostic charts &amp; grade analytics</li>
+            </ul>
+          </div>
+
+          <!-- Card 6: Student Profiling -->
+          <div class="campus-card">
+            <div class="campus-card-header">
+              <div class="campus-icon-wrap">&#128241;</div>
+              <div class="campus-card-title-group">
+                <div class="campus-card-title">Student Profiling</div>
+                <div class="campus-card-caption">Instant Mobile Profiles (iOS &amp; Android)</div>
+              </div>
+            </div>
+            <div class="campus-image-container">
+              <img src="profile_assets/mobileloginpage.jpeg" alt="Complete Student Profiles - Mobile App">
+            </div>
+            <ul class="campus-card-bullets">
+              <li>360° student identity profile accessible on mobile</li>
+              <li>Biometric digital ID card generation &amp; credentials</li>
+              <li>Offline syllabus, attendance &amp; notice caching</li>
+            </ul>
+          </div>
+
+          <!-- Card 7: Institutional Analytics -->
+          <div class="campus-card">
+            <div class="campus-card-header">
+              <div class="campus-icon-wrap">&#128200;</div>
+              <div class="campus-card-title-group">
+                <div class="campus-card-title">Institutional Analytics</div>
+                <div class="campus-card-caption">Master Command Center Admin Dashboard</div>
+              </div>
+            </div>
+            <div class="campus-image-container">
+              <img src="profile_assets/princydah.png" alt="Master Command Center Admin Dashboard">
+            </div>
+            <ul class="campus-card-bullets">
+              <li>High-level administrative reporting &amp; cohort readiness</li>
+              <li>Faculty workload balancing &amp; substitute tracking</li>
+              <li>One-click documentation export for NAAC A++</li>
+            </ul>
+          </div>
+
+          <!-- Card 8: Secure Portal Gateway -->
+          <div class="campus-card">
+            <div class="campus-card-header">
+              <div class="campus-icon-wrap">&#128274;</div>
+              <div class="campus-card-title-group">
+                <div class="campus-card-title">Secure Portal Gateway</div>
+                <div class="campus-card-caption">Role-Based Secure Login Gateway</div>
+              </div>
+            </div>
+            <div class="campus-image-container">
+              <img src="profile_assets/loginpagedesktop.png" alt="Role-Based Secure Portal Login Gateway">
+            </div>
+            <ul class="campus-card-bullets">
+              <li>Enterprise authentication with granular role filtering</li>
+              <li>Multi-stakeholder portals (Student, Faculty, Admin, Parent)</li>
+              <li>Full data sovereignty &amp; ISO 27001 encryption</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- COMPLIANCE & APP STORE ECOSYSTEM (Zero Blank Space) -->
+        <div class="campus-compliance-bar">
+          <div class="compliance-badge">
+            <img src="profile_assets/NAAC_LOGO.png" alt="NAAC Accreditation">
+            <div class="compliance-text">
+              <strong>NAAC A++ Alignment</strong>
+              <span>CO/PO Outcome Framework</span>
+            </div>
+          </div>
+          <div class="compliance-badge">
+            <img src="profile_assets/images (2).jpg" alt="NBA Quality Framework">
+            <div class="compliance-text">
+              <strong>NBA Quality Ready</strong>
+              <span>Criteria Mapping &amp; Audits</span>
+            </div>
+          </div>
+          <div class="compliance-badge">
+            <img src="profile_assets/playstore.png" alt="Google Play Store">
+            <div class="compliance-text">
+              <strong>Google Play Store</strong>
+              <span>Verified Android App (4.8 Rating)</span>
+            </div>
+          </div>
+          <div class="compliance-badge">
+            <img src="profile_assets/apple-store-icon.png" alt="Apple App Store">
+            <div class="compliance-text">
+              <strong>Apple App Store</strong>
+              <span>Certified iOS Native App</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="sheet-footer">
+        <div class="footer-left">
+          <span class="footer-confidential">&bull; STALIGHT TECHNOLOGIES PVT. LTD.</span>
+          <span>Proprietary Product: Stalight Campus ERP</span>
+        </div>
+        <div class="footer-center">contact@stalight.in &bull; www.stalight.in</div>
+        <div class="footer-right">
+          <span>PAGE 04</span>
+          <span class="footer-page-pill">04 / 10</span>
+        </div>
+      </footer>
+    </article>
+
+    <!-- SLIDE 5: COGNITIVE TECH: STALIGHT SYNC AI PLATFORM -->
+    <article class="sheet" id="slide-5" data-page="5">
+      <header class="sheet-header">
+        <div class="header-left">
+          <div class="accent-bars">
+            <div class="accent-bar"></div>
+            <div class="accent-bar short"></div>
+          </div>
+          <h2 class="header-title">COGNITIVE TECH: <span class="grad">STALIGHT SYNC AI PLATFORM</span></h2>
+        </div>
+        <div class="header-logo">
+          <img src="profile_assets/stalightlogo.png" alt="Stalight Logo">
+          <div class="header-logo-text">
+            <div class="header-logo-name">STALIGHT&reg;</div>
+            <div class="header-logo-sub">TECHNOLOGIES</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="sheet-content">
+        <div class="sync-grid">
+          <!-- Sync Card 1 -->
+          <div class="sync-card">
+            <div class="sync-card-media">
+              <img src="profile_assets/Screenshot 2026-05-23 at 10.42.35 AM.png" alt="NEURA Voice AI Mock Interviews">
+            </div>
+            <div class="sync-card-title">NEURA Voice AI Mock Interviews</div>
+            <p class="sync-card-desc">Conversational LLM-driven mock interviews simulating Fortune 500 tech hiring. Evaluates tone, speech sentiment, technical precision, and system architecture logic in real-time.</p>
+          </div>
+
+          <!-- Sync Card 2 -->
+          <div class="sync-card">
+            <div class="sync-card-media">
+              <img src="profile_assets/Screenshot 2026-05-23 at 10.41.25 AM.png" alt="Multi-Language Cloud IDE">
+            </div>
+            <div class="sync-card-title">Multi-Language Cloud IDE</div>
+            <p class="sync-card-desc">Zero-setup browser development environment for Python, Java, C++, Go, and SQL. Instant sandbox execution with live syntax highlighting, memory profiling, and edge test execution.</p>
+          </div>
+
+          <!-- Sync Card 3 -->
+          <div class="sync-card">
+            <div class="sync-card-media">
+              <img src="profile_assets/Screenshot 2026-05-23 at 10.40.57 AM.png" alt="AI Proctoring & Anti-Cheat Suite">
+            </div>
+            <div class="sync-card-title">AI Proctoring &amp; Anti-Cheat</div>
+            <p class="sync-card-desc">Multi-screen detection, tab-switch restrictions, background speech flags, and real-time gaze tracking for high-stakes campus recruitment tests and university coding exams.</p>
+          </div>
+
+          <!-- Sync Card 4 -->
+          <div class="sync-card">
+            <div class="sync-card-media">
+              <img src="profile_assets/Screenshot 2026-05-23 at 10.43.37 AM.png" alt="Automated Test Suite Grader">
+            </div>
+            <div class="sync-card-title">Automated Test Suite Grader</div>
+            <p class="sync-card-desc">Evaluates algorithmic code submissions against rigorous edge cases, time complexity (Big-O) constraints, memory footprints, and enterprise clean-code standards automatically.</p>
+          </div>
+
+          <!-- Sync Card 5 -->
+          <div class="sync-card">
+            <div class="sync-card-media">
+              <img src="profile_assets/Screenshot 2026-05-23 at 10.43.58 AM.png" alt="Placement Command & Cohort Analytics">
+            </div>
+            <div class="sync-card-title">Placement Command Hub</div>
+            <p class="sync-card-desc">Empowers institutional placement officers with real-time student cohort readiness heatmaps, recruiter shortlisting filters, skill gap identification, and automated drive scheduling.</p>
+          </div>
+
+          <!-- Sync Card 6 -->
+          <div class="sync-card">
+            <div class="sync-card-media">
+              <img src="profile_assets/Screenshot 2026-05-23 at 10.44.06 AM.png" alt="5,000+ Curated DSA Question Bank">
+            </div>
+            <div class="sync-card-title">5,000+ Curated DSA Problems</div>
+            <p class="sync-card-desc">Comprehensive question repository curated by top industry architects, spanning Data Structures, Algorithms, System Design, and Full Stack enterprise scenarios.</p>
+          </div>
+        </div>
+      </div>
+
+      <footer class="sheet-footer">
+        <div class="footer-left">
+          <span class="footer-confidential">&bull; STALIGHT TECHNOLOGIES PVT. LTD.</span>
+          <span>Proprietary Product: Stalight Sync AI Platform</span>
+        </div>
+        <div class="footer-center">contact@stalight.in &bull; www.stalight.in</div>
+        <div class="footer-right">
+          <span>PAGE 05</span>
+          <span class="footer-page-pill">05 / 10</span>
+        </div>
+      </footer>
+    </article>
+
+    <!-- SLIDE 6: CAPACITY BUILDING: STALIGHT ACADEMY (ZERO BLANK SPACE) -->
+    <article class="sheet" id="slide-6" data-page="6">
+      <header class="sheet-header">
+        <div class="header-left">
+          <div class="accent-bars">
+            <div class="accent-bar"></div>
+            <div class="accent-bar short"></div>
+          </div>
+          <h2 class="header-title">CAPACITY BUILDING: <span class="grad">STALIGHT ACADEMY</span></h2>
+        </div>
+        <div class="header-logo">
+          <img src="profile_assets/stalightlogo.png" alt="Stalight Logo">
+          <div class="header-logo-text">
+            <div class="header-logo-name">STALIGHT&reg;</div>
+            <div class="header-logo-sub">TECHNOLOGIES</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="sheet-content">
+        <div class="academy-grid">
+          <!-- Col 1: Core Accredited Tracks -->
+          <div class="academy-col">
+            <div class="academy-col-header">
+              <span>&#127891;</span> Core Accredited Diploma Tracks
+            </div>
+
+            <div class="track-card">
+              <div class="track-title-row">
+                <div class="track-title">Full Stack Enterprise Dev</div>
+                <div class="track-badge">16 WEEKS</div>
+              </div>
+              <p class="track-desc">Intensive mastery of TypeScript, React 19, Node.js, Next.js, and cloud database architecture with hands-on production microservices and live deployment.</p>
+              <div class="service-tech-badges">
+                <span class="tech-pill">React 19</span>
+                <span class="tech-pill">Next.js</span>
+                <span class="tech-pill">Node.js</span>
+                <span class="tech-pill">PostgreSQL</span>
+              </div>
+            </div>
+
+            <div class="track-card alt">
+              <div class="track-title-row">
+                <div class="track-title">Cloud Architecture &amp; DevOps</div>
+                <div class="track-badge">14 WEEKS</div>
+              </div>
+              <p class="track-desc">Docker containerization, Kubernetes cluster orchestration, Terraform infrastructure as code, automated CI/CD pipelines, and multi-cloud reliability management.</p>
+              <div class="service-tech-badges">
+                <span class="tech-pill">AWS</span>
+                <span class="tech-pill">Docker</span>
+                <span class="tech-pill">Kubernetes</span>
+                <span class="tech-pill">CI/CD</span>
+              </div>
+            </div>
+
+            <div style="background: #F8FAFC; border: 1px dashed #CBD5E1; border-radius: 8px; padding: 12px 16px;">
+              <div style="font-size: 11.5px; font-weight: 800; color: var(--magenta-600); text-transform: uppercase; margin-bottom: 4px;">TRAINING COHORTS &bull; FOUNDATION TO SCALE</div>
+              <div style="font-size: 12.5px; color: var(--navy-800); line-height: 1.4;">Foundation (DSA &amp; System Design) &bull; Advanced (Enterprise Scale Microservices) &bull; Corporate Finishing School</div>
+            </div>
+          </div>
+
+          <!-- Col 2: Specialised Advanced Modules (2x2 Grid) -->
+          <div class="academy-col">
+            <div class="academy-col-header">
+              <span>&#9733;</span> Specialised Advanced Industry Modules
+            </div>
+
+            <div class="modules-2x2">
+              <!-- Module 1 -->
+              <div class="module-card">
+                <div class="module-header">
+                  <div class="module-icon">AI</div>
+                  <div class="module-name">Generative AI &amp; LLM Systems</div>
+                </div>
+                <p class="module-desc">Prompt engineering, LangChain, vector databases (Pinecone), and RAG pipelines for autonomous enterprise agents.</p>
+                <div class="module-tags">
+                  <span class="module-tag">LangChain</span>
+                  <span class="module-tag">RAG</span>
+                  <span class="module-tag">Vector DB</span>
+                </div>
+              </div>
+
+              <!-- Module 2 -->
+              <div class="module-card">
+                <div class="module-header">
+                  <div class="module-icon">CY</div>
+                  <div class="module-name">Cybersecurity &amp; PenTesting</div>
+                </div>
+                <p class="module-desc">OWASP Top 10 mitigation, vulnerability scanning, network packet analysis, and ethical penetration testing protocols.</p>
+                <div class="module-tags">
+                  <span class="module-tag">OWASP</span>
+                  <span class="module-tag">Kali</span>
+                  <span class="module-tag">TLS 1.3</span>
+                </div>
+              </div>
+
+              <!-- Module 3 -->
+              <div class="module-card">
+                <div class="module-header">
+                  <div class="module-icon">DE</div>
+                  <div class="module-name">Data Engineering &amp; Analytics</div>
+                </div>
+                <p class="module-desc">Apache Kafka streaming, real-time ETL pipelines, Snowflake data warehousing, and automated BI reporting dashboards.</p>
+                <div class="module-tags">
+                  <span class="module-tag">Kafka</span>
+                  <span class="module-tag">Spark</span>
+                  <span class="module-tag">Snowflake</span>
+                </div>
+              </div>
+
+              <!-- Module 4 -->
+              <div class="module-card">
+                <div class="module-header">
+                  <div class="module-icon">MB</div>
+                  <div class="module-name">Enterprise Mobile Engineering</div>
+                </div>
+                <p class="module-desc">React Native and Flutter architecture, native device API bridging, offline-first syncing, and biometric authentication.</p>
+                <div class="module-tags">
+                  <span class="module-tag">React Native</span>
+                  <span class="module-tag">Flutter</span>
+                  <span class="module-tag">iOS/Android</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="academy-bottom-bar">
+          <div><strong>ACADEMY IMPACT:</strong> 1,200+ Engineers Trained &bull; 88% Corporate Placement Rate &bull; 40+ Hiring Partners</div>
+          <div><strong>NBA &amp; NAAC ACCREDITED SKILL DEVELOPMENT OUTCOMES</strong></div>
+        </div>
+      </div>
+
+      <footer class="sheet-footer">
+        <div class="footer-left">
+          <span class="footer-confidential">&bull; STALIGHT TECHNOLOGIES PVT. LTD.</span>
+          <span>Technical Workforce Capacity Building</span>
+        </div>
+        <div class="footer-center">contact@stalight.in &bull; www.stalight.in</div>
+        <div class="footer-right">
+          <span>PAGE 06</span>
+          <span class="footer-page-pill">06 / 10</span>
+        </div>
+      </footer>
+    </article>
+
+    <!-- SLIDE 7: DOMAIN & INDUSTRY VERTICALS (DEDICATED SLIDE) -->
+    <article class="sheet" id="slide-7" data-page="7">
+      <header class="sheet-header">
+        <div class="header-left">
+          <div class="accent-bars">
+            <div class="accent-bar"></div>
+            <div class="accent-bar short"></div>
+          </div>
+          <h2 class="header-title">DOMAIN VERTICALS: <span class="grad">ENTERPRISE &amp; SECTOR APPLICATIONS</span></h2>
+        </div>
+        <div class="header-logo">
+          <img src="profile_assets/stalightlogo.png" alt="Stalight Logo">
+          <div class="header-logo-text">
+            <div class="header-logo-name">STALIGHT&reg;</div>
+            <div class="header-logo-sub">TECHNOLOGIES</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="sheet-content">
+        <div class="verticals-grid">
+          <!-- Vertical 1 -->
+          <div class="vertical-card">
+            <div class="vertical-badge">
+              <span>&#127891;</span> Higher Education &amp; Universities
+            </div>
+            <p class="vertical-desc">Comprehensive digital transformation for autonomous universities, engineering colleges, and multi-campus institutions.</p>
+            <ul class="vertical-features">
+              <li>End-to-end Campus ERP &amp; mobile student apps</li>
+              <li>NAAC A++ &amp; NBA accreditation compliance mapping</li>
+              <li>Automated placement cell command centers</li>
+            </ul>
+          </div>
+
+          <!-- Vertical 2 -->
+          <div class="vertical-card">
+            <div class="vertical-badge">
+              <span>&#9729;</span> Enterprise SaaS &amp; Cloud Tech
+            </div>
+            <p class="vertical-desc">Bespoke cloud architecture, microservices re-engineering, and high-concurrency platforms for global software companies.</p>
+            <ul class="vertical-features">
+              <li>High-velocity API backends &amp; microservices</li>
+              <li>Zero-downtime database migrations &amp; Redis caching</li>
+              <li>Multi-tenant enterprise access control (RBAC)</li>
+            </ul>
+          </div>
+
+          <!-- Vertical 3 -->
+          <div class="vertical-card">
+            <div class="vertical-badge">
+              <span>&#127963;</span> Government &amp; Public Sector
+            </div>
+            <p class="vertical-desc">Secure citizen-facing digital portals, automated biometric verification, and institutional skill development programs.</p>
+            <ul class="vertical-features">
+              <li>Facial recognition attendance with strict Indian data privacy</li>
+              <li>Large-scale public examination proctoring portals</li>
+              <li>Multi-lingual administrative dashboards</li>
+            </ul>
+          </div>
+
+          <!-- Vertical 4 -->
+          <div class="vertical-card">
+            <div class="vertical-badge">
+              <span>&#9877;</span> Healthcare &amp; MedTech
+            </div>
+            <p class="vertical-desc">HIPAA-compliant hospital management systems, appointment scheduling, and secure digital clinical records.</p>
+            <ul class="vertical-features">
+              <li>Telemedicine platforms with encrypted video consultations</li>
+              <li>Automated patient electronic medical records (EMR)</li>
+              <li>Diagnostic reporting with QR-code verifiable lab tests</li>
+            </ul>
+          </div>
+
+          <!-- Vertical 5 -->
+          <div class="vertical-card">
+            <div class="vertical-badge">
+              <span>&#128176;</span> Banking &amp; FinTech
+            </div>
+            <p class="vertical-desc">Secure transactional architectures, automated reconciliation ledgers, and institutional payment workflows.</p>
+            <ul class="vertical-features">
+              <li>High-security payment gateway reconciliations</li>
+              <li>Automated installment fee ledgers &amp; fine calculations</li>
+              <li>Cryptographically verifiable digital receipts</li>
+            </ul>
+          </div>
+
+          <!-- Vertical 6 -->
+          <div class="vertical-card">
+            <div class="vertical-badge">
+              <span>&#128666;</span> Logistics &amp; Transport Telematics
+            </div>
+            <p class="vertical-desc">Real-time GPS fleet tracking, intelligent routing algorithms, and automated transport safety alerts.</p>
+            <ul class="vertical-features">
+              <li>Real-time vehicle GPS coordinates &amp; route analytics</li>
+              <li>Geofence-triggered notifications for parents &amp; managers</li>
+              <li>Driver performance &amp; speed threshold telematics</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="vertical-bottom-ribbon">
+          <div><strong>CROSS-INDUSTRY SCALABILITY:</strong> Modular API Architecture &bull; SOC-2 &amp; ISO-27001 Ready &bull; Sub-Second Response Times</div>
+          <div><strong>DEPLOYED ACROSS 15+ ENTERPRISE &amp; CAMPUS CLIENTS</strong></div>
+        </div>
+      </div>
+
+      <footer class="sheet-footer">
+        <div class="footer-left">
+          <span class="footer-confidential">&bull; STALIGHT TECHNOLOGIES PVT. LTD.</span>
+          <span>Domain &amp; Industry Verticals</span>
+        </div>
+        <div class="footer-center">contact@stalight.in &bull; www.stalight.in</div>
+        <div class="footer-right">
+          <span>PAGE 07</span>
+          <span class="footer-page-pill">07 / 10</span>
+        </div>
+      </footer>
+    </article>
+
+    <!-- SLIDE 8: REGIONAL & GLOBAL PRESENCE -->
+    <article class="sheet" id="slide-8" data-page="8">
+      <header class="sheet-header">
+        <div class="header-left">
+          <div class="accent-bars">
+            <div class="accent-bar"></div>
+            <div class="accent-bar short"></div>
+          </div>
+          <h2 class="header-title">REGIONAL &amp; <span class="grad">GLOBAL PRESENCE</span></h2>
+        </div>
+        <div class="header-logo">
+          <img src="profile_assets/stalightlogo.png" alt="Stalight Logo">
+          <div class="header-logo-text">
+            <div class="header-logo-name">STALIGHT&reg;</div>
+            <div class="header-logo-sub">TECHNOLOGIES</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="sheet-content">
+        <div class="presence-grid">
+          <!-- Col 1: Corridors & Hubs -->
+          <div class="presence-map-col">
+            <div style="font-family: var(--font-heading); font-size: 16.5px; font-weight: 800; color: var(--navy-900); text-transform: uppercase;">
+              Active Technology Corridors
+            </div>
+            <p style="font-size: 13.5px; color: var(--text-body); line-height: 1.5;">
+              Stalight maintains a strategic multi-city engineering presence across premier technology capitals and North Karnataka higher education centers.
+            </p>
+            <div class="hubs-list">
+              <div class="hub-badge"><span class="hub-dot"></span> HQ: Bengaluru</div>
+              <div class="hub-badge"><span class="hub-dot"></span> Hubballi-Dharwad</div>
+              <div class="hub-badge"><span class="hub-dot"></span> Gadag (TCE Hub)</div>
+              <div class="hub-badge"><span class="hub-dot"></span> Mysuru</div>
+              <div class="hub-badge"><span class="hub-dot"></span> Mangaluru</div>
+              <div class="hub-badge"><span class="hub-dot"></span> Belagavi</div>
+              <div class="hub-badge"><span class="hub-dot blue"></span> Hyderabad Node</div>
+              <div class="hub-badge"><span class="hub-dot blue"></span> Chennai Center</div>
+              <div class="hub-badge"><span class="hub-dot blue"></span> Delhi NCR</div>
+              <div class="hub-badge"><span class="hub-dot blue"></span> Singapore DC</div>
+            </div>
+            <div style="margin-top: auto; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px 16px;">
+              <div style="font-size: 11.5px; font-weight: 800; color: var(--magenta-600); text-transform: uppercase; margin-bottom: 4px;">RAPID ON-SITE DEPLOYMENT</div>
+              <div style="font-size: 12.5px; color: var(--navy-800); line-height: 1.4;">Dedicated on-campus technical support engineers stationed across partner campuses for 100% immediate resolution.</div>
+            </div>
+          </div>
+
+          <!-- Col 2: Hub Deep Dives -->
+          <div class="presence-right-col">
+            <div class="presence-hub-card">
+              <div class="presence-hub-title">Central Headquarters &bull; Bengaluru</div>
+              <div class="presence-hub-desc">
+                Core product engineering, advanced AI research, cloud infrastructure operations, and executive leadership housed in India&rsquo;s primary technology capital.
+              </div>
+            </div>
+
+            <div class="presence-hub-card" style="border-left-color: #EC4899;">
+              <div class="presence-hub-title">North Karnataka Regional Hubs &bull; Hubballi &amp; Gadag</div>
+              <div class="presence-hub-desc">
+                Pioneering tier-2/3 higher education digital enablement, student incubation centers, and dedicated Campus ERP support hubs serving premier regional engineering colleges.
+              </div>
+            </div>
+
+            <div class="presence-hub-card" style="border-left-color: #2563EB;">
+              <div class="presence-hub-title">Global Cloud Network &bull; Singapore &amp; AWS US-East</div>
+              <div class="presence-hub-desc">
+                Distributed edge infrastructure nodes, automated backup repositories, and low-latency CDN acceleration providing seamless global accessibility and compliance.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="sheet-footer">
+        <div class="footer-left">
+          <span class="footer-confidential">&bull; STALIGHT TECHNOLOGIES PVT. LTD.</span>
+          <span>Regional &amp; Global Technology Footprint</span>
+        </div>
+        <div class="footer-center">contact@stalight.in &bull; www.stalight.in</div>
+        <div class="footer-right">
+          <span>PAGE 08</span>
+          <span class="footer-page-pill">08 / 10</span>
+        </div>
+      </footer>
+    </article>
+
+    <!-- SLIDE 9: SCALE METRICS & ACHIEVEMENTS -->
+    <article class="sheet" id="slide-9" data-page="9">
+      <header class="sheet-header">
+        <div class="header-left">
+          <div class="accent-bars">
+            <div class="accent-bar"></div>
+            <div class="accent-bar short"></div>
+          </div>
+          <h2 class="header-title">OUR ACHIEVEMENTS &amp; <span class="grad">SCALE METRICS</span></h2>
+        </div>
+        <div class="header-logo">
+          <img src="profile_assets/stalightlogo.png" alt="Stalight Logo">
+          <div class="header-logo-text">
+            <div class="header-logo-name">STALIGHT&reg;</div>
+            <div class="header-logo-sub">TECHNOLOGIES</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="sheet-content">
+        <div class="metrics-top-row">
+          <div class="metric-big-card">
+            <div class="metric-big-num">50,000+</div>
+            <div class="metric-big-title">Active Daily Users</div>
+            <div class="metric-big-sub">Students, professors &amp; administrators</div>
+          </div>
+          <div class="metric-big-card">
+            <div class="metric-big-num">15+</div>
+            <div class="metric-big-title">Engineering Campuses</div>
+            <div class="metric-big-sub">Full Campus ERP deployments</div>
+          </div>
+          <div class="metric-big-card">
+            <div class="metric-big-num">99.98%</div>
+            <div class="metric-big-title">Production SLA</div>
+            <div class="metric-big-sub">Zero unplanned service downtime</div>
+          </div>
+          <div class="metric-big-card">
+            <div class="metric-big-num">5M+</div>
+            <div class="metric-big-title">Code Executions</div>
+            <div class="metric-big-sub">Autonomous AI sandbox evaluations</div>
+          </div>
+        </div>
+
+        <div class="achievements-grid">
+          <div class="achievement-card">
+            <div class="achievement-header">
+              <div class="achievement-icon">&#127979;</div>
+              <div class="achievement-title">Institutional Transformation</div>
+            </div>
+            <p class="achievement-desc">
+              Reduced campus administrative overhead by over <strong>70%</strong>. Streamlined complex multi-crore fee collections with automated ledger reconciliation, eliminating defalcation and manual receipts across partner campuses.
+            </p>
+          </div>
+
+          <div class="achievement-card">
+            <div class="achievement-header">
+              <div class="achievement-icon" style="background: var(--purple-100); color: var(--purple-700);">&#9889;</div>
+              <div class="achievement-title">High-Throughput Biometrics</div>
+            </div>
+            <p class="achievement-desc">
+              Engineered proprietary facial recognition engines achieving sub-second verification (<strong>&lt;450ms</strong>) under varied lighting conditions, seamlessly handling over 2,000 concurrent students during morning gate check-in surges.
+            </p>
+          </div>
+
+          <div class="achievement-card">
+            <div class="achievement-header">
+              <div class="achievement-icon" style="background: var(--blue-100); color: var(--blue-700);">&#128640;</div>
+              <div class="achievement-title">Workforce Employability</div>
+            </div>
+            <p class="achievement-desc">
+              Stalight Sync AI Platform and Academy tracks accelerated campus placement ratios to <strong>88%</strong>, providing corporate recruiters with verifiable, cheat-proof coding profiles and live skill readiness heatmaps.
+            </p>
+          </div>
+        </div>
+
+        <div style="margin-top: 18px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between;">
+          <div style="font-size: 13px; font-weight: 700; color: var(--navy-900);">ACCREDITATION STANDARDS VERIFIED:</div>
+          <div style="font-size: 12.5px; color: var(--navy-700); font-weight: 600;">NAAC A++ Institutional Alignment &bull; NBA Tier-I / Tier-II Outcome Mapping &bull; ISO 27001 Data Security</div>
+        </div>
+      </div>
+
+      <footer class="sheet-footer">
+        <div class="footer-left">
+          <span class="footer-confidential">&bull; STALIGHT TECHNOLOGIES PVT. LTD.</span>
+          <span>Key Scale Metrics &amp; Proven Milestones</span>
+        </div>
+        <div class="footer-center">contact@stalight.in &bull; www.stalight.in</div>
+        <div class="footer-right">
+          <span>PAGE 09</span>
+          <span class="footer-page-pill">09 / 10</span>
+        </div>
+      </footer>
+    </article>
+
+    <!-- SLIDE 10: STRATEGIC ALLIANCES & CLIENT TRUST (8 REAL CLIENTS ONLY) -->
+    <article class="sheet" id="slide-10" data-page="10">
+      <header class="sheet-header">
+        <div class="header-left">
+          <div class="accent-bars">
+            <div class="accent-bar"></div>
+            <div class="accent-bar short"></div>
+          </div>
+          <h2 class="header-title">STRATEGIC ALLIANCES &amp; <span class="grad">CLIENT TRUST</span></h2>
+        </div>
+        <div class="header-logo">
+          <img src="profile_assets/stalightlogo.png" alt="Stalight Logo">
+          <div class="header-logo-text">
+            <div class="header-logo-name">STALIGHT&reg;</div>
+            <div class="header-logo-sub">TECHNOLOGIES</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="sheet-content">
+        <div class="clients-grid">
+          <!-- Client 1: AMC Institutions -->
+          <div class="client-card">
+            <div class="client-logo-box">
+              <img src="profile_assets/amclogo.png" alt="AMC Institutions">
+            </div>
+            <div class="client-name">AMC Institutions</div>
+            <div class="client-type">Premier Engineering Campus</div>
+            <p class="client-desc">Campus ERP deployment and automated placement assessment platform for over 6,000+ students.</p>
+          </div>
+
+          <!-- Client 2: City Engineering College -->
+          <div class="client-card">
+            <div class="client-logo-box">
+              <img src="profile_assets/cityenginerring.jpg" alt="City Engineering College">
+            </div>
+            <div class="client-name">City Engineering College</div>
+            <div class="client-type">Autonomous Technical College</div>
+            <p class="client-desc">Outcome-based education tracking, timetable automation, and digital faculty gradebooks.</p>
+          </div>
+
+          <!-- Client 3: Tontadarya College of Engineering -->
+          <div class="client-card">
+            <div class="client-logo-box">
+              <img src="profile_assets/tontadarya.gif" alt="Tontadarya College of Engineering">
+            </div>
+            <div class="client-name">TCE Hubballi-Gadag</div>
+            <div class="client-type">Campus ERP Anchor Partner</div>
+            <p class="client-desc">Long-standing institutional partnership with 100% digital fee collections and biometric attendance.</p>
+          </div>
+
+          <!-- Client 4: Dwi Nethra Eye Hospital -->
+          <div class="client-card">
+            <div class="client-logo-box">
+              <img src="profile_assets/dwinethra.jpg" alt="Dwi Nethra Eye Hospital">
+            </div>
+            <div class="client-name">Dwi Nethra Eye Hospital</div>
+            <div class="client-type">Enterprise Healthcare Client</div>
+            <p class="client-desc">Custom clinical records management, patient appointment automation, and tele-consultation platform.</p>
+          </div>
+
+          <!-- Client 5: Gleamator Technologies -->
+          <div class="client-card">
+            <div class="client-logo-box">
+              <img src="profile_assets/gleamatorlogo.jpg" alt="Gleamator Technologies">
+            </div>
+            <div class="client-name">Gleamator Technologies</div>
+            <div class="client-type">Software &amp; Digital Solutions</div>
+            <p class="client-desc">Cloud-native SaaS re-engineering, high-throughput microservices APIs, and technical consulting.</p>
+          </div>
+
+          <!-- Client 6: Vyomaa Media -->
+          <div class="client-card">
+            <div class="client-logo-box">
+              <img src="profile_assets/vyomaa.png" alt="Vyomaa Media">
+            </div>
+            <div class="client-name">Vyomaa Media Network</div>
+            <div class="client-type">Digital Media &amp; Cloud Network</div>
+            <p class="client-desc">High-velocity streaming delivery, edge content caching, and scalable brand campaign infrastructure.</p>
+          </div>
+
+          <!-- Client 7: Surya Enterprises -->
+          <div class="client-card">
+            <div class="client-logo-box">
+              <img src="profile_assets/surya.png" alt="Surya Enterprises">
+            </div>
+            <div class="client-name">Surya Enterprises</div>
+            <div class="client-type">Engineering &amp; Manufacturing</div>
+            <p class="client-desc">Enterprise operations management, supply chain tracking ledgers, and automated reporting systems.</p>
+          </div>
+
+          <!-- Client 8: Eduforcareer -->
+          <div class="client-card">
+            <div class="client-logo-box">
+              <img src="profile_assets/eduforcarrier.png" alt="Eduforcareer">
+            </div>
+            <div class="client-name">Eduforcareer</div>
+            <div class="client-type">Workforce Acceleration Partner</div>
+            <p class="client-desc">Joint technical bootcamp programs, placement drive enablement, and corporate talent pipelines.</p>
+          </div>
+        </div>
+
+        
+      </div>
+
+      <footer class="sheet-footer">
+        <div class="footer-left">
+          <span class="footer-confidential">&bull; STALIGHT TECHNOLOGIES PVT. LTD.</span>
+          <span>Client Trust &amp; Strategic Partners</span>
+        </div>
+        <div class="footer-center">contact@stalight.in &bull; www.stalight.in</div>
+        <div class="footer-right">
+          <span>PAGE 10</span>
+          <span class="footer-page-pill">10 / 10</span>
+        </div>
+      </footer>
+    </article>
+
+  </main>
+
+  <script>
+    (function () {
+      var sheets = Array.prototype.slice.call(document.querySelectorAll('.sheet'));
+      var total = sheets.length;
+      var currentIndex = 0;
+      var counter = document.getElementById('pageCounter');
+
+      function updateCounter(idx) {
+        currentIndex = idx;
+        if (counter) {
+          counter.textContent = 'Page ' + (idx + 1) + ' of ' + total;
+        }
+      }
+
+      function scrollToSheet(idx) {
+        if (idx >= 0 && idx < total) {
+          sheets[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+          updateCounter(idx);
+        }
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var page = parseInt(entry.target.getAttribute('data-page'), 10) - 1;
+            if (!isNaN(page)) {
+              updateCounter(page);
+            }
+          }
+        });
+      }, { threshold: 0.55 });
+
+      sheets.forEach(function (sheet) {
+        observer.observe(sheet);
+      });
+
+      document.getElementById('btnPrev').addEventListener('click', function () {
+        if (currentIndex > 0) {
+          scrollToSheet(currentIndex - 1);
+        }
+      });
+
+      document.getElementById('btnNext').addEventListener('click', function () {
+        if (currentIndex < total - 1) {
+          scrollToSheet(currentIndex + 1);
+        }
+      });
+
+      document.getElementById('btnPrint').addEventListener('click', function () {
+        window.print();
+      });
+
+      document.getElementById('btnOverview').addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+          if (currentIndex < total - 1) scrollToSheet(currentIndex + 1);
+        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+          if (currentIndex > 0) scrollToSheet(currentIndex - 1);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
