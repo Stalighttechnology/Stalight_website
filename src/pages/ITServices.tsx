@@ -3,6 +3,12 @@ import { motion, Variants, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import itImg from "@/assets/backgrounds/campus.jpg";
+import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
+import cloudImg from "@/assets/services/cloud-hosting.jpg";
+import workflowImg from "@/assets/services/workflow-automation.png";
+import perfImg from "@/assets/services/performance-testing.jpg";
+import infraImg from "@/assets/services/infrastructure-ops.png";
+
 import { 
   Server, 
   Cloud, 
@@ -42,50 +48,80 @@ const staggerContainer: Variants = {
   visible: { opacity: 1, transition: { staggerChildren: 0.2 } } 
 };
 
+const listStagger: Variants = { 
+  hidden: { opacity: 0 }, 
+  visible: { 
+    opacity: 1, 
+    transition: { 
+      staggerChildren: 0.1,
+      delayChildren: 0.05
+    } 
+  } 
+};
+
+const itemFadeIn: Variants = { 
+  hidden: { opacity: 0, x: -12 }, 
+  visible: { 
+    opacity: 1, 
+    x: 0, 
+    transition: { duration: 0.4, ease: "easeOut" } 
+  } 
+};
+
 // --- Mock Data ---
 const services = [
   {
-    icon: <Cloud className="w-8 h-8 text-purple-600" />,
+    tag: "Cloud Architecture",
     title: "Cloud & Hosting",
-    desc: "Reliable cloud infrastructure and deployment solutions designed for scalability and performance.",
+    desc: "Reliable cloud infrastructure and deployment solutions designed for enterprise scalability, resilience, and multi-region performance.",
+    image: cloudImg,
     details: [
-      "Managed hosting and deployment pipelines",
-      "Autoscaling, load balancing and CDN integration",
-      "Secure networking, VPCs and access controls",
-      "Cost optimisation, monitoring and observability",
+      "Managed hosting and automated deployment pipelines",
+      "Dynamic autoscaling, load balancing and global CDN integration",
+      "Secure VPC networking, isolated subnets and access controls",
+      "Continuous cost optimization, observability, and latency telemetry",
     ],
   },
   {
-    icon: <Zap className="w-8 h-8 text-purple-600" />,
+    tag: "Workflow Automation",
     title: "Workflow Automation",
-    desc: "Automate workflows, customer interactions, and repetitive tasks using advanced solutions.",
+    desc: "Automate complex business operations, mission-critical workflows, and data pipelines using intelligent custom systems.",
+    image: workflowImg,
+    fitContain: true,
     details: [
-      "Intelligent workflow automation with LLMs and RPA",
-      "automated customer support (chatbots & voice agents)",
-      "Process orchestration, monitoring and analytics",
-      "Integration with CRMs, ERPs and enterprise systems",
+      "Intelligent workflow automation with custom orchestrations",
+      "Automated customer support routing and escalation queues",
+      "Event-driven process orchestration and live telemetry analytics",
+      "Deep integration with enterprise CRMs, ERPs, and internal databases",
     ],
   },
   {
-    icon: <Activity className="w-8 h-8 text-purple-600" />,
+    tag: "Performance & Reliability",
     title: "Performance Optimization & Testing",
-    desc: "Optimize system performance and reliability through profiling, testing, and targeted tuning.",
+    desc: "Maximize system throughput, eliminate database bottlenecks, and ensure uninterrupted operations under peak production loads.",
+    image: perfImg,
     details: [
-      "Performance profiling and bottleneck analysis",
-      "Load, stress, and soak testing at scale",
-      "Automated regression testing and CI integration",
-      "Caching, tuning, and resource optimization strategies",
+      "Full-stack profiling, query execution plans, and bottleneck analysis",
+      "Load, stress, soak, and spike testing simulating thousands of users",
+      "Automated regression testing suites integrated into CI/CD pipelines",
+      "Multi-tier Redis caching, connection pooling, and memory tuning",
     ],
   },
   {
-    icon: <Server className="w-8 h-8 text-purple-600" />,
+    tag: "Managed Infrastructure",
     title: "Infrastructure Ops",
-    desc: "Optimized server, network, and hardware management tailored precisely for scale.",
+    desc: "Dedicated 24/7 server, container, and infrastructure operations ensuring 99.98% availability and zero unplanned downtime.",
+    image: infraImg,
+    fitContain: true,
+    caption: {
+      badge: "ITOps Core Lifecycle",
+      text: "Continuous 5-pillar lifecycle orchestrating run solutions, infrastructure, networks, security, and rapid problem resolution.",
+    },
     details: [
-      "Server & network management",
-      "Capacity planning and autoscaling",
-      "Backup, DR and recovery",
-      "Performance tuning and monitoring",
+      "Kubernetes cluster, Docker container, and bare-metal server management",
+      "Proactive capacity forecasting, auto-healing, and node balancing",
+      "Multi-region automated data backups, replication, and disaster recovery",
+      "Round-the-clock infrastructure monitoring and instant incident mitigation",
     ],
   }
 ];
@@ -251,90 +287,162 @@ const ITServices = () => {
             </motion.p>
           </motion.div>
 
-          <motion.div 
-            initial="hidden" 
-            whileInView="visible" 
-            viewport={{ once: true }} 
-            variants={staggerContainer} 
-            className="grid md:grid-cols-2 lg:grid-cols-2 gap-8"
-          >
-            {services.map((service, index) => (
-              <motion.div 
-                key={index} 
-                variants={fadeUp} 
-                className="group flex flex-col sm:flex-row gap-6 p-6 rounded-2xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100"
-              >
-                <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-purple-50 flex items-center justify-center transform transition-transform group-hover:-translate-y-1 group-hover:shadow-sm">
-                  {service.icon}
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold mb-3 text-slate-900">{service.title}</h3>
-                  <p className="text-slate-600 leading-relaxed">{service.desc}</p>
-
-                  <div className="mt-4">
-                    <Dialog
-                      open={openDialogIndex === index}
-                      onOpenChange={(open) => setOpenDialogIndex(open ? index : null)}
+          {/* Interactive Stacking Cards Section */}
+          <div className="w-full max-w-6xl xl:max-w-7xl mx-auto">
+            <ScrollStack
+              useWindowScroll={true}
+              smoothScroll={false}
+              itemDistance={180}
+              itemStackDistance={14}
+              stackPosition="96px"
+              holdDistance={120}
+              baseScale={0.94}
+              itemScale={0.02}
+              dimAmount={0.08}
+            >
+              {services.map((service, index) => (
+                <ScrollStackItem key={index} itemClassName="scroll-stack-it-card">
+                  <div className="flex flex-col md:grid md:grid-cols-12 gap-4 sm:gap-6 lg:gap-8 xl:gap-10 items-stretch h-full">
+                    {/* Visual Image & Caption: Clean & Framed (shows first on mobile, right column on desktop) */}
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.96 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.5, ease: "easeOut" }}
+                      className={`order-1 md:order-2 md:col-span-5 h-[190px] sm:h-[220px] md:h-full rounded-lg overflow-hidden border border-slate-200/90 shadow-sm relative group/img ${(service as any).fitContain ? 'bg-white p-3 sm:p-4 flex flex-col items-center justify-between' : 'bg-slate-100'} shrink-0`}
                     >
-                      <DialogTrigger asChild>
-                        <button className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-md text-sm font-medium hover:bg-purple-700 transition">
-                          Learn More
-                        </button>
-                      </DialogTrigger>
+                      <div className={`w-full ${(service as any).caption ? 'flex-1 flex items-center justify-center overflow-hidden' : 'h-full'}`}>
+                        <img
+                          src={service.image}
+                          alt={service.title}
+                          className={`w-full h-full ${(service as any).fitContain ? 'object-contain' : 'object-cover'} object-center transform transition-transform duration-700 group-hover/img:scale-105`}
+                        />
+                      </div>
 
-                      <DialogContent className="sm:rounded-2xl p-6 bg-white">
-                        <DialogHeader className="flex flex-col items-start gap-2">
-                          <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 rounded-lg bg-purple-50 flex items-center justify-center">
-                              {service.icon}
-                            </div>
-                            <DialogTitle className="text-lg sm:text-xl">
-                              {(() => {
-                                const parts = service.title.split(" ");
-                                if (parts.length === 1) return <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500">{service.title}</span>;
-                                const tail = parts.pop();
-                                return (
-                                  <>
-                                    <span className="font-light">{parts.join(" ")}</span>{' '}
-                                    <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500">{tail}</span>
-                                  </>
-                                );
-                              })()}
-                            </DialogTitle>
+                      {(service as any).caption && (
+                        <motion.div 
+                          initial={{ opacity: 0, y: 8 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.2, duration: 0.45, ease: "easeOut" }}
+                          className="w-full pt-2.5 mt-1 border-t border-slate-100 text-center"
+                        >
+                          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-900 text-white text-[10px] font-bold uppercase tracking-wider mb-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                            {(service as any).caption.badge}
                           </div>
-                          <DialogDescription className="text-slate-600 mt-1">{service.desc}</DialogDescription>
-                        </DialogHeader>
+                          <p className="text-[11px] sm:text-xs text-slate-500 leading-snug line-clamp-2 max-w-sm mx-auto font-medium">
+                            {(service as any).caption.text}
+                          </p>
+                        </motion.div>
+                      )}
+                    </motion.div>
 
-                        <hr className="my-4 border-slate-100" />
-
-                        <div className="mt-2 text-slate-700">
-                          <ul className="list-disc pl-5 space-y-3">
-                            {service.details?.map((d, i) => (
-                              <li key={i} className="leading-relaxed">{d}</li>
-                            ))}
-                          </ul>
+                    {/* Left Column: Text & Capabilities */}
+                    <div className="order-2 md:order-1 md:col-span-7 flex flex-col justify-between h-full py-0.5">
+                      <div>
+                        <div className="mb-2">
+                          <span className="inline-block text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-purple-700 bg-purple-50 border border-purple-200/70 px-2.5 py-0.5 rounded-md">
+                            {service.tag}
+                          </span>
                         </div>
 
-                        <DialogFooter className="mt-6 flex flex-col sm:flex-row sm:justify-end gap-3">
-                          <DialogClose asChild>
-                            <button
-                              onClick={scrollToAssessment}
-                              className="group relative inline-flex items-center justify-center px-4 py-2 bg-slate-950 text-white rounded-md overflow-hidden shadow-[0_10px_30px_-10px_rgba(168,85,247,0.12)] hover:-translate-y-0.5 transition-all duration-200"
-                            >
-                              <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                              <span className="relative z-10 text-sm font-semibold">Get IT Assessment</span>
+                        <h3 className="text-xl sm:text-2xl lg:text-[26px] font-bold text-slate-900 tracking-tight mb-1.5 sm:mb-2">
+                          {service.title}
+                        </h3>
+
+                        <p className="text-slate-600 leading-relaxed text-xs sm:text-sm mb-2.5 sm:mb-3">
+                          {service.desc}
+                        </p>
+
+                        <div className="pt-2 sm:pt-2.5 border-t border-slate-100 mb-2">
+                          <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 sm:mb-2">
+                            Key Capabilities
+                          </h4>
+                          <motion.ul 
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, amount: 0.2 }}
+                            variants={listStagger}
+                            className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 text-xs sm:text-sm text-slate-700 font-medium"
+                          >
+                            {service.details.map((d, i) => (
+                              <motion.li 
+                                key={i} 
+                                variants={itemFadeIn}
+                                className="flex items-start gap-2"
+                              >
+                                <span className="w-1.5 h-1.5 rounded-sm bg-purple-600 mt-1.5 shrink-0"></span>
+                                <span className="leading-snug">{d}</span>
+                              </motion.li>
+                            ))}
+                          </motion.ul>
+                        </div>
+                      </div>
+
+                      <div className="pt-2 sm:pt-2.5 border-t border-slate-100 flex items-center justify-start mt-auto">
+                        <Dialog
+                          open={openDialogIndex === index}
+                          onOpenChange={(open) => setOpenDialogIndex(open ? index : null)}
+                        >
+                          <DialogTrigger asChild>
+                            <button className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 hover:bg-purple-600 text-white rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 shadow-sm hover:shadow-md group/btn">
+                              <span>View Specifications &amp; Scope</span>
+                              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                             </button>
-                          </DialogClose>
-                          <DialogClose className="inline-flex items-center px-4 py-2 bg-slate-100 text-slate-900 rounded-md hover:bg-slate-200 transition">Close</DialogClose>
-                        </DialogFooter>
-                      </DialogContent>
-                    </Dialog>
+                          </DialogTrigger>
+
+                          <DialogContent className="sm:rounded-xl p-6 bg-white border border-slate-200 shadow-xl">
+                            <DialogHeader className="flex flex-col items-start gap-2">
+                              <DialogTitle className="text-lg sm:text-xl font-bold">
+                                {(() => {
+                                  const parts = service.title.split(" ");
+                                  if (parts.length === 1) return <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500">{service.title}</span>;
+                                  const tail = parts.pop();
+                                  return (
+                                    <>
+                                      <span className="font-light">{parts.join(" ")}</span>{' '}
+                                      <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500">{tail}</span>
+                                    </>
+                                  );
+                                })()}
+                              </DialogTitle>
+                              <DialogDescription className="text-slate-600 mt-1">{service.desc}</DialogDescription>
+                            </DialogHeader>
+
+                            <hr className="my-4 border-slate-100" />
+
+                            <div className="mt-2 text-slate-700">
+                              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Enterprise Scope of Work</h4>
+                              <ul className="list-disc pl-5 space-y-3 text-sm">
+                                {service.details?.map((d, i) => (
+                                  <li key={i} className="leading-relaxed">{d}</li>
+                                ))}
+                              </ul>
+                            </div>
+
+                            <DialogFooter className="mt-6 flex flex-col sm:flex-row sm:justify-end gap-3">
+                              <DialogClose asChild>
+                                <button
+                                  onClick={scrollToAssessment}
+                                  className="group relative inline-flex items-center justify-center px-4 py-2 bg-slate-950 text-white rounded-lg overflow-hidden shadow-sm hover:-translate-y-0.5 transition-all duration-200"
+                                >
+                                  <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                  <span className="relative z-10 text-sm font-semibold">Get IT Assessment</span>
+                                </button>
+                              </DialogClose>
+                              <DialogClose className="inline-flex items-center px-4 py-2 bg-slate-100 text-slate-900 rounded-lg hover:bg-slate-200 transition">Close</DialogClose>
+                            </DialogFooter>
+                          </DialogContent>
+                        </Dialog>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+                </ScrollStackItem>
+              ))}
+            </ScrollStack>
+          </div>
+</div>
       </section>
 
       {/* --- CTA / Professional Assessment Form Section --- */}
