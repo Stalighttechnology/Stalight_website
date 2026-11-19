@@ -122,19 +122,6 @@ const AboutUs = () => {
           >
             {/* Left Content Column */}
             <div className="lg:col-span-7 flex flex-col items-start text-left">
-              
-              {/* Professional Indicator Pill */}
-              <motion.div
-                variants={fadeUpVariants}
-                className="inline-flex items-center gap-2.5 px-4.5 py-2 rounded-full bg-white border border-red-100 shadow-[0_2px_12px_rgba(211,32,39,0.06)] mb-8"
-              >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D32027]"></span>
-                </span>
-                <span className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-slate-700">Pioneering Software Excellence</span>
-              </motion.div>
-
               {/* Headline */}
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[5.2rem] font-light text-slate-900 tracking-tight leading-[1.05] mb-8">
                 About <strong>Stalight Technologies</strong> <br />
@@ -244,21 +231,6 @@ const AboutUs = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out origin-center"
                   />
                 </motion.div>
-
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none"></div>
-
-                {/* Floating Tags */}
-                <div className="absolute top-6 left-6 bg-slate-900/90 backdrop-blur-md border border-slate-700/50 px-4 py-2 rounded-full shadow-lg pointer-events-none">
-                  <p className="text-[9px] font-black text-white uppercase tracking-[0.15em] flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#D32027] animate-pulse"></span>
-                    Engineering Hub
-                  </p>
-                </div>
-
-                <div className="absolute bottom-6 right-6 bg-white/95 backdrop-blur-md border border-slate-100 px-4 py-2.5 rounded-2xl shadow-xl max-w-[200px] pointer-events-none">
-                  <p className="text-[10px] font-extrabold text-[#D32027] uppercase tracking-wider mb-0.5">Collaborative Spaces</p>
-                  <p className="text-[12px] font-medium text-slate-600 leading-tight">Designed for high productivity and focus.</p>
-                </div>
               </motion.div>
             </div>
 
